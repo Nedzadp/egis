@@ -1,0 +1,188 @@
+/* Import the reindeer theme. */
+/* This only allows us to use the mixins defined in it and does not add any styles by itself. */
+@import "../reindeer/reindeer.scss";
+
+/* This contains all of your theme. */
+/* If somebody wants to extend the theme she will include this mixin. */
+@mixin pp4istheme {
+  /* Include all the styles from the reindeer theme */
+  @include reindeer;
+
+  /* Insert your theme rules here */
+  /* Insert your theme rules here */
+  .v-slot-vertical-custom-layout {
+    width:1024px;
+    min-height: 970px;
+    -webkit-border-radius: 20px 20px 20px 20px;
+    -moz-border-radius: 20px 20px 20px 20px;
+    border-radius: 20px 20px 20px 20px;
+    border:3px solid #dfdfdf;
+    background-color:white;
+    margin: 0 auto;
+}
+    .v-slot-hrline{
+        background-color:#00a2e8;
+    }
+    .v-slot-hrline2{
+        background-color:#dfdfdf;
+    }
+
+    .v-slot-main-menu-button {
+          
+            background-color: #fff;
+            border-right: 2px solid #dfdfdf;
+            border-top: 2px solid #dfdfdf;
+            border-bottom: 2px solid #dfdfdf;
+            display: inline-block;
+            color: #777777;
+            height: 30px;
+            line-height: 30px;
+            text-decoration: none;
+            text-align: center;
+            min-width: 100px;
+            padding-left: 10px;
+    }
+   .v-button-link .v-button-caption{
+        font-family: Arial;
+        font-size: 15px;
+        font-weight: 900;
+    }
+    .v-slot-selected{
+        background-color:#00a2e8;
+        color: white;
+    }
+    .v-slot-selected .v-button-caption{
+        color: white;
+    }
+    .v-slot-main-menu-button:hover {
+            background-color:#00a2e8;
+    }.v-slot-main-menu-button:active {
+            position:relative;
+            top:1px;
+    }
+    .v-slot-main-menu-button:hover   {
+
+            background-color: #00a2e8;
+            color: white;
+    }
+    .v-slot-main-menu-button:hover  .v-button-caption  {
+            color: white;
+    }
+
+    .v-button-link {
+	border: none;
+	background: transparent;
+	padding: 0;
+	color: inherit;
+	
+    }
+
+.v-sa  .v-button-link:focus {
+	outline-offset: -3px;
+}
+
+ .v-button-link .v-button-caption {
+	text-decoration: none;
+	color: inherit;
+	text-align: left;
+}
+
+
+
+.v-slot-sub-menu-button {
+            
+            background-color: #00a2e8;
+            border-right: 2px solid #00a2e8;
+            border-top: 2px solid #00a2e8;
+            border-bottom: 2px solid #00a2e8;
+            display: inline-block;
+            color: white;
+            height: 30px;
+            line-height: 30px;
+            text-decoration: none;
+            text-align: center;
+            padding-left: 10px;
+            min-width: 100px;
+    }
+    .v-slot-sub-menu-button:hover {
+            background-color:#fff;
+    }.v-slot-sub-menu-button:active {
+            position:relative;
+            top:1px;
+    }
+    .v-slot-sub-menu-button:hover   {
+
+            background-color:white;
+            color: #00a2e8;
+    }
+    .v-slot-sub-menu-button:hover  .v-button-caption  {
+            color: #00a2e8;
+    }
+
+    .v-slot-sub-menu-selected {
+        background-color:white;
+        color: #00a2e8;
+    }
+    
+    .v-slot-submenu{
+        background-color:#00a2e8;
+        width: 100%;
+    }
+
+    .v-slot-left-panel {
+        width:260px;
+       min-height: 280px;
+        -webkit-border-radius: 20px 20px 20px 20px;
+        -moz-border-radius: 20px 20px 20px 20px;
+        border-radius: 20px 20px 20px 20px;
+        border:3px solid #dfdfdf;
+        background-color:white;
+        margin-left: 10px;
+        margin-top: 10px;
+        padding: 10px;
+    }
+    
+    .v-slot-right-panel {
+        width: 630px;
+       min-height: 280px;
+        -webkit-border-radius: 20px 20px 20px 20px;
+        -moz-border-radius: 20px 20px 20px 20px;
+        border-radius: 20px 20px 20px 20px;
+        border:3px solid #dfdfdf;
+        background-color:white;
+        margin-left: 15px;
+        margin-top: 10px;
+        padding: 12px;
+    }
+    .v-slot-header-text  {
+       
+        font-weight: bold;
+    }        
+     .v-slot-text-hrline{
+        background-color:#dfdfdf;
+        width: 257px;
+    }
+    .v-slot-text-hrline-right {
+        background-color:#dfdfdf;
+        width: 620px;
+         margin-bottom: 5px;
+    }
+    
+    .v-slot-left-form{
+        padding: 3px;
+    }
+    .v-slot-right-table {
+	margin-left: 3px;
+    }
+    .v-slot-image-logo {
+        width: 230px;
+        height: 170px;
+    }
+    .v-slot-custom-header {
+        padding-left: 15px;
+        padding-top: 5px;
+    }
+    .v-slot-header-login {
+        padding-top: 2px;
+    }
+}

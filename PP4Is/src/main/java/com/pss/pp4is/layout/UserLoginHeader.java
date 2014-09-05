@@ -6,6 +6,8 @@
 
 package com.pss.pp4is.layout;
 
+import com.vaadin.event.FieldEvents;
+import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.ui.HorizontalLayout;
@@ -42,6 +44,7 @@ public class UserLoginHeader extends HorizontalLayout{
         usernameField = new TextField();
         usernameField.setWidth("125px");
         usernameField.setInputPrompt("username");
+       
         
         addComponent(usernameField);
         setExpandRatio(usernameField, 1.25f);
@@ -57,6 +60,19 @@ public class UserLoginHeader extends HorizontalLayout{
         passwordField.setInputPrompt("password");
         addComponent(passwordField);
         setExpandRatio(passwordField, 1.25f);
+        
+         usernameField.addTextChangeListener(new TextChangeListener() {
+            @Override
+            public void textChange(FieldEvents.TextChangeEvent event) {
+                Notification.show("Text change");
+                getLoginLabel().removeStyleName("login-label-action");
+                getLoginLabel().addStyleName("login-label");
+        
+                getUsernameField().removeStyleName("login-fields");
+                getPasswordField().removeStyleName("login-fields");
+            }
+        });
+        
     }
 
     public Label getLoginLabel() {

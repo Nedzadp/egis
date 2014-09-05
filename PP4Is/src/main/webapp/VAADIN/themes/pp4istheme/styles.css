@@ -7280,6 +7280,11 @@ body .pp4istheme.v-app .v-app-loading {
 	font-weight: bold;
 }
 
+.pp4istheme .login-fields {
+	border: 1px red solid;
+	color: red;
+}
+
 .pp4istheme .v-Notification.mynotification {
 	background: white;
 	border: 3px solid #dfdfdf;

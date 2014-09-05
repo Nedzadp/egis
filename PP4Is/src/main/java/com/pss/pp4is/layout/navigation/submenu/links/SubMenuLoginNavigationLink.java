@@ -28,8 +28,13 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         note.setPosition(Position.TOP_CENTER);
         note.setStyleName("mynotification");
         note.show(Page.getCurrent());
+        
         getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
         getLayoutController().getUserLoginHeader().getLoginLabel().addStyleName("login-label-action");
+        
+        getLayoutController().getUserLoginHeader().getUsernameField().addStyleName("login-fields");
+        getLayoutController().getUserLoginHeader().getPasswordField().addStyleName("login-fields");
+        
     }
     
 }

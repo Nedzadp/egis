@@ -6,6 +6,8 @@
 
 package com.pss.pp4is.layout.content;
 
+import com.vaadin.ui.CustomLayout;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -21,5 +23,6 @@ public class MainContentComponent extends  VerticalLayout{
     
     private void initLayout() {
         addStyleName("main-content");
+        addComponent(new CustomLayout("welcome"));
     }
 }

@@ -23,8 +23,8 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class CustomLayout extends  VerticalLayout{
 
-    private static final String LOGO_PATH = "images/pp4s-logo.jpg";
-    private static final String EGIS_LOGO_PATH = "images/egis-logo.png";
+    private static final String LOGO_PATH = "img/pp4s-logo.jpg";
+    private static final String EGIS_LOGO_PATH = "img/egis-logo.png";
     private MainMenuNavigationLayout mainMenuNavigationLayout;
     private SubMenuNavigationLayout subMenuNavigationLayout;
     private MainContentComponent mainContentComponent;

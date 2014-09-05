@@ -6,10 +6,14 @@
 
 package com.pss.pp4is.layout.header;
 
+import com.vaadin.event.ShortcutAction;
+import com.vaadin.event.ShortcutListener;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 
@@ -56,15 +60,31 @@ public class CustomHeaderLayout extends  HorizontalLayout{
     
     private HorizontalLayout createRightHeader() {
         HorizontalLayout rightHeaderLayout = new HorizontalLayout();
-        rightHeaderLayout.setWidth("350px");
         rightHeaderLayout.addStyleName("header-login");
+        rightHeaderLayout.setWidth("320px");
+        Label loginLabel = new Label("Log in");
+        
+        loginLabel.setWidth("40px");
+        loginLabel.addStyleName("login-label");
+        
+        rightHeaderLayout.addComponent(loginLabel);
+        rightHeaderLayout.setExpandRatio(loginLabel, 0.4f);
         TextField username = new TextField();
+        username.setWidth("125px");
         username.setInputPrompt("username");
-        username.addStyleName("align-right");
         rightHeaderLayout.addComponent(username);
+        rightHeaderLayout.setExpandRatio(username, 1.25f);
         PasswordField password = new PasswordField();
+        password.setWidth("125px");
+        password.addShortcutListener(new ShortcutListener("Enter pressed", ShortcutAction.KeyCode.ENTER, null) {
+            @Override
+            public void handleAction(Object sender, Object target) {
+                Notification.show("Log in failed");
+            }
+        });
         password.setInputPrompt("password");
         rightHeaderLayout.addComponent(password);
+        rightHeaderLayout.setExpandRatio(password, 1.25f);
         
         return rightHeaderLayout;
     }

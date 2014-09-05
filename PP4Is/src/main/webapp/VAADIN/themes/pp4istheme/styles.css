@@ -7115,8 +7115,8 @@ body .pp4istheme.v-app .v-app-loading {
 
 .pp4istheme .v-button-link .v-button-caption {
 	font-family: Arial;
-	font-size: 15px;
-	font-weight: 900;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 .pp4istheme .v-slot-selected {
@@ -7266,5 +7266,10 @@ body .pp4istheme.v-app .v-app-loading {
 }
 
 .pp4istheme .v-slot-header-login {
+	padding-top: 2px;
+	width: 350px;
+}
+
+.pp4istheme .v-slot-login-label {
 	padding-top: 2px;
 }

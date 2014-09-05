@@ -44,8 +44,8 @@
     }
    .v-button-link .v-button-caption{
         font-family: Arial;
-        font-size: 15px;
-        font-weight: 900;
+        font-size: 14px;
+	font-weight: bold;
     }
     .v-slot-selected{
         background-color:#00a2e8;
@@ -184,5 +184,9 @@
     }
     .v-slot-header-login {
         padding-top: 2px;
+        width: 350px;
+    }
+    .v-slot-login-label {
+       padding-top: 2px;
     }
 }

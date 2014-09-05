@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class MainMenuHomeNavigationLink extends CustomButtonLink{
     public MainMenuHomeNavigationLink() {
-        setCaption("Home");
+        setCaption("PP4I system");
     }
 
     @Override

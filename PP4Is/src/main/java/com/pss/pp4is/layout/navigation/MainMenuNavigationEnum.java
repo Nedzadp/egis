@@ -14,8 +14,7 @@ import com.pss.pp4is.layout.navigation.links.MainMenuSecondNavigationLink;
  * @author Nedzad
  */
 public enum MainMenuNavigationEnum {
-    MAIN_MENU_HOME_LINK(1, MainMenuHomeNavigationLink.class),
-    MAIN_MENU_SECOND_LINK(2, MainMenuSecondNavigationLink.class);
+    MAIN_MENU_HOME_LINK(1, MainMenuHomeNavigationLink.class);//,MAIN_MENU_SECOND_LINK(2, MainMenuSecondNavigationLink.class);
     
     private final int row;
     private final Class<? extends CustomButtonLink> link;

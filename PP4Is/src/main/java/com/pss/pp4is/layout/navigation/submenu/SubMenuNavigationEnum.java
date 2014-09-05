@@ -6,7 +6,10 @@
 
 package com.pss.pp4is.layout.navigation.submenu;
 
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuEnglishNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuHomeNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuLoginNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuMagyarNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuSecondNavigationLink;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,11 @@ import java.util.List;
  */
 public enum SubMenuNavigationEnum {
     SUB_MENU_HOME_WELCOME(1,1, SubMenuHomeNavigationLink.class),
-    SUB_MENU_SECOND_LINK(2,2, SubMenuSecondNavigationLink.class);
+    SUB_MENU_ENGLISH(1,2, SubMenuEnglishNavigationLink.class),
+    SUB_MENU_MAGYAR(1,3, SubMenuMagyarNavigationLink.class),
+    SUB_MENU_LOGIN(1,4, SubMenuLoginNavigationLink.class),
+    
+    SUB_MENU_SECOND_LINK(2,5, SubMenuSecondNavigationLink.class);
     
     private final int rootMenu;
     private final int row;

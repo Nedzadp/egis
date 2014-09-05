@@ -24,6 +24,6 @@ public class MainMenuSecondNavigationLink extends CustomButtonLink{
         getLayoutController().fixSelectedMenu(this);
         this.addStyleName("selected");
         getLayoutController().setCustomButtonLink(this);
-        getLayoutController().buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_SECOND_LINK.getRow(),getLayoutController().getCustomLayout().getSubMenuNavigationLayout().getSubMenuLayout());
+      //  getLayoutController().buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_SECOND_LINK.getRow(),getLayoutController().getCustomLayout().getSubMenuNavigationLayout().getSubMenuLayout());
     }
 }

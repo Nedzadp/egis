@@ -7,6 +7,7 @@
 package com.pss.pp4is.system;
 
 import com.pss.pp4is.layout.CustomLayout;
+import com.pss.pp4is.layout.UserLoginHeader;
 import com.pss.pp4is.layout.navigation.CustomButtonLink;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
@@ -22,6 +23,7 @@ public class LayoutController{
     private final CustomLayout customLayout;
     private CustomButtonLink customButtonLink;
     private CustomSubmenuLink customSubmenuLink;
+    private UserLoginHeader userLoginHeader;
     
     public LayoutController(CustomLayout customLayout) {
         this.customLayout = customLayout;
@@ -68,7 +70,12 @@ public class LayoutController{
         getCustomSubmenuLink().removeStyleName("sub-menu-selected");
         setCustomSubmenuLink(customSubmenuLink);
     }
-    
-    
-    
+
+    public void setUserLogin(UserLoginHeader userLoginHeader) {
+       this.userLoginHeader = userLoginHeader;
+    }
+
+    public UserLoginHeader getUserLoginHeader() {
+        return userLoginHeader;
+    }
 }

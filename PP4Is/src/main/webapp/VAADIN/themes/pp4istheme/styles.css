@@ -7273,3 +7273,9 @@ body .pp4istheme.v-app .v-app-loading {
 .pp4istheme .v-slot-login-label {
 	padding-top: 2px;
 }
+
+.pp4istheme .v-slot-login-label-action {
+	padding-top: 2px;
+	color: red;
+	font-weight: bold;
+}

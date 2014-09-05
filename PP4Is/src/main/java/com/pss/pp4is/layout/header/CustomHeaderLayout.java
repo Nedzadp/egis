@@ -6,16 +6,14 @@
 
 package com.pss.pp4is.layout.header;
 
+import com.pss.pp4is.layout.UserLoginHeader;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.TextField;
 
 /**
  *
@@ -23,7 +21,11 @@ import com.vaadin.ui.TextField;
  */
 public class CustomHeaderLayout extends  HorizontalLayout{
 
-    public CustomHeaderLayout() {
+    private LayoutController layoutController;
+    private UserLoginHeader userLoginHeader;
+    
+    public CustomHeaderLayout(LayoutController layoutController) {
+        this.layoutController = layoutController;
         initLayout();
     }
  
@@ -36,9 +38,10 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         addComponent(leftHeaderLayout);
         setComponentAlignment(leftHeaderLayout, Alignment.TOP_LEFT);
         
-        HorizontalLayout rightHeaderLayout = createRightHeader();
-        addComponent(rightHeaderLayout);
-        setComponentAlignment(rightHeaderLayout, Alignment.TOP_RIGHT);
+        userLoginHeader = new UserLoginHeader();
+        addComponent(userLoginHeader);
+        setComponentAlignment(userLoginHeader, Alignment.TOP_RIGHT);
+        layoutController.setUserLogin(userLoginHeader);
         
     }
     
@@ -46,47 +49,16 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         HorizontalLayout leftHeaderLayout = new HorizontalLayout();
         leftHeaderLayout.setWidth("120px");
        
-        Embedded flagOne = new Embedded(null, new ThemeResource("images/hungary-flag.png"));
+        Embedded flagOne = new Embedded(null, new ThemeResource("img/hungary-flag.png"));
         leftHeaderLayout.addComponent(flagOne);
        
-        Embedded flagTwo = new Embedded(null, new ThemeResource("images/united-kingdom-flag.png"));
+        Embedded flagTwo = new Embedded(null, new ThemeResource("img/united-kingdom-flag.png"));
         leftHeaderLayout.addComponent(flagTwo);
         
-        Embedded flagThree = new Embedded(null, new ThemeResource("images/germany-flag.png"));
+        Embedded flagThree = new Embedded(null, new ThemeResource("img/germany-flag.png"));
         leftHeaderLayout.addComponent(flagThree);
         
         return leftHeaderLayout;
-    }
-    
-    private HorizontalLayout createRightHeader() {
-        HorizontalLayout rightHeaderLayout = new HorizontalLayout();
-        rightHeaderLayout.addStyleName("header-login");
-        rightHeaderLayout.setWidth("320px");
-        Label loginLabel = new Label("Log in");
-        
-        loginLabel.setWidth("40px");
-        loginLabel.addStyleName("login-label");
-        
-        rightHeaderLayout.addComponent(loginLabel);
-        rightHeaderLayout.setExpandRatio(loginLabel, 0.4f);
-        TextField username = new TextField();
-        username.setWidth("125px");
-        username.setInputPrompt("username");
-        rightHeaderLayout.addComponent(username);
-        rightHeaderLayout.setExpandRatio(username, 1.25f);
-        PasswordField password = new PasswordField();
-        password.setWidth("125px");
-        password.addShortcutListener(new ShortcutListener("Enter pressed", ShortcutAction.KeyCode.ENTER, null) {
-            @Override
-            public void handleAction(Object sender, Object target) {
-                Notification.show("Log in failed");
-            }
-        });
-        password.setInputPrompt("password");
-        rightHeaderLayout.addComponent(password);
-        rightHeaderLayout.setExpandRatio(password, 1.25f);
-        
-        return rightHeaderLayout;
     }
     
 }

@@ -49,7 +49,7 @@ public class CustomLayout extends  VerticalLayout{
     }
     
     private void createHeader() {
-        addComponent(new CustomHeaderLayout());
+        addComponent(new CustomHeaderLayout(layoutController));
         
         addHorizontalLines();
         

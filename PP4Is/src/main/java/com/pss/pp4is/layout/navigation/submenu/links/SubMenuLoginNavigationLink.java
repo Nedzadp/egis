@@ -20,7 +20,8 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
 
     @Override
     public void handleClick(ClickEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
+       getLayoutController().getUserLoginHeader().getLoginLabel().addStyleName("login-label-action");
     }
     
 }

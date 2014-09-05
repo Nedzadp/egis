@@ -9,16 +9,11 @@ package com.pss.pp4is.data;
 import com.pss.pp4is.data.containers.ProductContainer;
 import com.pss.pp4is.data.containers.ProductMasterContainer;
 import com.pss.pp4is.data.models.Product;
-import com.pss.pp4is.data.models.ProductLanguage;
 import com.pss.pp4is.data.models.ProductMaster;
-import com.pss.pp4is.data.models.ProductPrinter;
-import com.pss.pp4is.data.models.ProductType;
+import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.system.DatabaseConnection;
-import com.vaadin.ui.Notification;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class DataController {
     
-    public ProductContainer getProducts() {
+    public static ProductContainer getProducts() {
         try {
             ProductContainer products = new ProductContainer();
             
@@ -60,7 +55,7 @@ public class DataController {
         return null;
     }
 
-    public ProductMasterContainer getProductMaster(Product product) {
+    public static ProductMasterContainer getProductMaster(Product product) {
         try {
             ProductMasterContainer products = new ProductMasterContainer();
             String sql = "SELECT m.master_id, m.name, m.is_braille, m.is_falt, m.is_active, m.path " +
@@ -101,4 +96,42 @@ public class DataController {
         }
         return null;
     }
+    
+    public static User getUser(String username, String password) {
+        try {
+            User user = new User();
+            String sql = " SELECT u.userId, "+
+                         "        u.firstName, " +
+                         "        u.lastName, " +
+                         "        u.username, " +
+                         "        u.password " +
+                         " FROM   user u " +
+                         " WHERE  u.username = '"+username+"' "+
+                         " AND    u.password = '"+password+"' "+
+                         " AND    u.isActive = 1";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {     
+                user.setUserId(resultSet.getInt("u.userId"));
+                user.setFirstName(resultSet.getString("u.firstName"));
+                user.setLastName(resultSet.getString("u.lastName"));
+                user.setUsername(resultSet.getString("u.username"));
+                user.setPassword(resultSet.getString("u.password"));
+                return user;
+            }
+            databaseConnection.disconnect();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
 }

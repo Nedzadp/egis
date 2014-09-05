@@ -24,17 +24,15 @@ public class RightMainContentComponent extends  VerticalLayout{
 
     private ProductTable productTable;
     private ProductMasterTable productMasterTable;
-    private DataController dataController;
     
     public RightMainContentComponent() {
-        dataController = new DataController();
         addStyleName("right-panel");
     }
     public void initLayout(String headerString) {
         
         initHeader(headerString);
         
-        productTable = new ProductTable(dataController.getProducts());
+        productTable = new ProductTable(DataController.getProducts());
         addComponent(productTable);
     }
 
@@ -50,7 +48,7 @@ public class RightMainContentComponent extends  VerticalLayout{
     }
     
     public void addTable(Product product) {
-        ProductMasterContainer container = dataController.getProductMaster(product);
+        ProductMasterContainer container = DataController.getProductMaster(product);
         if(container != null){
             productMasterTable = new ProductMasterTable(container);
             addComponent(productMasterTable);
@@ -65,7 +63,4 @@ public class RightMainContentComponent extends  VerticalLayout{
         return productMasterTable;
     }
 
-    public DataController getDataController() {
-        return dataController;
-    }
 }

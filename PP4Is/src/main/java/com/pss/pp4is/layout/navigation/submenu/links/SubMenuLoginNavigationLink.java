@@ -35,6 +35,8 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         getLayoutController().getUserLoginHeader().getUsernameField().addStyleName("login-fields");
         getLayoutController().getUserLoginHeader().getPasswordField().addStyleName("login-fields");
         
+        getLayoutController().getUserLoginHeader().getUsernameField().focus();
+        
     }
     
 }

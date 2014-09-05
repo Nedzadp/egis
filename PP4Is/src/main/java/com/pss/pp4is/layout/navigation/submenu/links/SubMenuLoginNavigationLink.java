@@ -7,6 +7,9 @@
 package com.pss.pp4is.layout.navigation.submenu.links;
 
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
+import com.vaadin.server.Page;
+import com.vaadin.shared.Position;
+import com.vaadin.ui.Notification;
 
 /**
  *
@@ -20,8 +23,13 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
 
     @Override
     public void handleClick(ClickEvent event) {
-       getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
-       getLayoutController().getUserLoginHeader().getLoginLabel().addStyleName("login-label-action");
+        Notification note = new Notification(null,"Log in using header log in form",Notification.Type.HUMANIZED_MESSAGE);
+        note.setDelayMsec(3000);
+        note.setPosition(Position.TOP_CENTER);
+        note.setStyleName("mynotification");
+        note.show(Page.getCurrent());
+        getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
+        getLayoutController().getUserLoginHeader().getLoginLabel().addStyleName("login-label-action");
     }
     
 }

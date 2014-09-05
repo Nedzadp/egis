@@ -7279,3 +7279,9 @@ body .pp4istheme.v-app .v-app-loading {
 	color: red;
 	font-weight: bold;
 }
+
+.pp4istheme .v-Notification.mynotification {
+	background: white;
+	border: 3px solid #dfdfdf;
+	color: #00a2e8;
+}

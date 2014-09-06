@@ -7211,6 +7211,7 @@ body .pp4istheme.v-app .v-app-loading {
 	text-decoration: none;
 	text-align: center;
 	padding-left: 10px;
+	padding-right: 10px;
 	min-width: 100px;
 }
 

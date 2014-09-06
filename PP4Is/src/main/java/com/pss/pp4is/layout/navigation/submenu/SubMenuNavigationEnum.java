@@ -6,16 +6,23 @@
 
 package com.pss.pp4is.layout.navigation.submenu;
 
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuAboutNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuDocumentCompaniesNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuDocumentTypeNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuEnglishNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuExitNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuHomeNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuImagesNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuInformationNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuInspectionProfilesNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuListsNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuLoginNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuMagyarNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuProductsInspectionsNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuReportsNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuRestartClockNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuSystemUsageNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuUserActivitiesNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuUsersNavigationLink;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,21 +32,30 @@ import java.util.List;
  * @author Nedzad
  */
 public enum SubMenuNavigationEnum {
-    // sub menus of first main menu, rootMenu = 1
-// sub menus of first main menu, rootMenu = 1
+
+    // sub menus of first main menu, rootMenu = 1, Home
     SUB_MENU_HOME_WELCOME(1,1, SubMenuHomeNavigationLink.class, null),
     SUB_MENU_ENGLISH(1,2, SubMenuEnglishNavigationLink.class,null),
     SUB_MENU_MAGYAR(1,3, SubMenuMagyarNavigationLink.class,null),
     SUB_MENU_LOGIN(1,4, SubMenuLoginNavigationLink.class, false),
     SUB_MENU_RESTART_CLOCK(1,5, SubMenuRestartClockNavigationLink.class,true),
     SUB_MENU_EXIT(1,6, SubMenuExitNavigationLink.class,true),
-    // sub menus of second main menu, rootMenu = 2
+    // sub menus of second main menu, rootMenu = 2, Lists
     SUB_MENU_PRODUCTS_INSPECTIONS(2,7, SubMenuProductsInspectionsNavigationLink.class,true),
     SUB_MENU_DOCUMENT_LANGUAGES(2,8, SubMenuDocumentTypeNavigationLink.class,true),
     SUB_MENU_DOCUMENT_TYPES(2,9, SubMenuDocumentTypeNavigationLink.class,true),
     SUB_MENU_DOCUMENT_PRINT_COMPANIES(2,10, SubMenuDocumentCompaniesNavigationLink.class,true),
     SUB_MENU_INSPECTION_PROFILES(2,11, SubMenuInspectionProfilesNavigationLink.class,true),
-    SUB_MENU_USERS(2,12, SubMenuUsersNavigationLink.class,true)
+    SUB_MENU_USERS(2,12, SubMenuUsersNavigationLink.class,true),
+    // sub menus of third main menu, rootMenu = 3, Reports
+    SUB_MENU_SYSTEM_USAGE(3,13, SubMenuSystemUsageNavigationLink.class,true),
+    SUB_MENU_USER_ACTIVITIES(3,14, SubMenuUserActivitiesNavigationLink.class,true),
+    // sub menus of fourth main menu, root menu = 4, Help
+    SUB_MENU_INFORMATION(4,15, SubMenuInformationNavigationLink.class,true),
+    SUB_MENU_LISTS(4,16, SubMenuListsNavigationLink.class,true),
+    SUB_MENU_IMAGES(4,17, SubMenuImagesNavigationLink.class,true),
+    SUB_MENU_REPORTS(4,18, SubMenuReportsNavigationLink.class,true),
+    SUB_MENU_ABOUT(4,19, SubMenuAboutNavigationLink.class,true)
     ;
     
     private final int rootMenu;

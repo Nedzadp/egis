@@ -7,6 +7,7 @@
 package com.pss.pp4is.layout.navigation.links;
 
 import com.pss.pp4is.layout.navigation.CustomButtonLink;
+import com.pss.pp4is.layout.navigation.MainMenuNavigationEnum;
 import com.vaadin.ui.Notification;
 
 /**
@@ -24,7 +25,7 @@ public class MainMenuReportsNavigationLink extends CustomButtonLink{
         getLayoutController().fixSelectedMenu(this);
         this.addStyleName("selected");
         getLayoutController().setCustomButtonLink(this);
-        Notification.show("No implemented yet");
+        getLayoutController().buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_REPORTS_LINK.getRow(),getLayoutController().getCustomLayout().getSubMenuNavigationLayout().getSubMenuLayout(),true);
     }
  
     

@@ -22,7 +22,7 @@ public class SubMenuExitNavigationLink extends CustomSubmenuLink{
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);
-        Notification.show("No implemented yet");
+        Notification.show("Not implemented yet");
     }
     
 }

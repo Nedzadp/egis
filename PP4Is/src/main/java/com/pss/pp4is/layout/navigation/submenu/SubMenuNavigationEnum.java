@@ -6,12 +6,17 @@
 
 package com.pss.pp4is.layout.navigation.submenu;
 
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuDocumentCompaniesNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuDocumentTypeNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuEnglishNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuExitNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuHomeNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuInspectionProfilesNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuLoginNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuMagyarNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuProductsInspectionsNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.SubMenuRestartClockNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.SubMenuUsersNavigationLink;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +26,20 @@ import java.util.List;
  */
 public enum SubMenuNavigationEnum {
     // sub menus of first main menu, rootMenu = 1
+// sub menus of first main menu, rootMenu = 1
     SUB_MENU_HOME_WELCOME(1,1, SubMenuHomeNavigationLink.class, null),
     SUB_MENU_ENGLISH(1,2, SubMenuEnglishNavigationLink.class,null),
     SUB_MENU_MAGYAR(1,3, SubMenuMagyarNavigationLink.class,null),
     SUB_MENU_LOGIN(1,4, SubMenuLoginNavigationLink.class, false),
     SUB_MENU_RESTART_CLOCK(1,5, SubMenuRestartClockNavigationLink.class,true),
-    SUB_MENU_EXIT(1,6, SubMenuExitNavigationLink.class,true)
+    SUB_MENU_EXIT(1,6, SubMenuExitNavigationLink.class,true),
     // sub menus of second main menu, rootMenu = 2
+    SUB_MENU_PRODUCTS_INSPECTIONS(2,7, SubMenuProductsInspectionsNavigationLink.class,true),
+    SUB_MENU_DOCUMENT_LANGUAGES(2,8, SubMenuDocumentTypeNavigationLink.class,true),
+    SUB_MENU_DOCUMENT_TYPES(2,9, SubMenuDocumentTypeNavigationLink.class,true),
+    SUB_MENU_DOCUMENT_PRINT_COMPANIES(2,10, SubMenuDocumentCompaniesNavigationLink.class,true),
+    SUB_MENU_INSPECTION_PROFILES(2,11, SubMenuInspectionProfilesNavigationLink.class,true),
+    SUB_MENU_USERS(2,12, SubMenuUsersNavigationLink.class,true)
     ;
     
     private final int rootMenu;

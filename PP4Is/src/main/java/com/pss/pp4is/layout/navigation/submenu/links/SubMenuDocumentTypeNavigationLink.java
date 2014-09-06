@@ -7,20 +7,21 @@
 package com.pss.pp4is.layout.navigation.submenu.links;
 
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 
 /**
  *
  * @author Nedzad
  */
-public class SubMenuProductsInspectionsNavigationLink extends CustomSubmenuLink{
+public class SubMenuDocumentTypeNavigationLink extends CustomSubmenuLink{
 
-    public SubMenuProductsInspectionsNavigationLink() {
-        setCaption("Products and inspections");
+    public SubMenuDocumentTypeNavigationLink() {
+        setCaption("Document types");
     }
 
     @Override
-    public void handleClick(ClickEvent event) {
+    public void handleClick(Button.ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);
         Notification.show("Not implemented yet");
     }

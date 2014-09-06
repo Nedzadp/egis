@@ -78,7 +78,7 @@ public class LayoutController implements Serializable{
         setCustomButtonLink(customButtonLink);
     }
     public void buildSubMenu(int rootMainMenu,HorizontalLayout menu, boolean authenticated) {
-         menu.removeAllComponents();
+        menu.removeAllComponents();
         
         List<SubMenuNavigationEnum> subMenus = SubMenuNavigationEnum.getSubmenusByRootMenu(rootMainMenu,authenticated);
         for(SubMenuNavigationEnum subMenu : subMenus) {

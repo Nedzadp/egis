@@ -6,17 +6,21 @@
 
 package com.pss.pp4is.layout.navigation.submenu.links;
 
+import com.pss.pp4is.layout.content.CustomVerticalLayout;
+import com.pss.pp4is.layout.content.MainContentLayoutEnum;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
+import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 
 /**
  *
  * @author Nedzad
  */
-public class SubMenuProductsInspectionsNavigationLink extends CustomSubmenuLink{
+public class SubMenuInspectionProfilesNavigationLink extends CustomSubmenuLink{
 
-    public SubMenuProductsInspectionsNavigationLink() {
-        setCaption("Products and inspections");
+    public SubMenuInspectionProfilesNavigationLink() {
+        setCaption("Inspection profiles");
     }
 
     @Override
@@ -25,5 +29,5 @@ public class SubMenuProductsInspectionsNavigationLink extends CustomSubmenuLink{
         Notification.show("Not implemented yet");
     }
     
-    
+   
 }

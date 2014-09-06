@@ -38,7 +38,7 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         getLayoutController().getUserLoginHeader().getPasswordField().addStyleName("login-fields-blinker");
         
         getLayoutController().getUserLoginHeader().getUsernameField().focus();
-        
+       
         
     }
     

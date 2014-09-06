@@ -25,7 +25,6 @@ public class MainMenuListsNavigationLink extends CustomButtonLink{
         getLayoutController().fixSelectedMenu(this);
         this.addStyleName("selected");
         getLayoutController().setCustomButtonLink(this);
-        Notification.show("No implemented yet");
         getLayoutController().buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_LISTS_LINK.getRow(),getLayoutController().getCustomLayout().getSubMenuNavigationLayout().getSubMenuLayout(),true);
     }
 }

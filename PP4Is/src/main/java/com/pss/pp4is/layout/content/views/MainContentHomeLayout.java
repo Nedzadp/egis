@@ -12,6 +12,7 @@ import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.pss.pp4is.layout.content.LeftMainContentComponent;
 import com.pss.pp4is.layout.content.RightMainContentComponent;
 import com.vaadin.data.Property;
+import com.vaadin.ui.CustomLayout;
 import com.vaadin.ui.HorizontalLayout;
 
 
@@ -26,6 +27,11 @@ public class MainContentHomeLayout extends CustomVerticalLayout{
     }
     
     private void initLayout() {
+        
+        
+        addStyleName("main-content");
+        addComponent(new CustomLayout("welcome"));
+        
         
         HorizontalLayout firstRowLayout = new HorizontalLayout();
         
@@ -71,8 +77,8 @@ public class MainContentHomeLayout extends CustomVerticalLayout{
             }
         });
                
-        addComponent(firstRowLayout);
-        addComponent(secondRowLayout);
+        //addComponent(firstRowLayout);
+        //addComponent(secondRowLayout);
         
     }
 }

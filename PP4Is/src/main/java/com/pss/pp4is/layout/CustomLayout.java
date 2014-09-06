@@ -30,7 +30,6 @@ public class CustomLayout extends  VerticalLayout{
     private MainContentComponent mainContentComponent;
     private LayoutController layoutController;
     
-    
     public CustomLayout() {
         initLayout();
         

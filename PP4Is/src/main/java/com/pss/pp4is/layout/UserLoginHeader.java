@@ -103,7 +103,6 @@ public class UserLoginHeader extends HorizontalLayout{
                      Notification.show("Welcome!", "System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it.", Notification.Type.HUMANIZED_MESSAGE);
                      layoutController.refreshLayout();
                 }
-                
             }
         });
          

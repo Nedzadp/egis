@@ -13,7 +13,6 @@ import com.vaadin.event.FieldEvents;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
-import com.vaadin.server.Page;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
@@ -42,7 +41,7 @@ public class UserLoginHeader extends HorizontalLayout{
         addStyleName("header-login");
         setWidth("320px");
         
-        loginLabel = new Label("Log in");
+        loginLabel = new Label("Log in:");
         
         loginLabel.setWidth("40px");
         loginLabel.addStyleName("login-label");
@@ -67,22 +66,22 @@ public class UserLoginHeader extends HorizontalLayout{
          usernameField.addTextChangeListener(new TextChangeListener() {
             @Override
             public void textChange(FieldEvents.TextChangeEvent event) {
-                getLoginLabel().removeStyleName("login-label-action");
+                getLoginLabel().removeStyleName("login-label-blinker");
                 getLoginLabel().addStyleName("login-label");
         
-                getUsernameField().removeStyleName("login-fields");
-                getPasswordField().removeStyleName("login-fields");
+                getUsernameField().removeStyleName("login-fields-blinker");
+                getPasswordField().removeStyleName("login-fields-blinker");
             }
         });
          
          passwordField.addTextChangeListener(new TextChangeListener() {
             @Override
             public void textChange(FieldEvents.TextChangeEvent event) {
-                getLoginLabel().removeStyleName("login-label-action");
+                getLoginLabel().removeStyleName("login-label-blinker");
                 getLoginLabel().addStyleName("login-label");
         
-                getUsernameField().removeStyleName("login-fields");
-                getPasswordField().removeStyleName("login-fields");
+                getUsernameField().removeStyleName("login-fields-blinker");
+                getPasswordField().removeStyleName("login-fields-blinker");
             }
         });
         

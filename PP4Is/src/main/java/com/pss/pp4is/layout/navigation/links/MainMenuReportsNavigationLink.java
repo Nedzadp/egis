@@ -6,7 +6,6 @@
 
 package com.pss.pp4is.layout.navigation.links;
 
-import com.google.gwt.user.client.DOM;
 import com.pss.pp4is.layout.navigation.CustomButtonLink;
 import com.vaadin.ui.Notification;
 

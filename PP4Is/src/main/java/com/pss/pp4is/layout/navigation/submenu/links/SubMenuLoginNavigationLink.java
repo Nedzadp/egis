@@ -23,17 +23,17 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
 
     @Override
     public void handleClick(ClickEvent event) {
-        Notification note = new Notification(null,"Log in using header log in form",Notification.Type.HUMANIZED_MESSAGE);
+        Notification note = new Notification(null,"Log in here, please!",Notification.Type.HUMANIZED_MESSAGE);
         note.setDelayMsec(3000);
         note.setPosition(Position.TOP_CENTER);
         note.setStyleName("mynotification");
         note.show(Page.getCurrent());
         
         getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
-        getLayoutController().getUserLoginHeader().getLoginLabel().addStyleName("login-label-action");
+        getLayoutController().getUserLoginHeader().getLoginLabel().addStyleName("login-label-blinker");
         
-        getLayoutController().getUserLoginHeader().getUsernameField().addStyleName("login-fields");
-        getLayoutController().getUserLoginHeader().getPasswordField().addStyleName("login-fields");
+        getLayoutController().getUserLoginHeader().getUsernameField().addStyleName("login-fields-blinker");
+        getLayoutController().getUserLoginHeader().getPasswordField().addStyleName("login-fields-blinker");
         
         getLayoutController().getUserLoginHeader().getUsernameField().focus();
         

@@ -1,6 +1,7 @@
 @import "addons.scss";
 @import "pp4istheme.scss";
 
+@include keyframes;
 /* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
 /* The actual styles should be defined in pp4istheme.scss */
 .pp4istheme {
@@ -8,4 +9,6 @@
 
   // Include pp4istheme theme styles in your theme
   @include pp4istheme;
+  
+  
 }

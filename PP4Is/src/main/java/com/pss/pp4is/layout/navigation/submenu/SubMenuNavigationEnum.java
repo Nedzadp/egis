@@ -19,21 +19,22 @@ import java.util.List;
  * @author Nedzad
  */
 public enum SubMenuNavigationEnum {
-    SUB_MENU_HOME_WELCOME(1,1, SubMenuHomeNavigationLink.class),
-    SUB_MENU_ENGLISH(1,2, SubMenuEnglishNavigationLink.class),
-    SUB_MENU_MAGYAR(1,3, SubMenuMagyarNavigationLink.class),
-    SUB_MENU_LOGIN(1,4, SubMenuLoginNavigationLink.class),
-    
-    SUB_MENU_SECOND_LINK(2,5, SubMenuSecondNavigationLink.class);
+    SUB_MENU_HOME_WELCOME(1,1, SubMenuHomeNavigationLink.class, null),
+    SUB_MENU_ENGLISH(1,2, SubMenuEnglishNavigationLink.class,null),
+    SUB_MENU_MAGYAR(1,3, SubMenuMagyarNavigationLink.class,null),
+    SUB_MENU_LOGIN(1,4, SubMenuLoginNavigationLink.class, false),
+    SUB_MENU_RESTART_CLOCK(2,5, SubMenuSecondNavigationLink.class,true);
     
     private final int rootMenu;
     private final int row;
     private final Class<? extends CustomSubmenuLink> link;
-	
-    private SubMenuNavigationEnum(int rootMenu,int row, Class<? extends CustomSubmenuLink> link) {
+    private final Boolean isAuthenticated;
+    
+    private SubMenuNavigationEnum(int rootMenu,int row, Class<? extends CustomSubmenuLink> link, Boolean isAuthenticated) {
         this.rootMenu = rootMenu;
         this.row = row;
         this.link = link;
+        this.isAuthenticated = isAuthenticated;
     }
 
     public int getRootMenu() {
@@ -42,6 +43,10 @@ public enum SubMenuNavigationEnum {
     
     public int getRow() {
         return row;
+    }
+
+    public Boolean isIsAuthenticated() {
+        return isAuthenticated;
     }
 
     public Class<? extends CustomSubmenuLink> getLink() {
@@ -54,14 +59,26 @@ public enum SubMenuNavigationEnum {
         try {
             object =  link.newInstance();
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
         }
         return object;
     }
     
     public static List<SubMenuNavigationEnum> getSubmenusByRootMenu(int rootMenu) {
+        List<SubMenuNavigationEnum> subMenus = new ArrayList<SubMenuNavigationEnum>();
+        
+        for(SubMenuNavigationEnum subMenu : SubMenuNavigationEnum.values()) {
+            if(subMenu.getRootMenu() == rootMenu) {
+                subMenus.add(subMenu);
+            }
+        }
+        
+        return subMenus;
+    }
+    
+    public static List<SubMenuNavigationEnum> getAuthenticatedSubmenusByRootMenu(int rootMenu) {
         List<SubMenuNavigationEnum> subMenus = new ArrayList<SubMenuNavigationEnum>();
         
         for(SubMenuNavigationEnum subMenu : SubMenuNavigationEnum.values()) {

@@ -2,6 +2,7 @@
 /* This only allows us to use the mixins defined in it and does not add any styles by itself. */
 @import "../reindeer/reindeer.scss";
 
+@import "keyframes.scss";
 /* This contains all of your theme. */
 /* If somebody wants to extend the theme she will include this mixin. */
 @mixin pp4istheme {
@@ -206,4 +207,40 @@
         color: #00a2e8;
     }
     
+    .login-fields-blinker {
+        -webkit-animation-name: blinker;
+        -webkit-animation-duration: 1s;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+
+        -moz-animation-name: blinker;
+        -moz-animation-duration: 1s;
+        -moz-animation-timing-function: linear;
+        -moz-animation-iteration-count: infinite;
+
+        animation-name: blinker;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+    
+    .login-label-blinker {
+        
+        padding-top: 2px;
+        
+        -webkit-animation-name: blinker;
+        -webkit-animation-duration: 1s;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+
+        -moz-animation-name: blinker;
+        -moz-animation-duration: 1s;
+        -moz-animation-timing-function: linear;
+        -moz-animation-iteration-count: infinite;
+
+        animation-name: blinker;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
 }

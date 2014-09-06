@@ -115,6 +115,7 @@ public class LayoutController{
         getSubMenuNavigationLayout().removeAllComponents();
         getMainContentComponent().removeAllComponents();
         getMainMenuNavigationLayout().initLayoutForAuthenticatedUser();
+        getSubMenuNavigationLayout().initLayoutForAuthenticatedUser();
         
     }
 }

@@ -6,8 +6,10 @@
 
 package com.pss.pp4is.layout.navigation;
 
+import com.pss.pp4is.layout.navigation.links.MainMenuHelpNavigationLink;
 import com.pss.pp4is.layout.navigation.links.MainMenuHomeNavigationLink;
 import com.pss.pp4is.layout.navigation.links.MainMenuListsNavigationLink;
+import com.pss.pp4is.layout.navigation.links.MainMenuReportsNavigationLink;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,9 @@ import java.util.List;
  */
 public enum MainMenuNavigationEnum {
     MAIN_MENU_HOME_LINK(1, MainMenuHomeNavigationLink.class, null),
-    MAIN_MENU_SECOND_LINK(2, MainMenuListsNavigationLink.class,true);
+    MAIN_MENU_LISTS_LINK(2, MainMenuListsNavigationLink.class,true),
+    MAIN_MENU_REPORTS_LINK(3, MainMenuReportsNavigationLink.class,true),
+    MAIN_MENU_HELP_LINK(4, MainMenuHelpNavigationLink.class,true);
     
 
     

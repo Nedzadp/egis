@@ -6,17 +6,18 @@
 
 package com.pss.pp4is.layout.navigation.links;
 
+import com.google.gwt.user.client.DOM;
 import com.pss.pp4is.layout.navigation.CustomButtonLink;
-import com.pss.pp4is.layout.navigation.MainMenuNavigationEnum;
+import com.vaadin.ui.Notification;
 
 /**
  *
  * @author Nedzad
  */
-public class MainMenuHomeNavigationLink extends CustomButtonLink{
-   
-    public MainMenuHomeNavigationLink() {
-        setCaption("PP4I system");
+public class MainMenuReportsNavigationLink extends CustomButtonLink{
+
+    public MainMenuReportsNavigationLink() {
+        setCaption("Reports");
     }
 
     @Override
@@ -24,6 +25,9 @@ public class MainMenuHomeNavigationLink extends CustomButtonLink{
         getLayoutController().fixSelectedMenu(this);
         this.addStyleName("selected");
         getLayoutController().setCustomButtonLink(this);
-        getLayoutController().buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_HOME_LINK.getRow(),getLayoutController().getCustomLayout().getSubMenuNavigationLayout().getSubMenuLayout());
+        Notification.show("No implemented yet");
     }
+ 
+    
+    
 }

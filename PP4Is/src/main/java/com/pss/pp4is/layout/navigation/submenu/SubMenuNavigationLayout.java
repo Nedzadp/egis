@@ -21,12 +21,16 @@ public class SubMenuNavigationLayout extends  HorizontalLayout{
     
     public SubMenuNavigationLayout(LayoutController layoutController) {
         this.layoutController = layoutController;
+        addStyleName("submenu");
         initLayout();
     }
     private void initLayout() {
-        addStyleName("submenu");
         addComponent(subMenuLayout = new HorizontalLayout());
         layoutController.buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_HOME_LINK.getRow(), subMenuLayout);
+    }
+    
+    public void initLayoutForAuthenticatedUser() {
+        
     }
 
     public HorizontalLayout getSubMenuLayout() {

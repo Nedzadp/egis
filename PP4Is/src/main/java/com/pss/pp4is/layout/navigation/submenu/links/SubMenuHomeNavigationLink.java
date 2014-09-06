@@ -23,7 +23,6 @@ public class SubMenuHomeNavigationLink extends CustomSubmenuLink{
 
     @Override
     public void handleClick(ClickEvent event) {
-        getLayoutController().setCustomSubmenuLink(this);
         getLayoutController().fixSelectedSubMenu(this);
         CustomVerticalLayout layout = MainContentLayoutEnum.getInstanceBySubMenu(SubMenuNavigationEnum.SUB_MENU_HOME_WELCOME.getRow());
         if(layout != null) {

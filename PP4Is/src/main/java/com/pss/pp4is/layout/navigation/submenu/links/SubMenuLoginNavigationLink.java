@@ -23,6 +23,8 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
 
     @Override
     public void handleClick(ClickEvent event) {
+        getLayoutController().fixSelectedSubMenu(this);
+        
         Notification note = new Notification(null,"Log in here, please!",Notification.Type.HUMANIZED_MESSAGE);
         note.setDelayMsec(3000);
         note.setPosition(Position.TOP_CENTER);
@@ -36,6 +38,7 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         getLayoutController().getUserLoginHeader().getPasswordField().addStyleName("login-fields-blinker");
         
         getLayoutController().getUserLoginHeader().getUsernameField().focus();
+        
         
     }
     

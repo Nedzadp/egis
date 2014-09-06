@@ -90,7 +90,7 @@ public class UserLoginHeader extends HorizontalLayout{
             public void handleAction(Object sender, Object target) {
                 user = CurrentUser.isAuthenticated(usernameField.getValue(), passwordField.getValue());
                 if(user == null) {
-                    Notification.show("Login", "Login failed for username "+usernameField.getValue()+ ".", Notification.Type.WARNING_MESSAGE);
+                    Notification.show("Login", "User name or password is not correct. Please try it again.", Notification.Type.WARNING_MESSAGE);
                     getLoginLabel().removeStyleName("login-label");
                     getLoginLabel().addStyleName("login-label-action");
 
@@ -100,7 +100,7 @@ public class UserLoginHeader extends HorizontalLayout{
                     getUsernameField().focus();
                     
                 } else {
-                     Notification.show("Login", "Welcome "+user.getFirstName()+".", Notification.Type.TRAY_NOTIFICATION);
+                     Notification.show("Welcome!", "System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it.", Notification.Type.HUMANIZED_MESSAGE);
                      layoutController.refreshLayout();
                 }
                 

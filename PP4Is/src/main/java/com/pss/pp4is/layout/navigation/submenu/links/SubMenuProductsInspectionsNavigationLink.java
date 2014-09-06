@@ -13,17 +13,17 @@ import com.vaadin.ui.Notification;
  *
  * @author Nedzad
  */
-public class SubMenuMagyarNavigationLink extends  CustomSubmenuLink{
+public class SubMenuProductsInspectionsNavigationLink extends CustomSubmenuLink{
 
-    public SubMenuMagyarNavigationLink() {
-        setCaption("Magyar");
+    public SubMenuProductsInspectionsNavigationLink() {
+        setCaption("Products and inspections");
     }
 
-    
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);
         Notification.show("No implemented yet");
     }
+    
     
 }

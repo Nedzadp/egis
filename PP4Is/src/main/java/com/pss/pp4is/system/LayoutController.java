@@ -15,13 +15,14 @@ import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
 import com.vaadin.ui.HorizontalLayout;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author Nedzad
  */
-public class LayoutController{
+public class LayoutController implements Serializable{
 
     private final CustomLayout customLayout;
     private CustomButtonLink customButtonLink;
@@ -87,18 +88,21 @@ public class LayoutController{
         }
     }
 
-    public void setCustomSubmenuLink(CustomSubmenuLink customSubmenuLink) {
-        this.customSubmenuLink = customSubmenuLink;
-        this.customSubmenuLink.addStyleName("sub-menu-selected");
-    }
 
     public CustomSubmenuLink getCustomSubmenuLink() {
         return customSubmenuLink;
     }
     
+    private void setCustomSubmenuLink(CustomSubmenuLink customSubmenuLink) {
+        this.customSubmenuLink = customSubmenuLink;
+    }
+    
     public void fixSelectedSubMenu(CustomSubmenuLink customSubmenuLink) {
-        getCustomSubmenuLink().removeStyleName("sub-menu-selected");
+        if(getCustomSubmenuLink()!=null) {   
+            getCustomSubmenuLink().removeStyleName("sub-menu-selected");
+        }
         setCustomSubmenuLink(customSubmenuLink);
+        getCustomSubmenuLink().addStyleName("sub-menu-selected");
     }
 
     public void setUserLogin(UserLoginHeader userLoginHeader) {
@@ -118,4 +122,6 @@ public class LayoutController{
         getSubMenuNavigationLayout().initLayoutForAuthenticatedUser();
         
     }
+
+    
 }

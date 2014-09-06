@@ -7,6 +7,7 @@
 package com.pss.pp4is.layout.navigation.submenu.links;
 
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
+import com.vaadin.ui.Notification;
 
 /**
  *
@@ -20,7 +21,8 @@ public class SubMenuEnglishNavigationLink extends CustomSubmenuLink{
 
     @Override
     public void handleClick(ClickEvent event) {
-       
+        getLayoutController().fixSelectedSubMenu(this);
+        Notification.show("No implemented yet");
     }
     
     

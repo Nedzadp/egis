@@ -26,11 +26,12 @@ public class SubMenuNavigationLayout extends  HorizontalLayout{
     }
     private void initLayout() {
         addComponent(subMenuLayout = new HorizontalLayout());
-        layoutController.buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_HOME_LINK.getRow(), subMenuLayout);
+        layoutController.buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_HOME_LINK.getRow(), subMenuLayout,false);
     }
     
     public void initLayoutForAuthenticatedUser() {
-        
+        addComponent(subMenuLayout = new HorizontalLayout());
+        layoutController.buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_HOME_LINK.getRow(), subMenuLayout,true);
     }
 
     public HorizontalLayout getSubMenuLayout() {

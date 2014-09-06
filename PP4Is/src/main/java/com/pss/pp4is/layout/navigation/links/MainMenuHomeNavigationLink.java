@@ -24,6 +24,10 @@ public class MainMenuHomeNavigationLink extends CustomButtonLink{
         getLayoutController().fixSelectedMenu(this);
         this.addStyleName("selected");
         getLayoutController().setCustomButtonLink(this);
-        getLayoutController().buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_HOME_LINK.getRow(),getLayoutController().getCustomLayout().getSubMenuNavigationLayout().getSubMenuLayout());
+        boolean authenticated = false;
+        if(getLayoutController().getUserLoginHeader().getUser() != null) {
+            authenticated = true;
+        }
+        getLayoutController().buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_HOME_LINK.getRow(),getLayoutController().getCustomLayout().getSubMenuNavigationLayout().getSubMenuLayout(),authenticated);
     }
 }

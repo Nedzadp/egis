@@ -76,10 +76,10 @@ public class LayoutController{
         getCustomButtonLink().removeStyleName("selected");
         setCustomButtonLink(customButtonLink);
     }
-    public void buildSubMenu(int rootMainMenu,HorizontalLayout menu) {
+    public void buildSubMenu(int rootMainMenu,HorizontalLayout menu, boolean authenticated) {
          menu.removeAllComponents();
         
-        List<SubMenuNavigationEnum> subMenus = SubMenuNavigationEnum.getSubmenusByRootMenu(rootMainMenu);
+        List<SubMenuNavigationEnum> subMenus = SubMenuNavigationEnum.getSubmenusByRootMenu(rootMainMenu,authenticated);
         for(SubMenuNavigationEnum subMenu : subMenus) {
             CustomSubmenuLink link = subMenu.getInstance();
             link.setLayoutController(this);

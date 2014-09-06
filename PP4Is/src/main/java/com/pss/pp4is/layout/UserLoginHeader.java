@@ -29,7 +29,7 @@ public class UserLoginHeader extends HorizontalLayout{
     private TextField usernameField;
     private PasswordField passwordField;
     private User user;
-    private LayoutController layoutController;
+    private final LayoutController layoutController;
     
     public UserLoginHeader(LayoutController layoutController) {
         this.layoutController = layoutController;

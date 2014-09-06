@@ -7,7 +7,6 @@
 package com.pss.pp4is.layout.content;
 
 import com.pss.pp4is.layout.content.views.MainContentHomeLayout;
-import com.vaadin.ui.HorizontalLayout;
 
 /**
  *

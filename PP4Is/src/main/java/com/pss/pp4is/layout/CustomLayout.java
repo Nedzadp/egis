@@ -85,11 +85,14 @@ public class CustomLayout extends  VerticalLayout{
     
     private void addMainContent() {
         addComponent(mainContentComponent = new MainContentComponent());
+        layoutController.setMainContentComponent(mainContentComponent);
     }
     
     private void createMainMenuNavigation() {
         subMenuNavigationLayout = new SubMenuNavigationLayout(layoutController);
+        layoutController.setSubMenuNavigationLayout(subMenuNavigationLayout);
         addComponent(mainMenuNavigationLayout = new MainMenuNavigationLayout(layoutController));
+        layoutController.setMainMenuNavigationLayout(mainMenuNavigationLayout);
     }
 
     public MainContentComponent getMainContentComponent() {

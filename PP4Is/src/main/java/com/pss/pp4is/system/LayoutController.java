@@ -8,9 +8,12 @@ package com.pss.pp4is.system;
 
 import com.pss.pp4is.layout.CustomLayout;
 import com.pss.pp4is.layout.UserLoginHeader;
+import com.pss.pp4is.layout.content.MainContentComponent;
 import com.pss.pp4is.layout.navigation.CustomButtonLink;
+import com.pss.pp4is.layout.navigation.MainMenuNavigationLayout;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
+import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
 import com.vaadin.ui.HorizontalLayout;
 import java.util.List;
 
@@ -24,6 +27,9 @@ public class LayoutController{
     private CustomButtonLink customButtonLink;
     private CustomSubmenuLink customSubmenuLink;
     private UserLoginHeader userLoginHeader;
+    private MainMenuNavigationLayout mainMenuNavigationLayout;
+    private SubMenuNavigationLayout subMenuNavigationLayout;
+    private MainContentComponent mainContentComponent;
     
     public LayoutController(CustomLayout customLayout) {
         this.customLayout = customLayout;
@@ -31,6 +37,30 @@ public class LayoutController{
 
     public CustomLayout getCustomLayout() {
         return customLayout;
+    }
+
+    public MainMenuNavigationLayout getMainMenuNavigationLayout() {
+        return mainMenuNavigationLayout;
+    }
+
+    public void setMainMenuNavigationLayout(MainMenuNavigationLayout mainMenuNavigationLayout) {
+        this.mainMenuNavigationLayout = mainMenuNavigationLayout;
+    }
+
+    public SubMenuNavigationLayout getSubMenuNavigationLayout() {
+        return subMenuNavigationLayout;
+    }
+
+    public void setSubMenuNavigationLayout(SubMenuNavigationLayout subMenuNavigationLayout) {
+        this.subMenuNavigationLayout = subMenuNavigationLayout;
+    }
+
+    public MainContentComponent getMainContentComponent() {
+        return mainContentComponent;
+    }
+
+    public void setMainContentComponent(MainContentComponent mainContentComponent) {
+        this.mainContentComponent = mainContentComponent;
     }
 
     public void setCustomButtonLink(CustomButtonLink customButtonLink) {
@@ -77,5 +107,14 @@ public class LayoutController{
 
     public UserLoginHeader getUserLoginHeader() {
         return userLoginHeader;
+    }
+
+    public void refreshLayout() {
+        getUserLoginHeader().removeAllComponents();
+        getMainMenuNavigationLayout().removeAllComponents();
+        getSubMenuNavigationLayout().removeAllComponents();
+        getMainContentComponent().removeAllComponents();
+        getMainMenuNavigationLayout().initLayoutForAuthenticatedUser();
+        
     }
 }

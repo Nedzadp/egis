@@ -13,9 +13,9 @@ import com.pss.pp4is.system.LayoutController;
  *
  * @author Nedzad
  */
-public class MainMenuSecondNavigationLink extends CustomButtonLink{
+public class MainMenuListsNavigationLink extends CustomButtonLink{
 
-    public MainMenuSecondNavigationLink() {
+    public MainMenuListsNavigationLink() {
         setCaption("Second link");
     }
 

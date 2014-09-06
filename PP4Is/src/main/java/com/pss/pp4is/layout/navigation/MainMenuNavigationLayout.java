@@ -7,7 +7,7 @@
 package com.pss.pp4is.layout.navigation;
 
 import com.pss.pp4is.layout.navigation.links.MainMenuHomeNavigationLink;
-import com.pss.pp4is.layout.navigation.links.MainMenuSecondNavigationLink;
+import com.pss.pp4is.layout.navigation.links.MainMenuListsNavigationLink;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.HorizontalLayout;
 
@@ -27,7 +27,19 @@ public class MainMenuNavigationLayout extends  HorizontalLayout{
     
     private void initLayout() {
         
-        for(MainMenuNavigationEnum mainMenu : MainMenuNavigationEnum.values()) {
+        for(MainMenuNavigationEnum mainMenu : MainMenuNavigationEnum.getValuesForAnonymousUser()) {
+            CustomButtonLink buttonLink = mainMenu.getInstance();
+            buttonLink.setLayoutController(layoutController);
+            if(mainMenu.getRow() == 1) {
+                layoutController.setCustomButtonLink(buttonLink);
+            }
+            addComponent(buttonLink);
+        }
+    }
+    
+    public void initLayoutForAuthenticatedUser() {
+        
+        for(MainMenuNavigationEnum mainMenu : MainMenuNavigationEnum.getValuesForAuthenticatedUser()) {
             CustomButtonLink buttonLink = mainMenu.getInstance();
             buttonLink.setLayoutController(layoutController);
             if(mainMenu.getRow() == 1) {

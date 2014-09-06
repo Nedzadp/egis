@@ -8,8 +8,6 @@ package com.pss.pp4is.layout.header;
 
 import com.pss.pp4is.layout.UserLoginHeader;
 import com.pss.pp4is.system.LayoutController;
-import com.vaadin.event.ShortcutAction;
-import com.vaadin.event.ShortcutListener;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Embedded;
@@ -21,7 +19,7 @@ import com.vaadin.ui.HorizontalLayout;
  */
 public class CustomHeaderLayout extends  HorizontalLayout{
 
-    private LayoutController layoutController;
+    private final LayoutController layoutController;
     private UserLoginHeader userLoginHeader;
     
     public CustomHeaderLayout(LayoutController layoutController) {
@@ -38,7 +36,7 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         addComponent(leftHeaderLayout);
         setComponentAlignment(leftHeaderLayout, Alignment.TOP_LEFT);
         
-        userLoginHeader = new UserLoginHeader();
+        userLoginHeader = new UserLoginHeader(layoutController);
         addComponent(userLoginHeader);
         setComponentAlignment(userLoginHeader, Alignment.TOP_RIGHT);
         layoutController.setUserLogin(userLoginHeader);

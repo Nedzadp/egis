@@ -8,6 +8,7 @@ package com.pss.pp4is.layout;
 
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.system.CurrentUser;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.event.ShortcutAction;
@@ -29,9 +30,12 @@ public class UserLoginHeader extends HorizontalLayout{
     private TextField usernameField;
     private PasswordField passwordField;
     private User user;
+    private LayoutController layoutController;
     
-    public UserLoginHeader() {
+    public UserLoginHeader(LayoutController layoutController) {
+        this.layoutController = layoutController;
         initLayout();
+        
     }
     
     private void initLayout() {
@@ -98,6 +102,7 @@ public class UserLoginHeader extends HorizontalLayout{
                     
                 } else {
                      Notification.show("Login", "Welcome "+user.getFirstName()+".", Notification.Type.TRAY_NOTIFICATION);
+                     layoutController.refreshLayout();
                 }
                 
             }

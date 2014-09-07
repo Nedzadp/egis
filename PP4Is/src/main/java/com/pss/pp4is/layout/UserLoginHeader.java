@@ -13,7 +13,11 @@ import com.vaadin.event.FieldEvents;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
@@ -122,5 +126,23 @@ public class UserLoginHeader extends HorizontalLayout{
 
     public PasswordField getPasswordField() {
         return passwordField;
+    }
+
+    public void refreshLayout() {
+        
+        HorizontalLayout userInformation = new HorizontalLayout();
+        
+        Image userIcon = new Image(null, new ThemeResource("img/user-icon2.png"));
+        userInformation.addComponent(userIcon);
+        
+        Label usernameLabel = new Label();
+        usernameLabel.addStyleName("username-label");
+        usernameLabel.setCaption(getUser().getUsername());
+        userInformation.addComponent(usernameLabel);
+        
+        userInformation.addStyleName("user-information");
+        addComponent(userInformation);
+        setComponentAlignment(userInformation, Alignment.TOP_RIGHT);
+       
     }
 }

@@ -14,7 +14,10 @@ import com.pss.pp4is.layout.navigation.MainMenuNavigationLayout;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
+import com.vaadin.ui.Label;
 import java.io.Serializable;
 import java.util.List;
 
@@ -118,10 +121,9 @@ public class LayoutController implements Serializable{
         getMainMenuNavigationLayout().removeAllComponents();
         getSubMenuNavigationLayout().removeAllComponents();
         getMainContentComponent().removeAllComponents();
+        getUserLoginHeader().refreshLayout();
         getMainMenuNavigationLayout().initLayoutForAuthenticatedUser();
         getSubMenuNavigationLayout().initLayoutForAuthenticatedUser();
-        
+       
     }
-
-    
 }

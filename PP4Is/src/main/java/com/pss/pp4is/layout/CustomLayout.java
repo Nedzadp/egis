@@ -6,11 +6,16 @@
 
 package com.pss.pp4is.layout;
 
+import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.pss.pp4is.layout.content.MainContentComponent;
+import com.pss.pp4is.layout.content.MainContentLayoutEnum;
 import com.pss.pp4is.layout.header.CustomHeaderLayout;
 import com.pss.pp4is.layout.navigation.MainMenuNavigationLayout;
+import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
 import com.pss.pp4is.system.LayoutController;
+import com.vaadin.event.MouseEvents;
+import com.vaadin.event.MouseEvents.ClickListener;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
@@ -75,7 +80,18 @@ public class CustomLayout extends  VerticalLayout{
         HorizontalLayout logoLayout = new HorizontalLayout();
         logoLayout.setWidth("100%");
         // Display the image without caption
-        logoLayout.addComponent(new Image(null, new ThemeResource(LOGO_PATH)));
+        Image logo = new Image(null, new ThemeResource(LOGO_PATH));
+        logo.addClickListener(new ClickListener() {
+            @Override
+            public void click(MouseEvents.ClickEvent event) {
+                CustomVerticalLayout layout = MainContentLayoutEnum.getInstanceBySubMenu(SubMenuNavigationEnum.SUB_MENU_HOME_WELCOME.getRow());
+                if(layout != null) {
+                    getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
+                    getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
+                }
+            }
+        });
+        logoLayout.addComponent(logo);
         Image egis_logo = new Image(null, new ThemeResource(EGIS_LOGO_PATH));
         logoLayout.addComponent(egis_logo);
         logoLayout.setComponentAlignment(egis_logo, Alignment.TOP_RIGHT);
@@ -108,5 +124,9 @@ public class CustomLayout extends  VerticalLayout{
 
     public MainMenuNavigationLayout getMainMenuNavigationLayout() {
         return mainMenuNavigationLayout;
+    }
+
+    public LayoutController getLayoutController() {
+        return layoutController;
     }
 }

@@ -6,24 +6,24 @@
 
 package com.pss.pp4is.layout.navigation.submenu;
 
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuAboutNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuDocumentCompaniesNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuDocumentTypeNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuEnglishNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuExitNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuHomeNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuImagesNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuInformationNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuInspectionProfilesNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuListsNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuLoginNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuMagyarNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuProductsInspectionsNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuReportsNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuRestartClockNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuSystemUsageNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuUserActivitiesNavigationLink;
-import com.pss.pp4is.layout.navigation.submenu.links.SubMenuUsersNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.help.SubMenuAboutNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.lists.SubMenuDocumentCompaniesNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.lists.SubMenuDocumentTypeNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.home.SubMenuEnglishNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.home.SubMenuExitNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.home.SubMenuHomeNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.help.SubMenuImagesNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.help.SubMenuInformationNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.lists.SubMenuInspectionProfilesNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.help.SubMenuListsNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.home.SubMenuLoginNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.home.SubMenuMagyarNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.lists.SubMenuProductsInspectionsNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.help.SubMenuReportsNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.home.SubMenuRestartClockNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.reports.SubMenuSystemUsageNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.reports.SubMenuUserActivitiesNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.lists.SubMenuUsersNavigationLink;
 import java.util.ArrayList;
 import java.util.List;
 

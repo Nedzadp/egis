@@ -39,7 +39,7 @@ public class CustomLayout extends  VerticalLayout{
         init();
     }
     
-    public void init() {
+    public  void init() {
         initLayout();
         
         createHeader();
@@ -47,6 +47,8 @@ public class CustomLayout extends  VerticalLayout{
         createMainMenuNavigation();
         
         createSubMenuNavigation();
+        
+        addHorizontalLines(true);
         
         addMainContent();
     }
@@ -59,25 +61,27 @@ public class CustomLayout extends  VerticalLayout{
     private void createHeader() {
         addComponent(new CustomHeaderLayout(layoutController));
         
-        addHorizontalLines();
+        addHorizontalLines(false);
         
         addLogo();
         
     }
     
-    private void addHorizontalLines() {
+    private void addHorizontalLines(boolean sameColor) {
         HorizontalLayout mainHorizontalLine = new HorizontalLayout();
         mainHorizontalLine.setHeight("4px");
         mainHorizontalLine.addStyleName("hrline2");
         addComponent(mainHorizontalLine);
         
-        HorizontalLayout subHorizontalLine = new HorizontalLayout();
-        subHorizontalLine.setWidth("300px");
-        subHorizontalLine.setHeight("4px");
-        subHorizontalLine.addStyleName("hrline");
-        
-        mainHorizontalLine.addComponent(subHorizontalLine);
-        mainHorizontalLine.setComponentAlignment(subHorizontalLine, Alignment.TOP_LEFT);
+        if(!sameColor) {
+            HorizontalLayout subHorizontalLine = new HorizontalLayout();
+            subHorizontalLine.setWidth("300px");
+            subHorizontalLine.setHeight("4px");
+            subHorizontalLine.addStyleName("hrline");
+
+            mainHorizontalLine.addComponent(subHorizontalLine);
+            mainHorizontalLine.setComponentAlignment(subHorizontalLine, Alignment.TOP_LEFT);
+        }
     }
     
     private void addLogo() {

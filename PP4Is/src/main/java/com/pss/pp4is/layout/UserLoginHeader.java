@@ -6,10 +6,13 @@
 
 package com.pss.pp4is.layout;
 
+import com.github.wolfie.refresher.Refresher;
+import com.github.wolfie.refresher.Refresher.RefreshListener;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.content.window.ExitWindow;
 import com.pss.pp4is.system.CurrentUser;
 import com.pss.pp4is.system.LayoutController;
+import com.vaadin.data.Property;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.event.MouseEvents;
@@ -25,6 +28,9 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /**
  *
@@ -38,10 +44,14 @@ public class UserLoginHeader extends HorizontalLayout{
     private User user;
     private final LayoutController layoutController;
     
+    private  Timer timer;
+    private Integer seconds;
+    private Integer minutes;
+    private TimerLabel timerLabel;
+    
     public UserLoginHeader(LayoutController layoutController) {
         this.layoutController = layoutController;
         initLayout();
-        
     }
     
     private void initLayout() {
@@ -150,9 +160,56 @@ public class UserLoginHeader extends HorizontalLayout{
         });
         
         userInformation.addComponent(logout);
+        timerLabel = new TimerLabel();
+        seconds = 59;
+        minutes = 2;
+        timerLabel.setCaption(minutes.toString()+" : "+seconds.toString());
+        
+        final Refresher refresher = new Refresher();
+        refresher.addListener(timerLabel);
+        addExtension(refresher);
+        
+        
+        userInformation.addComponent(timerLabel);
+        
+        int delay = 1000;
+        int period = 1000;
+        timer = new Timer();
+        
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+
+        @Override
+        public void run() {
+            seconds--;
+            if (seconds == 0) {
+                minutes--;
+                seconds = 59;
+            }
+            if(minutes == 0 && seconds == 0) {
+                timer.cancel();
+                addExitWindow();
+            }
+        }
+    }, delay, period);
         
         addComponent(userInformation);
         setComponentAlignment(userInformation, Alignment.TOP_RIGHT);
-       
     }
+   
+    private void addExitWindow() {
+        UI.getCurrent().addWindow(new ExitWindow(layoutController));
+    }
+    private class TimerLabel extends Label implements RefreshListener {
+
+        public TimerLabel() {
+            
+        }
+
+        @Override
+        public void refresh(Refresher source) {
+            setCaption(minutes.toString()+" : "+seconds.toString());
+        }
+    }
+    
 }

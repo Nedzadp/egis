@@ -7149,6 +7149,14 @@ body .pp4istheme.v-app .v-app-loading {
 	padding-left: 10px;
 }
 
+.pp4istheme .v-slot-restart-clock-button {
+	color: #00a2e8;
+	line-height: 20px;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-right: 10px;
+}
+
 .pp4istheme .v-button-link .v-button-caption {
 	font-family: Arial;
 	font-size: 14px;

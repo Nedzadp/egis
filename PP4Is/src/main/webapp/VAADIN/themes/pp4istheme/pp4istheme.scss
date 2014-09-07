@@ -43,6 +43,15 @@
             min-width: 100px;
             padding-left: 10px;
     }
+    
+    .v-slot-restart-clock-button {
+        color: #00a2e8;
+	line-height: 20px;
+	padding-left:5px;
+        padding-top: 5px;
+        padding-right: 10px;
+    }
+    
    .v-button-link .v-button-caption{
         font-family: Arial;
         font-size: 14px;

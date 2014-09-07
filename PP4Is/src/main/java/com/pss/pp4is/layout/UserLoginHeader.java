@@ -21,6 +21,7 @@ import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
@@ -28,6 +29,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.themes.BaseTheme;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -48,6 +50,8 @@ public class UserLoginHeader extends HorizontalLayout{
     private Integer seconds;
     private Integer minutes;
     private TimerLabel timerLabel;
+    private TimerImage timerImage;
+    private TimerButton timerButton;
     
     public UserLoginHeader(LayoutController layoutController) {
         this.layoutController = layoutController;
@@ -165,15 +169,39 @@ public class UserLoginHeader extends HorizontalLayout{
         minutes = 2;
         timerLabel.setCaption(minutes.toString()+" : "+seconds.toString());
         
-        final Refresher refresher = new Refresher();
-        refresher.addListener(timerLabel);
-        addExtension(refresher);
-        
-        
-        userInformation.addComponent(timerLabel);
+        //userInformation.addComponent(timerLabel);
         
         int delay = 1000;
         int period = 1000;
+        timerImage = new TimerImage(minutes.toString()+" : "+seconds.toString());
+        timerImage.addClickListener(new ClickListener() {
+
+            @Override
+            public void click(MouseEvents.ClickEvent event) {
+                Notification.show("Reset clock");
+            }
+        });
+        
+        timerButton = new TimerButton();
+        timerButton.setCaption(minutes.toString()+" : "+seconds.toString());
+        timerButton.addClickListener(new Button.ClickListener() {
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+               Notification.show("Restart");
+            }
+        });
+        
+        
+        final Refresher refresher = new Refresher();
+        refresher.addListener(timerButton);
+        addExtension(refresher);
+        
+        
+        userInformation.addComponent(timerButton);
+        
+        
+        
         timer = new Timer();
         
 
@@ -182,7 +210,7 @@ public class UserLoginHeader extends HorizontalLayout{
         @Override
         public void run() {
             seconds--;
-            if (seconds == 0) {
+            if (seconds == 0 && minutes>0) {
                 minutes--;
                 seconds = 59;
             }
@@ -200,6 +228,21 @@ public class UserLoginHeader extends HorizontalLayout{
     private void addExitWindow() {
         UI.getCurrent().addWindow(new ExitWindow(layoutController));
     }
+    
+    private class TimerButton extends Button implements RefreshListener {
+
+        public TimerButton() {
+            addStyleName(BaseTheme.BUTTON_LINK);
+            addStyleName("restart-clock-button");
+            setDescription("Reset the clock by clicking on it.");
+        }
+
+        @Override
+        public void refresh(Refresher source) {
+            setCaption(minutes.toString()+" : "+seconds.toString());
+        }
+    }
+    
     private class TimerLabel extends Label implements RefreshListener {
 
         public TimerLabel() {
@@ -210,6 +253,18 @@ public class UserLoginHeader extends HorizontalLayout{
         public void refresh(Refresher source) {
             setCaption(minutes.toString()+" : "+seconds.toString());
         }
+    }
+    
+    private class TimerImage extends Image implements RefreshListener {
+
+        public TimerImage(String caption) {
+            super(caption, new ThemeResource("img/timer1.png"));
+        }
+
+        @Override
+        public void refresh(Refresher source) {
+            setCaption(minutes.toString()+" : "+seconds.toString());
+        } 
     }
     
 }

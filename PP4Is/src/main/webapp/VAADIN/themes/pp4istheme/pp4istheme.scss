@@ -214,18 +214,11 @@
         font-size: 16px;
         padding-left: 3px;
         margin-right: 5px;
-        padding-top: 3px;
+        padding-top: 4px;
     }
     
-    .logout{
-        font-size: 12px;
-        color: blue;
-        padding-top: 6px;
-        margin-right: 5px;
-    }
-    
-    .v-slot-user-information {
-        margin-right: 5px;
+    .logout-icon{
+        margin-right: 10px;
     }
     
     .login-fields-blinker {
@@ -264,4 +257,11 @@
         animation-timing-function: linear;
         animation-iteration-count: infinite;
     }
+    
+    .v-window-exit-window .v-window-outerheader {
+        background: #00a2e8;
+     }
+     .v-window-exit-window .v-window-closebox {
+        background: url('img/close-modal.png');
+     }
 }

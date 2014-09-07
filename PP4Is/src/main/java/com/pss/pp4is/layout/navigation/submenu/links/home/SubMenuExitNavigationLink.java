@@ -6,8 +6,9 @@
 
 package com.pss.pp4is.layout.navigation.submenu.links.home;
 
+import com.pss.pp4is.layout.content.window.ExitWindow;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
-import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
 
 /**
  *
@@ -22,7 +23,6 @@ public class SubMenuExitNavigationLink extends CustomSubmenuLink{
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);
-        Notification.show("Not implemented yet");
+        UI.getCurrent().addWindow(new ExitWindow(getLayoutController()));
     }
-    
 }

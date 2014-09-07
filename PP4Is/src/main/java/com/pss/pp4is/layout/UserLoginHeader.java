@@ -7,21 +7,24 @@
 package com.pss.pp4is.layout;
 
 import com.pss.pp4is.data.models.User;
+import com.pss.pp4is.layout.content.window.ExitWindow;
 import com.pss.pp4is.system.CurrentUser;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.event.FieldEvents.TextChangeListener;
+import com.vaadin.event.MouseEvents;
+import com.vaadin.event.MouseEvents.ClickListener;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 
 /**
  *
@@ -132,15 +135,22 @@ public class UserLoginHeader extends HorizontalLayout{
         
         HorizontalLayout userInformation = new HorizontalLayout();
         
-        Image userIcon = new Image(null, new ThemeResource("img/user-icon2.png"));
-        userInformation.addComponent(userIcon);
-        
         Label usernameLabel = new Label();
         usernameLabel.addStyleName("username-label");
         usernameLabel.setCaption(getUser().getUsername());
         userInformation.addComponent(usernameLabel);
         
-        userInformation.addStyleName("user-information");
+        Image logout = new Image(null, new ThemeResource("img/logout.png"));
+        logout.addStyleName("logout-icon");
+        logout.addClickListener(new ClickListener() {
+            @Override
+            public void click(MouseEvents.ClickEvent event) {
+               UI.getCurrent().addWindow(new ExitWindow(layoutController));
+            }
+        });
+        
+        userInformation.addComponent(logout);
+        
         addComponent(userInformation);
         setComponentAlignment(userInformation, Alignment.TOP_RIGHT);
        

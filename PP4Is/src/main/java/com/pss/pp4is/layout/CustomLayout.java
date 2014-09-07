@@ -36,6 +36,10 @@ public class CustomLayout extends  VerticalLayout{
     private LayoutController layoutController;
     
     public CustomLayout() {
+        init();
+    }
+    
+    public void init() {
         initLayout();
         
         createHeader();

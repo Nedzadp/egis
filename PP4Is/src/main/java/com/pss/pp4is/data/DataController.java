@@ -7,8 +7,10 @@
 package com.pss.pp4is.data;
 
 import com.pss.pp4is.data.containers.ProductContainer;
+import com.pss.pp4is.data.containers.ProductLanguageContainer;
 import com.pss.pp4is.data.containers.ProductMasterContainer;
 import com.pss.pp4is.data.models.Product;
+import com.pss.pp4is.data.models.ProductLanguage;
 import com.pss.pp4is.data.models.ProductMaster;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.system.DatabaseConnection;
@@ -91,6 +93,30 @@ public class DataController {
             }
             databaseConnection.disconnect();
             return products;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static ProductLanguageContainer getProductLanguage() {
+        try {
+            ProductLanguageContainer productLanguageContainer = new ProductLanguageContainer();
+            String sql = "SELECT pl.product_language_id, pl.name " +
+                         "FROM product_language pl ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {     
+                productLanguageContainer.addBean(new ProductLanguage(resultSet.getInt("pl.product_language_id"), resultSet.getString("pl.name")));
+            }
+            databaseConnection.disconnect();
+            return productLanguageContainer;
         } catch (SQLException ex) {
             Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
         }

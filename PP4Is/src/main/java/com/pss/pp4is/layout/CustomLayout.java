@@ -48,7 +48,7 @@ public class CustomLayout extends  VerticalLayout{
         
         createSubMenuNavigation();
         
-        addHorizontalLines(true);
+        //addHorizontalLines(true);
         
         addMainContent();
     }

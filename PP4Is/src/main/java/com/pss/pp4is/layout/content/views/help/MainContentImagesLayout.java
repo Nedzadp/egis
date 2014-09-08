@@ -4,26 +4,25 @@
  * and open the template in the editor.
  */
 
-package com.pss.pp4is.layout.content;
+package com.pss.pp4is.layout.content.views.help;
 
+import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.vaadin.ui.CustomLayout;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.VerticalLayout;
 
 /**
  *
  * @author Nedzad
  */
-public class MainContentComponent extends  VerticalLayout{
-    
-    public MainContentComponent() {
+public class MainContentImagesLayout extends CustomVerticalLayout{
+
+    public MainContentImagesLayout() {
         initLayout();
-        
     }
     
     private void initLayout() {
         setMargin(false);
         setSpacing(false);
-        addComponent(new CustomLayout("welcome"));
+        
+        addComponent(new CustomLayout("images"));
     }
 }

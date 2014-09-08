@@ -7,13 +7,25 @@
 package com.pss.pp4is.layout.content;
 
 import com.pss.pp4is.layout.content.views.MainContentHomeLayout;
+import com.pss.pp4is.layout.content.views.help.MainContentAboutLayout;
+import com.pss.pp4is.layout.content.views.help.MainContentImagesLayout;
+import com.pss.pp4is.layout.content.views.help.MainContentInformationLayout;
+import com.pss.pp4is.layout.content.views.help.MainContentListsLayout;
+import com.pss.pp4is.layout.content.views.help.MainContentReportsLayout;
 
 /**
  *
  * @author Nedzad
  */
 public enum MainContentLayoutEnum {
-    WELCOME_CONTENT_LAYOUT(1,1, MainContentHomeLayout.class);
+    WELCOME_CONTENT_LAYOUT(1,1, MainContentHomeLayout.class),
+    // help sub links
+    INFORMATION_LAYOUT(15,2,MainContentInformationLayout.class),
+    LISTS_LAYOUT(16,3,MainContentListsLayout.class),
+    IMAGES_LAYOUT(17,4,MainContentImagesLayout.class),
+    REPORTS_LAYOUT(18,5,MainContentReportsLayout.class),
+    ABOUT_LAYOUT(19,6,MainContentAboutLayout.class)
+    ;
 
     private final int subMenu;
     private final int row;

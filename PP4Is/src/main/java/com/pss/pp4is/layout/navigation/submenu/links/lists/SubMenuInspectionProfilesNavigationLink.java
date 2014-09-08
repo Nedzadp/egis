@@ -30,6 +30,4 @@ public class SubMenuInspectionProfilesNavigationLink extends CustomSubmenuLink{
             getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
         }
     }
-    
-   
 }

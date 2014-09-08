@@ -25,11 +25,11 @@ public class InspectionProfileContainer extends BeanItemContainer<InspectionProf
     };
 
     public static final String[] COL_HEADERS_ENGLISH = new String[] {
-        "Inspection profile id", "Name", "Gray to white from", "Error cutting from", "SubSquare size", "maxRotation", "rotationPrecision", "errorGroupsMaxGap",
-        "errorGroupMinSize", "errorErosionCount", "errorDilationCount", "profileNote", "sampleName", "samplePath", "ztolerance", "horisontalOverlapCoeffLeft",
-        "horisontalInsideCoeffLeft", "horisontalDistanceCoeffLeft", "verticalOverlapCoeffLeft", "verticalInsideCoeffLeft", "verticalDistanceCoeffLeft",
-        "horisontalOverlapCoeffRight", "orisontalInsideCoeffRight", "orisontalDistanceCoeffRight", "verticalOverlapCoeffRight", "verticalInsideCoeffRight",
-        "verticalDistanceCoeffRight"
+        "Inspection profile id", "Name", "Gray to white from", "Error cutting from", "SubSquare size", "max Rotation", "rotation Precision", "error Groups Max Gap",
+        "error Group Min Size", "error Erosion Count", "error Dilation Count", "profile Note", "sample Name", "sample Path", "ztolerance", "horisontal Overlap Coeff Left",
+        "horisontal Inside Coeff Left", "horisontal Distance Coeff Left", "vertical Overlap Coeff Left", "vertical Inside Coeff Left", "vertical Distance Coeff Left",
+        "horisontal Overlap Coeff Right", "orisontal Inside Coeff Right", "orisontal Distance Coeff Right", "vertical Overlap Coeff Right", "vertical InsideCoeff Right",
+        "vertical Distance Coeff Right"
     };
     
     public InspectionProfileContainer() throws IllegalArgumentException {

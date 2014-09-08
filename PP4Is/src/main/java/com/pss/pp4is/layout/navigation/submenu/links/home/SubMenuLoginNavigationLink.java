@@ -6,6 +6,7 @@
 
 package com.pss.pp4is.layout.navigation.submenu.links.home;
 
+import com.github.wolfie.refresher.Refresher;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.vaadin.server.Page;
 import com.vaadin.shared.Position;
@@ -28,10 +29,10 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         getLayoutController().fixSelectedSubMenu(this);
         
         Notification note = new Notification(null,"Log in here, please!",Notification.Type.HUMANIZED_MESSAGE);
-        note.setDelayMsec(3000);
-        note.setPosition(Position.TOP_RIGHT);
+        note.setPosition(Position.TOP_CENTER);
         note.setStyleName("mynotification");
         note.show(Page.getCurrent());
+
         
         getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
         getLayoutController().getUserLoginHeader().getLoginLabel().addStyleName("login-label-blinker");
@@ -42,7 +43,6 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         getLayoutController().getUserLoginHeader().getUsernameField().focus();
         
         new CustomThread().start();
-
         
     }
     
@@ -55,15 +55,25 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         public void run() {
             try {
                 Thread.sleep(3000);
-                getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label-blinker");
-                getLayoutController().getUserLoginHeader().getUsernameField().removeStyleName("login-fields-blinker");
-                getLayoutController().getUserLoginHeader().getPasswordField().removeStyleName("login-fields-blinker");
-        
-                getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
+                new RefreshTimer().refresh(null);
         
             } catch (InterruptedException ex) {
                 Logger.getLogger(SubMenuLoginNavigationLink.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    private class RefreshTimer implements Refresher.RefreshListener {
+
+        public RefreshTimer() {
+        }
+
+        @Override
+        public void refresh(Refresher source) {
+            getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label-blinker");
+            getLayoutController().getUserLoginHeader().getUsernameField().removeStyleName("login-fields-blinker");
+            getLayoutController().getUserLoginHeader().getPasswordField().removeStyleName("login-fields-blinker");
+
+            getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
         }
         
     }

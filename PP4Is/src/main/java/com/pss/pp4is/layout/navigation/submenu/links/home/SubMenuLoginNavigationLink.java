@@ -10,6 +10,8 @@ import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.vaadin.server.Page;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.Notification;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +29,7 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         
         Notification note = new Notification(null,"Log in here, please!",Notification.Type.HUMANIZED_MESSAGE);
         note.setDelayMsec(3000);
-        note.setPosition(Position.TOP_CENTER);
+        note.setPosition(Position.TOP_RIGHT);
         note.setStyleName("mynotification");
         note.show(Page.getCurrent());
         
@@ -38,7 +40,31 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         getLayoutController().getUserLoginHeader().getPasswordField().addStyleName("login-fields-blinker");
         
         getLayoutController().getUserLoginHeader().getUsernameField().focus();
-       
+        
+        new CustomThread().start();
+
+        
+    }
+    
+    private class CustomThread extends Thread {
+
+        public CustomThread() {
+        }
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(3000);
+                getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label-blinker");
+                getLayoutController().getUserLoginHeader().getUsernameField().removeStyleName("login-fields-blinker");
+                getLayoutController().getUserLoginHeader().getPasswordField().removeStyleName("login-fields-blinker");
+        
+                getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
+        
+            } catch (InterruptedException ex) {
+                Logger.getLogger(SubMenuLoginNavigationLink.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
     }
     

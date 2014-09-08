@@ -13,7 +13,9 @@ import com.pss.pp4is.layout.content.views.help.MainContentInformationLayout;
 import com.pss.pp4is.layout.content.views.help.MainContentListsLayout;
 import com.pss.pp4is.layout.content.views.help.MainContentReportsLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentProductLanguageLayout;
+import com.pss.pp4is.layout.content.views.listing.MainContentProductPrinterLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentProductTypeLayout;
+import com.pss.pp4is.layout.content.views.listing.MainContentUserLayout;
 
 /**
  *
@@ -29,7 +31,9 @@ public enum MainContentLayoutEnum {
     ABOUT_LAYOUT(19,6,MainContentAboutLayout.class),
     // listings
     DOCUMENT_LANGUAGE(8,7, MainContentProductLanguageLayout.class),
-    DOCUMENT_TYPE(9,8,MainContentProductTypeLayout.class)
+    DOCUMENT_TYPE(9,8,MainContentProductTypeLayout.class),
+    DOCUMENT_PRINTER(10,9, MainContentProductPrinterLayout.class),
+    USERS(12,10, MainContentUserLayout.class)
     ;
 
     private final int subMenu;

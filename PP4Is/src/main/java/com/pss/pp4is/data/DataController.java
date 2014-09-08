@@ -9,10 +9,13 @@ package com.pss.pp4is.data;
 import com.pss.pp4is.data.containers.ProductContainer;
 import com.pss.pp4is.data.containers.ProductLanguageContainer;
 import com.pss.pp4is.data.containers.ProductMasterContainer;
+import com.pss.pp4is.data.containers.ProductPrinterContainer;
 import com.pss.pp4is.data.containers.ProductTypeContainer;
+import com.pss.pp4is.data.containers.UserContainer;
 import com.pss.pp4is.data.models.Product;
 import com.pss.pp4is.data.models.ProductLanguage;
 import com.pss.pp4is.data.models.ProductMaster;
+import com.pss.pp4is.data.models.ProductPrinter;
 import com.pss.pp4is.data.models.ProductType;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.system.DatabaseConnection;
@@ -143,6 +146,61 @@ public class DataController {
             }
             databaseConnection.disconnect();
             return productTypeContainer;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static ProductPrinterContainer getProductPrinter() {
+        try {
+            ProductPrinterContainer productPrinterContainer = new ProductPrinterContainer();
+            String sql = "SELECT pp.product_printer_id, pp.name " +
+                         "FROM product_printer pp ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {     
+                productPrinterContainer.addBean(new ProductPrinter(resultSet.getInt("pp.product_printer_id"), resultSet.getString("pp.name")));
+            }
+            databaseConnection.disconnect();
+            return productPrinterContainer;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static UserContainer getUsers() {
+        try {
+            UserContainer userContainer = new UserContainer();
+            String sql = "SELECT * FROM  user ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {  
+                User user = new User();
+                user.setUserId(resultSet.getInt("userId"));
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setEmail(resultSet.getString("email"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+                user.setIsActive(resultSet.getBoolean("isActive")?"X":"");
+                userContainer.addBean(user);
+            }
+            databaseConnection.disconnect();
+            return userContainer;
         } catch (SQLException ex) {
             Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -7115,6 +7115,14 @@ body .pp4istheme.v-app .v-app-loading {
 	background-image: url(../reindeer/window/img/black/content-bg.png);/** sprite-ref: black-verticals; sprite-alignment: repeat */
 }
 
+.pp4istheme .v-table-header {
+	background-color: #00a2e8;
+}
+
+.pp4istheme .v-table-caption-container {
+	color: white;
+}
+
 .pp4istheme .v-slot-vertical-custom-layout {
 	width: 1024px;
 	min-height: 970px;

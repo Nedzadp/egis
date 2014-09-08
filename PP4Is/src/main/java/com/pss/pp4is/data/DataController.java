@@ -9,9 +9,11 @@ package com.pss.pp4is.data;
 import com.pss.pp4is.data.containers.ProductContainer;
 import com.pss.pp4is.data.containers.ProductLanguageContainer;
 import com.pss.pp4is.data.containers.ProductMasterContainer;
+import com.pss.pp4is.data.containers.ProductTypeContainer;
 import com.pss.pp4is.data.models.Product;
 import com.pss.pp4is.data.models.ProductLanguage;
 import com.pss.pp4is.data.models.ProductMaster;
+import com.pss.pp4is.data.models.ProductType;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.system.DatabaseConnection;
 import java.sql.ResultSet;
@@ -117,6 +119,30 @@ public class DataController {
             }
             databaseConnection.disconnect();
             return productLanguageContainer;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static ProductTypeContainer getProductType() {
+        try {
+            ProductTypeContainer productTypeContainer = new ProductTypeContainer();
+            String sql = "SELECT pt.product_type_id, pt.name " +
+                         "FROM product_type pt ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {     
+                productTypeContainer.addBean(new ProductType(resultSet.getInt("pt.product_type_id"), resultSet.getString("pt.name")));
+            }
+            databaseConnection.disconnect();
+            return productTypeContainer;
         } catch (SQLException ex) {
             Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
         }

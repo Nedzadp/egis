@@ -10,6 +10,14 @@
   @include reindeer;
 
   /* Insert your theme rules here */
+    .v-table-header {
+      background-color:#00a2e8;
+    }
+    
+    .v-table-caption-container{
+        color: white;
+    }
+    
   /* Insert your theme rules here */
   .v-slot-vertical-custom-layout {
     width:1024px;

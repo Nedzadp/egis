@@ -22,7 +22,8 @@ public class MainContentComponent extends  VerticalLayout{
     }
     
     private void initLayout() {
-        addStyleName("main-content");
+        setMargin(false);
+        setSpacing(false);
         addComponent(new CustomLayout("welcome"));
     }
 }

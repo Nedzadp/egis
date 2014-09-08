@@ -17,7 +17,7 @@ import com.vaadin.ui.Notification;
 public class SubMenuDocumentTypeNavigationLink extends CustomSubmenuLink{
 
     public SubMenuDocumentTypeNavigationLink() {
-        setCaption("Document types");
+        setCaption("Doc. types");
     }
 
     @Override

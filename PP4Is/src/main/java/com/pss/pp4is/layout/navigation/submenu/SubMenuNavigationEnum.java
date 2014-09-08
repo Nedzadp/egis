@@ -21,6 +21,7 @@ import com.pss.pp4is.layout.navigation.submenu.links.home.SubMenuMagyarNavigatio
 import com.pss.pp4is.layout.navigation.submenu.links.lists.SubMenuProductsInspectionsNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.help.SubMenuReportsNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.home.SubMenuRestartClockNavigationLink;
+import com.pss.pp4is.layout.navigation.submenu.links.lists.SubMenuDocumentLanguageNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.reports.SubMenuSystemUsageNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.reports.SubMenuUserActivitiesNavigationLink;
 import com.pss.pp4is.layout.navigation.submenu.links.lists.SubMenuUsersNavigationLink;
@@ -43,7 +44,7 @@ public enum SubMenuNavigationEnum {
     // sub menus of second main menu, rootMenu = 2, Lists
     SUB_MENU_PRODUCTS_INSPECTIONS(2,7, SubMenuProductsInspectionsNavigationLink.class,true),
     SUB_MENU_DOCUMENT_LANGUAGES(2,8, SubMenuDocumentTypeNavigationLink.class,true),
-    SUB_MENU_DOCUMENT_TYPES(2,9, SubMenuDocumentTypeNavigationLink.class,true),
+    SUB_MENU_DOCUMENT_TYPES(2,9, SubMenuDocumentLanguageNavigationLink.class,true),
     SUB_MENU_DOCUMENT_PRINT_COMPANIES(2,10, SubMenuDocumentCompaniesNavigationLink.class,true),
     SUB_MENU_INSPECTION_PROFILES(2,11, SubMenuInspectionProfilesNavigationLink.class,true),
     SUB_MENU_USERS(2,12, SubMenuUsersNavigationLink.class,true),

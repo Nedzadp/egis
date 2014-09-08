@@ -27,11 +27,10 @@ public class MainContentHomeLayout extends CustomVerticalLayout{
     }
     
     private void initLayout() {
+        setMargin(false);
+        setSpacing(false);
         
-        
-        addStyleName("main-content");
         addComponent(new CustomLayout("welcome"));
-        
         
         HorizontalLayout firstRowLayout = new HorizontalLayout();
         

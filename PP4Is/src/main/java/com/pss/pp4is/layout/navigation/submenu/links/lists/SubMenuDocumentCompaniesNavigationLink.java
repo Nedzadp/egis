@@ -17,7 +17,7 @@ import com.vaadin.ui.Notification;
 public class SubMenuDocumentCompaniesNavigationLink extends CustomSubmenuLink{
 
     public SubMenuDocumentCompaniesNavigationLink() {
-        setCaption("Document print companies");
+        setCaption("Printer companies");
     }
 
     @Override

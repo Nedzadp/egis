@@ -17,7 +17,7 @@ import com.vaadin.ui.Notification;
 public class SubMenuDocumentLanguageNavigationLink extends CustomSubmenuLink{
 
     public SubMenuDocumentLanguageNavigationLink() {
-        setCaption("Document languages");
+        setCaption("Doc. languages");
     }
 
     @Override

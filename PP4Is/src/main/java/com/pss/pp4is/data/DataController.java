@@ -6,12 +6,14 @@
 
 package com.pss.pp4is.data;
 
+import com.pss.pp4is.data.containers.InspectionProfileContainer;
 import com.pss.pp4is.data.containers.ProductContainer;
 import com.pss.pp4is.data.containers.ProductLanguageContainer;
 import com.pss.pp4is.data.containers.ProductMasterContainer;
 import com.pss.pp4is.data.containers.ProductPrinterContainer;
 import com.pss.pp4is.data.containers.ProductTypeContainer;
 import com.pss.pp4is.data.containers.UserContainer;
+import com.pss.pp4is.data.models.InspectionProfile;
 import com.pss.pp4is.data.models.Product;
 import com.pss.pp4is.data.models.ProductLanguage;
 import com.pss.pp4is.data.models.ProductMaster;
@@ -201,6 +203,57 @@ public class DataController {
             }
             databaseConnection.disconnect();
             return userContainer;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static InspectionProfileContainer getInspectionProfiles() {
+        try {
+            InspectionProfileContainer inspectionProfileContainer = new InspectionProfileContainer();
+            String sql = "SELECT * FROM  inspection_profile ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {  
+                InspectionProfile inspectionProfile = new InspectionProfile();
+                inspectionProfile.setInspectionProfileId(resultSet.getInt("inspection_profile_id"));
+                inspectionProfile.setName(resultSet.getString("name"));
+                inspectionProfile.setGrayToWhiteFrom(resultSet.getInt("grayToWhiteFrom"));
+                inspectionProfile.setErrorCuttingFrom(resultSet.getInt("errorCuttingFrom"));
+                inspectionProfile.setSubSquareSize(resultSet.getInt("subSquareSize"));
+                inspectionProfile.setMaxRotation(resultSet.getDouble("maxRotation"));
+                inspectionProfile.setRotationPrecision(resultSet.getInt("rotationPrecision"));
+                inspectionProfile.setErrorGroupsMaxGap(resultSet.getInt("errorGroupsMaxGap"));
+                inspectionProfile.setErrorGroupMinSize(resultSet.getInt("errorGroupMinSize"));
+                inspectionProfile.setErrorErosionCount(resultSet.getInt("errorErosionCount"));
+                inspectionProfile.setErrorDilationCount(resultSet.getInt("errorDilationCount"));
+                inspectionProfile.setProfileNote(resultSet.getString("profile_note"));
+                inspectionProfile.setSampleName(resultSet.getString("sampleName"));
+                inspectionProfile.setSamplePath(resultSet.getString("samplePath"));
+                inspectionProfile.setZtolerance(resultSet.getDouble("ztolerance"));
+                inspectionProfile.setHorisontalOverlapCoeffLeft(resultSet.getDouble("horisontalOverlapCoeffLeft"));
+                inspectionProfile.setHorisontalInsideCoeffLeft(resultSet.getDouble("horisontalInsideCoeffLeft"));
+                inspectionProfile.setHorisontalDistanceCoeffLeft(resultSet.getDouble("horisontalDistanceCoeffLeft"));
+                inspectionProfile.setVerticalOverlapCoeffLeft(resultSet.getDouble("verticalOverlapCoeffLeft"));
+                inspectionProfile.setVerticalInsideCoeffLeft(resultSet.getDouble("verticalInsideCoeffLeft"));
+                inspectionProfile.setVerticalDistanceCoeffLeft(resultSet.getDouble("verticalDistanceCoeffLeft"));
+                inspectionProfile.setHorisontalOverlapCoeffRight(resultSet.getDouble("horisontalOverlapCoeffRight"));
+                inspectionProfile.setOrisontalInsideCoeffRight(resultSet.getDouble("orisontalInsideCoeffRight"));
+                inspectionProfile.setOrisontalDistanceCoeffRight(resultSet.getDouble("orisontalDistanceCoeffRight"));
+                inspectionProfile.setVerticalOverlapCoeffRight(resultSet.getDouble("verticalOverlapCoeffRight"));
+                inspectionProfile.setVerticalInsideCoeffRight(resultSet.getDouble("verticalInsideCoeffRight"));
+                inspectionProfile.setVerticalDistanceCoeffRight(resultSet.getDouble("verticalDistanceCoeffRight"));
+                inspectionProfileContainer.addBean(inspectionProfile);
+            }
+            databaseConnection.disconnect();
+            return inspectionProfileContainer;
         } catch (SQLException ex) {
             Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
         }

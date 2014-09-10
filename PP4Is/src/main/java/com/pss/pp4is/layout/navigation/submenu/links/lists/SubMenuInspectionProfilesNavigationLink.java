@@ -6,8 +6,10 @@
 
 package com.pss.pp4is.layout.navigation.submenu.links.lists;
 
+import com.pss.pp4is.layout.content.CustomVerticalLayout;
+import com.pss.pp4is.layout.content.MainContentLayoutEnum;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
-import com.vaadin.ui.Notification;
+import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 
 /**
  *
@@ -22,8 +24,10 @@ public class SubMenuInspectionProfilesNavigationLink extends CustomSubmenuLink{
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);
-        Notification.show("Not implemented yet");
+        CustomVerticalLayout layout = MainContentLayoutEnum.getInstanceBySubMenu(SubMenuNavigationEnum.SUB_MENU_INSPECTION_PROFILES.getRow());
+        if(layout != null) {
+            getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
+            getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
+        }
     }
-    
-   
 }

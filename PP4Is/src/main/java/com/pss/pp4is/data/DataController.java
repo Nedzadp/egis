@@ -6,10 +6,19 @@
 
 package com.pss.pp4is.data;
 
+import com.pss.pp4is.data.containers.InspectionProfileContainer;
 import com.pss.pp4is.data.containers.ProductContainer;
+import com.pss.pp4is.data.containers.ProductLanguageContainer;
 import com.pss.pp4is.data.containers.ProductMasterContainer;
+import com.pss.pp4is.data.containers.ProductPrinterContainer;
+import com.pss.pp4is.data.containers.ProductTypeContainer;
+import com.pss.pp4is.data.containers.UserContainer;
+import com.pss.pp4is.data.models.InspectionProfile;
 import com.pss.pp4is.data.models.Product;
+import com.pss.pp4is.data.models.ProductLanguage;
 import com.pss.pp4is.data.models.ProductMaster;
+import com.pss.pp4is.data.models.ProductPrinter;
+import com.pss.pp4is.data.models.ProductType;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.system.DatabaseConnection;
 import java.sql.ResultSet;
@@ -91,6 +100,160 @@ public class DataController {
             }
             databaseConnection.disconnect();
             return products;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static ProductLanguageContainer getProductLanguage() {
+        try {
+            ProductLanguageContainer productLanguageContainer = new ProductLanguageContainer();
+            String sql = "SELECT pl.product_language_id, pl.name " +
+                         "FROM product_language pl ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {     
+                productLanguageContainer.addBean(new ProductLanguage(resultSet.getInt("pl.product_language_id"), resultSet.getString("pl.name")));
+            }
+            databaseConnection.disconnect();
+            return productLanguageContainer;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static ProductTypeContainer getProductType() {
+        try {
+            ProductTypeContainer productTypeContainer = new ProductTypeContainer();
+            String sql = "SELECT pt.product_type_id, pt.name " +
+                         "FROM product_type pt ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {     
+                productTypeContainer.addBean(new ProductType(resultSet.getInt("pt.product_type_id"), resultSet.getString("pt.name")));
+            }
+            databaseConnection.disconnect();
+            return productTypeContainer;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static ProductPrinterContainer getProductPrinter() {
+        try {
+            ProductPrinterContainer productPrinterContainer = new ProductPrinterContainer();
+            String sql = "SELECT pp.product_printer_id, pp.name " +
+                         "FROM product_printer pp ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {     
+                productPrinterContainer.addBean(new ProductPrinter(resultSet.getInt("pp.product_printer_id"), resultSet.getString("pp.name")));
+            }
+            databaseConnection.disconnect();
+            return productPrinterContainer;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static UserContainer getUsers() {
+        try {
+            UserContainer userContainer = new UserContainer();
+            String sql = "SELECT * FROM  user ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {  
+                User user = new User();
+                user.setUserId(resultSet.getInt("userId"));
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setEmail(resultSet.getString("email"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
+                user.setIsActive(resultSet.getBoolean("isActive")?"X":"");
+                userContainer.addBean(user);
+            }
+            databaseConnection.disconnect();
+            return userContainer;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public static InspectionProfileContainer getInspectionProfiles() {
+        try {
+            InspectionProfileContainer inspectionProfileContainer = new InspectionProfileContainer();
+            String sql = "SELECT * FROM  inspection_profile ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+                return null;
+            }
+            while(resultSet.next()) {  
+                InspectionProfile inspectionProfile = new InspectionProfile();
+                inspectionProfile.setInspectionProfileId(resultSet.getInt("inspection_profile_id"));
+                inspectionProfile.setName(resultSet.getString("name"));
+                inspectionProfile.setGrayToWhiteFrom(resultSet.getInt("grayToWhiteFrom"));
+                inspectionProfile.setErrorCuttingFrom(resultSet.getInt("errorCuttingFrom"));
+                inspectionProfile.setSubSquareSize(resultSet.getInt("subSquareSize"));
+                inspectionProfile.setMaxRotation(resultSet.getDouble("maxRotation"));
+                inspectionProfile.setRotationPrecision(resultSet.getInt("rotationPrecision"));
+                inspectionProfile.setErrorGroupsMaxGap(resultSet.getInt("errorGroupsMaxGap"));
+                inspectionProfile.setErrorGroupMinSize(resultSet.getInt("errorGroupMinSize"));
+                inspectionProfile.setErrorErosionCount(resultSet.getInt("errorErosionCount"));
+                inspectionProfile.setErrorDilationCount(resultSet.getInt("errorDilationCount"));
+                inspectionProfile.setProfileNote(resultSet.getString("profile_note"));
+                inspectionProfile.setSampleName(resultSet.getString("sampleName"));
+                inspectionProfile.setSamplePath(resultSet.getString("samplePath"));
+                inspectionProfile.setZtolerance(resultSet.getDouble("ztolerance"));
+                inspectionProfile.setHorisontalOverlapCoeffLeft(resultSet.getDouble("horisontalOverlapCoeffLeft"));
+                inspectionProfile.setHorisontalInsideCoeffLeft(resultSet.getDouble("horisontalInsideCoeffLeft"));
+                inspectionProfile.setHorisontalDistanceCoeffLeft(resultSet.getDouble("horisontalDistanceCoeffLeft"));
+                inspectionProfile.setVerticalOverlapCoeffLeft(resultSet.getDouble("verticalOverlapCoeffLeft"));
+                inspectionProfile.setVerticalInsideCoeffLeft(resultSet.getDouble("verticalInsideCoeffLeft"));
+                inspectionProfile.setVerticalDistanceCoeffLeft(resultSet.getDouble("verticalDistanceCoeffLeft"));
+                inspectionProfile.setHorisontalOverlapCoeffRight(resultSet.getDouble("horisontalOverlapCoeffRight"));
+                inspectionProfile.setOrisontalInsideCoeffRight(resultSet.getDouble("orisontalInsideCoeffRight"));
+                inspectionProfile.setOrisontalDistanceCoeffRight(resultSet.getDouble("orisontalDistanceCoeffRight"));
+                inspectionProfile.setVerticalOverlapCoeffRight(resultSet.getDouble("verticalOverlapCoeffRight"));
+                inspectionProfile.setVerticalInsideCoeffRight(resultSet.getDouble("verticalInsideCoeffRight"));
+                inspectionProfile.setVerticalDistanceCoeffRight(resultSet.getDouble("verticalDistanceCoeffRight"));
+                inspectionProfileContainer.addBean(inspectionProfile);
+            }
+            databaseConnection.disconnect();
+            return inspectionProfileContainer;
         } catch (SQLException ex) {
             Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
         }

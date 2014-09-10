@@ -6,6 +6,7 @@
 
 package com.pss.pp4is.layout.navigation.submenu.links.home;
 
+import com.github.wolfie.refresher.Refresher;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.vaadin.server.Page;
 import com.vaadin.shared.Position;
@@ -32,6 +33,7 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         note.setPosition(Position.TOP_RIGHT);
         note.setStyleName("mynotification");
         note.show(Page.getCurrent());
+
         
         getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
         getLayoutController().getUserLoginHeader().getLoginLabel().addStyleName("login-label-blinker");
@@ -64,8 +66,22 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
             } catch (InterruptedException ex) {
                 Logger.getLogger(SubMenuLoginNavigationLink.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
         
     }
-    
+        private class RefreshTimer implements Refresher.RefreshListener {
+
+            public RefreshTimer() {
+            }
+
+            @Override
+            public void refresh(Refresher source) {
+                getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label-blinker");
+                getLayoutController().getUserLoginHeader().getUsernameField().removeStyleName("login-fields-blinker");
+                getLayoutController().getUserLoginHeader().getPasswordField().removeStyleName("login-fields-blinker");
+
+                getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
+
+            }
+        }
+    }
 }

@@ -18,7 +18,7 @@ public class User {
     private String email;
     private String username;
     private String password;
-    private boolean isActive;
+    private String isActive;
 
     public int getUserId() {
         return userId;
@@ -30,6 +30,14 @@ public class User {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
     }
 
     public void setFirstName(String firstName) {
@@ -67,16 +75,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public boolean isIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    
-        
-
 }

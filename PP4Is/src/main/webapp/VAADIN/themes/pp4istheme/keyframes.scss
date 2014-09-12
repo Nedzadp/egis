@@ -21,5 +21,25 @@
         50% { opacity: 0.0; }
         100% { opacity: 1.0; }
     }
-    
+    @-webkit-keyframes spinner {
+    0% { background-position: 0 0;}
+    100% { background-position: -528px 0;}
 }
+
+@-moz-keyframes spinner {
+    0% { background-position: 0 0;}
+    100% { background-position: -528px 0;}
+}
+
+@-ms-keyframes spinner {
+    0% { background-position: 0 0;}
+    100% { background-position: -528px 0;}
+}
+
+@-o-keyframes spinner {
+    0% { background-position: 0 0;}
+    100% { background-position: -528px 0;}
+}
+
+}
+

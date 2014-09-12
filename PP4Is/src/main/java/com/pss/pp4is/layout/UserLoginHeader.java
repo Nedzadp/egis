@@ -13,7 +13,6 @@ import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.content.window.ExitWindow;
 import com.pss.pp4is.system.CurrentUser;
 import com.pss.pp4is.system.LayoutController;
-import com.vaadin.data.Property;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.event.MouseEvents;
@@ -198,6 +197,8 @@ public class UserLoginHeader extends HorizontalLayout{
 
         timer.scheduleAtFixedRate(new TimerTask() {
 
+
+            
         @Override
         public void run() {
             seconds--;
@@ -207,7 +208,7 @@ public class UserLoginHeader extends HorizontalLayout{
             }
             if(minutes == 0 && seconds == 0) {
                 timer.cancel();
-                addExitWindow();
+                automaticallyLogout();
             }
         }
     }, delay, period);
@@ -216,8 +217,11 @@ public class UserLoginHeader extends HorizontalLayout{
         setComponentAlignment(userInformation, Alignment.TOP_RIGHT);
     }
    
-    private void addExitWindow() {
-        UI.getCurrent().addWindow(new ExitWindow(layoutController));
+    private void automaticallyLogout() {
+        DataController.updateUserActivity(layoutController.getUser());
+        layoutController.getCustomLayout().removeAllComponents();
+        layoutController.getCustomLayout().init();
+        Notification.show("You have been automatically logged out!");
     }
     
     private class TimerButton extends Button implements RefreshListener {
@@ -230,32 +234,8 @@ public class UserLoginHeader extends HorizontalLayout{
 
         @Override
         public void refresh(Refresher source) {
-            setCaption(minutes.toString()+" : "+seconds.toString());
-        }
-    }
-    
-    private class TimerLabel extends Label implements RefreshListener {
-
-        public TimerLabel() {
             
-        }
-
-        @Override
-        public void refresh(Refresher source) {
             setCaption(minutes.toString()+" : "+seconds.toString());
         }
     }
-    
-    private class TimerImage extends Image implements RefreshListener {
-
-        public TimerImage(String caption) {
-            super(caption, new ThemeResource("img/timer1.png"));
-        }
-
-        @Override
-        public void refresh(Refresher source) {
-            setCaption(minutes.toString()+" : "+seconds.toString());
-        } 
-    }
-    
 }

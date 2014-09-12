@@ -342,4 +342,50 @@ public class DataController {
         }
     }
     
+    public static Integer getTimerMinutes() {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        String selectSql = "SELECT timer FROM user_clock LIMIT 1";
+        Integer timer = null;
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            while(resultSet.next()) {
+                timer = resultSet.getInt("timer");
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        return timer;
+    }
+
+    public static void updateTimerUserActivity(User user) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        String selectSql = "SELECT id FROM user_activity WHERE user_id = "+user.getUserId()+" ORDER BY id DESC LIMIT 1";
+        try {
+            databaseConnection.connect();
+             ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+            } else {
+                Integer activity_id = null;
+                while(resultSet.next()) {
+                    activity_id = resultSet.getInt("id");
+                }
+                String updateSql = "UPDATE user_activity SET reset_clock_counter = reset_clock_counter+1 WHERE id = ?";
+                PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(updateSql);
+                preparedStatement.clearParameters();
+                preparedStatement.setInt(1, activity_id);
+                preparedStatement.executeUpdate();
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+    }
+    
 }

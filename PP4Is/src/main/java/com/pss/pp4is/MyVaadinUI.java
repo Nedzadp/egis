@@ -4,7 +4,6 @@ import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.CustomLayout;
 import com.pss.pp4is.system.LayoutController;
-import com.sun.corba.se.spi.orb.DataCollector;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -12,7 +11,6 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import javax.activation.DataContentHandler;
 import javax.servlet.annotation.WebServlet;
 
 @Theme("pp4istheme")
@@ -38,9 +36,7 @@ public class MyVaadinUI extends UI
         setContent(layout);
         User user = null;
         user = (User) UI.getCurrent().getSession().getAttribute("user");
-        if(user != null) {
-            Notification.show(user.getUsername());
-        }
+       
         addDetachListener(new DetachListener() {
             @Override
             public void detach(DetachEvent event) {

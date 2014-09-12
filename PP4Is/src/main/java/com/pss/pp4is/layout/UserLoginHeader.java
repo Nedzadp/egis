@@ -47,11 +47,9 @@ public class UserLoginHeader extends HorizontalLayout{
     private User user;
     private final LayoutController layoutController;
     
-    private  Timer timer;
+    private Timer timer;
     private Integer seconds;
     private Integer minutes;
-    private TimerLabel timerLabel;
-    private TimerImage timerImage;
     private TimerButton timerButton;
     
     public UserLoginHeader(LayoutController layoutController) {
@@ -169,23 +167,13 @@ public class UserLoginHeader extends HorizontalLayout{
         });
         
         userInformation.addComponent(logout);
-        timerLabel = new TimerLabel();
+        
+        
         seconds = 59;
-        minutes = 2;
-        timerLabel.setCaption(minutes.toString()+" : "+seconds.toString());
-        
-        //userInformation.addComponent(timerLabel);
-        
+        minutes = DataController.getTimerMinutes()-1;
+     
         int delay = 1000;
         int period = 1000;
-        timerImage = new TimerImage(minutes.toString()+" : "+seconds.toString());
-        timerImage.addClickListener(new ClickListener() {
-
-            @Override
-            public void click(MouseEvents.ClickEvent event) {
-                Notification.show("Reset clock");
-            }
-        });
         
         timerButton = new TimerButton();
         timerButton.setCaption(minutes.toString()+" : "+seconds.toString());
@@ -193,22 +181,20 @@ public class UserLoginHeader extends HorizontalLayout{
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
-               Notification.show("Restart");
+               Notification.show("Clock", "Clock restarted successfully", Notification.Type.TRAY_NOTIFICATION);
+               seconds = 59;
+               minutes = DataController.getTimerMinutes()-1;
+               DataController.updateTimerUserActivity(layoutController.getUser());
             }
         });
-        
         
         final Refresher refresher = new Refresher();
         refresher.addListener(timerButton);
         addExtension(refresher);
         
-        
         userInformation.addComponent(timerButton);
         
-        
-        
         timer = new Timer();
-        
 
         timer.scheduleAtFixedRate(new TimerTask() {
 

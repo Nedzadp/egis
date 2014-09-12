@@ -8,6 +8,7 @@ package com.pss.pp4is.layout;
 
 import com.github.wolfie.refresher.Refresher;
 import com.github.wolfie.refresher.Refresher.RefreshListener;
+import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.content.window.ExitWindow;
 import com.pss.pp4is.system.CurrentUser;
@@ -122,7 +123,11 @@ public class UserLoginHeader extends HorizontalLayout{
                     
                 } else {
                      Notification.show("Welcome!", "System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it.", Notification.Type.HUMANIZED_MESSAGE);
+                     layoutController.setUser(user);
+                     UI.getCurrent().getSession().setAttribute("user", user);
+                     DataController.insertUserActivity(layoutController.getUser());
                      layoutController.refreshLayout();
+                     Notification.show("Welcome!", "User activity logged in", Notification.Type.TRAY_NOTIFICATION);
                 }
             }
         });

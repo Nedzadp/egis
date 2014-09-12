@@ -6,6 +6,7 @@
 
 package com.pss.pp4is.system;
 
+import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.CustomLayout;
 import com.pss.pp4is.layout.UserLoginHeader;
 import com.pss.pp4is.layout.content.MainContentComponent;
@@ -14,10 +15,7 @@ import com.pss.pp4is.layout.navigation.MainMenuNavigationLayout;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Image;
-import com.vaadin.ui.Label;
 import java.io.Serializable;
 import java.util.List;
 
@@ -27,18 +25,30 @@ import java.util.List;
  */
 public class LayoutController implements Serializable{
 
-    private final CustomLayout customLayout;
+    private CustomLayout customLayout;
     private CustomButtonLink customButtonLink;
     private CustomSubmenuLink customSubmenuLink;
     private UserLoginHeader userLoginHeader;
     private MainMenuNavigationLayout mainMenuNavigationLayout;
     private SubMenuNavigationLayout subMenuNavigationLayout;
     private MainContentComponent mainContentComponent;
+    private User user;
     
-    public LayoutController(CustomLayout customLayout) {
+    public LayoutController() {
+    }
+
+    public void setCustomLayout(CustomLayout customLayout) {
         this.customLayout = customLayout;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     public CustomLayout getCustomLayout() {
         return customLayout;
     }

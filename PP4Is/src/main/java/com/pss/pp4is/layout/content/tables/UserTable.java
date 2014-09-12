@@ -37,6 +37,7 @@ public class UserTable extends Table implements Serializable{
         setColumnCollapsed("userId", true);
         setColumnCollapsed("password", true);
         setColumnHeaders(UserContainer.COL_HEADERS_ENGLISH);
+        setColumnWidth("userId", 40);
     }
     
     private void createDataRow() {

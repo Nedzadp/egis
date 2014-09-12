@@ -40,7 +40,6 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         addComponent(userLoginHeader);
         setComponentAlignment(userLoginHeader, Alignment.TOP_RIGHT);
         layoutController.setUserLogin(userLoginHeader);
-        
     }
     
     private HorizontalLayout createLeftHeader() {

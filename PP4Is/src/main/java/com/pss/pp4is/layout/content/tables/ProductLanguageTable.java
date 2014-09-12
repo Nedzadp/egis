@@ -36,6 +36,7 @@ public class ProductLanguageTable extends Table implements Serializable{
         setVisibleColumns(ProductLanguageContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("productLanguageId", true);
         setColumnHeaders(ProductLanguageContainer.COL_HEADERS_ENGLISH);
+        setColumnWidth("productLanguageId", 120);
     }
     
     private void createDataRow() {

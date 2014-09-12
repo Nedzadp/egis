@@ -21,6 +21,7 @@ import com.pss.pp4is.data.models.ProductPrinter;
 import com.pss.pp4is.data.models.ProductType;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.system.DatabaseConnection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -261,6 +262,7 @@ public class DataController {
     }
     
     public static User getUser(String username, String password) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
         try {
             User user = new User();
             String sql = " SELECT u.userId, "+
@@ -272,8 +274,7 @@ public class DataController {
                          " WHERE  u.username = '"+username+"' "+
                          " AND    u.password = '"+password+"' "+
                          " AND    u.isActive = 1";
-            
-            DatabaseConnection databaseConnection = new DatabaseConnection();
+           
             databaseConnection.connect();
             
             ResultSet resultSet = databaseConnection.executeQuery(sql);
@@ -289,12 +290,56 @@ public class DataController {
                 user.setPassword(resultSet.getString("u.password"));
                 return user;
             }
-            databaseConnection.disconnect();
             
         } catch (SQLException ex) {
             Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } finally {
+            databaseConnection.disconnect();
+        } 
         return null;
+    }
+
+    public static void insertUserActivity(User user) {
+        String sql = "INSERT INTO user_activity(logged_in, user_id) VALUES(NOW(), ?)";
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        try {
+            databaseConnection.connect();
+            PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(sql);
+            preparedStatement.clearParameters();
+            preparedStatement.setInt(1, user.getUserId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            databaseConnection.disconnect();
+        }    
+    }
+
+    public static void updateUserActivity(User user) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        String selectSql = "SELECT id FROM user_activity WHERE user_id = "+user.getUserId()+" ORDER BY id DESC LIMIT 1";
+        try {
+            databaseConnection.connect();
+             ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            if(resultSet == null) {
+                databaseConnection.disconnect();
+            } else {
+                Integer activity_id = null;
+                while(resultSet.next()) {
+                    activity_id = resultSet.getInt("id");
+                }
+                String updateSql = "UPDATE user_activity SET logged_out = NOW() WHERE id = ?";
+                PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(updateSql);
+                preparedStatement.clearParameters();
+                preparedStatement.setInt(1, activity_id);
+                preparedStatement.executeUpdate();
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
     }
     
 }

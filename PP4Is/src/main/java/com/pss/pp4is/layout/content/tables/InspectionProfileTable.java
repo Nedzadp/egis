@@ -36,6 +36,7 @@ public class InspectionProfileTable extends Table implements Serializable{
         setVisibleColumns(InspectionProfileContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("inspectionProfileId", true);
         setColumnHeaders(InspectionProfileContainer.COL_HEADERS_ENGLISH);
+        setColumnWidth("inspectionProfileId", 120);
     }
     
     private void createDataRow() {

@@ -68,4 +68,8 @@ public class DatabaseConnection {
         }
         return resultSet;
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
 }

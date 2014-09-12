@@ -6,6 +6,7 @@
 
 package com.pss.pp4is.layout.content.window;
 
+import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.client.ApplicationConfiguration;
 import com.vaadin.ui.Button;
@@ -50,6 +51,7 @@ public class ExitWindow extends Window{
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 close();
+                DataController.updateUserActivity(layoutController.getUser());
                 layoutController.getCustomLayout().removeAllComponents();
                 layoutController.getCustomLayout().init();
             }

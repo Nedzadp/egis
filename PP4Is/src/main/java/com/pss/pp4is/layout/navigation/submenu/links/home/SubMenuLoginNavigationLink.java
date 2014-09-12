@@ -29,8 +29,8 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
         getLayoutController().fixSelectedSubMenu(this);
         
         Notification note = new Notification(null,"Log in here, please!",Notification.Type.HUMANIZED_MESSAGE);
-        note.setDelayMsec(3000);
-        note.setPosition(Position.TOP_RIGHT);
+        note.setDelayMsec(4000);
+        note.setPosition(Position.TOP_CENTER);
         note.setStyleName("mynotification");
         note.show(Page.getCurrent());
 

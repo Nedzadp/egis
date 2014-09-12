@@ -36,6 +36,7 @@ public class ProductPrinterTable extends Table implements Serializable{
         setVisibleColumns(ProductPrinterContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("productPrinterId", true);
         setColumnHeaders(ProductPrinterContainer.COL_HEADERS_ENGLISH);
+        setColumnWidth("productPrinterId", 110);
     }
     
     private void createDataRow() {

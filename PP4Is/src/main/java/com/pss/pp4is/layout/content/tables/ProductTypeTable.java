@@ -36,6 +36,7 @@ public class ProductTypeTable extends Table implements Serializable{
         setVisibleColumns(ProductTypeContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("productTypeId", true);
         setColumnHeaders(ProductTypeContainer.COL_HEADERS_ENGLISH);
+        setColumnWidth("productTypeId", 90);
     }
     
     private void createDataRow() {

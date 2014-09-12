@@ -33,13 +33,14 @@ public class CustomLayout extends  VerticalLayout{
     private MainMenuNavigationLayout mainMenuNavigationLayout;
     private SubMenuNavigationLayout subMenuNavigationLayout;
     private MainContentComponent mainContentComponent;
-    private LayoutController layoutController;
+    private final LayoutController layoutController;
     
-    public CustomLayout() {
+    public CustomLayout(LayoutController layoutController) {
+        this.layoutController = layoutController;
         init();
     }
     
-    public  void init() {
+    public final void init() {
         initLayout();
         
         createHeader();
@@ -55,7 +56,7 @@ public class CustomLayout extends  VerticalLayout{
     
     private void initLayout()  {
         addStyleName("vertical-custom-layout");
-        layoutController = new LayoutController(this);
+        
     }
     
     private void createHeader() {

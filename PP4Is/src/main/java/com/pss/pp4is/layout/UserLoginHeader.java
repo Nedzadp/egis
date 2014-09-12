@@ -221,7 +221,7 @@ public class UserLoginHeader extends HorizontalLayout{
         DataController.updateUserActivity(layoutController.getUser());
         layoutController.getCustomLayout().removeAllComponents();
         layoutController.getCustomLayout().init();
-        Notification.show("You have been automatically logged out!");
+        Notification.show("Timer","You have been automatically logged out!", Notification.Type.WARNING_MESSAGE);
     }
     
     private class TimerButton extends Button implements RefreshListener {

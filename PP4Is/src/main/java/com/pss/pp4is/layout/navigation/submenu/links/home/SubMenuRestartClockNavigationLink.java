@@ -7,7 +7,6 @@
 package com.pss.pp4is.layout.navigation.submenu.links.home;
 
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
-import com.vaadin.ui.Notification;
 
 /**
  *
@@ -21,6 +20,6 @@ public class SubMenuRestartClockNavigationLink extends CustomSubmenuLink {
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);
-        Notification.show("Not implemented yet");
+        getLayoutController().getUserLoginHeader().resetClock();
     }
 }

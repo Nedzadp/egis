@@ -180,10 +180,7 @@ public class UserLoginHeader extends HorizontalLayout{
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
-               Notification.show("Clock", "Clock restarted successfully", Notification.Type.TRAY_NOTIFICATION);
-               seconds = 59;
-               minutes = DataController.getTimerMinutes()-1;
-               DataController.updateTimerUserActivity(layoutController.getUser());
+               resetClock();
             }
         });
         
@@ -237,5 +234,12 @@ public class UserLoginHeader extends HorizontalLayout{
             
             setCaption(minutes.toString()+" : "+seconds.toString());
         }
+    }
+    
+    public void resetClock() {
+        Notification.show("Clock", "Clock restarted successfully", Notification.Type.TRAY_NOTIFICATION);
+        seconds = 59;
+        minutes = DataController.getTimerMinutes()-1;
+        DataController.updateTimerUserActivity(layoutController.getUser());
     }
 }

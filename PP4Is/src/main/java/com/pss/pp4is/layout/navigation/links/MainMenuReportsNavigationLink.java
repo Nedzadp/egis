@@ -8,7 +8,6 @@ package com.pss.pp4is.layout.navigation.links;
 
 import com.pss.pp4is.layout.navigation.CustomButtonLink;
 import com.pss.pp4is.layout.navigation.MainMenuNavigationEnum;
-import com.vaadin.ui.Notification;
 
 /**
  *

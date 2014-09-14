@@ -11,7 +11,6 @@ import com.pss.pp4is.layout.content.MainContentLayoutEnum;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Notification;
 
 /**
  *

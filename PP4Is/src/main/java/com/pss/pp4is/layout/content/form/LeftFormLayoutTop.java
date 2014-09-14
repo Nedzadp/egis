@@ -7,11 +7,8 @@
 package com.pss.pp4is.layout.content.form;
 
 import com.pss.pp4is.data.models.Product;
-import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.TextArea;
 
 /**

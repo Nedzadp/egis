@@ -7,7 +7,6 @@
 package com.pss.pp4is.system;
 
 import com.pss.pp4is.layout.content.MainContentComponent;
-import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
 
 /**
  *

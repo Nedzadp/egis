@@ -8,7 +8,6 @@ package com.pss.pp4is.system;
 
 import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.data.models.User;
-import com.vaadin.ui.UI;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

@@ -13,7 +13,6 @@ import com.pss.pp4is.layout.content.tables.ProductMasterTable;
 import com.pss.pp4is.layout.content.tables.ProductTable;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 
 /**

@@ -6,7 +6,7 @@
 
 package com.pss.pp4is.layout.content.tables;
 
-import com.pss.pp4is.data.containers.ProductTypeContainer;
+import com.pss.pp4is.data.containers.UserActivityContainer;
 import com.vaadin.ui.Table;
 import java.io.Serializable;
 
@@ -14,12 +14,12 @@ import java.io.Serializable;
  *
  * @author Nedzad
  */
-public class ProductTypeTable extends Table implements Serializable{
+public class UserActivityTable extends Table implements Serializable{
 
-    private final ProductTypeContainer productTypeContainer;
+    private final UserActivityContainer userActivityContainer;
     
-    public ProductTypeTable(ProductTypeContainer productTypeContainer) {
-        this.productTypeContainer = productTypeContainer;
+    public UserActivityTable(UserActivityContainer userActivityContainer) {
+        this.userActivityContainer = userActivityContainer;
         initTable();
     }
     
@@ -32,13 +32,13 @@ public class ProductTypeTable extends Table implements Serializable{
         setSizeFull();
         setPageLength(10);
         createDataRow();
-        setVisibleColumns(ProductTypeContainer.NATURAL_COL_ORDER);
-        setColumnCollapsed("productTypeId", true);
-        setColumnHeaders(ProductTypeContainer.COL_HEADERS_ENGLISH);
-        setColumnWidth("productTypeId", 90);
+        setVisibleColumns(UserActivityContainer.NATURAL_COL_ORDER);
+        setColumnCollapsed("id", true);
+        setColumnHeaders(UserActivityContainer.COL_HEADERS_ENGLISH);
+        setColumnWidth("id", 90);
     }
     
     private void createDataRow() {
-        setContainerDataSource(productTypeContainer);
+        setContainerDataSource(userActivityContainer);
     }
 }

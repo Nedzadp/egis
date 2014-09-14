@@ -12,6 +12,7 @@ import com.pss.pp4is.data.containers.ProductLanguageContainer;
 import com.pss.pp4is.data.containers.ProductMasterContainer;
 import com.pss.pp4is.data.containers.ProductPrinterContainer;
 import com.pss.pp4is.data.containers.ProductTypeContainer;
+import com.pss.pp4is.data.containers.UserActivityContainer;
 import com.pss.pp4is.data.containers.UserContainer;
 import com.pss.pp4is.data.models.InspectionProfile;
 import com.pss.pp4is.data.models.Product;
@@ -20,12 +21,15 @@ import com.pss.pp4is.data.models.ProductMaster;
 import com.pss.pp4is.data.models.ProductPrinter;
 import com.pss.pp4is.data.models.ProductType;
 import com.pss.pp4is.data.models.User;
+import com.pss.pp4is.data.models.UserActivity;
 import com.pss.pp4is.system.DatabaseConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sun.applet.Main;
 
 /**
  *
@@ -366,7 +370,7 @@ public class DataController {
         String selectSql = "SELECT id FROM user_activity WHERE user_id = "+user.getUserId()+" ORDER BY id DESC LIMIT 1";
         try {
             databaseConnection.connect();
-             ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
             if(resultSet == null) {
                 databaseConnection.disconnect();
             } else {
@@ -386,6 +390,71 @@ public class DataController {
         } finally {
             databaseConnection.disconnect();
         }
+    }
+    
+    public static UserActivityContainer getUserActivities() {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        String selectSql = "SELECT ua.id, ua.logged_in, ua.logged_out, ua.reset_clock_counter, u.username "
+                         + "FROM user_activity ua "
+                         + "JOIN user u ON ua.user_id = u.userId "
+                         + "ORDER BY u.username";
+        
+        UserActivityContainer userActivityContainer = new UserActivityContainer();
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            while(resultSet.next()) {
+                UserActivity userActivity = new UserActivity();
+                userActivity.setId(resultSet.getInt("ua.id"));
+                userActivity.setLoggedIn(resultSet.getTimestamp("ua.logged_in"));
+                userActivity.setLoggedOut(resultSet.getTimestamp("ua.logged_out"));
+                userActivity.setClockReset(resultSet.getInt("ua.reset_clock_counter"));
+                userActivity.setUsername(resultSet.getString("u.username"));
+                userActivityContainer.addBean(userActivity);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        return userActivityContainer;
+    }
+
+    public static UserActivityContainer getFilteredActivities(String username, Date fromDate, Date toDate) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        String selectSql = "SELECT ua.id, ua.logged_in, ua.logged_out, ua.reset_clock_counter, u.username "
+                         + "FROM user_activity ua "
+                         + "JOIN user u ON ua.user_id = u.userId "
+                         + "WHERE u.username LIKE '"+username+"' ";
+        if(fromDate != null) {
+            selectSql += "AND ua.logged_in >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+        }
+        if(toDate != null) {
+            selectSql += "AND ua.logged_out <= '"+new java.sql.Date(toDate.getTime())+"' ";
+        }
+            selectSql += "ORDER BY u.username";
+        
+        UserActivityContainer userActivityContainer = new UserActivityContainer();
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            while(resultSet.next()) {
+                UserActivity userActivity = new UserActivity();
+                userActivity.setId(resultSet.getInt("ua.id"));
+                userActivity.setLoggedIn(resultSet.getTimestamp("ua.logged_in"));
+                userActivity.setLoggedOut(resultSet.getTimestamp("ua.logged_out"));
+                userActivity.setClockReset(resultSet.getInt("ua.reset_clock_counter"));
+                userActivity.setUsername(resultSet.getString("u.username"));
+                userActivityContainer.addBean(userActivity);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        return userActivityContainer;
     }
     
 }

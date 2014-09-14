@@ -8,7 +8,6 @@ package com.pss.pp4is.layout.content.views.listing;
 
 import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.layout.content.CustomVerticalLayout;
-import com.pss.pp4is.layout.content.tables.ProductLanguageTable;
 import com.pss.pp4is.layout.content.tables.ProductTypeTable;
 import com.vaadin.ui.Label;
 

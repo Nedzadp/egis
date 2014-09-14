@@ -10,7 +10,6 @@ import com.pss.pp4is.data.models.ProductMaster;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Embedded;
-import com.vaadin.ui.Image;
 import com.vaadin.ui.VerticalLayout;
 /**
  *

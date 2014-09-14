@@ -6,7 +6,6 @@
 
 package com.pss.pp4is.layout.content.tables;
 
-import com.pss.pp4is.data.containers.ProductTypeContainer;
 import com.pss.pp4is.data.containers.UserContainer;
 import com.vaadin.ui.Table;
 import java.io.Serializable;

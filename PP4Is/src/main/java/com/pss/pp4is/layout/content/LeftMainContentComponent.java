@@ -6,7 +6,6 @@
 
 package com.pss.pp4is.layout.content;
 
-import com.pss.pp4is.data.models.ProductMaster;
 import com.pss.pp4is.layout.content.form.LeftFormLayoutBottom;
 import com.pss.pp4is.layout.content.form.LeftFormLayoutTop;
 import com.vaadin.ui.HorizontalLayout;

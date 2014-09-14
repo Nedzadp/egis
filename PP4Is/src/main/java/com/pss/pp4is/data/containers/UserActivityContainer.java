@@ -6,7 +6,7 @@
 
 package com.pss.pp4is.data.containers;
 
-import com.pss.pp4is.data.models.User;
+import com.pss.pp4is.data.models.UserActivity;
 import com.vaadin.data.util.BeanItemContainer;
 import java.io.Serializable;
 
@@ -14,16 +14,15 @@ import java.io.Serializable;
  *
  * @author Nedzad
  */
-public class UserContainer extends BeanItemContainer<User> implements Serializable{
+public class UserActivityContainer extends BeanItemContainer<UserActivity> implements Serializable{
 
     public static final Object[] NATURAL_COL_ORDER = new String[] {
-        "userId", "firstName", "lastName","email","username","password","isActive"};
+        "id", "loggedIn", "loggedOut", "clockReset", "username"};
 
     public static final String[] COL_HEADERS_ENGLISH = new String[] {
-         "User id" ,"First name","Last name","Email","Username","Password","Active"};
+         "User activity id", "Logged in", "Logged out", "Clock reset counter", "Username"};
     
-    public UserContainer() throws IllegalArgumentException {
-        super(User.class);
+    public UserActivityContainer() throws IllegalArgumentException {
+        super(UserActivity.class);
     }
 }
-

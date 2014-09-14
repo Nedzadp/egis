@@ -17,6 +17,7 @@ import com.pss.pp4is.layout.content.views.listing.MainContentProductLanguageLayo
 import com.pss.pp4is.layout.content.views.listing.MainContentProductPrinterLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentProductTypeLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentUserLayout;
+import com.pss.pp4is.layout.content.views.reports.MainContentUserActivityLayout;
 
 /**
  *
@@ -35,7 +36,10 @@ public enum MainContentLayoutEnum {
     DOCUMENT_TYPE(9,8,MainContentProductTypeLayout.class),
     DOCUMENT_PRINTER(10,9, MainContentProductPrinterLayout.class),
     USERS(12,10, MainContentUserLayout.class),
-    INSPECTION_PROFILES(11,11, MainContentInspectionProfileLayout.class)
+    INSPECTION_PROFILES(11,11, MainContentInspectionProfileLayout.class),
+    // reports
+    USER_ACTIVITIES(14,12, MainContentUserActivityLayout.class)
+    
     ;
 
     private final int subMenu;
@@ -61,9 +65,9 @@ public enum MainContentLayoutEnum {
         try {
             object =  view.newInstance();
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
         }
         return object;
     }

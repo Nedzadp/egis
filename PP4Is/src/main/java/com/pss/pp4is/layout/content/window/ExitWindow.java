@@ -8,11 +8,9 @@ package com.pss.pp4is.layout.content.window;
 
 import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.system.LayoutController;
-import com.vaadin.client.ApplicationConfiguration;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 

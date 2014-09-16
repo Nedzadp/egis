@@ -7,8 +7,14 @@
 package com.pss.pp4is.layout.content;
 
 import com.pss.pp4is.data.DataController;
+import com.pss.pp4is.data.containers.InspectionContainer;
+import com.pss.pp4is.data.containers.InspectionDetailContainer;
 import com.pss.pp4is.data.containers.ProductMasterContainer;
+import com.pss.pp4is.data.models.Inspection;
+import com.pss.pp4is.data.models.InspectionDetail;
 import com.pss.pp4is.data.models.Product;
+import com.pss.pp4is.layout.content.tables.InspectionDetailTable;
+import com.pss.pp4is.layout.content.tables.ProductInspectionTable;
 import com.pss.pp4is.layout.content.tables.ProductMasterTable;
 import com.pss.pp4is.layout.content.tables.ProductTable;
 import com.vaadin.ui.HorizontalLayout;
@@ -23,6 +29,8 @@ public class RightMainContentComponent extends  VerticalLayout{
 
     private ProductTable productTable;
     private ProductMasterTable productMasterTable;
+    private ProductInspectionTable productInspectionTable;
+    private InspectionDetailTable inspectionDetailTable;
     
     public RightMainContentComponent() {
         addStyleName("right-panel");
@@ -62,4 +70,29 @@ public class RightMainContentComponent extends  VerticalLayout{
         return productMasterTable;
     }
 
+    public void addInspectionTable(Product product) {
+        InspectionContainer inspectionContainer = DataController.getProductInspections(product.getProductId());
+        if(inspectionContainer != null) {
+            productInspectionTable = new ProductInspectionTable(inspectionContainer);
+            addComponent(productInspectionTable);
+        }
+    }
+
+    public ProductInspectionTable getProductInspectionTable() {
+        return productInspectionTable;
+    }
+
+    public void addInspectionDetailTable(Inspection inspection) {
+        InspectionDetailContainer  inspectionDetailContainer = DataController.getInspectionDetails(inspection.getInspectionId());
+        if(inspectionDetailContainer != null) {
+            inspectionDetailTable = new InspectionDetailTable(inspectionDetailContainer);
+            addComponent(inspectionDetailTable);
+        }
+    }
+
+    public InspectionDetailTable getInspectionDetailTable() {
+        return inspectionDetailTable;
+    }
+    
+    
 }

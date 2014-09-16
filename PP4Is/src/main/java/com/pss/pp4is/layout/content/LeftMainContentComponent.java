@@ -51,10 +51,10 @@ public class LeftMainContentComponent extends  VerticalLayout{
 
     
     
-    public void initSecondLayout() {
+    public void initSecondLayout(String headerCaption) {
         addStyleName("left-panel");
         
-        Label header = new Label("Master details");
+        Label header = new Label(headerCaption);
         header.addStyleName("header-text");
         addComponent(header);
         

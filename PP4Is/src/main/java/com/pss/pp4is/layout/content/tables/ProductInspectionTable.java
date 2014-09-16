@@ -6,8 +6,7 @@
 
 package com.pss.pp4is.layout.content.tables;
 
-import com.pss.pp4is.data.containers.ProductContainer;
-import com.pss.pp4is.data.containers.ProductMasterContainer;
+import com.pss.pp4is.data.containers.InspectionContainer;
 import com.vaadin.ui.Table;
 import java.io.Serializable;
 
@@ -15,33 +14,31 @@ import java.io.Serializable;
  *
  * @author Nedzad
  */
-public class ProductTable extends Table implements Serializable{
+public class ProductInspectionTable extends Table implements Serializable{
 
-    private final ProductContainer products;
+    private final InspectionContainer inspectionContainer;
     
-    public ProductTable(ProductContainer products) {
-        this.products = products;
+    public ProductInspectionTable(InspectionContainer inspectionContainer) {
+        this.inspectionContainer = inspectionContainer;
         initTable();
     }
     
     private void initTable() {
-        addStyleName("right-table");
         setColumnCollapsingAllowed(true);
         setColumnReorderingAllowed(true);
         setSelectable(true);
         setImmediate(true);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(10);
+        setPageLength(10); 
         createDataRow();
-        setVisibleColumns(ProductContainer.NATURAL_COL_ORDER);
-        setColumnCollapsed("productId", true);
-        setColumnHeaders(ProductContainer.COL_HEADERS_ENGLISH);
-        setColumnWidth("productId", 120);
+        setVisibleColumns(inspectionContainer.NATURAL_COL_ORDER);
+        setColumnCollapsed("inspectionId", true);
+        setColumnHeaders(inspectionContainer.COL_HEADERS_ENGLISH);
+        setColumnWidth("inspectionId", 120);
     }
     
     private void createDataRow() {
-        setContainerDataSource(products);
+        setContainerDataSource(inspectionContainer);
     }
-
 }

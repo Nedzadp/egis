@@ -32,14 +32,19 @@ public class LeftFormLayoutTop extends FormLayout implements IFormLayout{
         
         addComponent(productId = new ComboBox("Product id"));
         productId.setNullSelectionAllowed(false);
+        productId.setWidth("155px");
         addComponent(productName = new ComboBox("Name"));
         productName.setNullSelectionAllowed(false);
+        productName.setWidth("155px");
+        
         addComponent(productType = new ComboBox("Type"));
         productType.setNullSelectionAllowed(false);
+        productType.setWidth("155px");
         addComponent(language = new ComboBox("Language"));
         language.setNullSelectionAllowed(false);
+        language.setWidth("155px");
         addComponent(printerComp = new TextArea("Printer comp"));
-        printerComp.setWidth("153px");
+        printerComp.setWidth("155px");
     }
 
     public ComboBox getProductId() {

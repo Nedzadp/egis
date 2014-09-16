@@ -21,6 +21,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.VerticalLayout;
+import sun.awt.AWTAccessor;
 
 /**
  *
@@ -56,7 +57,6 @@ public class CustomLayout extends  VerticalLayout{
     
     private void initLayout()  {
         addStyleName("vertical-custom-layout");
-        
     }
     
     private void createHeader() {

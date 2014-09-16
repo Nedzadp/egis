@@ -6,6 +6,8 @@
 
 package com.pss.pp4is.layout.content.views.listing;
 
+import com.pss.pp4is.data.models.Inspection;
+import com.pss.pp4is.data.models.InspectionDetail;
 import com.pss.pp4is.data.models.Product;
 import com.pss.pp4is.data.models.ProductMaster;
 import com.pss.pp4is.layout.content.CustomVerticalLayout;
@@ -38,7 +40,7 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
         
         HorizontalLayout secondRowLayout = new HorizontalLayout();
         final LeftMainContentComponent leftMainContentComponentSecondRow = new LeftMainContentComponent();
-        leftMainContentComponentSecondRow.initSecondLayout();
+        leftMainContentComponentSecondRow.initSecondLayout("Master image detail");
         
         
         
@@ -47,12 +49,28 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
         secondRowLayout.addComponent(rightMainContentComponentSecondRow);
         secondRowLayout.addComponent(leftMainContentComponentSecondRow);
         
+        
+        HorizontalLayout thirdRowLayout = new HorizontalLayout();
+        final RightMainContentComponent rightMainContentComponentThirddRow = new RightMainContentComponent();        
+        rightMainContentComponentThirddRow.initHeader("Inspection");
+        thirdRowLayout.addComponent(rightMainContentComponentThirddRow);
+        
+        HorizontalLayout fourthRowLayout = new HorizontalLayout();
+        final RightMainContentComponent rightMainContentComponentFourthRow = new RightMainContentComponent();        
+        rightMainContentComponentFourthRow.initHeader("Inspection details");
+        final LeftMainContentComponent leftMainContentComponentFourthRow = new LeftMainContentComponent();
+        leftMainContentComponentFourthRow.initSecondLayout("Inspection detail master image");
+        
+        fourthRowLayout.addComponent(rightMainContentComponentFourthRow);
+        fourthRowLayout.addComponent(leftMainContentComponentFourthRow);
+        
         rightMainContentComponent.getProductTable().addValueChangeListener(new Property.ValueChangeListener() {
             @Override
             public void valueChange(Property.ValueChangeEvent event) {
                 Product product = (Product)rightMainContentComponent.getProductTable().getValue();
+                // update product details
                 leftMainContentComponent.getFormLayoutTop().updateLayout(product);
-                
+                // update master table
                 rightMainContentComponentSecondRow.removeAllComponents();
                 rightMainContentComponentSecondRow.initHeader("Master");
                 rightMainContentComponentSecondRow.addTable(product);
@@ -61,15 +79,53 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
                             @Override
                             public void valueChange(Property.ValueChangeEvent event) {
                                 ProductMaster productMaster = (ProductMaster)rightMainContentComponentSecondRow.getProductMasterTable().getValue();
-                                leftMainContentComponentSecondRow.getFormLayoutBottom().updateImage(productMaster);
+                                leftMainContentComponentSecondRow.getFormLayoutBottom().updateImage(productMaster.getPath());
                             }
                         });
                 }
+                
+                // update inspections
+                rightMainContentComponentThirddRow.removeAllComponents();
+                rightMainContentComponentThirddRow.initHeader("Inspection");
+                rightMainContentComponentThirddRow.addInspectionTable(product);
+                
+                if(rightMainContentComponentThirddRow.getProductInspectionTable() != null) {
+                    rightMainContentComponentThirddRow.getProductInspectionTable().addValueChangeListener(new Property.ValueChangeListener() {
+
+                        @Override
+                        public void valueChange(Property.ValueChangeEvent event) {
+                           Inspection inspection = (Inspection)rightMainContentComponentThirddRow.getProductInspectionTable().getValue();
+                            
+                           rightMainContentComponentFourthRow.removeAllComponents();
+                           rightMainContentComponentFourthRow.initHeader("Inspection details");
+                           rightMainContentComponentFourthRow.addInspectionDetailTable(inspection);
+                           if(rightMainContentComponentFourthRow.getInspectionDetailTable() != null) {
+                               rightMainContentComponentFourthRow.getInspectionDetailTable().addValueChangeListener(new Property.ValueChangeListener() {
+
+                                   @Override
+                                   public void valueChange(Property.ValueChangeEvent event) {
+                                       InspectionDetail inspectionDetail = (InspectionDetail)rightMainContentComponentFourthRow.getInspectionDetailTable().getValue();
+                                       leftMainContentComponentFourthRow.getFormLayoutBottom().updateImage(inspectionDetail.getMester_path());
+                                   }
+                               });
+                           }
+                           
+                        }
+                    });
+                }
+                
+                
             }
         });
-               
+        
+        
+        
+        
         addComponent(firstRowLayout);
         addComponent(secondRowLayout);
+        addComponent(thirdRowLayout);
+        addComponent(fourthRowLayout);
+        
     }
     
 }

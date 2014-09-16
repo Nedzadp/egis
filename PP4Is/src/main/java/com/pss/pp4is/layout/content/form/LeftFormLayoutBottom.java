@@ -34,10 +34,10 @@ public class LeftFormLayoutBottom extends VerticalLayout{
     
     }
 
-    public void updateImage(ProductMaster productMaster) {
+    public void updateImage(String path) {
         removeAllComponents();
-        if(productMaster.getPath()!=null && !productMaster.getPath().isEmpty()){
-            image = new Embedded( null, new ThemeResource( productMaster.getPath() ) );
+        if(path!=null && !path.isEmpty()){
+            image = new Embedded( null, new ThemeResource( path ) );
             image.setWidth( "230px" ); 
             image.setHeight( "170px" );
             addComponent(image);

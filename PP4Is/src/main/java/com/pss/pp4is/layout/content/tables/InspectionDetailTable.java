@@ -6,8 +6,8 @@
 
 package com.pss.pp4is.layout.content.tables;
 
+import com.pss.pp4is.data.containers.InspectionDetailContainer;
 import com.pss.pp4is.data.containers.InspectionProfileContainer;
-import com.pss.pp4is.data.containers.ProductMasterContainer;
 import com.vaadin.ui.Table;
 import java.io.Serializable;
 
@@ -15,12 +15,12 @@ import java.io.Serializable;
  *
  * @author Nedzad
  */
-public class ProductMasterTable extends Table implements Serializable{
+public class InspectionDetailTable extends Table implements Serializable{
 
-    private final ProductMasterContainer products;
+    private final InspectionDetailContainer inspectionDetailContainer;
     
-    public ProductMasterTable(ProductMasterContainer products) {
-        this.products = products;
+    public InspectionDetailTable(InspectionDetailContainer inspectionDetailContainer) {
+        this.inspectionDetailContainer = inspectionDetailContainer;
         initTable();
     }
     
@@ -34,14 +34,15 @@ public class ProductMasterTable extends Table implements Serializable{
         setSizeFull();
         setPageLength(10);
         createDataRow();
-        setVisibleColumns(ProductMasterContainer.NATURAL_COL_ORDER);
-        setColumnCollapsed("masterId", true);
-        setColumnHeaders(ProductMasterContainer.COL_HEADERS_ENGLISH);
-        setColumnWidth("masterId", 120);
+        setVisibleColumns(InspectionDetailContainer.NATURAL_COL_ORDER);
+        setColumnCollapsed("inspection_details_id", true);
+        setColumnCollapsed("master_id", true);
+        setColumnHeaders(InspectionDetailContainer.COL_HEADERS_ENGLISH);
+        setColumnWidth("inspection_details_id", 120);
     }
     
     private void createDataRow() {
-        setContainerDataSource(products);
+        setContainerDataSource(inspectionDetailContainer);
     }
-
 }
+

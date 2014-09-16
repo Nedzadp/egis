@@ -13,6 +13,7 @@ import com.pss.pp4is.layout.content.views.help.MainContentInformationLayout;
 import com.pss.pp4is.layout.content.views.help.MainContentListsLayout;
 import com.pss.pp4is.layout.content.views.help.MainContentReportsLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentInspectionProfileLayout;
+import com.pss.pp4is.layout.content.views.listing.MainContentProductInspectionLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentProductLanguageLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentProductPrinterLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentProductTypeLayout;
@@ -37,8 +38,9 @@ public enum MainContentLayoutEnum {
     DOCUMENT_PRINTER(10,9, MainContentProductPrinterLayout.class),
     USERS(12,10, MainContentUserLayout.class),
     INSPECTION_PROFILES(11,11, MainContentInspectionProfileLayout.class),
+    PRODUCTS_INSPECTIONS(7,12, MainContentProductInspectionLayout.class),
     // reports
-    USER_ACTIVITIES(14,12, MainContentUserActivityLayout.class)
+    USER_ACTIVITIES(14,13, MainContentUserActivityLayout.class)
     
     ;
 

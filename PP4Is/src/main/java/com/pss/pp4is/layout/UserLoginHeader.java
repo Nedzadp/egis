@@ -199,6 +199,9 @@ public class UserLoginHeader extends HorizontalLayout{
         @Override
         public void run() {
             seconds--;
+            if(seconds == 0 && minutes == 1) {
+                showNotification();
+            }
             if (seconds == 0 && minutes>0) {
                 minutes--;
                 seconds = 59;
@@ -214,6 +217,10 @@ public class UserLoginHeader extends HorizontalLayout{
         setComponentAlignment(userInformation, Alignment.TOP_RIGHT);
     }
    
+    private void showNotification() {
+        Notification.show("Warning", "Click on the clock to restart it, please. Otherwise system will log you out within a minute.", Notification.Type.WARNING_MESSAGE);
+    }
+    
     private void automaticallyLogout() {
         DataController.updateUserActivity(layoutController.getUser());
         layoutController.getCustomLayout().removeAllComponents();

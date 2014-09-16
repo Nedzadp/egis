@@ -31,53 +31,5 @@ public class MainContentHomeLayout extends CustomVerticalLayout{
         setSpacing(false);
         
         addComponent(new CustomLayout("welcome"));
-        
-        HorizontalLayout firstRowLayout = new HorizontalLayout();
-        
-        final LeftMainContentComponent leftMainContentComponent = new LeftMainContentComponent();
-        leftMainContentComponent.initLayout();
-        
-        
-        final RightMainContentComponent rightMainContentComponent = new RightMainContentComponent();      
-        rightMainContentComponent.initLayout("Product");
-        firstRowLayout.addComponent(rightMainContentComponent);
-        firstRowLayout.addComponent(leftMainContentComponent);
-        
-        HorizontalLayout secondRowLayout = new HorizontalLayout();
-        final LeftMainContentComponent leftMainContentComponentSecondRow = new LeftMainContentComponent();
-        leftMainContentComponentSecondRow.initSecondLayout();
-        
-        
-        
-        final RightMainContentComponent rightMainContentComponentSecondRow = new RightMainContentComponent();      
-        rightMainContentComponentSecondRow.initHeader("Master");
-        secondRowLayout.addComponent(rightMainContentComponentSecondRow);
-        secondRowLayout.addComponent(leftMainContentComponentSecondRow);
-        
-        rightMainContentComponent.getProductTable().addValueChangeListener(new Property.ValueChangeListener() {
-            @Override
-            public void valueChange(Property.ValueChangeEvent event) {
-                Product product = (Product)rightMainContentComponent.getProductTable().getValue();
-                leftMainContentComponent.getFormLayoutTop().updateLayout(product);
-                
-                rightMainContentComponentSecondRow.removeAllComponents();
-                rightMainContentComponentSecondRow.initHeader("Master");
-                rightMainContentComponentSecondRow.addTable(product);
-                if(rightMainContentComponentSecondRow.getProductMasterTable()!=null){
-                    rightMainContentComponentSecondRow.getProductMasterTable().addValueChangeListener(new Property.ValueChangeListener() {
-                            @Override
-                            public void valueChange(Property.ValueChangeEvent event) {
-                                ProductMaster productMaster = (ProductMaster)rightMainContentComponentSecondRow.getProductMasterTable().getValue();
-                                leftMainContentComponentSecondRow.getFormLayoutBottom().updateImage(productMaster);
-                            }
-                        });
-                }
-
-            }
-        });
-               
-        //addComponent(firstRowLayout);
-        //addComponent(secondRowLayout);
-        
     }
 }

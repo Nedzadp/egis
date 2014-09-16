@@ -9,7 +9,9 @@ package com.pss.pp4is.system;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.CustomLayout;
 import com.pss.pp4is.layout.UserLoginHeader;
+import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.pss.pp4is.layout.content.MainContentComponent;
+import com.pss.pp4is.layout.content.MainContentLayoutEnum;
 import com.pss.pp4is.layout.navigation.CustomButtonLink;
 import com.pss.pp4is.layout.navigation.MainMenuNavigationLayout;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
@@ -130,10 +132,8 @@ public class LayoutController implements Serializable{
         getUserLoginHeader().removeAllComponents();
         getMainMenuNavigationLayout().removeAllComponents();
         getSubMenuNavigationLayout().removeAllComponents();
-        getMainContentComponent().removeAllComponents();
         getUserLoginHeader().refreshLayout();
         getMainMenuNavigationLayout().initLayoutForAuthenticatedUser();
         getSubMenuNavigationLayout().initLayoutForAuthenticatedUser();
-       
     }
 }

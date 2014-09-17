@@ -7309,7 +7309,6 @@ body .pp4istheme.v-app .v-app-loading {
 }
 
 .pp4istheme .v-slot-right-panel {
-	width: 630px;
 	min-height: 280px;
 	-webkit-border-radius: 20px 20px 20px 20px;
 	-moz-border-radius: 20px 20px 20px 20px;

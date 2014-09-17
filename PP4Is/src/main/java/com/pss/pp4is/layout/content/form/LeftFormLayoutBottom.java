@@ -19,7 +19,6 @@ public class LeftFormLayoutBottom extends VerticalLayout{
     
     public LeftFormLayoutBottom() {
         setMargin(true);
-        setSizeUndefined();
         initFormLayout();
     }
     

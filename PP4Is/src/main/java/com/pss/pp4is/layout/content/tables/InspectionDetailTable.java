@@ -24,7 +24,6 @@ public class InspectionDetailTable extends Table implements Serializable{
     }
     
     private void initTable() {
-        addStyleName("right-table");
         setColumnCollapsingAllowed(true);
         setColumnReorderingAllowed(true);
         setSelectable(true);

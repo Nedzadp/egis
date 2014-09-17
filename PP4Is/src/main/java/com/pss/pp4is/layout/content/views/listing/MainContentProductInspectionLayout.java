@@ -27,6 +27,9 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
     }
     
     private void initLayout() {
+        setMargin(true);
+        setSpacing(true);
+        
         HorizontalLayout firstRowLayout = new HorizontalLayout();
         
         final LeftMainContentComponent leftMainContentComponent = new LeftMainContentComponent();
@@ -56,9 +59,12 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
         thirdRowLayout.addComponent(rightMainContentComponentThirddRow);
         
         HorizontalLayout fourthRowLayout = new HorizontalLayout();
+        
+        
         final RightMainContentComponent rightMainContentComponentFourthRow = new RightMainContentComponent();        
         rightMainContentComponentFourthRow.initHeader("Inspection details");
         final LeftMainContentComponent leftMainContentComponentFourthRow = new LeftMainContentComponent();
+        leftMainContentComponentFourthRow.setWidth("260px");
         leftMainContentComponentFourthRow.initSecondLayout("Inspection detail master image");
         
         fourthRowLayout.addComponent(rightMainContentComponentFourthRow);
@@ -80,6 +86,14 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
                             public void valueChange(Property.ValueChangeEvent event) {
                                 ProductMaster productMaster = (ProductMaster)rightMainContentComponentSecondRow.getProductMasterTable().getValue();
                                 leftMainContentComponentSecondRow.getFormLayoutBottom().updateImage(productMaster.getPath());
+                                
+                                rightMainContentComponentThirddRow.removeAllComponents();
+                                rightMainContentComponentThirddRow.initHeader("Inspection");
+                                rightMainContentComponentThirddRow.addInspectionTable(productMaster);
+                                
+                                rightMainContentComponentFourthRow.removeAllComponents();
+                                rightMainContentComponentFourthRow.initHeader("Inspection details");
+                                rightMainContentComponentFourthRow.addInspectionDetailTable(productMaster);
                             }
                         });
                 }
@@ -88,6 +102,19 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
                 rightMainContentComponentThirddRow.removeAllComponents();
                 rightMainContentComponentThirddRow.initHeader("Inspection");
                 rightMainContentComponentThirddRow.addInspectionTable(product);
+                rightMainContentComponentFourthRow.removeAllComponents();
+                rightMainContentComponentFourthRow.initHeader("Inspection details");
+                rightMainContentComponentFourthRow.addInspectionDetailTable(product);
+                if(rightMainContentComponentFourthRow.getInspectionDetailTable() != null) {
+                    rightMainContentComponentFourthRow.getInspectionDetailTable().addValueChangeListener(new Property.ValueChangeListener() {
+
+                        @Override
+                        public void valueChange(Property.ValueChangeEvent event) {
+                            InspectionDetail inspectionDetail = (InspectionDetail)rightMainContentComponentFourthRow.getInspectionDetailTable().getValue();
+                            leftMainContentComponentFourthRow.getFormLayoutBottom().updateImage(inspectionDetail.getMester_path());
+                        }
+                    });
+                }
                 
                 if(rightMainContentComponentThirddRow.getProductInspectionTable() != null) {
                     rightMainContentComponentThirddRow.getProductInspectionTable().addValueChangeListener(new Property.ValueChangeListener() {
@@ -113,14 +140,8 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
                         }
                     });
                 }
-                
-                
             }
         });
-        
-        
-        
-        
         addComponent(firstRowLayout);
         addComponent(secondRowLayout);
         addComponent(thirdRowLayout);

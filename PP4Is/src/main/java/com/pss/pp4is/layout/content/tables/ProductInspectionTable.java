@@ -30,12 +30,11 @@ public class ProductInspectionTable extends Table implements Serializable{
         setImmediate(true);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(10); 
+        setPageLength(10);
         createDataRow();
-        setVisibleColumns(inspectionContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("inspectionId", true);
+        setVisibleColumns(inspectionContainer.NATURAL_COL_ORDER);
         setColumnHeaders(inspectionContainer.COL_HEADERS_ENGLISH);
-        setColumnWidth("inspectionId", 120);
     }
     
     private void createDataRow() {

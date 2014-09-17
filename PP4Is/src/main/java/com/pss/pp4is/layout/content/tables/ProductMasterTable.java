@@ -30,7 +30,6 @@ public class ProductMasterTable extends Table implements Serializable{
         setSelectable(true);
         setImmediate(true);
         setNullSelectionAllowed(false);
-        setSizeFull();
         setPageLength(10);
         createDataRow();
         setVisibleColumns(ProductMasterContainer.NATURAL_COL_ORDER);

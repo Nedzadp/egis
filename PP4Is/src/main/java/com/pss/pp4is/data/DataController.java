@@ -538,5 +538,137 @@ public class DataController {
         }
         return inspectionDetailContainer;
     }
+
+    public static InspectionDetailContainer getInspectionDetailsByProduct(int productId) {
+        InspectionDetailContainer inspectionDetailContainer = new InspectionDetailContainer();
+        
+        String selectSql = "SELECT id.inspection_details_id, id.master_id, m.name, id.vizsgalt_name, id.vizsgalt_feltoltve_path, id.eredmeny_path, id.jelolt_path, "
+                         + "id.maszk_path, id.mester_path, id.mester_feldolgozott_path, id.vizsgalt_path, id.vizsgalt_feldolgozott_path, id.jelolt_szamozott_path, "
+                         + "id.elfogadva, id.engedellyel_elfogadva, id.elutasitva, id.inspection_profile_notes, id.onTheBunchList, id.urgent, id.vizsgalt_feltoltve_path_pdf "
+                         + "FROM inspection_details id "
+                         + "JOIN master m ON id.master_id = m.master_id "
+                         + "JOIN inspection i ON id.inspection_id = i.inspection_id "
+                         + "JOIN product p ON i.product_id = p.product_id "
+                         + "WHERE i.product_id = "+productId+" ";
+                
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            while(resultSet.next()) {
+                InspectionDetail inspectionDetail = new InspectionDetail();
+                inspectionDetail.setInspection_details_id(resultSet.getInt("id.inspection_details_id"));
+                inspectionDetail.setElfogadva(resultSet.getBoolean("id.elfogadva")?"X":"");
+                inspectionDetail.setMaster_id(resultSet.getInt("id.master_id"));
+                inspectionDetail.setMasterName(resultSet.getString("m.name"));
+                inspectionDetail.setVizsgalt_name(resultSet.getString("id.vizsgalt_name"));
+                inspectionDetail.setVizsgalt_feldolgozott_path(resultSet.getString("id.vizsgalt_feltoltve_path"));
+                inspectionDetail.setEredmeny_path(resultSet.getString("id.eredmeny_path"));
+                inspectionDetail.setJelolt_path(resultSet.getString("id.jelolt_path"));
+                inspectionDetail.setMaszk_path(resultSet.getString("id.maszk_path"));
+                inspectionDetail.setMester_path(resultSet.getString("id.mester_path"));
+                inspectionDetail.setMester_feldolgozott_path(resultSet.getString("id.mester_feldolgozott_path"));
+                inspectionDetail.setVizsgalt_path(resultSet.getString("id.vizsgalt_path"));
+                inspectionDetail.setVizsgalt_feldolgozott_path(resultSet.getString("id.vizsgalt_feldolgozott_path"));
+                inspectionDetail.setJelolt_szamozott_path(resultSet.getString("id.jelolt_szamozott_path"));
+                inspectionDetail.setEngedellyel_elfogadva(resultSet.getBoolean("id.engedellyel_elfogadva")?"X":"");
+                inspectionDetail.setElutasitva(resultSet.getBoolean("id.elutasitva")?"X":"");
+                inspectionDetail.setInspection_profile_notes(resultSet.getString("id.inspection_profile_notes"));
+                inspectionDetail.setOnTheBunchList(resultSet.getBoolean("id.onTheBunchList")?"X":"");
+                inspectionDetail.setUrgent(resultSet.getBoolean("id.urgent")?"X":"");
+                inspectionDetail.setVizsgalt_feltoltve_path_pdf(resultSet.getString("id.vizsgalt_feltoltve_path_pdf"));
+                inspectionDetailContainer.addBean(inspectionDetail);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        return inspectionDetailContainer;
+    }
+
+    public static InspectionDetailContainer getInspectionDetailsByMaster(int masterId) {
+        InspectionDetailContainer inspectionDetailContainer = new InspectionDetailContainer();
+        
+        String selectSql = "SELECT id.inspection_details_id, id.master_id, m.name, id.vizsgalt_name, id.vizsgalt_feltoltve_path, id.eredmeny_path, id.jelolt_path, "
+                         + "id.maszk_path, id.mester_path, id.mester_feldolgozott_path, id.vizsgalt_path, id.vizsgalt_feldolgozott_path, id.jelolt_szamozott_path, "
+                         + "id.elfogadva, id.engedellyel_elfogadva, id.elutasitva, id.inspection_profile_notes, id.onTheBunchList, id.urgent, id.vizsgalt_feltoltve_path_pdf "
+                         + "FROM inspection_details id "
+                         + "JOIN master m ON id.master_id = m.master_id "
+                         + "JOIN inspection i ON id.inspection_id = i.inspection_id "
+                         + "JOIN product p ON i.product_id = p.product_id "
+                         + "WHERE id.master_id = "+masterId+" ";
+                
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            while(resultSet.next()) {
+                InspectionDetail inspectionDetail = new InspectionDetail();
+                inspectionDetail.setInspection_details_id(resultSet.getInt("id.inspection_details_id"));
+                inspectionDetail.setElfogadva(resultSet.getBoolean("id.elfogadva")?"X":"");
+                inspectionDetail.setMaster_id(resultSet.getInt("id.master_id"));
+                inspectionDetail.setMasterName(resultSet.getString("m.name"));
+                inspectionDetail.setVizsgalt_name(resultSet.getString("id.vizsgalt_name"));
+                inspectionDetail.setVizsgalt_feldolgozott_path(resultSet.getString("id.vizsgalt_feltoltve_path"));
+                inspectionDetail.setEredmeny_path(resultSet.getString("id.eredmeny_path"));
+                inspectionDetail.setJelolt_path(resultSet.getString("id.jelolt_path"));
+                inspectionDetail.setMaszk_path(resultSet.getString("id.maszk_path"));
+                inspectionDetail.setMester_path(resultSet.getString("id.mester_path"));
+                inspectionDetail.setMester_feldolgozott_path(resultSet.getString("id.mester_feldolgozott_path"));
+                inspectionDetail.setVizsgalt_path(resultSet.getString("id.vizsgalt_path"));
+                inspectionDetail.setVizsgalt_feldolgozott_path(resultSet.getString("id.vizsgalt_feldolgozott_path"));
+                inspectionDetail.setJelolt_szamozott_path(resultSet.getString("id.jelolt_szamozott_path"));
+                inspectionDetail.setEngedellyel_elfogadva(resultSet.getBoolean("id.engedellyel_elfogadva")?"X":"");
+                inspectionDetail.setElutasitva(resultSet.getBoolean("id.elutasitva")?"X":"");
+                inspectionDetail.setInspection_profile_notes(resultSet.getString("id.inspection_profile_notes"));
+                inspectionDetail.setOnTheBunchList(resultSet.getBoolean("id.onTheBunchList")?"X":"");
+                inspectionDetail.setUrgent(resultSet.getBoolean("id.urgent")?"X":"");
+                inspectionDetail.setVizsgalt_feltoltve_path_pdf(resultSet.getString("id.vizsgalt_feltoltve_path_pdf"));
+                inspectionDetailContainer.addBean(inspectionDetail);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        return inspectionDetailContainer;
+    }
+
+    public static InspectionContainer getProductInspectionsByMaster(int masterId) {
+        InspectionContainer inspectionContainer = new InspectionContainer();
+        String selectSql = "SELECT i.inspection_id, i.insp_date, i.path, i.inspector, i.cikk_num, i.meo_num, i.naplo_num, i.taska_num, i.closed "
+                        + "FROM inspection i "
+                        + "JOIN product p ON i.product_id = p.product_id "
+                        + "JOIN master m ON i.product_id = m.product_id "
+                        + "WHERE m.master_id = "+masterId+" ";
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            while(resultSet.next()) {
+                Inspection inspection = new Inspection();
+                inspection.setInspectionId(resultSet.getInt("i.inspection_id"));
+                inspection.setInspectionDate(resultSet.getString("i.insp_date"));
+                inspection.setPath(resultSet.getString("i.path"));
+                inspection.setInspector(resultSet.getString("i.inspector"));
+                inspection.setCikkNum(resultSet.getString("i.cikk_num"));
+                inspection.setMeoNum(resultSet.getString("i.meo_num"));
+                inspection.setNaploNum(resultSet.getString("i.naplo_num"));
+                inspection.setTaskaNum(resultSet.getString("i.taska_num"));
+                boolean closed = resultSet.getBoolean("i.closed");
+                inspection.setClosed(closed?"X":"");
+                inspectionContainer.addBean(inspection);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        return inspectionContainer;
+    }
     
 }

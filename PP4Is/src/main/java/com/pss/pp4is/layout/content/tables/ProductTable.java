@@ -30,7 +30,6 @@ public class ProductTable extends Table implements Serializable{
         setSelectable(true);
         setImmediate(true);
         setNullSelectionAllowed(false);
-        setSizeFull();
         setPageLength(10);
         createDataRow();
         setVisibleColumns(ProductContainer.NATURAL_COL_ORDER);

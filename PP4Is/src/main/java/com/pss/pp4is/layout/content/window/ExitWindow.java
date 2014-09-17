@@ -51,6 +51,7 @@ public class ExitWindow extends Window{
                 close();
                 DataController.updateUserActivity(layoutController.getUser());
                 layoutController.getCustomLayout().removeAllComponents();
+                layoutController.setUser(null);
                 layoutController.getCustomLayout().init();
             }
         }));

@@ -6,10 +6,7 @@
 
 package com.pss.pp4is.layout.navigation.submenu.links.home;
 
-import com.pss.pp4is.layout.content.CustomVerticalLayout;
-import com.pss.pp4is.layout.content.MainContentLayoutEnum;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
-import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 
 /**
  *
@@ -24,11 +21,11 @@ public class SubMenuHomeNavigationLink extends CustomSubmenuLink{
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);
-        CustomVerticalLayout layout = MainContentLayoutEnum.getInstanceBySubMenu(SubMenuNavigationEnum.SUB_MENU_HOME_WELCOME.getRow());
-        if(layout != null) {
-            getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
-            getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
+        getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
+        if(getLayoutController().getUser()!=null) {
+            getLayoutController().getCustomLayout().getMainContentComponent().initWelcomeLayout();
+        } else {
+            getLayoutController().getCustomLayout().getMainContentComponent().initLayout();
         }
     }
-   
 }

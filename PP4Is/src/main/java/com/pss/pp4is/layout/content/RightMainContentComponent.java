@@ -11,7 +11,6 @@ import com.pss.pp4is.data.containers.InspectionContainer;
 import com.pss.pp4is.data.containers.InspectionDetailContainer;
 import com.pss.pp4is.data.containers.ProductMasterContainer;
 import com.pss.pp4is.data.models.Inspection;
-import com.pss.pp4is.data.models.InspectionDetail;
 import com.pss.pp4is.data.models.Product;
 import com.pss.pp4is.layout.content.tables.InspectionDetailTable;
 import com.pss.pp4is.layout.content.tables.ProductInspectionTable;

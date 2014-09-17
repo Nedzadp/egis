@@ -9,11 +9,9 @@ package com.pss.pp4is.layout.content.views.reports;
 import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.pss.pp4is.layout.content.tables.UserActivityTable;
-import com.pss.pp4is.layout.content.window.ExitWindow;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 
 /**

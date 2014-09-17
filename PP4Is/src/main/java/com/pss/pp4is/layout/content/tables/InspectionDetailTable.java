@@ -7,7 +7,6 @@
 package com.pss.pp4is.layout.content.tables;
 
 import com.pss.pp4is.data.containers.InspectionDetailContainer;
-import com.pss.pp4is.data.containers.InspectionProfileContainer;
 import com.vaadin.ui.Table;
 import java.io.Serializable;
 

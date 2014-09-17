@@ -16,13 +16,18 @@ import com.vaadin.ui.VerticalLayout;
 public class MainContentComponent extends  VerticalLayout{
     
     public MainContentComponent() {
-        initLayout();
-        
-    }
-    
-    private void initLayout() {
         setMargin(false);
         setSpacing(false);
+        setSizeFull();
+        
+        initLayout();
+    }
+    
+    public void initLayout() {
+        addComponent(new CustomLayout("home"));
+    }
+    
+    public void initWelcomeLayout() {
         addComponent(new CustomLayout("welcome"));
     }
 }

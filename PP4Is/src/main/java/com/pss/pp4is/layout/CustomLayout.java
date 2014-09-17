@@ -6,12 +6,9 @@
 
 package com.pss.pp4is.layout;
 
-import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.pss.pp4is.layout.content.MainContentComponent;
-import com.pss.pp4is.layout.content.MainContentLayoutEnum;
 import com.pss.pp4is.layout.header.CustomHeaderLayout;
 import com.pss.pp4is.layout.navigation.MainMenuNavigationLayout;
-import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.event.MouseEvents;
@@ -21,7 +18,6 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.VerticalLayout;
-import sun.awt.AWTAccessor;
 
 /**
  *
@@ -93,10 +89,11 @@ public class CustomLayout extends  VerticalLayout{
         logo.addClickListener(new ClickListener() {
             @Override
             public void click(MouseEvents.ClickEvent event) {
-                CustomVerticalLayout layout = MainContentLayoutEnum.getInstanceBySubMenu(SubMenuNavigationEnum.SUB_MENU_HOME_WELCOME.getRow());
-                if(layout != null) {
-                    getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
-                    getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
+                getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
+                if(getLayoutController().getUser()!=null) {
+                    getLayoutController().getCustomLayout().getMainContentComponent().initWelcomeLayout();
+                }else {
+                    getLayoutController().getCustomLayout().getMainContentComponent().initLayout();
                 }
             }
         });

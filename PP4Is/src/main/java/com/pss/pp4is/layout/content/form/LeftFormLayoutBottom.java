@@ -6,7 +6,6 @@
 
 package com.pss.pp4is.layout.content.form;
 
-import com.pss.pp4is.data.models.ProductMaster;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Embedded;

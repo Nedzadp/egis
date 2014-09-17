@@ -6,14 +6,8 @@
 
 package com.pss.pp4is.layout.content.views;
 
-import com.pss.pp4is.data.models.Product;
-import com.pss.pp4is.data.models.ProductMaster;
 import com.pss.pp4is.layout.content.CustomVerticalLayout;
-import com.pss.pp4is.layout.content.LeftMainContentComponent;
-import com.pss.pp4is.layout.content.RightMainContentComponent;
-import com.vaadin.data.Property;
 import com.vaadin.ui.CustomLayout;
-import com.vaadin.ui.HorizontalLayout;
 
 
 /**

@@ -16,7 +16,7 @@ import com.pss.pp4is.layout.navigation.MainMenuNavigationEnum;
 public class MainMenuHelpNavigationLink extends CustomButtonLink{
 
     public MainMenuHelpNavigationLink() {
-        setCaption("Help");
+        setCaption(getLayoutController().getI18n().translate("Help"));
     }
 
     @Override

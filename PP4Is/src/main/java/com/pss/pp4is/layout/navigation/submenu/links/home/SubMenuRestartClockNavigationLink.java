@@ -14,7 +14,7 @@ import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
  */
 public class SubMenuRestartClockNavigationLink extends CustomSubmenuLink {
     public SubMenuRestartClockNavigationLink() {
-        setCaption("Restart clock");
+        setCaption(getLayoutController().getI18n().translate("Restart clock"));
     }
 
     @Override

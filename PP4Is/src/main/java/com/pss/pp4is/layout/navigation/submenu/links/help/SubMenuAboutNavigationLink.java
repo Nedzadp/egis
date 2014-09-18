@@ -19,7 +19,7 @@ import com.vaadin.ui.Button;
 public class SubMenuAboutNavigationLink extends CustomSubmenuLink{
 
     public SubMenuAboutNavigationLink() {
-        setCaption("About");
+        setCaption(getLayoutController().getI18n().translate("About"));
     }
 
     @Override

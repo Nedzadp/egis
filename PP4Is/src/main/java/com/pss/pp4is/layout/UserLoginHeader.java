@@ -12,6 +12,7 @@ import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.content.window.ExitWindow;
 import com.pss.pp4is.system.CurrentUser;
+import com.pss.pp4is.system.LanguageEnum;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.event.FieldEvents;
 import com.vaadin.event.FieldEvents.TextChangeListener;
@@ -60,7 +61,7 @@ public class UserLoginHeader extends HorizontalLayout{
         addStyleName("header-login");
         setWidth("320px");
         
-        loginLabel = new Label("Log in:");
+        loginLabel = new Label(layoutController.getI18n().translate("Log in:"));
         
         loginLabel.setWidth("40px");
         loginLabel.addStyleName("login-label");
@@ -69,7 +70,7 @@ public class UserLoginHeader extends HorizontalLayout{
         setExpandRatio(loginLabel, 0.4f);
         usernameField = new TextField();
         usernameField.setWidth("125px");
-        usernameField.setInputPrompt("username");
+        usernameField.setInputPrompt(layoutController.getI18n().translate("username"));
        
         
         addComponent(usernameField);
@@ -78,7 +79,7 @@ public class UserLoginHeader extends HorizontalLayout{
         passwordField  = new PasswordField();
         passwordField.setWidth("125px");
        
-        passwordField.setInputPrompt("password");
+        passwordField.setInputPrompt(layoutController.getI18n().translate("password"));
         addComponent(passwordField);
         setExpandRatio(passwordField, 1.25f);
         
@@ -109,7 +110,7 @@ public class UserLoginHeader extends HorizontalLayout{
             public void handleAction(Object sender, Object target) {
                 user = CurrentUser.isAuthenticated(usernameField.getValue(), passwordField.getValue());
                 if(user == null) {
-                    Notification.show("Login", "User name or password is not correct. Please try it again.", Notification.Type.WARNING_MESSAGE);
+                    Notification.show(layoutController.getI18n().translate("Login"), layoutController.getI18n().translate("User name or password is not correct. Please try it again."), Notification.Type.WARNING_MESSAGE);
                     getLoginLabel().removeStyleName("login-label");
                     getLoginLabel().addStyleName("login-label-action");
 
@@ -119,12 +120,14 @@ public class UserLoginHeader extends HorizontalLayout{
                     getUsernameField().focus();
                     
                 } else {
-                     Notification.show("Welcome!", "System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it.", Notification.Type.HUMANIZED_MESSAGE);
+                     layoutController.getI18n().setLanguageEnum(LanguageEnum.getUserLanguage(user));
+                    
+                     Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
                      layoutController.setUser(user);
                      UI.getCurrent().getSession().setAttribute("user", user);
                      DataController.insertUserActivity(layoutController.getUser());
                      layoutController.refreshLayout();
-                     Notification.show("Welcome!", "User activity logged in", Notification.Type.TRAY_NOTIFICATION);
+                     Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("User activity logged in"), Notification.Type.TRAY_NOTIFICATION);
                 }
             }
         });
@@ -218,14 +221,15 @@ public class UserLoginHeader extends HorizontalLayout{
     }
    
     private void showNotification() {
-        Notification.show("Warning", "Click on the clock to restart it, please. Otherwise system will log you out within a minute.", Notification.Type.WARNING_MESSAGE);
+        Notification.show(layoutController.getI18n().translate("Warning"), layoutController.getI18n().translate("Click on the clock to restart it, please. Otherwise system will log you out within a minute."), Notification.Type.WARNING_MESSAGE);
     }
     
     private void automaticallyLogout() {
         DataController.updateUserActivity(layoutController.getUser());
+        layoutController.setUser(null);
         layoutController.getCustomLayout().removeAllComponents();
         layoutController.getCustomLayout().init();
-        Notification.show("Timer","You have been automatically logged out!", Notification.Type.WARNING_MESSAGE);
+        Notification.show(layoutController.getI18n().translate("Timer"),layoutController.getI18n().translate("You have been automatically logged out!"), Notification.Type.WARNING_MESSAGE);
     }
     
     private class TimerButton extends Button implements RefreshListener {
@@ -244,7 +248,7 @@ public class UserLoginHeader extends HorizontalLayout{
     }
     
     public void resetClock() {
-        Notification.show("Clock", "Clock restarted successfully", Notification.Type.TRAY_NOTIFICATION);
+        Notification.show(layoutController.getI18n().translate("Clock"), layoutController.getI18n().translate("Clock restarted successfully"), Notification.Type.TRAY_NOTIFICATION);
         seconds = 59;
         minutes = DataController.getTimerMinutes()-1;
         DataController.updateTimerUserActivity(layoutController.getUser());

@@ -18,7 +18,7 @@ import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 public class SubMenuProductsInspectionsNavigationLink extends CustomSubmenuLink{
 
     public SubMenuProductsInspectionsNavigationLink() {
-        setCaption("Products and inspections");
+        setCaption(getLayoutController().getI18n().translate("Products and inspections"));
     }
 
     @Override

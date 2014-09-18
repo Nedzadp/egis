@@ -25,7 +25,7 @@ public class MainContentInspectionProfileLayout extends CustomVerticalLayout{
         setMargin(true);
         setSpacing(true);
         
-        addComponent(new Label("Inspection profile listing"));
+        addComponent(new Label(getLayoutController().getI18n().translate("Inspection profile listing")));
         
         InspectionProfileTable inspectionProfileTable = new InspectionProfileTable(DataController.getInspectionProfiles());
         

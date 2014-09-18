@@ -17,7 +17,7 @@ import com.vaadin.ui.Notification;
 public class SubMenuSystemUsageNavigationLink extends CustomSubmenuLink {
    
     public SubMenuSystemUsageNavigationLink() {
-        setCaption("System usage");
+        setCaption(getLayoutController().getI18n().translate("System usage"));
     }
 
     @Override

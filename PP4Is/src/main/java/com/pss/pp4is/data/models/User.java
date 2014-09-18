@@ -20,7 +20,16 @@ public class User implements Serializable{
     private String email;
     private String username;
     private String password;
+    private String language;
     private String isActive;
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 
     public int getUserId() {
         return userId;

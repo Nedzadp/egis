@@ -83,8 +83,8 @@ public class RightMainContentComponent extends  VerticalLayout{
         return productInspectionTable;
     }
 
-    public void addInspectionDetailTable(Inspection inspection) {
-        InspectionDetailContainer  inspectionDetailContainer = DataController.getInspectionDetails(inspection.getInspectionId());
+    public void addInspectionDetailTable(Inspection inspection, ProductMaster productMaster) {
+        InspectionDetailContainer  inspectionDetailContainer = DataController.getInspectionDetails(inspection.getInspectionId(),productMaster.getMasterId());
         if(inspectionDetailContainer != null) {
             inspectionDetailTable = new InspectionDetailTable(inspectionDetailContainer);
             addComponent(inspectionDetailTable);
@@ -103,8 +103,8 @@ public class RightMainContentComponent extends  VerticalLayout{
         }
     }
     
-    public void addInspectionDetailTable(ProductMaster productMaster) {
-        InspectionDetailContainer  inspectionDetailContainer = DataController.getInspectionDetailsByMaster(productMaster.getMasterId());
+    public void addInspectionDetailTable(ProductMaster productMaster, Inspection inspection) {
+        InspectionDetailContainer  inspectionDetailContainer = DataController.getInspectionDetailsByMaster(productMaster.getMasterId(),inspection.getInspectionId());
         if(inspectionDetailContainer != null) {
             inspectionDetailTable = new InspectionDetailTable(inspectionDetailContainer);
             addComponent(inspectionDetailTable);

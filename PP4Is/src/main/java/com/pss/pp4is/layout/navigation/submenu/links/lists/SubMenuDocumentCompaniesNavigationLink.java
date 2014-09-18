@@ -19,7 +19,7 @@ import com.vaadin.ui.Button;
 public class SubMenuDocumentCompaniesNavigationLink extends CustomSubmenuLink{
 
     public SubMenuDocumentCompaniesNavigationLink() {
-        setCaption("Printer companies");
+        setCaption(getLayoutController().getI18n().translate("Printer companies"));
     }
 
     @Override

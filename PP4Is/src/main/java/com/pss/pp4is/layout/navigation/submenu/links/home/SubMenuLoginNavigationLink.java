@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
 
     public SubMenuLoginNavigationLink() {
-        setCaption("Log in");
+        setCaption(getLayoutController().getI18n().translate("Log in"));
     }
 
     @Override

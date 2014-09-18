@@ -25,7 +25,7 @@ public class MainContentUserLayout extends CustomVerticalLayout{
         setMargin(true);
         setSpacing(true);
         
-        addComponent(new Label("User listing"));
+        addComponent(new Label(getLayoutController().getI18n().translate("User listing")));
         
         UserTable userTable = new UserTable(DataController.getUsers());
         

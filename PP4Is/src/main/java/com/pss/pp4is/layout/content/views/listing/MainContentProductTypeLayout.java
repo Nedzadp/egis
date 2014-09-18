@@ -25,7 +25,7 @@ public class MainContentProductTypeLayout extends CustomVerticalLayout{
         setMargin(true);
         setSpacing(true);
         
-        addComponent(new Label("Product type listing"));
+        addComponent(new Label(getLayoutController().getI18n().translate("Product type listing")));
         
         ProductTypeTable productTypeTable = new ProductTypeTable(DataController.getProductType());
         

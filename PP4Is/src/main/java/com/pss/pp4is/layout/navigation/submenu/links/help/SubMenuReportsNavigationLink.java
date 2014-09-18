@@ -18,7 +18,7 @@ import com.vaadin.ui.Button;
  */
 public class SubMenuReportsNavigationLink extends CustomSubmenuLink {
     public SubMenuReportsNavigationLink() {
-        setCaption("Reports");
+        setCaption(getLayoutController().getI18n().translate("Reports"));
     }
 
     @Override

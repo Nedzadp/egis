@@ -25,7 +25,7 @@ public class MainContentProductLanguageLayout extends CustomVerticalLayout{
         setMargin(true);
         setSpacing(true);
         
-        addComponent(new Label("Product language listing"));
+        addComponent(new Label(getLayoutController().getI18n().translate("Product language listing")));
         
         ProductLanguageTable productLanguageTable = new ProductLanguageTable(DataController.getProductLanguage());
         

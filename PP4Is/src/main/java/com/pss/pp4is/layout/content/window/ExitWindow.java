@@ -23,9 +23,10 @@ public class ExitWindow extends Window{
     private final LayoutController layoutController;
     
     public ExitWindow(LayoutController layoutController) {
-        super("Log out window");
         this.layoutController = layoutController;
+        setCaption(this.layoutController.getI18n().translate("Log out window"));
         initLayout();
+        
     }
     
     private void initLayout() {
@@ -39,13 +40,13 @@ public class ExitWindow extends Window{
         VerticalLayout layout = new VerticalLayout();
         layout.setSpacing(true);
         layout.setMargin(true);
-        layout.addComponent(new Label("Do you really want to log out from PP4I system?"));
+        layout.addComponent(new Label(layoutController.getI18n().translate("Do you really want to log out from PP4I system?")));
         
         HorizontalLayout answerButtons = new HorizontalLayout();
         answerButtons.setMargin(true);
         answerButtons.setSpacing(true);
         
-        answerButtons.addComponent(new Button("Yes", new Button.ClickListener() {
+        answerButtons.addComponent(new Button(layoutController.getI18n().translate("Yes"), new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 close();
@@ -56,7 +57,7 @@ public class ExitWindow extends Window{
             }
         }));
 
-        answerButtons.addComponent(new Button("No", new Button.ClickListener() {
+        answerButtons.addComponent(new Button(layoutController.getI18n().translate("No"), new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 close();

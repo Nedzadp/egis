@@ -18,7 +18,7 @@ import com.vaadin.ui.Button;
  */
 public class SubMenuUsersNavigationLink extends CustomSubmenuLink {
     public SubMenuUsersNavigationLink() {
-        setCaption("Users");
+        setCaption(getLayoutController().getI18n().translate("Users"));
     }
 
     @Override

@@ -22,6 +22,9 @@ import com.vaadin.ui.HorizontalLayout;
  */
 public class MainContentProductInspectionLayout extends CustomVerticalLayout{
 
+    private Inspection selectedInspection=null;
+    private ProductMaster selectedProductMaster = null;
+    
     public MainContentProductInspectionLayout() {
         initLayout();
     }
@@ -37,35 +40,35 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
         
         
         final RightMainContentComponent rightMainContentComponent = new RightMainContentComponent();      
-        rightMainContentComponent.initLayout("Product");
+        rightMainContentComponent.initLayout(getLayoutController().getI18n().translate("Product"));
         firstRowLayout.addComponent(rightMainContentComponent);
         firstRowLayout.addComponent(leftMainContentComponent);
         
         HorizontalLayout secondRowLayout = new HorizontalLayout();
         final LeftMainContentComponent leftMainContentComponentSecondRow = new LeftMainContentComponent();
-        leftMainContentComponentSecondRow.initSecondLayout("Master image detail");
+        leftMainContentComponentSecondRow.initSecondLayout(getLayoutController().getI18n().translate("Master image detail"));
         
         
         
         final RightMainContentComponent rightMainContentComponentSecondRow = new RightMainContentComponent();      
-        rightMainContentComponentSecondRow.initHeader("Master");
+        rightMainContentComponentSecondRow.initHeader(getLayoutController().getI18n().translate("Master"));
         secondRowLayout.addComponent(rightMainContentComponentSecondRow);
         secondRowLayout.addComponent(leftMainContentComponentSecondRow);
         
         
         HorizontalLayout thirdRowLayout = new HorizontalLayout();
         final RightMainContentComponent rightMainContentComponentThirddRow = new RightMainContentComponent();        
-        rightMainContentComponentThirddRow.initHeader("Inspection");
+        rightMainContentComponentThirddRow.initHeader(getLayoutController().getI18n().translate("Inspection"));
         thirdRowLayout.addComponent(rightMainContentComponentThirddRow);
         
         HorizontalLayout fourthRowLayout = new HorizontalLayout();
         
         
         final RightMainContentComponent rightMainContentComponentFourthRow = new RightMainContentComponent();        
-        rightMainContentComponentFourthRow.initHeader("Inspection details");
+        rightMainContentComponentFourthRow.initHeader(getLayoutController().getI18n().translate("Inspection details"));
         final LeftMainContentComponent leftMainContentComponentFourthRow = new LeftMainContentComponent();
         leftMainContentComponentFourthRow.setWidth("260px");
-        leftMainContentComponentFourthRow.initSecondLayout("Inspection detail master image");
+        leftMainContentComponentFourthRow.initSecondLayout(getLayoutController().getI18n().translate("Inspection detail master image"));
         
         fourthRowLayout.addComponent(rightMainContentComponentFourthRow);
         fourthRowLayout.addComponent(leftMainContentComponentFourthRow);
@@ -78,43 +81,32 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
                 leftMainContentComponent.getFormLayoutTop().updateLayout(product);
                 // update master table
                 rightMainContentComponentSecondRow.removeAllComponents();
-                rightMainContentComponentSecondRow.initHeader("Master");
+                rightMainContentComponentSecondRow.initHeader(getLayoutController().getI18n().translate("Master"));
                 rightMainContentComponentSecondRow.addTable(product);
+                // clear inspection details
+                rightMainContentComponentFourthRow.removeAllComponents();
+                rightMainContentComponentFourthRow.initHeader(getLayoutController().getI18n().translate("Inspection details"));
+                
                 if(rightMainContentComponentSecondRow.getProductMasterTable()!=null){
                     rightMainContentComponentSecondRow.getProductMasterTable().addValueChangeListener(new Property.ValueChangeListener() {
                             @Override
                             public void valueChange(Property.ValueChangeEvent event) {
                                 ProductMaster productMaster = (ProductMaster)rightMainContentComponentSecondRow.getProductMasterTable().getValue();
                                 leftMainContentComponentSecondRow.getFormLayoutBottom().updateImage(productMaster.getPath());
-                                
-                                rightMainContentComponentThirddRow.removeAllComponents();
-                                rightMainContentComponentThirddRow.initHeader("Inspection");
-                                rightMainContentComponentThirddRow.addInspectionTable(productMaster);
-                                
-                                rightMainContentComponentFourthRow.removeAllComponents();
-                                rightMainContentComponentFourthRow.initHeader("Inspection details");
-                                rightMainContentComponentFourthRow.addInspectionDetailTable(productMaster);
+                                selectedProductMaster = productMaster;
+                                if(selectedInspection != null) {
+                                    rightMainContentComponentFourthRow.removeAllComponents();
+                                    rightMainContentComponentFourthRow.initHeader(getLayoutController().getI18n().translate("Inspection details"));
+                                    rightMainContentComponentFourthRow.addInspectionDetailTable(productMaster,selectedInspection);
+                                }
                             }
                         });
                 }
                 
                 // update inspections
                 rightMainContentComponentThirddRow.removeAllComponents();
-                rightMainContentComponentThirddRow.initHeader("Inspection");
+                rightMainContentComponentThirddRow.initHeader(getLayoutController().getI18n().translate("Inspection"));
                 rightMainContentComponentThirddRow.addInspectionTable(product);
-                rightMainContentComponentFourthRow.removeAllComponents();
-                rightMainContentComponentFourthRow.initHeader("Inspection details");
-                rightMainContentComponentFourthRow.addInspectionDetailTable(product);
-                if(rightMainContentComponentFourthRow.getInspectionDetailTable() != null) {
-                    rightMainContentComponentFourthRow.getInspectionDetailTable().addValueChangeListener(new Property.ValueChangeListener() {
-
-                        @Override
-                        public void valueChange(Property.ValueChangeEvent event) {
-                            InspectionDetail inspectionDetail = (InspectionDetail)rightMainContentComponentFourthRow.getInspectionDetailTable().getValue();
-                            leftMainContentComponentFourthRow.getFormLayoutBottom().updateImage(inspectionDetail.getMester_path());
-                        }
-                    });
-                }
                 
                 if(rightMainContentComponentThirddRow.getProductInspectionTable() != null) {
                     rightMainContentComponentThirddRow.getProductInspectionTable().addValueChangeListener(new Property.ValueChangeListener() {
@@ -122,21 +114,24 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
                         @Override
                         public void valueChange(Property.ValueChangeEvent event) {
                            Inspection inspection = (Inspection)rightMainContentComponentThirddRow.getProductInspectionTable().getValue();
-                            
-                           rightMainContentComponentFourthRow.removeAllComponents();
-                           rightMainContentComponentFourthRow.initHeader("Inspection details");
-                           rightMainContentComponentFourthRow.addInspectionDetailTable(inspection);
-                           if(rightMainContentComponentFourthRow.getInspectionDetailTable() != null) {
-                               rightMainContentComponentFourthRow.getInspectionDetailTable().addValueChangeListener(new Property.ValueChangeListener() {
-
-                                   @Override
-                                   public void valueChange(Property.ValueChangeEvent event) {
-                                       InspectionDetail inspectionDetail = (InspectionDetail)rightMainContentComponentFourthRow.getInspectionDetailTable().getValue();
-                                       leftMainContentComponentFourthRow.getFormLayoutBottom().updateImage(inspectionDetail.getMester_path());
-                                   }
-                               });
+                           selectedInspection = inspection; 
+                           if(selectedProductMaster != null) {
+                               rightMainContentComponentFourthRow.removeAllComponents();
+                                    rightMainContentComponentFourthRow.initHeader(getLayoutController().getI18n().translate("Inspection details"));
+                                    rightMainContentComponentFourthRow.addInspectionDetailTable(inspection,selectedProductMaster);
                            }
-                           
+                        }
+                    });
+                }
+                
+                
+                if(rightMainContentComponentFourthRow.getInspectionDetailTable() != null) {
+                    rightMainContentComponentFourthRow.getInspectionDetailTable().addValueChangeListener(new Property.ValueChangeListener() {
+
+                        @Override
+                        public void valueChange(Property.ValueChangeEvent event) {
+                            InspectionDetail inspectionDetail = (InspectionDetail)rightMainContentComponentFourthRow.getInspectionDetailTable().getValue();
+                            leftMainContentComponentFourthRow.getFormLayoutBottom().updateImage(inspectionDetail.getVizsgalt_feltoltve_path());
                         }
                     });
                 }

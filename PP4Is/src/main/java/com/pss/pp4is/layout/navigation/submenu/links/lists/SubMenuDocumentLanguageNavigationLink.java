@@ -19,7 +19,7 @@ import com.vaadin.ui.Button;
 public class SubMenuDocumentLanguageNavigationLink extends CustomSubmenuLink{
 
     public SubMenuDocumentLanguageNavigationLink() {
-        setCaption("Doc. languages");
+        setCaption(getLayoutController().getI18n().translate("Doc. languages"));
     }
 
     @Override

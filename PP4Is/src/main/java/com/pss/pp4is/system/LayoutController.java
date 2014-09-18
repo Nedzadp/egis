@@ -33,11 +33,20 @@ public class LayoutController implements Serializable{
     private SubMenuNavigationLayout subMenuNavigationLayout;
     private MainContentComponent mainContentComponent;
     private User user;
+    private I18n i18n;
     
     public LayoutController() {
         user = null;
     }
 
+    public void setI18n(I18n i18n) {
+        this.i18n = i18n;
+    }
+
+    public I18n getI18n() {
+        return i18n;
+    }
+    
     public void setCustomLayout(CustomLayout customLayout) {
         this.customLayout = customLayout;
     }

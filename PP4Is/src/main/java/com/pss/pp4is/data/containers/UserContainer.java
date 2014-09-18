@@ -17,10 +17,10 @@ import java.io.Serializable;
 public class UserContainer extends BeanItemContainer<User> implements Serializable{
 
     public static final Object[] NATURAL_COL_ORDER = new String[] {
-        "userId", "firstName", "lastName","email","username","password","isActive"};
+        "userId", "firstName", "lastName","email","username","password", "language", "isActive"};
 
     public static final String[] COL_HEADERS_ENGLISH = new String[] {
-         "User id" ,"First name","Last name","Email","Username","Password","Active"};
+         "User id" ,"First name","Last name","Email","Username","Password","Language","Active"};
     
     public UserContainer() throws IllegalArgumentException {
         super(User.class);

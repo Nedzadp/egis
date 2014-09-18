@@ -27,10 +27,14 @@ import com.pss.pp4is.data.models.ProductType;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.data.models.UserActivity;
 import com.pss.pp4is.system.DatabaseConnection;
+import com.pss.pp4is.system.LanguageEnum;
+import com.pss.pp4is.system.Translation;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -206,6 +210,7 @@ public class DataController {
                 user.setEmail(resultSet.getString("email"));
                 user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
+                user.setLanguage(resultSet.getString("language"));
                 user.setIsActive(resultSet.getBoolean("isActive")?"X":"");
                 userContainer.addBean(user);
             }
@@ -276,7 +281,8 @@ public class DataController {
                          "        u.firstName, " +
                          "        u.lastName, " +
                          "        u.username, " +
-                         "        u.password " +
+                         "        u.password, " +
+                         "        u.language "+
                          " FROM   user u " +
                          " WHERE  u.username = '"+username+"' "+
                          " AND    u.password = '"+password+"' "+
@@ -295,6 +301,7 @@ public class DataController {
                 user.setLastName(resultSet.getString("u.lastName"));
                 user.setUsername(resultSet.getString("u.username"));
                 user.setPassword(resultSet.getString("u.password"));
+                user.setLanguage(resultSet.getString("u.language"));
                 return user;
             }
             
@@ -493,14 +500,15 @@ public class DataController {
         return inspectionContainer;
     }
     
-    public static InspectionDetailContainer getInspectionDetails(int inspectionId) {
+    public static InspectionDetailContainer getInspectionDetails(int inspectionId, int masterId) {
         InspectionDetailContainer inspectionDetailContainer = new InspectionDetailContainer();
         String selectSql = "SELECT id.inspection_details_id, id.master_id, m.name, id.vizsgalt_name, id.vizsgalt_feltoltve_path, id.eredmeny_path, id.jelolt_path, "
                          + "id.maszk_path, id.mester_path, id.mester_feldolgozott_path, id.vizsgalt_path, id.vizsgalt_feldolgozott_path, id.jelolt_szamozott_path, "
                          + "id.elfogadva, id.engedellyel_elfogadva, id.elutasitva, id.inspection_profile_notes, id.onTheBunchList, id.urgent, id.vizsgalt_feltoltve_path_pdf "
                          + "FROM inspection_details id "
                          + "JOIN master m ON id.master_id = m.master_id "
-                         + "WHERE id.inspection_id = "+inspectionId+" ";
+                         + "WHERE id.inspection_id = "+inspectionId+" "
+                         + "AND id.master_id = "+masterId+" ";
                 
         DatabaseConnection databaseConnection = new DatabaseConnection();
         try {
@@ -588,7 +596,7 @@ public class DataController {
         return inspectionDetailContainer;
     }
 
-    public static InspectionDetailContainer getInspectionDetailsByMaster(int masterId) {
+    public static InspectionDetailContainer getInspectionDetailsByMaster(int masterId, int inspectionId) {
         InspectionDetailContainer inspectionDetailContainer = new InspectionDetailContainer();
         
         String selectSql = "SELECT id.inspection_details_id, id.master_id, m.name, id.vizsgalt_name, id.vizsgalt_feltoltve_path, id.eredmeny_path, id.jelolt_path, "
@@ -598,7 +606,8 @@ public class DataController {
                          + "JOIN master m ON id.master_id = m.master_id "
                          + "JOIN inspection i ON id.inspection_id = i.inspection_id "
                          + "JOIN product p ON i.product_id = p.product_id "
-                         + "WHERE id.master_id = "+masterId+" ";
+                         + "WHERE id.master_id = "+masterId+" "
+                         + "AND id.inspection_id = "+inspectionId+" ";
                 
         DatabaseConnection databaseConnection = new DatabaseConnection();
         try {
@@ -669,6 +678,54 @@ public class DataController {
             databaseConnection.disconnect();
         }
         return inspectionContainer;
+    }
+    
+    public static List<Translation> getTranslations(String language) {
+        List<Translation> translations = new ArrayList<Translation>();
+        
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        String selectSql = "SELECT keyword, english, magyar FROM translation;";
+        
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            while(resultSet.next()) {
+               Translation translation = new Translation();
+               translation.setKeyword(resultSet.getString("keyword"));
+               
+                if(LanguageEnum.getENGLISH().getLang().equals(language) && resultSet.getString("english")!=null) {
+                   translation.setTranslation(resultSet.getString("english"));
+                } else if(LanguageEnum.getHUNGARIAN().getLang().equals(language) && resultSet.getString("magyar")!=null) {
+                   translation.setTranslation(resultSet.getString("magyar"));
+                } else {
+                    translation.setTranslation(resultSet.getString("keyword"));
+                }
+                translations.add(translation);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        
+        return translations;
+    }
+
+    public static void insertKeywordForTranslation(String keyword) {
+        String sql = "INSERT INTO translation(keyword) VALUES(?)";
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        try {
+            databaseConnection.connect();
+            PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(sql);
+            preparedStatement.clearParameters();
+            preparedStatement.setString(1, keyword);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            databaseConnection.disconnect();
+        }   
     }
     
 }

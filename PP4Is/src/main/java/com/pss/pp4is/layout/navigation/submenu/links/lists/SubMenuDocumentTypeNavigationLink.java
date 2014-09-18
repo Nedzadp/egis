@@ -19,7 +19,7 @@ import com.vaadin.ui.Button;
 public class SubMenuDocumentTypeNavigationLink extends CustomSubmenuLink{
 
     public SubMenuDocumentTypeNavigationLink() {
-        setCaption("Doc. types");
+        setCaption(getLayoutController().getI18n().translate("Doc. types"));
     }
 
     @Override

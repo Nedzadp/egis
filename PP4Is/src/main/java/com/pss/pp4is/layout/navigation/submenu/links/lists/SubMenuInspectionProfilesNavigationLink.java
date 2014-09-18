@@ -18,7 +18,7 @@ import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 public class SubMenuInspectionProfilesNavigationLink extends CustomSubmenuLink{
 
     public SubMenuInspectionProfilesNavigationLink() {
-        setCaption("Inspection profiles");
+        setCaption(getLayoutController().getI18n().translate("Inspection profiles"));
     }
 
     @Override

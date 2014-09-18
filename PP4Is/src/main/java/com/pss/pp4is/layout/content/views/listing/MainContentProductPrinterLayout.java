@@ -25,7 +25,7 @@ public class MainContentProductPrinterLayout extends CustomVerticalLayout{
         setMargin(true);
         setSpacing(true);
         
-        addComponent(new Label("Product printer listing"));
+        addComponent(new Label(getLayoutController().getI18n().translate("Product printer listing")));
         
         ProductPrinterTable productPrinterTable = new ProductPrinterTable(DataController.getProductPrinter());
         

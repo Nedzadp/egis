@@ -13,10 +13,12 @@ import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
  * @author Nedzad
  */
 public class SubMenuRestartClockNavigationLink extends CustomSubmenuLink {
-    public SubMenuRestartClockNavigationLink() {
+
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("Restart clock"));
     }
-
+    
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);

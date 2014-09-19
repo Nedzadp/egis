@@ -14,11 +14,14 @@ import com.pss.pp4is.layout.navigation.MainMenuNavigationEnum;
  * @author Nedzad
  */
 public class MainMenuHomeNavigationLink extends CustomButtonLink{
-   
-    public MainMenuHomeNavigationLink() {
+
+
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("PP4I system"));
     }
 
+    
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedMenu(this);

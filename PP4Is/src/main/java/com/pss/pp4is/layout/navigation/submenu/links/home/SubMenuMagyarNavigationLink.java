@@ -15,10 +15,10 @@ import com.vaadin.ui.Notification;
  */
 public class SubMenuMagyarNavigationLink extends  CustomSubmenuLink{
 
-    public SubMenuMagyarNavigationLink() {
+    @Override
+    public void addCaption() {
         setCaption("Magyar");
     }
-
     
     @Override
     public void handleClick(ClickEvent event) {

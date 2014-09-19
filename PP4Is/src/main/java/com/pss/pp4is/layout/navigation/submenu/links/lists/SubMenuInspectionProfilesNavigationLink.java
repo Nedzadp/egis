@@ -17,15 +17,18 @@ import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
  */
 public class SubMenuInspectionProfilesNavigationLink extends CustomSubmenuLink{
 
-    public SubMenuInspectionProfilesNavigationLink() {
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("Inspection profiles"));
     }
-
+    
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);
         CustomVerticalLayout layout = MainContentLayoutEnum.getInstanceBySubMenu(SubMenuNavigationEnum.SUB_MENU_INSPECTION_PROFILES.getRow());
         if(layout != null) {
+            layout.setLayoutController(getLayoutController());
+            layout.initLayout();
             getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
             getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
         }

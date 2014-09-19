@@ -107,6 +107,7 @@ public class LayoutController implements Serializable{
         for(SubMenuNavigationEnum subMenu : subMenus) {
             CustomSubmenuLink link = subMenu.getInstance();
             link.setLayoutController(this);
+            link.addCaption();
             menu.addComponent(link);
         }
     }

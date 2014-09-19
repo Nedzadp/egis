@@ -15,11 +15,8 @@ import com.vaadin.ui.CustomLayout;
  */
 public class MainContentListsLayout extends CustomVerticalLayout{
 
-    public MainContentListsLayout() {
-        initLayout();
-    }
-    
-    private void initLayout() {
+    @Override
+    public void initLayout() {
         setMargin(false);
         setSpacing(false);
         

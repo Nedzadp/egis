@@ -15,7 +15,8 @@ import com.pss.pp4is.layout.navigation.MainMenuNavigationEnum;
  */
 public class MainMenuReportsNavigationLink extends CustomButtonLink{
 
-    public MainMenuReportsNavigationLink() {
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("Reports"));
     }
 
@@ -26,7 +27,4 @@ public class MainMenuReportsNavigationLink extends CustomButtonLink{
         getLayoutController().setCustomButtonLink(this);
         getLayoutController().buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_REPORTS_LINK.getRow(),getLayoutController().getCustomLayout().getSubMenuNavigationLayout().getSubMenuLayout(),true);
     }
- 
-    
-    
 }

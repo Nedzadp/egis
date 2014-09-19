@@ -15,11 +15,12 @@ import com.vaadin.ui.Notification;
  * @author Nedzad
  */
 public class SubMenuSystemUsageNavigationLink extends CustomSubmenuLink {
-   
-    public SubMenuSystemUsageNavigationLink() {
+
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("System usage"));
     }
-
+    
     @Override
     public void handleClick(Button.ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);

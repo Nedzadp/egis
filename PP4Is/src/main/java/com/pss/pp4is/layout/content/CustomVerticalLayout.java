@@ -30,5 +30,6 @@ public abstract class CustomVerticalLayout extends VerticalLayout{
         return layoutController;
     }
     
+    public abstract void initLayout();
     
 }

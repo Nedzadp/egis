@@ -17,11 +17,9 @@ import com.vaadin.ui.Label;
  */
 public class MainContentProductTypeLayout extends CustomVerticalLayout{
 
-    public MainContentProductTypeLayout() {
-        initLayout();
-    }
     
-    private void initLayout() {
+    @Override
+    public void initLayout() {
         setMargin(true);
         setSpacing(true);
         

@@ -18,7 +18,8 @@ import com.vaadin.ui.Button;
  */
 public class SubMenuAboutNavigationLink extends CustomSubmenuLink{
 
-    public SubMenuAboutNavigationLink() {
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("About"));
     }
 
@@ -27,6 +28,8 @@ public class SubMenuAboutNavigationLink extends CustomSubmenuLink{
         getLayoutController().fixSelectedSubMenu(this);
         CustomVerticalLayout layout = MainContentLayoutEnum.getInstanceBySubMenu(SubMenuNavigationEnum.SUB_MENU_ABOUT.getRow());
         if(layout != null) {
+            layout.setLayoutController(getLayoutController());
+            layout.initLayout();
             getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
             getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
         }

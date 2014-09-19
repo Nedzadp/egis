@@ -28,8 +28,7 @@ public abstract class CustomButtonLink extends Button{
                 }
             });
 	}
-    public abstract void handleClick(ClickEvent event);
-
+    
     public void setLayoutController(LayoutController layoutController) {
         this.layoutController = layoutController;
     }
@@ -37,4 +36,8 @@ public abstract class CustomButtonLink extends Button{
     public LayoutController getLayoutController() {
         return layoutController;
     }
+    
+    public abstract void handleClick(ClickEvent event);
+    
+    public abstract void addCaption();
 }

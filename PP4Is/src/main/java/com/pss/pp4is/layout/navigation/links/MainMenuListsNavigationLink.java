@@ -14,9 +14,11 @@ import com.pss.pp4is.layout.navigation.MainMenuNavigationEnum;
  */
 public class MainMenuListsNavigationLink extends CustomButtonLink{
 
-    public MainMenuListsNavigationLink() {
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("Lists"));
     }
+    
 
     @Override
     public void handleClick(ClickEvent event) {

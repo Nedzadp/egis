@@ -25,11 +25,8 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
     private Inspection selectedInspection=null;
     private ProductMaster selectedProductMaster = null;
     
-    public MainContentProductInspectionLayout() {
-        initLayout();
-    }
-    
-    private void initLayout() {
+    @Override
+    public void initLayout() {
         setMargin(true);
         setSpacing(true);
         

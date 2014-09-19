@@ -17,7 +17,8 @@ import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
  */
 public class SubMenuProductsInspectionsNavigationLink extends CustomSubmenuLink{
 
-    public SubMenuProductsInspectionsNavigationLink() {
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("Products and inspections"));
     }
 
@@ -26,7 +27,9 @@ public class SubMenuProductsInspectionsNavigationLink extends CustomSubmenuLink{
         getLayoutController().fixSelectedSubMenu(this);
         CustomVerticalLayout layout = MainContentLayoutEnum.getInstanceBySubMenu(SubMenuNavigationEnum.SUB_MENU_PRODUCTS_INSPECTIONS.getRow());
         if(layout != null) {
-            getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
+            layout.setLayoutController(getLayoutController());
+            layout.initLayout();
+            getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();    
             getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
         }
     }

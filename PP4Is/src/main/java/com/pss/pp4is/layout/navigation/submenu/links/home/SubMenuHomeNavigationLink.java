@@ -13,8 +13,9 @@ import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
  * @author Nedzad
  */
 public class SubMenuHomeNavigationLink extends CustomSubmenuLink{
-    
-    public SubMenuHomeNavigationLink() {
+
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("Welcome"));
     }
 

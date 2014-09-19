@@ -29,6 +29,7 @@ public class MainMenuNavigationLayout extends  HorizontalLayout{
         for(MainMenuNavigationEnum mainMenu : MainMenuNavigationEnum.getValuesForAnonymousUser()) {
             CustomButtonLink buttonLink = mainMenu.getInstance();
             buttonLink.setLayoutController(layoutController);
+            buttonLink.addCaption();
             if(mainMenu.getRow() == 1) {
                 layoutController.setCustomButtonLink(buttonLink);
             }
@@ -41,6 +42,7 @@ public class MainMenuNavigationLayout extends  HorizontalLayout{
         for(MainMenuNavigationEnum mainMenu : MainMenuNavigationEnum.getValuesForAuthenticatedUser()) {
             CustomButtonLink buttonLink = mainMenu.getInstance();
             buttonLink.setLayoutController(layoutController);
+            buttonLink.addCaption();
             if(mainMenu.getRow() == 1) {
                 layoutController.setCustomButtonLink(buttonLink);
             }

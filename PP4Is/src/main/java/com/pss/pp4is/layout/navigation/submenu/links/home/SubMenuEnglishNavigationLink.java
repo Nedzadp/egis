@@ -15,10 +15,12 @@ import com.vaadin.ui.Notification;
  */
 public class SubMenuEnglishNavigationLink extends CustomSubmenuLink{
 
-    public SubMenuEnglishNavigationLink() {
+    @Override
+    public void addCaption() {
         setCaption("English");
     }
 
+    
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);

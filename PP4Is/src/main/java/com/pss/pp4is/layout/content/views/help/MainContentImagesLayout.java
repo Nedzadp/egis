@@ -15,14 +15,10 @@ import com.vaadin.ui.CustomLayout;
  */
 public class MainContentImagesLayout extends CustomVerticalLayout{
 
-    public MainContentImagesLayout() {
-        initLayout();
-    }
-    
-    private void initLayout() {
+    @Override
+    public void initLayout() {
         setMargin(false);
         setSpacing(false);
-        
         addComponent(new CustomLayout("images"));
     }
 }

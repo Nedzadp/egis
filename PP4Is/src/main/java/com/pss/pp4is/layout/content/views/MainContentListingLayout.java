@@ -14,12 +14,9 @@ import com.pss.pp4is.layout.content.CustomVerticalLayout;
  */
 public class MainContentListingLayout extends CustomVerticalLayout{
 
-    public MainContentListingLayout() {
-        initLayout();
-    }
-    
-    private void initLayout() {
-        
+    @Override
+    public void initLayout() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

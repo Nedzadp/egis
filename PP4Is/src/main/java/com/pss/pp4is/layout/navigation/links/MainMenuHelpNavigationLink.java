@@ -15,10 +15,14 @@ import com.pss.pp4is.layout.navigation.MainMenuNavigationEnum;
  */
 public class MainMenuHelpNavigationLink extends CustomButtonLink{
 
-    public MainMenuHelpNavigationLink() {
+
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("Help"));
     }
 
+    
+    
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedMenu(this);

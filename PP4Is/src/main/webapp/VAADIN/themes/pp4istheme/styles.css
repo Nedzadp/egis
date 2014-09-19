@@ -7430,16 +7430,3 @@ body .pp4istheme.v-app .v-app-loading {
 .pp4istheme .v-window-exit-window .v-window-closebox {
 	background: url('img/close-modal.png');
 }
-
-.pp4istheme v-loading-indicator, .pp4istheme .v-loading-indicator-delay, .pp4istheme .v-loading-indicator-wait {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	background-position: 50%;
-	background-color: gray;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	opacity: 0.8;
-	-ms-filter: alpha(opacity=80);
-	filter: alpha(opacity=80);
-}

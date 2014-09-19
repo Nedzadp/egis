@@ -9,7 +9,9 @@ package com.pss.pp4is.layout.header;
 import com.pss.pp4is.layout.UserLoginHeader;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.server.ThemeResource;
+import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
 
@@ -44,16 +46,17 @@ public class CustomHeaderLayout extends  HorizontalLayout{
     
     private HorizontalLayout createLeftHeader() {
         HorizontalLayout leftHeaderLayout = new HorizontalLayout();
-        leftHeaderLayout.setWidth("120px");
+        leftHeaderLayout.setWidth("100%");
        
-        Embedded flagOne = new Embedded(null, new ThemeResource("img/hungary-flag.png"));
-        leftHeaderLayout.addComponent(flagOne);
-       
-        Embedded flagTwo = new Embedded(null, new ThemeResource("img/united-kingdom-flag.png"));
-        leftHeaderLayout.addComponent(flagTwo);
-        
-        Embedded flagThree = new Embedded(null, new ThemeResource("img/germany-flag.png"));
-        leftHeaderLayout.addComponent(flagThree);
+        ComboBox comboBox = new ComboBox(null);
+        comboBox.setNullSelectionAllowed(false);
+        comboBox.setFilteringMode(FilteringMode.CONTAINS);
+        comboBox.setTextInputAllowed(false);
+
+        comboBox.addItem("Test 1");
+        comboBox.addItem("Test 2");
+        comboBox.addItem("Test 3");
+        leftHeaderLayout.addComponent(comboBox);
         
         return leftHeaderLayout;
     }

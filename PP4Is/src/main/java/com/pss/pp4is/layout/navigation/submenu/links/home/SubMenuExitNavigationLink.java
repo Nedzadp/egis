@@ -16,9 +16,11 @@ import com.vaadin.ui.UI;
  */
 public class SubMenuExitNavigationLink extends CustomSubmenuLink{
 
-    public SubMenuExitNavigationLink() {
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("Exit"));
     }
+    
 
     @Override
     public void handleClick(ClickEvent event) {

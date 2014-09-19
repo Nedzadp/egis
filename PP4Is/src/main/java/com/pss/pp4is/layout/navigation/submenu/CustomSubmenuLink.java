@@ -27,7 +27,6 @@ public abstract class CustomSubmenuLink extends  Button{
                 }
             });
 	}
-    public abstract void handleClick(Button.ClickEvent event);
 
     public void setLayoutController(LayoutController layoutController) {
         this.layoutController = layoutController;
@@ -36,4 +35,8 @@ public abstract class CustomSubmenuLink extends  Button{
     public LayoutController getLayoutController() {
         return layoutController;
     }
+    
+    public abstract void handleClick(Button.ClickEvent event);
+    
+    public abstract void addCaption();
 }

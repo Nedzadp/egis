@@ -17,11 +17,9 @@ import com.vaadin.ui.Label;
  */
 public class MainContentInspectionProfileLayout extends CustomVerticalLayout{
 
-    public MainContentInspectionProfileLayout() {
-        initLayout();
-    }
     
-    private void initLayout() {
+    @Override
+    public void initLayout() {
         setMargin(true);
         setSpacing(true);
         

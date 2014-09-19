@@ -18,15 +18,18 @@ import com.vaadin.ui.Button;
  */
 public class SubMenuListsNavigationLink extends CustomSubmenuLink{
 
-    public SubMenuListsNavigationLink() {
+    @Override
+    public void addCaption() {
         setCaption(getLayoutController().getI18n().translate("Lists"));
     }
-
+    
     @Override
     public void handleClick(Button.ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);
         CustomVerticalLayout layout = MainContentLayoutEnum.getInstanceBySubMenu(SubMenuNavigationEnum.SUB_MENU_LISTS.getRow());
         if(layout != null) {
+            layout.setLayoutController(getLayoutController());
+            layout.initLayout();
             getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
             getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
         }

@@ -22,15 +22,13 @@ public class MainContentUserActivityLayout extends CustomVerticalLayout{
 
     private UserActivityTable userActivityTable;
     
-    public MainContentUserActivityLayout() {
-        initLayout();
-    }
-    
-    private void initLayout() {
+
+    @Override
+    public void initLayout() {
         setMargin(true);
         setSpacing(true);
         
-        addComponent(new Label("User activities"));
+        addComponent(new Label(getLayoutController().getI18n().translate("User activities")));
         
         userActivityTable = new UserActivityTable(DataController.getUserActivities());
         
@@ -38,7 +36,7 @@ public class MainContentUserActivityLayout extends CustomVerticalLayout{
         spacer.setHeight("10px");
         addComponent(spacer);
         
-        Button filterButton = new Button("Filter", new ThemeResource("img/filter.png"));
+        Button filterButton = new Button(getLayoutController().getI18n().translate("Filter"), new ThemeResource("img/filter.png"));
         filterButton.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {

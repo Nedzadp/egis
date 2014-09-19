@@ -1,14 +1,13 @@
 /* Import the reindeer theme. */
 /* This only allows us to use the mixins defined in it and does not add any styles by itself. */
 @import "../reindeer/reindeer.scss";
-
+//@import "../valo/valo";
 @import "keyframes.scss";
 /* This contains all of your theme. */
 /* If somebody wants to extend the theme she will include this mixin. */
 @mixin pp4istheme {
   /* Include all the styles from the reindeer theme */
   @include reindeer;
-
   /* Insert your theme rules here */
     .v-table-header {
       background-color:#00a2e8;
@@ -280,21 +279,4 @@
      .v-window-exit-window .v-window-closebox {
         background: url('img/close-modal.png');
      }
-     
-     
-    v-loading-indicator,  
- .v-loading-indicator-delay,  
- .v-loading-indicator-wait {  
-   width: 100%;  
-   height: 100%;  
-   margin: 0;  
-   background-position: 50%;  
-   background-color: gray;  
-   background-repeat: no-repeat;  
-   background-attachment: fixed;   
-   opacity: .8;  
-   -ms-filter: alpha(opacity=80);  
-   filter: alpha(opacity=80);  
- }   
-     
 }

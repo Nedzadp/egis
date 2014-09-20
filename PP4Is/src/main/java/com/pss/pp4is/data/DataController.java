@@ -16,6 +16,8 @@ import com.pss.pp4is.data.containers.ProductPrinterContainer;
 import com.pss.pp4is.data.containers.ProductTypeContainer;
 import com.pss.pp4is.data.containers.UserActivityContainer;
 import com.pss.pp4is.data.containers.UserContainer;
+import com.pss.pp4is.data.containers.UserProductContainer;
+import com.pss.pp4is.data.models.CustomTranslation;
 import com.pss.pp4is.data.models.Inspection;
 import com.pss.pp4is.data.models.InspectionDetail;
 import com.pss.pp4is.data.models.InspectionProfile;
@@ -24,11 +26,15 @@ import com.pss.pp4is.data.models.ProductLanguage;
 import com.pss.pp4is.data.models.ProductMaster;
 import com.pss.pp4is.data.models.ProductPrinter;
 import com.pss.pp4is.data.models.ProductType;
+import com.pss.pp4is.data.models.TranslationComponent;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.data.models.UserActivity;
+import com.pss.pp4is.data.models.UserProduct;
 import com.pss.pp4is.system.DatabaseConnection;
 import com.pss.pp4is.system.LanguageEnum;
 import com.pss.pp4is.system.Translation;
+import com.vaadin.data.Container;
+import com.vaadin.data.util.BeanItemContainer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -212,6 +218,7 @@ public class DataController {
                 user.setPassword(resultSet.getString("password"));
                 user.setLanguage(resultSet.getString("language"));
                 user.setIsActive(resultSet.getBoolean("isActive")?"X":"");
+                user.setSuperUser(resultSet.getBoolean("isSuperUser"));
                 userContainer.addBean(user);
             }
             databaseConnection.disconnect();
@@ -282,6 +289,7 @@ public class DataController {
                          "        u.lastName, " +
                          "        u.username, " +
                          "        u.password, " +
+                         "        u.isSuperUser, " +
                          "        u.language "+
                          " FROM   user u " +
                          " WHERE  u.username = '"+username+"' "+
@@ -302,6 +310,7 @@ public class DataController {
                 user.setUsername(resultSet.getString("u.username"));
                 user.setPassword(resultSet.getString("u.password"));
                 user.setLanguage(resultSet.getString("u.language"));
+                user.setSuperUser(resultSet.getBoolean("u.isSuperUser"));
                 return user;
             }
             
@@ -728,4 +737,99 @@ public class DataController {
         }   
     }
     
+    
+     public static Container getTranslations() {
+        List<TranslationComponent> translations = new ArrayList<TranslationComponent>();
+        Container container = new BeanItemContainer(TranslationComponent.class);
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        String selectSql = "SELECT id,keyword, english, magyar FROM translation;";
+        
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            while(resultSet.next()) {
+               TranslationComponent translation = new TranslationComponent();
+               translation.setKeyword(resultSet.getString("keyword"));
+               translation.setEnglishTranslation(new CustomTranslation(resultSet.getInt("id"), resultSet.getString("english"), LanguageEnum.ENGLISH));
+               translation.setHungarianTranslation(new CustomTranslation(resultSet.getInt("id"), resultSet.getString("magyar"), LanguageEnum.HUNGARIAN));
+               
+               container.addItem(translation);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        
+        return container;
+    }
+
+    public static void updateTranslation(Integer translationId, LanguageEnum languageEnum, String value) {
+        String sql = "UPDATE translation SET ";
+        if(languageEnum.equals(LanguageEnum.ENGLISH)) {
+            sql += " english = ? ";
+        } else {
+            sql += " magyar = ? ";
+        }
+        sql += " WHERE id = ? ";
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        try {
+            databaseConnection.connect();
+            PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(sql);
+            preparedStatement.clearParameters();
+            preparedStatement.setString(1, value);
+            preparedStatement.setInt(2, translationId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            databaseConnection.disconnect();
+        }
+    }
+    
+    
+    public static UserProductContainer getFilteredUserProductActivities(String username, Date fromDate, Date toDate) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        String selectSql = "SELECT u.username, p.name, p.create_date, pp.mod_date "
+                         + "FROM user u "
+                         + "LEFT JOIN product p ON (u.userId = p.create_by_id ) "
+                         + "LEFT JOIN product pp ON (u.userId = pp.mod_by_id) ";
+
+        if(username != null) {
+            selectSql += "WHERE u.username LIKE '"+username+"' ";
+        }
+        if(fromDate != null) {
+            selectSql += "AND (p.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+            selectSql += "OR pp.mod_date >= '"+new java.sql.Date(fromDate.getTime())+"') ";
+        }
+        if(toDate != null) {
+            selectSql += "AND (p.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+            selectSql += "OR pp.mod_date <= '"+new java.sql.Date(toDate.getTime())+"') ";
+        }
+            selectSql += "GROUP BY u.username, p.name, p.create_date, pp.mod_date ";
+            
+            selectSql += "ORDER BY u.username";
+            
+        
+        UserProductContainer userProductContainer = new UserProductContainer();
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            while(resultSet.next()) {
+                UserProduct userProduct = new UserProduct();
+                userProduct.setUsername(resultSet.getString("u.username"));
+                userProduct.setProductName(resultSet.getString("p.name"));
+                userProduct.setCreatedAt(resultSet.getTimestamp("p.create_date"));
+                userProduct.setModifiedAt(resultSet.getTimestamp("pp.mod_date"));
+                userProductContainer.addBean(userProduct);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        return userProductContainer;
+    }
 }

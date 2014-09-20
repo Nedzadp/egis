@@ -22,7 +22,16 @@ public class User implements Serializable{
     private String password;
     private String language;
     private String isActive;
+    private boolean superUser;
 
+    public boolean isSuperUser() {
+        return superUser;
+    }
+
+    public void setSuperUser(boolean superUser) {
+        this.superUser = superUser;
+    }
+    
     public String getLanguage() {
         return language;
     }

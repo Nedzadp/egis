@@ -7,7 +7,7 @@
 package com.pss.pp4is.layout.navigation.submenu.links.home;
 
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
-import com.vaadin.ui.Notification;
+import com.pss.pp4is.system.LanguageEnum;
 
 /**
  *
@@ -24,8 +24,18 @@ public class SubMenuEnglishNavigationLink extends CustomSubmenuLink{
     @Override
     public void handleClick(ClickEvent event) {
         getLayoutController().fixSelectedSubMenu(this);
-        Notification.show("Not implemented yet");
+        getLayoutController().getI18n().setLanguageEnum(LanguageEnum.ENGLISH);
+        if(getLayoutController().getUser()==null) {
+            getLayoutController().refreshLanguageLayout();
+        } else {
+            getLayoutController().refreshLayout();
+            getLayoutController().getCustomButtonLink().handleClick(null);
+            getLayoutController().getCustomSubmenuLink().handleClick(null);
+        }
     }
-    
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
     
 }

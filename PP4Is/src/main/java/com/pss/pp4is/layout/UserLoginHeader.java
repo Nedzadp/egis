@@ -7,7 +7,6 @@
 package com.pss.pp4is.layout;
 
 import com.github.wolfie.refresher.Refresher;
-import com.github.wolfie.refresher.Refresher.RefreshListener;
 import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.content.window.ExitWindow;
@@ -20,6 +19,7 @@ import com.vaadin.event.MouseEvents;
 import com.vaadin.event.MouseEvents.ClickListener;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
+import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -30,9 +30,6 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.themes.BaseTheme;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 /**
@@ -46,11 +43,7 @@ public class UserLoginHeader extends HorizontalLayout{
     private PasswordField passwordField;
     private User user;
     private final LayoutController layoutController;
-    
-    private Timer timer;
-    private Integer seconds;
-    private Integer minutes;
-    private TimerButton timerButton;
+    private CustomTimerTask customTimerTask;
     
     public UserLoginHeader(LayoutController layoutController) {
         this.layoutController = layoutController;
@@ -93,24 +86,17 @@ public class UserLoginHeader extends HorizontalLayout{
                 getPasswordField().removeStyleName("login-fields-blinker");
             }
         });
-         
-         passwordField.addTextChangeListener(new TextChangeListener() {
-            @Override
-            public void textChange(FieldEvents.TextChangeEvent event) {
-                getLoginLabel().removeStyleName("login-label-blinker");
-                getLoginLabel().addStyleName("login-label");
-        
-                getUsernameField().removeStyleName("login-fields-blinker");
-                getPasswordField().removeStyleName("login-fields-blinker");
-            }
-        });
         
          passwordField.addShortcutListener(new ShortcutListener("Enter pressed", ShortcutAction.KeyCode.ENTER, null) {
             @Override
             public void handleAction(Object sender, Object target) {
                 user = CurrentUser.isAuthenticated(usernameField.getValue(), passwordField.getValue());
                 if(user == null) {
-                    Notification.show(layoutController.getI18n().translate("Login"), layoutController.getI18n().translate("User name or password is not correct. Please try it again."), Notification.Type.WARNING_MESSAGE);
+                    Notification notification = new Notification(layoutController.getI18n().translate("Login"), layoutController.getI18n().translate("User name or password is not correct. Please try it again."), Notification.Type.WARNING_MESSAGE);
+                    notification.setDelayMsec(3000);
+                    notification.show(Page.getCurrent());
+                    
+                   // Notification.show(layoutController.getI18n().translate("Login"), layoutController.getI18n().translate("User name or password is not correct. Please try it again."), Notification.Type.WARNING_MESSAGE);
                     getLoginLabel().removeStyleName("login-label");
                     getLoginLabel().addStyleName("login-label-action");
 
@@ -121,13 +107,18 @@ public class UserLoginHeader extends HorizontalLayout{
                     
                 } else {
                      layoutController.getI18n().setLanguageEnum(LanguageEnum.getUserLanguage(user));
-                    
-                     Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
+                     Notification notification = new Notification(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
+                     notification.setDelayMsec(3000);
+                     notification.show(Page.getCurrent());
+                    //Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
                      layoutController.setUser(user);
                      UI.getCurrent().getSession().setAttribute("user", user);
                      DataController.insertUserActivity(layoutController.getUser());
                      layoutController.refreshLayout();
-                     Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("User activity logged in"), Notification.Type.TRAY_NOTIFICATION);
+                     Notification notification2 = new Notification(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("User activity logged in"), Notification.Type.TRAY_NOTIFICATION);
+                     notification2.setDelayMsec(3000);
+                     notification2.show(Page.getCurrent());
+                     //Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("User activity logged in"), Notification.Type.TRAY_NOTIFICATION);
                 }
             }
         });
@@ -170,16 +161,11 @@ public class UserLoginHeader extends HorizontalLayout{
         
         userInformation.addComponent(logout);
         
+        layoutController.setSeconds(59);
+        layoutController.setMinutes(DataController.getTimerMinutes()-1);
         
-        seconds = 59;
-        minutes = DataController.getTimerMinutes()-1;
-     
-        int delay = 1000;
-        int period = 1000;
-        
-        timerButton = new TimerButton();
-        timerButton.setCaption(minutes.toString()+" : "+seconds.toString());
-        timerButton.addClickListener(new Button.ClickListener() {
+        layoutController.getTimerButton().setCaption(layoutController.getMinutes().toString()+" : "+layoutController.getSeconds().toString());
+        layoutController.getTimerButton().addClickListener(new Button.ClickListener() {
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
@@ -187,70 +173,27 @@ public class UserLoginHeader extends HorizontalLayout{
             }
         });
         
+        
         final Refresher refresher = new Refresher();
-        refresher.addListener(timerButton);
+        refresher.addListener(layoutController.getTimerButton());
         addExtension(refresher);
         
-        userInformation.addComponent(timerButton);
-        
-        timer = new Timer();
-
-        timer.scheduleAtFixedRate(new TimerTask() {
-
-
-            
-        @Override
-        public void run() {
-            seconds--;
-            if(seconds == 0 && minutes == 1) {
-                showNotification();
-            }
-            if (seconds == 0 && minutes>0) {
-                minutes--;
-                seconds = 59;
-            }
-            if(minutes == 0 && seconds == 0) {
-                timer.cancel();
-                automaticallyLogout();
-            }
-        }
-    }, delay, period);
+        layoutController.runClock(customTimerTask = new CustomTimerTask(layoutController));
+        layoutController.setCustomTimerTask(customTimerTask);
+        userInformation.addComponent(layoutController.getTimerButton());
         
         addComponent(userInformation);
         setComponentAlignment(userInformation, Alignment.TOP_RIGHT);
     }
-   
-    private void showNotification() {
-        Notification.show(layoutController.getI18n().translate("Warning"), layoutController.getI18n().translate("Click on the clock to restart it, please. Otherwise system will log you out within a minute."), Notification.Type.WARNING_MESSAGE);
-    }
-    
-    private void automaticallyLogout() {
-        DataController.updateUserActivity(layoutController.getUser());
-        layoutController.setUser(null);
-        layoutController.getCustomLayout().removeAllComponents();
-        layoutController.getCustomLayout().init();
-        Notification.show(layoutController.getI18n().translate("Timer"),layoutController.getI18n().translate("You have been automatically logged out!"), Notification.Type.WARNING_MESSAGE);
-    }
-    
-    private class TimerButton extends Button implements RefreshListener {
-
-        public TimerButton() {
-            addStyleName(BaseTheme.BUTTON_LINK);
-            addStyleName("restart-clock-button");
-            setDescription("Reset the clock by clicking on it.");
-        }
-
-        @Override
-        public void refresh(Refresher source) {
-            
-            setCaption(minutes.toString()+" : "+seconds.toString());
-        }
-    }
     
     public void resetClock() {
-        Notification.show(layoutController.getI18n().translate("Clock"), layoutController.getI18n().translate("Clock restarted successfully"), Notification.Type.TRAY_NOTIFICATION);
-        seconds = 59;
-        minutes = DataController.getTimerMinutes()-1;
+        
+        Notification notification = new Notification(layoutController.getI18n().translate("Clock"), layoutController.getI18n().translate("Clock restarted successfully"), Notification.Type.TRAY_NOTIFICATION);
+        notification.setDelayMsec(3000);
+        notification.show(Page.getCurrent());
+        //Notification.show(layoutController.getI18n().translate("Clock"), layoutController.getI18n().translate("Clock restarted successfully"), Notification.Type.TRAY_NOTIFICATION);
+        layoutController.setSeconds(59);
+        layoutController.setMinutes(DataController.getTimerMinutes()-1);
         DataController.updateTimerUserActivity(layoutController.getUser());
     }
 }

@@ -27,6 +27,10 @@ public class I18n implements Serializable{
         this.languageEnum = languageEnum;
         loadTranslationMap();
     }
+
+    public LanguageEnum getLanguageEnum() {
+        return languageEnum;
+    }
     
     public String translate(String keyword){
       

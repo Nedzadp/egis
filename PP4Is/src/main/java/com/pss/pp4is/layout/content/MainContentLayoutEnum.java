@@ -7,6 +7,7 @@
 package com.pss.pp4is.layout.content;
 
 import com.pss.pp4is.layout.content.views.MainContentHomeLayout;
+import com.pss.pp4is.layout.content.views.MainContentTranslationLayout;
 import com.pss.pp4is.layout.content.views.help.MainContentAboutLayout;
 import com.pss.pp4is.layout.content.views.help.MainContentImagesLayout;
 import com.pss.pp4is.layout.content.views.help.MainContentInformationLayout;
@@ -26,6 +27,7 @@ import com.pss.pp4is.layout.content.views.reports.MainContentUserActivityLayout;
  */
 public enum MainContentLayoutEnum {
     WELCOME_CONTENT_LAYOUT(1,1, MainContentHomeLayout.class),
+    TRANSLATION_CONTENT_LAYOUT(20,14, MainContentTranslationLayout.class),
     // help sub links
     INFORMATION_LAYOUT(15,2,MainContentInformationLayout.class),
     LISTS_LAYOUT(16,3,MainContentListsLayout.class),

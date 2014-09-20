@@ -1,12 +1,9 @@
 package com.pss.pp4is;
 
-import com.pss.pp4is.data.DataController;
-import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.CustomLayout;
 import com.pss.pp4is.system.I18n;
 import com.pss.pp4is.system.LanguageEnum;
 import com.pss.pp4is.system.LayoutController;
-import com.sun.imageio.plugins.common.I18N;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -37,14 +34,6 @@ public class MyVaadinUI extends UI
         layoutController.setCustomLayout(customLayout);
         layout.addComponent(customLayout);
         setContent(layout);
-        
-        addDetachListener(new DetachListener() {
-            @Override
-            public void detach(DetachEvent event) {
-                System.out.print("Detach");
-                DataController.updateUserActivity((User) UI.getCurrent().getSession().getAttribute("user"));
-            }
-        });
     }
 
  

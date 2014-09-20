@@ -27,4 +27,9 @@ public class SubMenuExitNavigationLink extends CustomSubmenuLink{
         getLayoutController().fixSelectedSubMenu(this);
         UI.getCurrent().addWindow(new ExitWindow(getLayoutController()));
     }
+    
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
 }

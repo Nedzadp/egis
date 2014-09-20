@@ -53,6 +53,11 @@ public class ExitWindow extends Window{
                 DataController.updateUserActivity(layoutController.getUser());
                 layoutController.getCustomLayout().removeAllComponents();
                 layoutController.setUser(null);
+                layoutController.getCustomTimerTask().cancel();
+                layoutController.setCurrentRootLinkSelected(null);
+                layoutController.setCurrentSubmenuLinkSelected(null);
+                layoutController.setCustomButtonLink(null);
+                layoutController.setCustomButtonLink(null);
                 layoutController.getCustomLayout().init();
             }
         }));

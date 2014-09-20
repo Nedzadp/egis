@@ -6,18 +6,25 @@
 
 package com.pss.pp4is.system;
 
+import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.CustomLayout;
+import com.pss.pp4is.layout.CustomTimerTask;
+import com.pss.pp4is.layout.TimerButton;
 import com.pss.pp4is.layout.UserLoginHeader;
 import com.pss.pp4is.layout.content.MainContentComponent;
 import com.pss.pp4is.layout.navigation.CustomButtonLink;
+import com.pss.pp4is.layout.navigation.MainMenuNavigationEnum;
 import com.pss.pp4is.layout.navigation.MainMenuNavigationLayout;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
+import com.vaadin.server.Page;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Timer;
 
 /**
  *
@@ -34,11 +41,76 @@ public class LayoutController implements Serializable{
     private MainContentComponent mainContentComponent;
     private User user;
     private I18n i18n;
+    private final Timer clockTimer;
+    
+    private Integer minutes;
+    private Integer seconds;
+    int delay = 1000;
+    int period = 1000;
+    private final TimerButton timerButton;
+    private CustomTimerTask customTimerTask;
+    
+    private CustomButtonLink currentRootLinkSelected;
+    private CustomSubmenuLink currentSubmenuLinkSelected;
+    
     
     public LayoutController() {
         user = null;
+        clockTimer = new Timer();
+        timerButton = new TimerButton(this);
     }
 
+    public void setCurrentRootLinkSelected(CustomButtonLink currentRootLinkSelected) {
+        this.currentRootLinkSelected = currentRootLinkSelected;
+    }
+
+    public CustomButtonLink getCurrentRootLinkSelected() {
+        return currentRootLinkSelected;
+    }
+
+    public void setCurrentSubmenuLinkSelected(CustomSubmenuLink currentSubmenuLinkSelected) {
+        this.currentSubmenuLinkSelected = currentSubmenuLinkSelected;
+    }
+
+    public CustomSubmenuLink getCurrentSubmenuLinkSelected() {
+        return currentSubmenuLinkSelected;
+    }
+    
+    public void setCustomTimerTask(CustomTimerTask customTimerTask) {
+        this.customTimerTask = customTimerTask;
+    }
+
+    public CustomTimerTask getCustomTimerTask() {
+        return customTimerTask;
+    }    
+    public TimerButton getTimerButton() {
+        return timerButton;
+    }
+    
+    public Integer getMinutes() {
+        return minutes;
+    }
+
+    public Integer getSeconds() {
+        return seconds;
+    }
+
+    public void setSeconds(Integer seconds) {
+        this.seconds = seconds;
+    }
+
+    public void setMinutes(Integer minutes) {
+        this.minutes = minutes;
+    }
+    
+    public Timer getClockTimer() {
+        return clockTimer;
+    }
+    
+    public void runClock(CustomTimerTask clockTimerTask) {
+        getClockTimer().scheduleAtFixedRate(clockTimerTask, delay, period);
+    }
+    
     public void setI18n(I18n i18n) {
         this.i18n = i18n;
     }
@@ -89,7 +161,6 @@ public class LayoutController implements Serializable{
 
     public void setCustomButtonLink(CustomButtonLink customButtonLink) {
         this.customButtonLink = customButtonLink;
-        this.customButtonLink.addStyleName("selected");
     }
 
     public CustomButtonLink getCustomButtonLink() {
@@ -97,17 +168,54 @@ public class LayoutController implements Serializable{
     }
     
     public void fixSelectedMenu(CustomButtonLink customButtonLink) {
-        getCustomButtonLink().removeStyleName("selected");
+        if(getCustomButtonLink() != null) {
+            getCustomButtonLink().removeStyleName("selected");
+        }
+        
         setCustomButtonLink(customButtonLink);
+        
+        getCustomButtonLink().addStyleName("selected");
+        
+        setCurrentRootLinkSelected(getCustomButtonLink());
     }
     public void buildSubMenu(int rootMainMenu,HorizontalLayout menu, boolean authenticated) {
         menu.removeAllComponents();
-        
+        boolean check = true;
         List<SubMenuNavigationEnum> subMenus = SubMenuNavigationEnum.getSubmenusByRootMenu(rootMainMenu,authenticated);
         for(SubMenuNavigationEnum subMenu : subMenus) {
+            if(subMenu.equals(SubMenuNavigationEnum.SUB_MENU_TRANSLATION)) {
+                continue;
+            }
             CustomSubmenuLink link = subMenu.getInstance();
             link.setLayoutController(this);
             link.addCaption();
+            link.setCustomSubmenuLinkId(subMenu.getRow()*10);
+            
+            if(check && getCurrentSubmenuLinkSelected()==null) {
+                check = false;
+                fixSelectedSubMenu(link);
+            }
+            if(link.equals(getCurrentSubmenuLinkSelected())) {
+                fixSelectedSubMenu(link);
+            }
+            
+            menu.addComponent(link);
+        }
+        if(rootMainMenu == MainMenuNavigationEnum.MAIN_MENU_HOME_LINK.getRow() && authenticated && getUser().isSuperUser()) {
+            boolean check2 = true;
+            CustomSubmenuLink link = SubMenuNavigationEnum.SUB_MENU_TRANSLATION.getInstance();
+            link.setLayoutController(this);
+            link.addCaption();
+            link.setCustomSubmenuLinkId(SubMenuNavigationEnum.SUB_MENU_TRANSLATION.getRow()*10);
+            
+            if(check2 && getCurrentSubmenuLinkSelected()==null) {
+                check2 = false;
+                fixSelectedSubMenu(link);
+            }
+            if(link.equals(getCurrentSubmenuLinkSelected())) {
+                fixSelectedSubMenu(link);
+            }
+            
             menu.addComponent(link);
         }
     }
@@ -122,11 +230,14 @@ public class LayoutController implements Serializable{
     }
     
     public void fixSelectedSubMenu(CustomSubmenuLink customSubmenuLink) {
+        
         if(getCustomSubmenuLink()!=null) {   
             getCustomSubmenuLink().removeStyleName("sub-menu-selected");
         }
         setCustomSubmenuLink(customSubmenuLink);
         getCustomSubmenuLink().addStyleName("sub-menu-selected");
+        
+        setCurrentSubmenuLinkSelected(getCustomSubmenuLink());
     }
 
     public void setUserLogin(UserLoginHeader userLoginHeader) {
@@ -136,7 +247,7 @@ public class LayoutController implements Serializable{
     public UserLoginHeader getUserLoginHeader() {
         return userLoginHeader;
     }
-
+    
     public void refreshLayout() {
         getUserLoginHeader().removeAllComponents();
         getMainMenuNavigationLayout().removeAllComponents();
@@ -146,5 +257,43 @@ public class LayoutController implements Serializable{
         getUserLoginHeader().refreshLayout();
         getMainMenuNavigationLayout().initLayoutForAuthenticatedUser();
         getSubMenuNavigationLayout().initLayoutForAuthenticatedUser();
+    }
+    
+     public void refreshLanguageLayoutAuthenticated() {
+        getMainMenuNavigationLayout().removeAllComponents();
+        getSubMenuNavigationLayout().removeAllComponents();
+        getMainContentComponent().removeAllComponents();
+        getMainMenuNavigationLayout().initLayoutForAuthenticatedUser();
+        getSubMenuNavigationLayout().initLayoutForAuthenticatedUserWithLanguage();
+    }
+    
+    
+    public void refreshLanguageLayout() {
+        getCustomLayout().removeAllComponents();
+        getCustomLayout().init();
+    }
+    
+    
+    public void showNotification() {
+        Notification notification = new Notification(getI18n().translate("Warning"), getI18n().translate("Click on the clock to restart it, please. Otherwise system will log you out within a minute."), Notification.Type.WARNING_MESSAGE);
+        notification.setDelayMsec(3000);
+        notification.show(Page.getCurrent());
+        //Notification.show(getI18n().translate("Warning"), getI18n().translate("Click on the clock to restart it, please. Otherwise system will log you out within a minute."), Notification.Type.WARNING_MESSAGE);
+    }
+    
+    public void automaticallyLogout() {
+        DataController.updateUserActivity(getUser());
+        setUser(null);
+        setCurrentRootLinkSelected(null);
+        setCurrentSubmenuLinkSelected(null);
+        getCustomTimerTask().cancel();
+        setCustomButtonLink(null);
+        setCustomButtonLink(null);
+        getCustomLayout().removeAllComponents();
+        getCustomLayout().init();
+        Notification notification = new Notification(getI18n().translate("Timer"),getI18n().translate("You have been automatically logged out!"), Notification.Type.WARNING_MESSAGE);
+        notification.setDelayMsec(3000);
+        notification.show(Page.getCurrent());
+        //Notification.show(getI18n().translate("Timer"),getI18n().translate("You have been automatically logged out!"), Notification.Type.WARNING_MESSAGE);
     }
 }

@@ -49,4 +49,14 @@ public enum LanguageEnum {
         }
         return userLanguage;
     }
+    public static LanguageEnum getLanguage(String language) {
+        LanguageEnum userLanguage = getENGLISH();
+        for(LanguageEnum languageEnum: values()) {
+            if(languageEnum.getLang().equals(language)) {
+               userLanguage = languageEnum;
+               break;
+            }
+        }
+        return userLanguage;
+    }
 }

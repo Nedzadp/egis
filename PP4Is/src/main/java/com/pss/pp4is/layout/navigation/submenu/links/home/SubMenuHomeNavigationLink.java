@@ -29,4 +29,9 @@ public class SubMenuHomeNavigationLink extends CustomSubmenuLink{
             getLayoutController().getCustomLayout().getMainContentComponent().initLayout();
         }
     }
+    
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
 }

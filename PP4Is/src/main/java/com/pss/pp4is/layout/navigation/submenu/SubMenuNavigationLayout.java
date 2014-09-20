@@ -37,4 +37,9 @@ public class SubMenuNavigationLayout extends  HorizontalLayout{
     public HorizontalLayout getSubMenuLayout() {
         return subMenuLayout;
     }
+
+    public void initLayoutForAuthenticatedUserWithLanguage() {
+        addComponent(subMenuLayout = new HorizontalLayout());
+        layoutController.buildSubMenu(layoutController.getCurrentRootLinkSelected().getCustomButtonLinkId(), subMenuLayout,true);
+    }
 }

@@ -31,4 +31,6 @@
 
 
     <inherits name="com.github.wolfie.refresher.RefresherWidgetset" />
+
+    <inherits name="org.dussan.vaadin.dcharts.DchartsWidgetset" />
 </module>

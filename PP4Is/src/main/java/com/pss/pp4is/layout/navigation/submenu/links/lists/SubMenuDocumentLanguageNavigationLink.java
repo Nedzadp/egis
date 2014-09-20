@@ -35,5 +35,8 @@ public class SubMenuDocumentLanguageNavigationLink extends CustomSubmenuLink{
         }
     }
     
-    
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
 }

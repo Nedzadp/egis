@@ -17,6 +17,7 @@ import com.vaadin.ui.themes.BaseTheme;
 public abstract class CustomButtonLink extends Button{
 
     private LayoutController layoutController;
+    protected Integer customButtonLinkId;
     
     public CustomButtonLink() {
         addStyleName(BaseTheme.BUTTON_LINK);
@@ -36,8 +37,22 @@ public abstract class CustomButtonLink extends Button{
     public LayoutController getLayoutController() {
         return layoutController;
     }
+
+    public boolean equals(CustomButtonLink cbl) {
+        return this.customButtonLinkId.equals(cbl.getCustomButtonLinkId());
+    }
+    
     
     public abstract void handleClick(ClickEvent event);
     
     public abstract void addCaption();
+    
+    public  void setCustomButtonLinkId(Integer id){
+        this.customButtonLinkId = id;
+    }
+    
+    public Integer getCustomButtonLinkId() {
+        return this.customButtonLinkId;
+    }
+    
 }

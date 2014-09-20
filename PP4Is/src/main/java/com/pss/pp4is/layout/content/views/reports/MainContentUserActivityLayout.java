@@ -9,6 +9,7 @@ package com.pss.pp4is.layout.content.views.reports;
 import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.pss.pp4is.layout.content.tables.UserActivityTable;
+import com.pss.pp4is.layout.content.tables.UserProductTable;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
@@ -21,6 +22,7 @@ import com.vaadin.ui.UI;
 public class MainContentUserActivityLayout extends CustomVerticalLayout{
 
     private UserActivityTable userActivityTable;
+    private UserProductTable userProductTable;
     
 
     @Override
@@ -35,6 +37,9 @@ public class MainContentUserActivityLayout extends CustomVerticalLayout{
         Label spacer = new Label(" ");
         spacer.setHeight("10px");
         addComponent(spacer);
+
+        userProductTable = new UserProductTable(DataController.getFilteredUserProductActivities(null, null, null));
+
         
         Button filterButton = new Button(getLayoutController().getI18n().translate("Filter"), new ThemeResource("img/filter.png"));
         filterButton.addClickListener(new Button.ClickListener() {
@@ -45,6 +50,7 @@ public class MainContentUserActivityLayout extends CustomVerticalLayout{
         });
         addComponent(filterButton);
         addComponent(userActivityTable);
+        addComponent(userProductTable);
         
     }
 }

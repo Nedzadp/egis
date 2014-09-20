@@ -25,11 +25,8 @@ public class MainMenuHelpNavigationLink extends CustomButtonLink{
     
     @Override
     public void handleClick(ClickEvent event) {
+        setCustomButtonLinkId(MainMenuNavigationEnum.MAIN_MENU_HELP_LINK.getRow());
         getLayoutController().fixSelectedMenu(this);
-        this.addStyleName("selected");
-        getLayoutController().setCustomButtonLink(this);
         getLayoutController().buildSubMenu(MainMenuNavigationEnum.MAIN_MENU_HELP_LINK.getRow(),getLayoutController().getCustomLayout().getSubMenuNavigationLayout().getSubMenuLayout(),true);
-
-    }
-   
+    }    
 }

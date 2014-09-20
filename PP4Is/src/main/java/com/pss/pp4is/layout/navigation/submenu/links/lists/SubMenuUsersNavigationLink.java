@@ -34,4 +34,9 @@ public class SubMenuUsersNavigationLink extends CustomSubmenuLink {
             getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
         }
     }
+    
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
 }

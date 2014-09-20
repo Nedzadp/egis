@@ -17,7 +17,6 @@ import com.vaadin.ui.HorizontalLayout;
 public class MainMenuNavigationLayout extends  HorizontalLayout{
     
     private final LayoutController layoutController;
-    private MainMenuHomeNavigationLink menuHomeNavigationLink;
     
     public MainMenuNavigationLayout(LayoutController layoutController) {
         this.layoutController = layoutController;
@@ -30,8 +29,16 @@ public class MainMenuNavigationLayout extends  HorizontalLayout{
             CustomButtonLink buttonLink = mainMenu.getInstance();
             buttonLink.setLayoutController(layoutController);
             buttonLink.addCaption();
+            buttonLink.setCustomButtonLinkId(mainMenu.getRow());
             if(mainMenu.getRow() == 1) {
                 layoutController.setCustomButtonLink(buttonLink);
+            }
+            if(layoutController.getCurrentRootLinkSelected() == null) {
+                layoutController.setCurrentRootLinkSelected(buttonLink);
+                layoutController.fixSelectedMenu(buttonLink);
+            }
+            if(buttonLink.equals(layoutController.getCurrentRootLinkSelected())) {
+                layoutController.fixSelectedMenu(buttonLink);
             }
             addComponent(buttonLink);
         }
@@ -43,9 +50,18 @@ public class MainMenuNavigationLayout extends  HorizontalLayout{
             CustomButtonLink buttonLink = mainMenu.getInstance();
             buttonLink.setLayoutController(layoutController);
             buttonLink.addCaption();
-            if(mainMenu.getRow() == 1) {
+            buttonLink.setCustomButtonLinkId(mainMenu.getRow());
+                    
+            if(layoutController.getCurrentRootLinkSelected() == null) {
+                layoutController.setCurrentRootLinkSelected(buttonLink);
+                layoutController.setCustomButtonLink(buttonLink);
+                buttonLink.addStyleName("selected");
+            }
+            if(buttonLink.equals(layoutController.getCurrentRootLinkSelected())) {
+                buttonLink.addStyleName("selected");
                 layoutController.setCustomButtonLink(buttonLink);
             }
+            
             addComponent(buttonLink);
         }
     }

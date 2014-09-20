@@ -33,4 +33,9 @@ public class SubMenuProductsInspectionsNavigationLink extends CustomSubmenuLink{
             getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);
         }
     }
+    
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
 }

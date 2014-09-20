@@ -26,5 +26,10 @@ public class SubMenuSystemUsageNavigationLink extends CustomSubmenuLink {
         getLayoutController().fixSelectedSubMenu(this);
         Notification.show("Not implemented yet");
     }
+    
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
 }
 

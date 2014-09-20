@@ -35,5 +35,8 @@ public class SubMenuDocumentCompaniesNavigationLink extends CustomSubmenuLink{
         }
     }
     
-    
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
 }

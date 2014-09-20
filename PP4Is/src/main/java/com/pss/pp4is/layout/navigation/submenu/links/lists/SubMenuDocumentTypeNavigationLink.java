@@ -36,5 +36,8 @@ public class SubMenuDocumentTypeNavigationLink extends CustomSubmenuLink{
         }
     }
     
-    
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
 }

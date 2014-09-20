@@ -85,4 +85,8 @@ public class SubMenuLoginNavigationLink extends CustomSubmenuLink{
             }
         }
     }
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
 }

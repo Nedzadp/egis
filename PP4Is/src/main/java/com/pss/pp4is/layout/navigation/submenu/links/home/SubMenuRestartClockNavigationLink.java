@@ -24,4 +24,8 @@ public class SubMenuRestartClockNavigationLink extends CustomSubmenuLink {
         getLayoutController().fixSelectedSubMenu(this);
         getLayoutController().getUserLoginHeader().resetClock();
     }
+    @Override
+    public String getLinkCaption() {
+        return getCaption();
+    }
 }

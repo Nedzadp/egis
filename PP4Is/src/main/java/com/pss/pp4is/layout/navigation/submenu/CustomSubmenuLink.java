@@ -16,6 +16,7 @@ import com.vaadin.ui.themes.BaseTheme;
  */
 public abstract class CustomSubmenuLink extends  Button{
     private LayoutController layoutController;
+    protected Integer customSubmenuLinkId;
     
      public CustomSubmenuLink() {
         addStyleName(BaseTheme.BUTTON_LINK);
@@ -39,4 +40,18 @@ public abstract class CustomSubmenuLink extends  Button{
     public abstract void handleClick(Button.ClickEvent event);
     
     public abstract void addCaption();
+    
+    public abstract String getLinkCaption();
+
+    public boolean equals(CustomSubmenuLink obj) {
+        return this.getCustomSubmenuLinkId().equals(obj.getCustomSubmenuLinkId()); 
+    }
+    
+    public void setCustomSubmenuLinkId(Integer customSubmenuLinkId) {
+        this.customSubmenuLinkId = customSubmenuLinkId;
+    }
+
+    public Integer getCustomSubmenuLinkId() {
+        return customSubmenuLinkId;
+    }
 }

@@ -16,6 +16,7 @@ import com.pss.pp4is.data.containers.ProductPrinterContainer;
 import com.pss.pp4is.data.containers.ProductTypeContainer;
 import com.pss.pp4is.data.containers.UserActivityContainer;
 import com.pss.pp4is.data.containers.UserContainer;
+import com.pss.pp4is.data.containers.UserInspectionContainer;
 import com.pss.pp4is.data.containers.UserProductContainer;
 import com.pss.pp4is.data.models.CustomTranslation;
 import com.pss.pp4is.data.models.Inspection;
@@ -29,6 +30,7 @@ import com.pss.pp4is.data.models.ProductType;
 import com.pss.pp4is.data.models.TranslationComponent;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.data.models.UserActivity;
+import com.pss.pp4is.data.models.UserInspection;
 import com.pss.pp4is.data.models.UserProduct;
 import com.pss.pp4is.system.DatabaseConnection;
 import com.pss.pp4is.system.LanguageEnum;
@@ -444,8 +446,10 @@ public class DataController {
         DatabaseConnection databaseConnection = new DatabaseConnection();
         String selectSql = "SELECT ua.id, ua.logged_in, ua.logged_out, ua.reset_clock_counter, u.username "
                          + "FROM user_activity ua "
-                         + "JOIN user u ON ua.user_id = u.userId "
-                         + "WHERE u.username LIKE '"+username+"' ";
+                         + "JOIN user u ON ua.user_id = u.userId ";
+        if(username!=null) {
+            selectSql += "WHERE u.username LIKE '"+username+"' ";
+        }
         if(fromDate != null) {
             selectSql += "AND ua.logged_in >= '"+new java.sql.Date(fromDate.getTime())+"' ";
         }
@@ -791,26 +795,22 @@ public class DataController {
     
     public static UserProductContainer getFilteredUserProductActivities(String username, Date fromDate, Date toDate) {
         DatabaseConnection databaseConnection = new DatabaseConnection();
-        String selectSql = "SELECT u.username, p.name, p.create_date, pp.mod_date "
-                         + "FROM user u "
-                         + "LEFT JOIN product p ON (u.userId = p.create_by_id ) "
-                         + "LEFT JOIN product pp ON (u.userId = pp.mod_by_id) ";
+        String selectSql = "SELECT u.userId, u.username, p.name, p.create_date, p.mod_date, p.create_by_id, p.mod_by_id " +
+                            "FROM product p " +
+                            "INNER JOIN user u ON ( p.create_by_id = u.userId OR p.mod_by_id = u.userId) ";
 
         if(username != null) {
             selectSql += "WHERE u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
             selectSql += "AND (p.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
-            selectSql += "OR pp.mod_date >= '"+new java.sql.Date(fromDate.getTime())+"') ";
+            selectSql += "OR p.mod_date >= '"+new java.sql.Date(fromDate.getTime())+"') ";
         }
         if(toDate != null) {
             selectSql += "AND (p.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
-            selectSql += "OR pp.mod_date <= '"+new java.sql.Date(toDate.getTime())+"') ";
+            selectSql += "OR p.mod_date <= '"+new java.sql.Date(toDate.getTime())+"') ";
         }
-            selectSql += "GROUP BY u.username, p.name, p.create_date, pp.mod_date ";
-            
-            selectSql += "ORDER BY u.username";
-            
+        selectSql += "ORDER BY u.username";
         
         UserProductContainer userProductContainer = new UserProductContainer();
         try {
@@ -821,7 +821,9 @@ public class DataController {
                 userProduct.setUsername(resultSet.getString("u.username"));
                 userProduct.setProductName(resultSet.getString("p.name"));
                 userProduct.setCreatedAt(resultSet.getTimestamp("p.create_date"));
-                userProduct.setModifiedAt(resultSet.getTimestamp("pp.mod_date"));
+                userProduct.setModifiedAt(resultSet.getTimestamp("p.mod_date"));
+                userProduct.setCreated(resultSet.getInt("p.create_by_id") == resultSet.getInt("u.userId")? "X":" ");
+                userProduct.setModified(resultSet.getInt("p.mod_by_id") == resultSet.getInt("u.userId")? "X":" ");
                 userProductContainer.addBean(userProduct);
             }
         }
@@ -831,5 +833,49 @@ public class DataController {
             databaseConnection.disconnect();
         }
         return userProductContainer;
+    }
+    
+    
+    public static UserInspectionContainer getFilteredUserInspectionActivities(String username, Date fromDate, Date toDate) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        String selectSql = "SELECT u.userId, u.username, p.name, i.create_date, i.mod_date, i.create_by_id, i.mod_by_id " +
+                            "FROM inspection i " +
+                            "INNER JOIN user u ON ( i.create_by_id = u.userId OR i.mod_by_id = u.userId) "+
+                            "INNER JOIN product p ON ( i.product_id = p.product_id) ";
+
+        if(username != null) {
+            selectSql += "WHERE u.username LIKE '"+username+"' ";
+        }
+        if(fromDate != null) {
+            selectSql += "AND (i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+            selectSql += "OR i.mod_date >= '"+new java.sql.Date(fromDate.getTime())+"') ";
+        }
+        if(toDate != null) {
+            selectSql += "AND (i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+            selectSql += "OR i.mod_date <= '"+new java.sql.Date(toDate.getTime())+"') ";
+        }
+        selectSql += "ORDER BY u.username";
+        
+        UserInspectionContainer userInspectionContainer = new UserInspectionContainer();
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(selectSql);
+            while(resultSet.next()) {
+                UserInspection userInspection = new UserInspection();
+                userInspection.setUsername(resultSet.getString("u.username"));
+                userInspection.setProductName(resultSet.getString("p.name"));
+                userInspection.setCreatedAt(resultSet.getTimestamp("i.create_date"));
+                userInspection.setModifiedAt(resultSet.getTimestamp("i.mod_date"));
+                userInspection.setCreated(resultSet.getInt("i.create_by_id") == resultSet.getInt("u.userId")? "X":" ");
+                userInspection.setModified(resultSet.getInt("i.mod_by_id") == resultSet.getInt("u.userId")? "X":" ");
+                userInspectionContainer.addBean(userInspection);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        return userInspectionContainer;
     }
 }

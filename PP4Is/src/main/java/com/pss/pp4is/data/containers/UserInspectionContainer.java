@@ -6,7 +6,7 @@
 
 package com.pss.pp4is.data.containers;
 
-import com.pss.pp4is.data.models.UserProduct;
+import com.pss.pp4is.data.models.UserInspection;
 import com.vaadin.data.util.BeanItemContainer;
 import java.io.Serializable;
 
@@ -14,16 +14,16 @@ import java.io.Serializable;
  *
  * @author Nedzad
  */
-public class UserProductContainer extends BeanItemContainer<UserProduct> implements Serializable{
+public class UserInspectionContainer extends BeanItemContainer<UserInspection> implements Serializable{
 
     public static final Object[] NATURAL_COL_ORDER = new String[] {
         "username", "productName", "createdAt", "created", "modifiedAt", "modified"};
 
     public static final String[] COL_HEADERS_ENGLISH = new String[] {
-         "Username","Product name","Created at", "Created", "Modified at", "Modified"};
+         "Username", "Product Name", "Created at", "Created", "Modified at", "Modified"};
     
-    public UserProductContainer() throws IllegalArgumentException {
-        super(UserProduct.class);
+    public UserInspectionContainer() throws IllegalArgumentException {
+        super(UserInspection.class);
     }
 }
 

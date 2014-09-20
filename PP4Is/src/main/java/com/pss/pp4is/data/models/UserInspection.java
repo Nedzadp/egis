@@ -12,7 +12,7 @@ import java.sql.Timestamp;
  *
  * @author Nedzad
  */
-public class UserProduct {
+public class UserInspection {
     private String username;
     private String productName;
     private Timestamp createdAt;
@@ -20,53 +20,52 @@ public class UserProduct {
     private String created;
     private String modified;
 
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
     public String getCreated() {
         return created;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
-    }
-
-    public String getModified() {
-        return modified;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
     }
 
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+
+    public String getModified() {
+        return modified;
     }
 
     public Timestamp getModifiedAt() {
         return modifiedAt;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+
     public void setModifiedAt(Timestamp modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
-    
-    
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

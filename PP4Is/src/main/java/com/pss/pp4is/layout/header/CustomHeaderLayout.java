@@ -6,6 +6,7 @@
 
 package com.pss.pp4is.layout.header;
 
+import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.layout.UserLoginHeader;
 import com.pss.pp4is.system.LanguageEnum;
 import com.pss.pp4is.system.LayoutController;
@@ -49,6 +50,7 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         leftHeaderLayout.setWidth("100%");
        
         ComboBox comboBox = new ComboBox(null);
+        layoutController.setLanguageComboBox(comboBox);
         
         comboBox.setNullSelectionAllowed(false);
         comboBox.setTextInputAllowed(false);
@@ -76,6 +78,7 @@ public class CustomHeaderLayout extends  HorizontalLayout{
                 } else {
                     layoutController.refreshLanguageLayoutAuthenticated();
                     layoutController.getCurrentSubmenuLinkSelected().click();
+                    DataController.updateUserLanguage(layoutController.getUser(), layoutController.getI18n().getLanguageEnum().getLang());
                 }
             }
         });

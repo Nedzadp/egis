@@ -14,6 +14,7 @@ import com.pss.pp4is.data.containers.ProductLanguageContainer;
 import com.pss.pp4is.data.containers.ProductMasterContainer;
 import com.pss.pp4is.data.containers.ProductPrinterContainer;
 import com.pss.pp4is.data.containers.ProductTypeContainer;
+import com.pss.pp4is.data.containers.SystemUsageContainer;
 import com.pss.pp4is.data.containers.UserActivityContainer;
 import com.pss.pp4is.data.containers.UserContainer;
 import com.pss.pp4is.data.containers.UserInspectionContainer;
@@ -27,11 +28,13 @@ import com.pss.pp4is.data.models.ProductLanguage;
 import com.pss.pp4is.data.models.ProductMaster;
 import com.pss.pp4is.data.models.ProductPrinter;
 import com.pss.pp4is.data.models.ProductType;
+import com.pss.pp4is.data.models.SystemUsage;
 import com.pss.pp4is.data.models.TranslationComponent;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.data.models.UserActivity;
 import com.pss.pp4is.data.models.UserInspection;
 import com.pss.pp4is.data.models.UserProduct;
+import com.pss.pp4is.layout.content.views.reports.ChartUtils;
 import com.pss.pp4is.system.DatabaseConnection;
 import com.pss.pp4is.system.LanguageEnum;
 import com.pss.pp4is.system.Translation;
@@ -42,7 +45,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -741,9 +748,24 @@ public class DataController {
         }   
     }
     
+    public static void updateUserLanguage(User user, String language) {
+        String sql = "UPDATE translation SET language = ? WHERE userId = ?";
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        try {
+            databaseConnection.connect();
+            PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(sql);
+            preparedStatement.clearParameters();
+            preparedStatement.setString(1, language);
+            preparedStatement.setInt(2, user.getUserId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            databaseConnection.disconnect();
+        }
+    }
     
      public static Container getTranslations() {
-        List<TranslationComponent> translations = new ArrayList<TranslationComponent>();
         Container container = new BeanItemContainer(TranslationComponent.class);
         DatabaseConnection databaseConnection = new DatabaseConnection();
         String selectSql = "SELECT id,keyword, english, magyar FROM translation;";
@@ -877,5 +899,199 @@ public class DataController {
             databaseConnection.disconnect();
         }
         return userInspectionContainer;
+    }
+    
+    public static SystemUsageContainer getFilteredSystemUsage(String username, Date fromDate, Date toDate) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        
+        String userSql = "SELECT u.username, SUM( UNIX_TIMESTAMP( ua.logged_out ) - UNIX_TIMESTAMP( ua.logged_in )) AS seconds " +
+                         "FROM user_activity ua "
+                       + "JOIN user u ON ua.user_id = u.userId ";
+        if(username!=null) {
+            userSql += "WHERE u.username LIKE '"+username+"' ";
+        }
+        if(fromDate != null) {
+            userSql += "AND ua.logged_in >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+        }
+        if(toDate != null) {
+            userSql += "AND ua.logged_out <= '"+new java.sql.Date(toDate.getTime())+"' ";
+        }
+            userSql += "GROUP BY u.username";
+        
+        String productSql = "SELECT u.username, COUNT( * ) AS 'newProducts' " +
+                            "FROM product p " +
+                            "JOIN user u ON p.create_by_id = u.userId ";
+        if(username!=null) {
+            productSql += "WHERE u.username LIKE '"+username+"' ";
+        }
+        if(fromDate != null) {
+            productSql += "AND p.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+        }
+        if(toDate != null) {
+            productSql += "AND p.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+        }
+        
+        productSql += "GROUP BY u.username ";
+        
+        String inspectionSql =  "SELECT u.username, COUNT( * ) AS 'newInspections' " +
+                                "FROM inspection i " +
+                                "JOIN user u ON i.create_by_id = u.userId " ;
+        
+        if(username!=null) {
+            productSql += "WHERE u.username LIKE '"+username+"' ";
+        }
+        if(fromDate != null) {
+            productSql += "AND i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+        }
+        if(toDate != null) {
+            productSql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+        }
+        inspectionSql += "GROUP BY u.username ";
+        
+        String masterImageSql = "SELECT u.username, COUNT( * ) AS 'newMaster' " +
+                                "FROM master i " +
+                                "JOIN user u ON i.create_by_id = u.userId " ;
+       if(username!=null) {
+            masterImageSql += "WHERE u.username LIKE '"+username+"' ";
+        }
+        if(fromDate != null) {
+            masterImageSql += "AND i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+        }
+        if(toDate != null) {
+            masterImageSql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+        }
+        masterImageSql += "GROUP BY u.username ";
+        
+        String inspectionDetailSql = "SELECT u.username, COUNT( * ) AS 'newInspectionDetails' " +
+                                    "FROM inspection_details i " +
+                                    "JOIN user u ON i.create_by_id = u.userId "
+                                  + "WHERE i.eredmeny_path IS NOT NULL " ;
+       if(username!=null) {
+            inspectionDetailSql += "AND u.username LIKE '"+username+"' ";
+        }
+        if(fromDate != null) {
+            inspectionDetailSql += "AND i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+        }
+        if(toDate != null) {
+            inspectionDetailSql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+        }
+        
+        inspectionDetailSql += "GROUP BY u.username ";
+        
+        SystemUsageContainer systemUsageContainer = new SystemUsageContainer();
+        Map<String, SystemUsage> userMap = new TreeMap<String, SystemUsage>();
+        try {
+            databaseConnection.connect();
+            // user spent time
+            ResultSet resultSet = databaseConnection.executeQuery(userSql);
+            while(resultSet.next()) {
+                SystemUsage systemUsage = new SystemUsage();
+                systemUsage.setUsername(resultSet.getString("u.username"));
+                systemUsage.setHoursInSystem(resultSet.getInt("seconds")/3600);
+                userMap.put(resultSet.getString("u.username"), systemUsage);
+            }
+            // user new products
+            resultSet = databaseConnection.executeQuery(productSql);
+            while(resultSet.next()) {
+                if(userMap.containsKey(resultSet.getString("u.username"))) {
+                    userMap.get(resultSet.getString("u.username")).setNewProducts(resultSet.getInt("newProducts"));
+                } else {
+                    SystemUsage systemUsage = new SystemUsage();
+                    systemUsage.setUsername(resultSet.getString("u.username"));
+                    systemUsage.setNewProducts(resultSet.getInt("newProducts"));
+                    userMap.put(resultSet.getString("u.username"), systemUsage);
+                }
+            }
+            // user new inspection
+            resultSet = databaseConnection.executeQuery(inspectionSql);
+            while(resultSet.next()) {
+                if(userMap.containsKey(resultSet.getString("u.username"))) {
+                    userMap.get(resultSet.getString("u.username")).setNewProducts(resultSet.getInt("newInspections"));
+                } else {
+                    SystemUsage systemUsage = new SystemUsage();
+                    systemUsage.setUsername(resultSet.getString("u.username"));
+                    systemUsage.setNewInspections(resultSet.getInt("newInspections"));
+                    userMap.put(resultSet.getString("u.username"), systemUsage);
+                }
+            }
+            // user new master images
+            resultSet = databaseConnection.executeQuery(masterImageSql);
+            while(resultSet.next()) {
+                if(userMap.containsKey(resultSet.getString("u.username"))) {
+                    userMap.get(resultSet.getString("u.username")).setNewProducts(resultSet.getInt("newMaster"));
+                } else {
+                    SystemUsage systemUsage = new SystemUsage();
+                    systemUsage.setUsername(resultSet.getString("u.username"));
+                    systemUsage.setUploadedImages(resultSet.getInt("newMaster"));
+                    userMap.put(resultSet.getString("u.username"), systemUsage);
+                }
+            }
+            // user inspection details
+            resultSet = databaseConnection.executeQuery(inspectionDetailSql);
+            while(resultSet.next()) {
+                if(userMap.containsKey(resultSet.getString("u.username"))) {
+                    userMap.get(resultSet.getString("u.username")).setNewProducts(resultSet.getInt("newInspectionDetails"));
+                } else {
+                    SystemUsage systemUsage = new SystemUsage();
+                    systemUsage.setUsername(resultSet.getString("u.username"));
+                    systemUsage.setInspectedImages(resultSet.getInt("newInspectionDetails"));
+                    userMap.put(resultSet.getString("u.username"), systemUsage);
+                }
+            }
+            for(Map.Entry<String, SystemUsage> mapEntry : userMap.entrySet()) {
+                systemUsageContainer.addBean(mapEntry.getValue());
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        return systemUsageContainer;
+    }
+
+    public static void getChartData(String username, Date fromDate, Date toDate,ChartUtils chartUtils) {
+        String sql = "SELECT u.username, MONTHNAME( i.create_date ) AS  'month_date', YEAR(i.create_date) AS 'year_date', COUNT( * ) AS  'newInspectionDetails' " +
+                     "FROM inspection_details i " +
+                     "JOIN user u ON i.create_by_id = u.userId " +
+                     "WHERE i.eredmeny_path IS NOT NULL  ";
+                     
+        
+        if(username!=null) {
+            sql += "AND u.username LIKE '"+username+"' ";
+        }
+        if(fromDate != null) {
+            sql += "AND i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+        }
+        if(toDate != null) {
+            sql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+        }
+        
+        sql += "GROUP BY u.username, month_date,year_date ORDER BY  FIELD( month_date,  'January',  'February',  'March',  'April',  'May',  'June',  'July',  'August',  'September',  'October',  'November',  'December' ),year_date  ";
+        
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            while(resultSet.next()) {
+                String username2 = resultSet.getString("u.username");
+                String date = resultSet.getString("month_date")+"-"+resultSet.getString("year_date");
+                System.out.println("DATE: "+date);
+                if(!chartUtils.getTicks().contains(date)){
+                    chartUtils.getTicks().add(date);
+                }
+                if(!chartUtils.getMap().containsKey(username2)) {
+                    chartUtils.getMap().put(username2, new LinkedHashMap<String,Integer>());
+                }
+                chartUtils.getMap().get(username2).put(date, resultSet.getInt("newInspectionDetails"));
+                
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
     }
 }

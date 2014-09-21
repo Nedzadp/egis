@@ -27,7 +27,6 @@ public class UserComboBox extends ComboBox{
         setNullSelectionAllowed(true);
         setFilteringMode(FilteringMode.CONTAINS);
         setTextInputAllowed(false);
-        setNullSelectionItemId("select");
         UserContainer userContainer = DataController.getUsers();
         for(User user : userContainer.getItemIds()) {
             addItem(user.getUsername());

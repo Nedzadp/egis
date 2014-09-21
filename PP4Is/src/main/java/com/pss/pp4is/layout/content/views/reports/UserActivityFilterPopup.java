@@ -31,7 +31,7 @@ public class UserActivityFilterPopup extends Window {
     private UserComboBox userSelect;
     private final UserActivityTable userActivityTable;
     private final UserProductTable userProductTable;
-    private UserInspectionTable userInspectionTable;
+    private final UserInspectionTable userInspectionTable;
     private String username;
     private DateField  fromDateField;
     private DateField toDateField;
@@ -63,7 +63,10 @@ public class UserActivityFilterPopup extends Window {
 
             @Override
             public void valueChange(Property.ValueChangeEvent event) {
-                username = event.getProperty().getValue().toString();
+                username = null;
+                if(event.getProperty().getValue() != null) {
+                    username = event.getProperty().getValue().toString();
+                } 
             }
         });
         
@@ -86,23 +89,24 @@ public class UserActivityFilterPopup extends Window {
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
-                
-                userActivityTable.removeAllItems();
-                userActivityTable.setContainerDataSource(DataController.getFilteredActivities(username,fromDateField.getValue(),toDateField.getValue()));
-                userActivityTable.setVisibleColumns(UserActivityContainer.NATURAL_COL_ORDER);
-                userActivityTable.setColumnCollapsed("id", true);
-                userActivityTable.setColumnHeaders(UserActivityContainer.COL_HEADERS_ENGLISH);
-                
-                userProductTable.removeAllItems();
-                userProductTable.setContainerDataSource(DataController.getFilteredUserProductActivities(username,fromDateField.getValue(),toDateField.getValue()));
-                userProductTable.setVisibleColumns(UserProductContainer.NATURAL_COL_ORDER);
-                userProductTable.setColumnHeaders(UserProductContainer.COL_HEADERS_ENGLISH);
-                
-                userInspectionTable.removeAllItems();
-                userInspectionTable.setContainerDataSource(DataController.getFilteredUserInspectionActivities(username,fromDateField.getValue(),toDateField.getValue()));
-                userInspectionTable.setVisibleColumns(UserInspectionContainer.NATURAL_COL_ORDER);
-                userInspectionTable.setColumnHeaders(UserInspectionContainer.COL_HEADERS_ENGLISH);
+                if(userActivityTable!= null && userProductTable!=null && userInspectionTable!=null) {
+                    userActivityTable.removeAllItems();
+                    userActivityTable.setContainerDataSource(DataController.getFilteredActivities(username,fromDateField.getValue(),toDateField.getValue()));
+                    userActivityTable.setVisibleColumns(UserActivityContainer.NATURAL_COL_ORDER);
+                    userActivityTable.setColumnCollapsed("id", true);
+                    userActivityTable.setColumnHeaders(UserActivityContainer.COL_HEADERS_ENGLISH);
 
+                    userProductTable.removeAllItems();
+                    userProductTable.setContainerDataSource(DataController.getFilteredUserProductActivities(username,fromDateField.getValue(),toDateField.getValue()));
+                    userProductTable.setVisibleColumns(UserProductContainer.NATURAL_COL_ORDER);
+                    userProductTable.setColumnHeaders(UserProductContainer.COL_HEADERS_ENGLISH);
+
+                    userInspectionTable.removeAllItems();
+                    userInspectionTable.setContainerDataSource(DataController.getFilteredUserInspectionActivities(username,fromDateField.getValue(),toDateField.getValue()));
+                    userInspectionTable.setVisibleColumns(UserInspectionContainer.NATURAL_COL_ORDER);
+                    userInspectionTable.setColumnHeaders(UserInspectionContainer.COL_HEADERS_ENGLISH);
+                }
+                close();
             }
         }));
         

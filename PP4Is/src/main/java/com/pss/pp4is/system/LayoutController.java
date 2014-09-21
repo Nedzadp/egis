@@ -20,6 +20,7 @@ import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
 import com.vaadin.server.Page;
+import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import java.io.Serializable;
@@ -52,7 +53,7 @@ public class LayoutController implements Serializable{
     
     private CustomButtonLink currentRootLinkSelected;
     private CustomSubmenuLink currentSubmenuLinkSelected;
-    
+    private ComboBox comboBox;
     
     public LayoutController() {
         user = null;
@@ -236,8 +237,9 @@ public class LayoutController implements Serializable{
         }
         setCustomSubmenuLink(customSubmenuLink);
         getCustomSubmenuLink().addStyleName("sub-menu-selected");
-        
-        setCurrentSubmenuLinkSelected(getCustomSubmenuLink());
+        if(!getCustomSubmenuLink().getCustomSubmenuLinkId().equals(SubMenuNavigationEnum.SUB_MENU_ENGLISH.getRow()*10) || !getCustomSubmenuLink().getCustomSubmenuLinkId().equals(SubMenuNavigationEnum.SUB_MENU_MAGYAR.getRow()*10)){
+            setCurrentSubmenuLinkSelected(getCustomSubmenuLink());
+        }
     }
 
     public void setUserLogin(UserLoginHeader userLoginHeader) {
@@ -296,4 +298,13 @@ public class LayoutController implements Serializable{
         notification.show(Page.getCurrent());
         //Notification.show(getI18n().translate("Timer"),getI18n().translate("You have been automatically logged out!"), Notification.Type.WARNING_MESSAGE);
     }
+
+    public void setLanguageComboBox(ComboBox comboBox) {
+        this.comboBox = comboBox;
+    }
+
+    public ComboBox getComboBox() {
+        return comboBox;
+    }
+    
 }

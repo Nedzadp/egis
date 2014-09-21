@@ -19,6 +19,7 @@ import com.pss.pp4is.layout.content.views.listing.MainContentProductLanguageLayo
 import com.pss.pp4is.layout.content.views.listing.MainContentProductPrinterLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentProductTypeLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentUserLayout;
+import com.pss.pp4is.layout.content.views.reports.MainContentSystemUsageLayout;
 import com.pss.pp4is.layout.content.views.reports.MainContentUserActivityLayout;
 
 /**
@@ -42,8 +43,8 @@ public enum MainContentLayoutEnum {
     INSPECTION_PROFILES(11,11, MainContentInspectionProfileLayout.class),
     PRODUCTS_INSPECTIONS(7,12, MainContentProductInspectionLayout.class),
     // reports
-    USER_ACTIVITIES(14,13, MainContentUserActivityLayout.class)
-    
+    USER_ACTIVITIES(14,13, MainContentUserActivityLayout.class),
+    SYSTEM_USAGE(13,14, MainContentSystemUsageLayout.class)
     ;
 
     private final int subMenu;

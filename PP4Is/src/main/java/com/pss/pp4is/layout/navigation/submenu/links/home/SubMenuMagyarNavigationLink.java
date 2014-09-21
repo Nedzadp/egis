@@ -6,6 +6,7 @@
 
 package com.pss.pp4is.layout.navigation.submenu.links.home;
 
+import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.layout.navigation.submenu.CustomSubmenuLink;
 import com.pss.pp4is.system.LanguageEnum;
 
@@ -27,10 +28,10 @@ public class SubMenuMagyarNavigationLink extends  CustomSubmenuLink{
         if(getLayoutController().getUser()==null) {
             getLayoutController().refreshLanguageLayout();
         } else {
-            getLayoutController().refreshLayout();
-            getLayoutController().getCustomButtonLink().handleClick(null);
-            getLayoutController().getCustomSubmenuLink().handleClick(null);
+            getLayoutController().refreshLanguageLayoutAuthenticated();
+            DataController.updateUserLanguage(getLayoutController().getUser(), LanguageEnum.HUNGARIAN.getLang());
         }
+        getLayoutController().getComboBox().setValue(getLayoutController().getI18n().getLanguageEnum().getLang());
     }
     @Override
     public String getLinkCaption() {

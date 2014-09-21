@@ -25,7 +25,6 @@ public class SubMenuUserActivitiesNavigationLink extends CustomSubmenuLink {
 
     @Override
     public void handleClick(Button.ClickEvent event) {
-        setCustomSubmenuLinkId(SubMenuNavigationEnum.SUB_MENU_USER_ACTIVITIES.getRow()*10);
         getLayoutController().fixSelectedSubMenu(this);
         CustomVerticalLayout layout = MainContentLayoutEnum.getInstanceBySubMenu(SubMenuNavigationEnum.SUB_MENU_USER_ACTIVITIES.getRow());
         if(layout != null) {

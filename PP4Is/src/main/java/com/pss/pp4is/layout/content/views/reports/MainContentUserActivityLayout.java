@@ -48,7 +48,7 @@ public class MainContentUserActivityLayout extends CustomVerticalLayout{
         filterButton.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
-               UI.getCurrent().addWindow(new UserActivityFilterPopup(userActivityTable,userProductTable,userInspectionTable));
+               UI.getCurrent().addWindow(new UserActivityFilterPopup(userActivityTable,userProductTable,userInspectionTable,null,null));
             }
         });
         addComponent(filterButton);

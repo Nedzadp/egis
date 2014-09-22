@@ -40,6 +40,7 @@ import com.pss.pp4is.system.LanguageEnum;
 import com.pss.pp4is.system.Translation;
 import com.vaadin.data.Container;
 import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.shared.ui.calendar.CalendarState;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,6 +53,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
 
 /**
  *
@@ -938,13 +941,13 @@ public class DataController {
                                 "JOIN user u ON i.create_by_id = u.userId " ;
         
         if(username!=null) {
-            productSql += "WHERE u.username LIKE '"+username+"' ";
+            inspectionSql += "WHERE u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
-            productSql += "AND i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+            inspectionSql += "AND i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
         }
         if(toDate != null) {
-            productSql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+            inspectionSql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
         }
         inspectionSql += "GROUP BY u.username ";
         
@@ -1051,11 +1054,31 @@ public class DataController {
     }
 
     public static void getChartData(String username, Date fromDate, Date toDate,ChartUtils chartUtils) {
-        String sql = "SELECT u.username, MONTHNAME( i.create_date ) AS  'month_date', YEAR(i.create_date) AS 'year_date', COUNT( * ) AS  'newInspectionDetails' " +
-                     "FROM inspection_details i " +
-                     "JOIN user u ON i.create_by_id = u.userId " +
-                     "WHERE i.eredmeny_path IS NOT NULL  ";
-                     
+        String sql ="";
+        boolean checkDuration = true;
+        
+        if(fromDate!= null) {
+            
+            Duration duration = new Duration(new DateTime(fromDate), new DateTime(toDate));
+            
+            if(duration.getStandardDays() < 30) {
+                checkDuration = false;
+            }
+            
+        }
+        
+        if(checkDuration){
+        
+            sql += "SELECT u.username, MONTHNAME( i.create_date ) AS  'month_date', YEAR(i.create_date) AS 'year_date', COUNT( * ) AS  'newInspectionDetails' " +
+                         "FROM inspection_details i " +
+                         "JOIN user u ON i.create_by_id = u.userId " +
+                         "WHERE i.eredmeny_path IS NOT NULL  ";
+        } else {
+            sql += "SELECT u.username, DATE( i.create_date ) AS  'month_date',  COUNT( * ) AS  'newInspectionDetails' " +
+                         "FROM inspection_details i " +
+                         "JOIN user u ON i.create_by_id = u.userId " +
+                         "WHERE i.eredmeny_path IS NOT NULL  ";
+        }              
         
         if(username!=null) {
             sql += "AND u.username LIKE '"+username+"' ";
@@ -1066,9 +1089,11 @@ public class DataController {
         if(toDate != null) {
             sql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
         }
-        
-        sql += "GROUP BY u.username, month_date,year_date ORDER BY  FIELD( month_date,  'January',  'February',  'March',  'April',  'May',  'June',  'July',  'August',  'September',  'October',  'November',  'December' ),year_date  ";
-        
+        if(checkDuration){
+            sql += "GROUP BY u.username, month_date,year_date ORDER BY  FIELD( month_date,  'January',  'February',  'March',  'April',  'May',  'June',  'July',  'August',  'September',  'October',  'November',  'December' ),year_date  ";
+        } else {
+            sql += "GROUP BY u.username, month_date ORDER BY  month_date  ";
+        }
         DatabaseConnection databaseConnection = new DatabaseConnection();
         
         try {
@@ -1076,8 +1101,10 @@ public class DataController {
             ResultSet resultSet = databaseConnection.executeQuery(sql);
             while(resultSet.next()) {
                 String username2 = resultSet.getString("u.username");
-                String date = resultSet.getString("month_date")+"-"+resultSet.getString("year_date");
-                System.out.println("DATE: "+date);
+                String date = resultSet.getString("month_date");
+                if(checkDuration){
+                    date += "-"+resultSet.getString("year_date");
+                }
                 if(!chartUtils.getTicks().contains(date)){
                     chartUtils.getTicks().add(date);
                 }

@@ -7,9 +7,11 @@
 package com.pss.pp4is.layout.content.views.reports;
 
 import com.pss.pp4is.data.DataController;
+import com.pss.pp4is.data.containers.SystemUsageContainer;
 import com.pss.pp4is.data.containers.UserActivityContainer;
 import com.pss.pp4is.data.containers.UserInspectionContainer;
 import com.pss.pp4is.data.containers.UserProductContainer;
+import com.pss.pp4is.layout.content.tables.SystemUsageTable;
 import com.pss.pp4is.layout.content.tables.UserActivityTable;
 import com.pss.pp4is.layout.content.tables.UserInspectionTable;
 import com.pss.pp4is.layout.content.tables.UserProductTable;
@@ -21,6 +23,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import java.util.Date;
 
 /**
  *
@@ -35,12 +38,16 @@ public class UserActivityFilterPopup extends Window {
     private String username;
     private DateField  fromDateField;
     private DateField toDateField;
+    private final SystemUsageTable systemUsageTable;
+    private final MainContentSystemUsageLayout customChartComponent;
     
-    public UserActivityFilterPopup(UserActivityTable userActivityTable,UserProductTable userProductTable,UserInspectionTable userInspectionTable) {
+    public UserActivityFilterPopup(UserActivityTable userActivityTable,UserProductTable userProductTable,UserInspectionTable userInspectionTable,SystemUsageTable systemUsageTable, MainContentSystemUsageLayout customChartComponent) {
         super("User activity filter window");
         this.userActivityTable = userActivityTable;
         this.userProductTable = userProductTable;
         this.userInspectionTable = userInspectionTable;
+        this.systemUsageTable = systemUsageTable;
+        this.customChartComponent = customChartComponent;
         initLayout();
     }
     
@@ -76,6 +83,7 @@ public class UserActivityFilterPopup extends Window {
         formLayout.addComponent(fromDateField);
         toDateField = new DateField("To date");
         toDateField.setDateFormat("yyyy-MM-dd HH:mm");
+        toDateField.setValue(new Date());
         toDateField.setWidth("180px");
         formLayout.addComponent(toDateField);
         layout.addComponent(formLayout);
@@ -106,6 +114,25 @@ public class UserActivityFilterPopup extends Window {
                     userInspectionTable.setVisibleColumns(UserInspectionContainer.NATURAL_COL_ORDER);
                     userInspectionTable.setColumnHeaders(UserInspectionContainer.COL_HEADERS_ENGLISH);
                 }
+                if(systemUsageTable != null && customChartComponent != null) {
+                    systemUsageTable.removeAllItems();
+                    systemUsageTable.setContainerDataSource(DataController.getFilteredSystemUsage(username,fromDateField.getValue(),toDateField.getValue()));
+                    systemUsageTable.setVisibleColumns(SystemUsageContainer.NATURAL_COL_ORDER);
+                    systemUsageTable.setColumnCollapsed("id", true);
+                    systemUsageTable.setColumnHeaders(SystemUsageContainer.COL_HEADERS_ENGLISH);
+                 
+                    customChartComponent.removeComponent(customChartComponent.getCustomChartComponent());
+                    
+                    ChartUtils chartUtils = new ChartUtils();
+        
+                    DataController.getChartData(username,fromDateField.getValue(),toDateField.getValue(),chartUtils);
+
+                    CustomChartComponent chartComponent = new CustomChartComponent(chartUtils);
+                    customChartComponent.setCustomChartComponent(chartComponent);
+                    chartComponent.show();
+                    customChartComponent.addComponent(chartComponent);
+                }
+                
                 close();
             }
         }));

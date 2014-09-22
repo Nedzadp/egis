@@ -6,13 +6,8 @@
 
 package com.pss.pp4is.layout.content.views.reports;
 
-import com.google.gwt.thirdparty.guava.common.collect.Ordering;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 import org.dussan.vaadin.dcharts.DCharts;
 import org.dussan.vaadin.dcharts.base.elements.XYaxis;
 import org.dussan.vaadin.dcharts.base.elements.XYseries;

@@ -10,6 +10,10 @@ import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.data.containers.SystemUsageContainer;
 import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.pss.pp4is.layout.content.tables.SystemUsageTable;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.UI;
 
 /**
  *
@@ -25,10 +29,12 @@ public class MainContentSystemUsageLayout extends CustomVerticalLayout{
         setMargin(true);
         setSpacing(true);
         
+        
+        
         SystemUsageContainer systemUsageContainer = DataController.getFilteredSystemUsage(null, null, null);
         
         systemUsageTable = new SystemUsageTable(systemUsageContainer);
-        addComponent(systemUsageTable);
+        
         
         ChartUtils chartUtils = new ChartUtils();
         
@@ -38,7 +44,36 @@ public class MainContentSystemUsageLayout extends CustomVerticalLayout{
         
         customChartComponent.show();
         
+        Button filterButton = new Button(getLayoutController().getI18n().translate("Filter"), new ThemeResource("img/filter.png"));
+        filterButton.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+               UI.getCurrent().addWindow(addFilter());
+            }
+        });
+        
+        
+        Label spacer = new Label(" ");
+        spacer.setHeight("10px");
+        addComponent(spacer);
+        
+        addComponent(filterButton);
+        
+        addComponent(systemUsageTable);
+        
         addComponent(customChartComponent);
         
+    }
+    
+    private UserActivityFilterPopup addFilter() {
+       return new UserActivityFilterPopup(null,null,null,systemUsageTable, this);
+    }
+
+    public CustomChartComponent getCustomChartComponent() {
+        return customChartComponent;
+    }
+
+    public void setCustomChartComponent(CustomChartComponent customChartComponent) {
+        this.customChartComponent = customChartComponent;
     }
 }

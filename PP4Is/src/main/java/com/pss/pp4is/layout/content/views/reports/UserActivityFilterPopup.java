@@ -97,6 +97,10 @@ public class UserActivityFilterPopup extends Window {
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
+                System.out.println("FROM DATE "+fromDateField.getValue());
+                
+                System.out.println("TO DATE "+toDateField.getValue());
+                
                 if(userActivityTable!= null && userProductTable!=null && userInspectionTable!=null) {
                     userActivityTable.removeAllItems();
                     userActivityTable.setContainerDataSource(DataController.getFilteredActivities(username,fromDateField.getValue(),toDateField.getValue()));

@@ -461,13 +461,13 @@ public class DataController {
             selectSql += "WHERE u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
-            selectSql += "AND ua.logged_in >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+            selectSql += "AND ua.logged_in >= '"+new java.sql.Timestamp(fromDate.getTime())+"' ";
         }
         if(toDate != null) {
-            selectSql += "AND ua.logged_out <= '"+new java.sql.Date(toDate.getTime())+"' ";
+            selectSql += "AND ua.logged_out <= '"+new java.sql.Timestamp(toDate.getTime())+"' ";
         }
             selectSql += "ORDER BY u.username";
-        
+        System.out.println("QUERY: "+selectSql);
         UserActivityContainer userActivityContainer = new UserActivityContainer();
         try {
             databaseConnection.connect();
@@ -828,12 +828,12 @@ public class DataController {
             selectSql += "WHERE u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
-            selectSql += "AND (p.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
-            selectSql += "OR p.mod_date >= '"+new java.sql.Date(fromDate.getTime())+"') ";
+            selectSql += "AND (p.create_date >= '"+new java.sql.Timestamp(fromDate.getTime())+"' ";
+            selectSql += "OR p.mod_date >= '"+new java.sql.Timestamp(fromDate.getTime())+"') ";
         }
         if(toDate != null) {
-            selectSql += "AND (p.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
-            selectSql += "OR p.mod_date <= '"+new java.sql.Date(toDate.getTime())+"') ";
+            selectSql += "AND (p.create_date <= '"+new java.sql.Timestamp(toDate.getTime())+"' ";
+            selectSql += "OR p.mod_date <= '"+new java.sql.Timestamp(toDate.getTime())+"') ";
         }
         selectSql += "ORDER BY u.username";
         
@@ -872,12 +872,12 @@ public class DataController {
             selectSql += "WHERE u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
-            selectSql += "AND (i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
-            selectSql += "OR i.mod_date >= '"+new java.sql.Date(fromDate.getTime())+"') ";
+            selectSql += "AND (i.create_date >= '"+new java.sql.Timestamp(fromDate.getTime())+"' ";
+            selectSql += "OR i.mod_date >= '"+new java.sql.Timestamp(fromDate.getTime())+"') ";
         }
         if(toDate != null) {
-            selectSql += "AND (i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
-            selectSql += "OR i.mod_date <= '"+new java.sql.Date(toDate.getTime())+"') ";
+            selectSql += "AND (i.create_date <= '"+new java.sql.Timestamp(toDate.getTime())+"' ";
+            selectSql += "OR i.mod_date <= '"+new java.sql.Timestamp(toDate.getTime())+"') ";
         }
         selectSql += "ORDER BY u.username";
         
@@ -914,10 +914,10 @@ public class DataController {
             userSql += "WHERE u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
-            userSql += "AND ua.logged_in >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+            userSql += "AND ua.logged_in >= '"+new java.sql.Timestamp(fromDate.getTime())+"' ";
         }
         if(toDate != null) {
-            userSql += "AND ua.logged_out <= '"+new java.sql.Date(toDate.getTime())+"' ";
+            userSql += "AND ua.logged_out <= '"+new java.sql.Timestamp(toDate.getTime())+"' ";
         }
             userSql += "GROUP BY u.username";
         
@@ -928,10 +928,10 @@ public class DataController {
             productSql += "WHERE u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
-            productSql += "AND p.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+            productSql += "AND p.create_date >= '"+new java.sql.Timestamp(fromDate.getTime())+"' ";
         }
         if(toDate != null) {
-            productSql += "AND p.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+            productSql += "AND p.create_date <= '"+new java.sql.Timestamp(toDate.getTime())+"' ";
         }
         
         productSql += "GROUP BY u.username ";
@@ -944,10 +944,10 @@ public class DataController {
             inspectionSql += "WHERE u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
-            inspectionSql += "AND i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+            inspectionSql += "AND i.create_date >= '"+new java.sql.Timestamp(fromDate.getTime())+"' ";
         }
         if(toDate != null) {
-            inspectionSql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+            inspectionSql += "AND i.create_date <= '"+new java.sql.Timestamp(toDate.getTime())+"' ";
         }
         inspectionSql += "GROUP BY u.username ";
         
@@ -958,10 +958,10 @@ public class DataController {
             masterImageSql += "WHERE u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
-            masterImageSql += "AND i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+            masterImageSql += "AND i.create_date >= '"+new java.sql.Timestamp(fromDate.getTime())+"' ";
         }
         if(toDate != null) {
-            masterImageSql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+            masterImageSql += "AND i.create_date <= '"+new java.sql.Timestamp(toDate.getTime())+"' ";
         }
         masterImageSql += "GROUP BY u.username ";
         
@@ -973,10 +973,10 @@ public class DataController {
             inspectionDetailSql += "AND u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
-            inspectionDetailSql += "AND i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+            inspectionDetailSql += "AND i.create_date >= '"+new java.sql.Timestamp(fromDate.getTime())+"' ";
         }
         if(toDate != null) {
-            inspectionDetailSql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+            inspectionDetailSql += "AND i.create_date <= '"+new java.sql.Timestamp(toDate.getTime())+"' ";
         }
         
         inspectionDetailSql += "GROUP BY u.username ";
@@ -1084,10 +1084,10 @@ public class DataController {
             sql += "AND u.username LIKE '"+username+"' ";
         }
         if(fromDate != null) {
-            sql += "AND i.create_date >= '"+new java.sql.Date(fromDate.getTime())+"' ";
+            sql += "AND i.create_date >= '"+new java.sql.Timestamp(fromDate.getTime())+"' ";
         }
         if(toDate != null) {
-            sql += "AND i.create_date <= '"+new java.sql.Date(toDate.getTime())+"' ";
+            sql += "AND i.create_date <= '"+new java.sql.Timestamp(toDate.getTime())+"' ";
         }
         if(checkDuration){
             sql += "GROUP BY u.username, month_date,year_date ORDER BY  FIELD( month_date,  'January',  'February',  'March',  'April',  'May',  'June',  'July',  'August',  'September',  'October',  'November',  'December' ),year_date  ";

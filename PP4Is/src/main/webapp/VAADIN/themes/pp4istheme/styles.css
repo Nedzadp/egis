@@ -7191,6 +7191,7 @@ body .pp4istheme.v-app .v-app-loading {
 	text-align: center;
 	min-width: 100px;
 	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .pp4istheme .v-slot-restart-clock-button {
@@ -7355,7 +7356,6 @@ body .pp4istheme.v-app .v-app-loading {
 
 .pp4istheme .v-slot-header-login {
 	padding-top: 2px;
-	width: 350px;
 }
 
 .pp4istheme .v-slot-login-label {

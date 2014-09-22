@@ -31,7 +31,7 @@ public class SystemUsageTable extends Table implements Serializable{
         setImmediate(true);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(10);
+        setPageLength(5);
         createDataRow();
         setVisibleColumns(SystemUsageContainer.NATURAL_COL_ORDER);
         setColumnHeaders(SystemUsageContainer.COL_HEADERS_ENGLISH);

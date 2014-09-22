@@ -19,6 +19,10 @@ public class MainContentImagesLayout extends CustomVerticalLayout{
     public void initLayout() {
         setMargin(false);
         setSpacing(false);
-        addComponent(new CustomLayout("images"));
+        if(getLayoutController().getI18n().getLanguageEnum().getLang().equals("eng")) {
+            addComponent(new CustomLayout("images_eng"));
+        } else if(getLayoutController().getI18n().getLanguageEnum().getLang().equals("hun")) {
+            addComponent(new CustomLayout("images_hun")); 
+        } 
     }
 }

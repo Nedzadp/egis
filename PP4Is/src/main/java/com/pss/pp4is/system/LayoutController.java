@@ -55,6 +55,10 @@ public class LayoutController implements Serializable{
     private CustomSubmenuLink currentSubmenuLinkSelected;
     private ComboBox comboBox;
     
+     private String userLabel = null;
+    private String fromDateLabel = null;
+    private String toDateLabel = null;
+    
     public LayoutController() {
         user = null;
         clockTimer = new Timer();
@@ -278,7 +282,7 @@ public class LayoutController implements Serializable{
     
     public void showNotification() {
         Notification notification = new Notification(getI18n().translate("Warning"), getI18n().translate("Click on the clock to restart it, please. Otherwise system will log you out within a minute."), Notification.Type.WARNING_MESSAGE);
-        notification.setDelayMsec(3000);
+        notification.setDelayMsec(1);
         notification.show(Page.getCurrent());
         //Notification.show(getI18n().translate("Warning"), getI18n().translate("Click on the clock to restart it, please. Otherwise system will log you out within a minute."), Notification.Type.WARNING_MESSAGE);
     }
@@ -294,7 +298,7 @@ public class LayoutController implements Serializable{
         getCustomLayout().removeAllComponents();
         getCustomLayout().init();
         Notification notification = new Notification(getI18n().translate("Timer"),getI18n().translate("You have been automatically logged out!"), Notification.Type.WARNING_MESSAGE);
-        notification.setDelayMsec(3000);
+        notification.setDelayMsec(1);
         notification.show(Page.getCurrent());
         //Notification.show(getI18n().translate("Timer"),getI18n().translate("You have been automatically logged out!"), Notification.Type.WARNING_MESSAGE);
     }
@@ -306,5 +310,27 @@ public class LayoutController implements Serializable{
     public ComboBox getComboBox() {
         return comboBox;
     }
-    
+    public void setUserLabel(String userLabel) {
+        this.userLabel = userLabel;
+    }
+
+    public String getUserLabel() {
+        return userLabel;
+    }
+
+    public void setFromDateLabel(String fromDateLabel) {
+        this.fromDateLabel = fromDateLabel;
+    }
+
+    public String getFromDateLabel() {
+        return fromDateLabel;
+    }
+
+    public void setToDateLabel(String toDateLabel) {
+        this.toDateLabel = toDateLabel;
+    }
+
+    public String getToDateLabel() {
+        return toDateLabel;
+    }
 }

@@ -52,29 +52,41 @@ public class UserLoginHeader extends HorizontalLayout{
     
     private void initLayout() {
         addStyleName("header-login");
-        setWidth("320px");
+        setWidth("340px");
         
         loginLabel = new Label(layoutController.getI18n().translate("Log in:"));
-        
-        loginLabel.setWidth("40px");
-        loginLabel.addStyleName("login-label");
+        loginLabel.setWidth("80px");
+        if(layoutController.getI18n().getLanguageEnum().getLang().equals("hun")) {
+            loginLabel.setWidth("80px");
+        }
         
         addComponent(loginLabel);
-        setExpandRatio(loginLabel, 0.4f);
+        setComponentAlignment(loginLabel, Alignment.MIDDLE_RIGHT);
+        if(layoutController.getI18n().getLanguageEnum().getLang().equals("hun")) {
+            setExpandRatio(loginLabel, 0.5f);
+        } else {
+            setExpandRatio(loginLabel, 0.3f);
+        }
+        
         usernameField = new TextField();
         usernameField.setWidth("125px");
         usernameField.setInputPrompt(layoutController.getI18n().translate("username"));
        
         
         addComponent(usernameField);
-        setExpandRatio(usernameField, 1.25f);
+        if(layoutController.getI18n().getLanguageEnum().getLang().equals("hun")) {
+            setExpandRatio(usernameField, 0.8f); 
+        } else {
+            setExpandRatio(usernameField, 1f);
+        }
+       
         
         passwordField  = new PasswordField();
         passwordField.setWidth("125px");
        
         passwordField.setInputPrompt(layoutController.getI18n().translate("password"));
         addComponent(passwordField);
-        setExpandRatio(passwordField, 1.25f);
+        setExpandRatio(passwordField, 0.8f);
         
          usernameField.addTextChangeListener(new TextChangeListener() {
             @Override
@@ -93,7 +105,7 @@ public class UserLoginHeader extends HorizontalLayout{
                 user = CurrentUser.isAuthenticated(usernameField.getValue(), passwordField.getValue());
                 if(user == null) {
                     Notification notification = new Notification(layoutController.getI18n().translate("Login"), layoutController.getI18n().translate("User name or password is not correct. Please try it again."), Notification.Type.WARNING_MESSAGE);
-                    notification.setDelayMsec(3000);
+                    notification.setDelayMsec(1);
                     notification.show(Page.getCurrent());
                     
                    // Notification.show(layoutController.getI18n().translate("Login"), layoutController.getI18n().translate("User name or password is not correct. Please try it again."), Notification.Type.WARNING_MESSAGE);
@@ -108,7 +120,7 @@ public class UserLoginHeader extends HorizontalLayout{
                 } else {
                      layoutController.getI18n().setLanguageEnum(LanguageEnum.getUserLanguage(user));
                      Notification notification = new Notification(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
-                     notification.setDelayMsec(3000);
+                     notification.setDelayMsec(1);
                      notification.show(Page.getCurrent());
                     //Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
                      layoutController.setUser(user);
@@ -116,7 +128,7 @@ public class UserLoginHeader extends HorizontalLayout{
                      DataController.insertUserActivity(layoutController.getUser());
                      layoutController.refreshLayout();
                      Notification notification2 = new Notification(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("User activity logged in"), Notification.Type.TRAY_NOTIFICATION);
-                     notification2.setDelayMsec(3000);
+                     notification2.setDelayMsec(1);
                      notification2.show(Page.getCurrent());
                      //Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("User activity logged in"), Notification.Type.TRAY_NOTIFICATION);
                 }
@@ -189,7 +201,7 @@ public class UserLoginHeader extends HorizontalLayout{
     public void resetClock() {
         
         Notification notification = new Notification(layoutController.getI18n().translate("Clock"), layoutController.getI18n().translate("Clock restarted successfully"), Notification.Type.TRAY_NOTIFICATION);
-        notification.setDelayMsec(3000);
+       notification.setDelayMsec(1);
         notification.show(Page.getCurrent());
         //Notification.show(layoutController.getI18n().translate("Clock"), layoutController.getI18n().translate("Clock restarted successfully"), Notification.Type.TRAY_NOTIFICATION);
         layoutController.setSeconds(59);

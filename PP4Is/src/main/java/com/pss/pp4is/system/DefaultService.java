@@ -13,10 +13,10 @@ import com.pss.pp4is.layout.content.MainContentComponent;
  * @author Nedzad
  */
 public class DefaultService implements IService{
-    private final MainContentComponent mainContentComponent;
+    private  MainContentComponent mainContentComponent;
 
     public DefaultService() {
-        this.mainContentComponent = new MainContentComponent();
+        
     }
 
     @Override

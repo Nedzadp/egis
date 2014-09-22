@@ -30,7 +30,7 @@ public class InspectionDetailTable extends Table implements Serializable{
         setImmediate(true);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(10);
+        setPageLength(7);
         createDataRow();
         setVisibleColumns(InspectionDetailContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("inspection_details_id", true);

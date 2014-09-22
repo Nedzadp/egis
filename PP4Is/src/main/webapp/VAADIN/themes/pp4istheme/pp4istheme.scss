@@ -50,6 +50,7 @@
             text-align: center;
             min-width: 100px;
             padding-left: 10px;
+            padding-right: 10px;
     }
     
     .v-slot-restart-clock-button {
@@ -202,7 +203,6 @@
     }
     .v-slot-header-login {
         padding-top: 2px;
-        width: 350px;
     }
     .v-slot-login-label {
        padding-top: 2px;

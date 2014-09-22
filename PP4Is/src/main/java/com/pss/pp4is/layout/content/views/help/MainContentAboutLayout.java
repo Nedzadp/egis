@@ -20,7 +20,10 @@ public class MainContentAboutLayout extends CustomVerticalLayout{
     public void initLayout() {
         setMargin(false);
         setSpacing(false);
-        
-        addComponent(new CustomLayout("about"));
+        if(getLayoutController().getI18n().getLanguageEnum().getLang().equals("eng")) {
+            addComponent(new CustomLayout("about_eng"));
+        } else if(getLayoutController().getI18n().getLanguageEnum().getLang().equals("hun")) {
+            addComponent(new CustomLayout("about_hun")); 
+        } 
     }
 }

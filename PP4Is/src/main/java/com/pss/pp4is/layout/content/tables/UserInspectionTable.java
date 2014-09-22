@@ -31,7 +31,7 @@ public class UserInspectionTable extends Table implements Serializable{
         setImmediate(true);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(10);
+        setPageLength(7);
         createDataRow();
         setVisibleColumns(UserInspectionContainer.NATURAL_COL_ORDER);
         setColumnHeaders(UserInspectionContainer.COL_HEADERS_ENGLISH);

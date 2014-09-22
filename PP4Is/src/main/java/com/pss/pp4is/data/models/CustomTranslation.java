@@ -8,10 +8,12 @@ package com.pss.pp4is.data.models;
 
 import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.system.LanguageEnum;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.TextArea;
+import com.vaadin.ui.themes.BaseTheme;
 
 /**
  *
@@ -23,7 +25,7 @@ public class CustomTranslation extends HorizontalLayout{
     private final String translation;
     private final LanguageEnum languageEnum;
     
-    private TextField editField;
+    private TextArea editField;
     private Button updateButton;
     
     public CustomTranslation(Integer translationId,String translation,LanguageEnum languageEnum) {
@@ -35,16 +37,16 @@ public class CustomTranslation extends HorizontalLayout{
     
     private void initLayout() {
         setSpacing(true);
-        setMargin(true);
-        addComponent(editField = new TextField());
-        editField.setWidth("100px");
-        editField.setHeight("20px");
+        addComponent(editField = new TextArea());
         
+        editField.setHeight("50px");
         if(translation!=null) {
             editField.setValue(translation);
         }
-        addComponent(updateButton = new Button("save"));
         
+        addComponent(updateButton = new Button("save"));
+        setComponentAlignment(updateButton, Alignment.MIDDLE_RIGHT);
+        updateButton.addStyleName(BaseTheme.BUTTON_LINK);
         updateButton.addClickListener(new Button.ClickListener() {
 
             @Override

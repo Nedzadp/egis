@@ -6,6 +6,7 @@
 
 package com.pss.pp4is.layout.content;
 
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.CustomLayout;
 import com.vaadin.ui.VerticalLayout;
 
@@ -15,7 +16,9 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class MainContentComponent extends  VerticalLayout{
     
-    public MainContentComponent() {
+    private LayoutController layoutController;
+    public MainContentComponent(LayoutController layoutController) {
+        this.layoutController = layoutController;
         setMargin(false);
         setSpacing(false);
         setSizeFull();
@@ -24,10 +27,18 @@ public class MainContentComponent extends  VerticalLayout{
     }
     
     public void initLayout() {
-        addComponent(new CustomLayout("home"));
+        if(layoutController.getI18n().getLanguageEnum().getLang().equals("eng")) {
+            addComponent(new CustomLayout("home_eng"));
+        } else if(layoutController.getI18n().getLanguageEnum().getLang().equals("hun")) {
+            addComponent(new CustomLayout("home_hun"));
+        }
     }
     
     public void initWelcomeLayout() {
-        addComponent(new CustomLayout("welcome"));
+        if(layoutController.getI18n().getLanguageEnum().getLang().equals("eng")) {
+            addComponent(new CustomLayout("welcome_eng"));
+        } else if(layoutController.getI18n().getLanguageEnum().getLang().equals("hun")) {
+            addComponent(new CustomLayout("welcome_hun"));
+        }
     }
 }

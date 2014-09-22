@@ -12,9 +12,13 @@ import com.pss.pp4is.layout.content.tables.UserActivityTable;
 import com.pss.pp4is.layout.content.tables.UserInspectionTable;
 import com.pss.pp4is.layout.content.tables.UserProductTable;
 import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  *
@@ -25,7 +29,8 @@ public class MainContentUserActivityLayout extends CustomVerticalLayout{
     private UserActivityTable userActivityTable;
     private UserProductTable userProductTable;
     private UserInspectionTable userInspectionTable;
-
+    private HorizontalLayout filterLayout;
+    private Button filterButton;
     @Override
     public void initLayout() {
         setMargin(true);
@@ -34,9 +39,8 @@ public class MainContentUserActivityLayout extends CustomVerticalLayout{
         
         userActivityTable = new UserActivityTable(DataController.getUserActivities());
         userActivityTable.setCaption(getLayoutController().getI18n().translate("User activities"));
-        Label spacer = new Label(" ");
-        spacer.setHeight("10px");
-        addComponent(spacer);
+        
+        
 
         userProductTable = new UserProductTable(DataController.getFilteredUserProductActivities(null, null, null));
         userProductTable.setCaption(getLayoutController().getI18n().translate("User product activities"));
@@ -44,20 +48,56 @@ public class MainContentUserActivityLayout extends CustomVerticalLayout{
         userInspectionTable = new UserInspectionTable(DataController.getFilteredUserInspectionActivities(null, null, null));
         userInspectionTable.setCaption(getLayoutController().getI18n().translate("User inspection activities"));
         
-        Button filterButton = new Button(getLayoutController().getI18n().translate("Filter"), new ThemeResource("img/filter.png"));
+         filterButton = new Button(getLayoutController().getI18n().translate("Filter"), new ThemeResource("img/filter.png"));
         filterButton.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
-               UI.getCurrent().addWindow(new UserActivityFilterPopup(userActivityTable,userProductTable,userInspectionTable,null,null));
+               UI.getCurrent().addWindow(addFilter());
             }
         });
-        addComponent(filterButton);
+        
+        Label spacer = new Label(" ");
+        spacer.setHeight("10px");
         addComponent(spacer);
+        addFilterLayout();
         addComponent(userActivityTable);
-        addComponent(spacer);
         addComponent(userProductTable);
-        addComponent(spacer);
         addComponent(userInspectionTable);
         
+    }
+    private UserActivityFilterPopup addFilter() {
+       return new UserActivityFilterPopup(userActivityTable,userProductTable,userInspectionTable,null,null,getLayoutController(),this);
+    }
+    public void repaint() {
+        removeAllComponents();
+        Label spacer = new Label(" ");
+        spacer.setHeight("10px");
+        addComponent(spacer);
+        addFilterLayout();
+        addComponent(userActivityTable);
+        addComponent(userProductTable);
+        addComponent(userInspectionTable);
+    }
+    private void addFilterLayout(){
+        filterLayout = new HorizontalLayout();
+        
+        filterLayout.setSpacing(true);
+        
+        filterLayout.addComponent(filterButton);
+        filterLayout.setComponentAlignment(filterButton, Alignment.MIDDLE_CENTER);
+        
+        VerticalLayout filterData = new VerticalLayout();
+        Panel panel = new Panel();
+        if(getLayoutController().getUserLabel()!=null) {
+            panel.setCaption("Filter data");
+            filterData.addComponent(new Label("Users: "+getLayoutController().getUserLabel()));
+            filterData.addComponent(new Label("From date: "+getLayoutController().getFromDateLabel()));
+            filterData.addComponent(new Label("To date: "+getLayoutController().getToDateLabel()));
+        }
+        panel.setContent(filterData);
+
+        filterLayout.addComponent(panel);
+        
+        addComponent(filterLayout);
     }
 }

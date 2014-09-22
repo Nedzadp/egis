@@ -15,7 +15,9 @@ import com.pss.pp4is.layout.content.tables.SystemUsageTable;
 import com.pss.pp4is.layout.content.tables.UserActivityTable;
 import com.pss.pp4is.layout.content.tables.UserInspectionTable;
 import com.pss.pp4is.layout.content.tables.UserProductTable;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.data.Property;
+import com.vaadin.shared.ui.datefield.Resolution;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
@@ -23,7 +25,10 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -40,9 +45,13 @@ public class UserActivityFilterPopup extends Window {
     private DateField toDateField;
     private final SystemUsageTable systemUsageTable;
     private final MainContentSystemUsageLayout customChartComponent;
+    private final LayoutController layoutController;
+    private final MainContentUserActivityLayout activityLayout;
     
-    public UserActivityFilterPopup(UserActivityTable userActivityTable,UserProductTable userProductTable,UserInspectionTable userInspectionTable,SystemUsageTable systemUsageTable, MainContentSystemUsageLayout customChartComponent) {
+    public UserActivityFilterPopup(UserActivityTable userActivityTable,UserProductTable userProductTable,UserInspectionTable userInspectionTable,SystemUsageTable systemUsageTable, MainContentSystemUsageLayout customChartComponent,LayoutController layoutController,MainContentUserActivityLayout activityLayout) {
         super("User activity filter window");
+        this.activityLayout = activityLayout;
+        this.layoutController = layoutController;
         this.userActivityTable = userActivityTable;
         this.userProductTable = userProductTable;
         this.userInspectionTable = userInspectionTable;
@@ -83,7 +92,8 @@ public class UserActivityFilterPopup extends Window {
         formLayout.addComponent(fromDateField);
         toDateField = new DateField("To date");
         toDateField.setDateFormat("yyyy-MM-dd HH:mm");
-        toDateField.setValue(new Date());
+        toDateField.setValue(new Timestamp(new Date().getTime()));
+        toDateField.setResolution(Resolution.SECOND);
         toDateField.setWidth("180px");
         formLayout.addComponent(toDateField);
         layout.addComponent(formLayout);
@@ -97,9 +107,22 @@ public class UserActivityFilterPopup extends Window {
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
-                System.out.println("FROM DATE "+fromDateField.getValue());
-                
-                System.out.println("TO DATE "+toDateField.getValue());
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                if(username==null) {
+                    layoutController.setUserLabel("All users");
+                } else {
+                    layoutController.setUserLabel(username);
+                }
+                if(fromDateField.getValue()==null) {
+                    layoutController.setFromDateLabel(" ");
+                } else {
+                    layoutController.setFromDateLabel(dateFormatter.format(fromDateField));
+                }
+                if(toDateField.getValue()==null) {
+                    layoutController.setToDateLabel(" ");
+                } else {
+                    layoutController.setToDateLabel(dateFormatter.format(toDateField.getValue()));
+                }
                 
                 if(userActivityTable!= null && userProductTable!=null && userInspectionTable!=null) {
                     userActivityTable.removeAllItems();
@@ -117,6 +140,8 @@ public class UserActivityFilterPopup extends Window {
                     userInspectionTable.setContainerDataSource(DataController.getFilteredUserInspectionActivities(username,fromDateField.getValue(),toDateField.getValue()));
                     userInspectionTable.setVisibleColumns(UserInspectionContainer.NATURAL_COL_ORDER);
                     userInspectionTable.setColumnHeaders(UserInspectionContainer.COL_HEADERS_ENGLISH);
+                    
+                    activityLayout.repaint();
                 }
                 if(systemUsageTable != null && customChartComponent != null) {
                     systemUsageTable.removeAllItems();
@@ -134,6 +159,7 @@ public class UserActivityFilterPopup extends Window {
                     CustomChartComponent chartComponent = new CustomChartComponent(chartUtils);
                     customChartComponent.setCustomChartComponent(chartComponent);
                     chartComponent.show();
+                    customChartComponent.repaint();
                     customChartComponent.addComponent(chartComponent);
                 }
                 

@@ -105,7 +105,7 @@ public class CustomLayout extends  VerticalLayout{
     }
     
     private void addMainContent() {
-        addComponent(mainContentComponent = new MainContentComponent());
+        addComponent(mainContentComponent = new MainContentComponent(layoutController));
         layoutController.setMainContentComponent(mainContentComponent);
     }
     

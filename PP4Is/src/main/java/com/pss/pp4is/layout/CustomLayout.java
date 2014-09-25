@@ -25,7 +25,7 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class CustomLayout extends  VerticalLayout{
 
-    private static final String LOGO_PATH = "img/pp4s-logo.jpg";
+    private static final String LOGO_PATH = "img/logo.jpg";
     private static final String EGIS_LOGO_PATH = "img/egis-logo.png";
     private MainMenuNavigationLayout mainMenuNavigationLayout;
     private SubMenuNavigationLayout subMenuNavigationLayout;
@@ -34,8 +34,52 @@ public class CustomLayout extends  VerticalLayout{
     
     public CustomLayout(LayoutController layoutController) {
         this.layoutController = layoutController;
-        init();
+        //init();
+        initNewStyle();
     }
+    public final void initNewStyle() { 
+        
+        
+        createNewHeader();
+    }
+    
+    private void createNewHeader() {
+        addComponent(new CustomHeaderLayout(layoutController));
+        
+        addNewLine();
+        
+        addNewLogo();
+    }
+    
+    private void addNewLine() {
+        HorizontalLayout headerLine = new HorizontalLayout();
+        headerLine.addStyleName("header-layout-line");
+        addComponent(headerLine);
+    }
+    
+    private void addNewLogo() {
+        
+        HorizontalLayout logoLayout = new HorizontalLayout();
+        logoLayout.addStyleName("logo-layout-content");
+        Image logo = new Image(null, new ThemeResource(LOGO_PATH));
+        logo.addClickListener(new ClickListener() {
+            @Override
+            public void click(MouseEvents.ClickEvent event) {
+                getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
+                if(getLayoutController().getUser()!=null) {
+                    getLayoutController().getCustomLayout().getMainContentComponent().initWelcomeLayout();
+                }else {
+                    getLayoutController().getCustomLayout().getMainContentComponent().initLayout();
+                }
+            }
+        });
+        logoLayout.addComponent(logo);
+        
+        addComponent(logoLayout);
+        setComponentAlignment(logoLayout, Alignment.TOP_CENTER);
+    }
+    
+    
     
     public final void init() {
         initLayout();

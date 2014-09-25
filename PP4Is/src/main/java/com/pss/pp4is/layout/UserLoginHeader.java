@@ -30,6 +30,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.themes.ValoTheme;
 
 
 /**
@@ -44,10 +45,103 @@ public class UserLoginHeader extends HorizontalLayout{
     private User user;
     private final LayoutController layoutController;
     private CustomTimerTask customTimerTask;
+    private HorizontalLayout content;
     
     public UserLoginHeader(LayoutController layoutController) {
         this.layoutController = layoutController;
-        initLayout();
+        //initLayout();
+        initNewLayout();
+    }
+    
+    private void initContent() {
+        setWidth("750px");
+        if(content == null) {
+            content = new HorizontalLayout();
+        }
+        content.removeAllComponents();
+        content.setSpacing(true);
+        addComponent(content);
+        setComponentAlignment(content, Alignment.MIDDLE_RIGHT);
+    }
+    
+    private void initNewLayout() {
+        
+        initContent();
+        
+        loginLabel = new Label(layoutController.getI18n().translate("LOGIN:"));
+        loginLabel.addStyleName("label-color");
+        
+        content.addComponent(loginLabel);
+        content.setComponentAlignment(loginLabel, Alignment.TOP_CENTER);
+        usernameField = new TextField();
+        usernameField.addStyleName(ValoTheme.TEXTFIELD_TINY);
+        usernameField.setInputPrompt(layoutController.getI18n().translate("username"));
+        usernameField.setHeight("21px");
+        
+        content.addComponent(usernameField);
+        passwordField  = new PasswordField();
+        passwordField.addStyleName(ValoTheme.TEXTFIELD_TINY);
+        passwordField.setInputPrompt(layoutController.getI18n().translate("password"));
+        passwordField.setHeight("21px");
+        content.addComponent(passwordField);
+        
+         usernameField.addTextChangeListener(new TextChangeListener() {
+            @Override
+            public void textChange(FieldEvents.TextChangeEvent event) {
+                getLoginLabel().removeStyleName("login-label-blinker");
+                getLoginLabel().addStyleName("login-label");
+        
+                getUsernameField().removeStyleName("login-fields-blinker");
+                getPasswordField().removeStyleName("login-fields-blinker");
+            }
+        });
+         
+         Button loginButton = new Button(new ThemeResource("img/login.jpg"));
+         loginButton.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
+         loginButton.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
+         loginButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+         loginButton.setWidth("23px");
+         loginButton.setHeight("21px");
+         loginButton.addClickListener(new Button.ClickListener() {
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                user = CurrentUser.isAuthenticated(usernameField.getValue(), passwordField.getValue());
+                if(user == null) {
+                    Notification notification = new Notification(layoutController.getI18n().translate("Login"), layoutController.getI18n().translate("User name or password is not correct. Please try it again."), Notification.Type.WARNING_MESSAGE);
+                    notification.setDelayMsec(2000);
+                    notification.show(Page.getCurrent());
+                    
+                    getLoginLabel().removeStyleName("label-color");
+                    getLoginLabel().addStyleName("login-label-action");
+
+                    getUsernameField().addStyleName("login-fields");
+                    getPasswordField().addStyleName("login-fields");
+                    
+                    getUsernameField().focus();
+                    
+                } else {
+                     layoutController.getI18n().setLanguageEnum(LanguageEnum.getUserLanguage(user));
+                     layoutController.setUser(user);
+                     
+                     Notification notification = new Notification(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
+                     notification.setDelayMsec(2000);
+                     notification.show(Page.getCurrent());
+                    //Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
+                     
+                     UI.getCurrent().getSession().setAttribute("user", user);
+                     DataController.insertUserActivity(layoutController.getUser());
+                     layoutController.refreshNewLayout();
+                     Notification notification2 = new Notification(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("User activity logged in"), Notification.Type.TRAY_NOTIFICATION);
+                     notification2.setDelayMsec(1);
+                     notification2.show(Page.getCurrent());
+                     //Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("User activity logged in"), Notification.Type.TRAY_NOTIFICATION);
+                }
+            }
+        });
+         
+         content.addComponent(loginButton);
+        
     }
     
     private void initLayout() {
@@ -207,5 +301,54 @@ public class UserLoginHeader extends HorizontalLayout{
         layoutController.setSeconds(59);
         layoutController.setMinutes(DataController.getTimerMinutes()-1);
         DataController.updateTimerUserActivity(layoutController.getUser());
+    }
+
+    public void refreshNewLayout() {
+        initContent();
+        
+        Label loggedInLabel = new Label(layoutController.getI18n().translate("LOGGED IN : "));
+        loggedInLabel.addStyleName("label-color");
+       
+        
+        content.addComponent(loggedInLabel);
+        content.setComponentAlignment(loggedInLabel, Alignment.BOTTOM_RIGHT);
+        
+        Label usernameLabel = new Label(layoutController.getUser().getUsername());
+        usernameLabel.addStyleName("label-font");
+        
+        
+        content.addComponent(usernameLabel);
+        content.setComponentAlignment(usernameLabel, Alignment.BOTTOM_RIGHT);
+        Label spacer = new Label(" ");
+        spacer.setWidth("20px");
+        content.addComponent(spacer);
+        
+        Label autoLogoutLabel = new Label(layoutController.getI18n().translate("AUTO LOG OUT TIME : "));
+        autoLogoutLabel.addStyleName("label-color");
+        
+        content.addComponent(autoLogoutLabel);
+        content.setComponentAlignment(autoLogoutLabel, Alignment.BOTTOM_RIGHT);
+        
+        layoutController.setSeconds(59);
+        layoutController.setMinutes(DataController.getTimerMinutes()-1);
+        
+        layoutController.getTimerButton().setCaption(layoutController.getMinutes().toString()+" : "+layoutController.getSeconds().toString());
+        layoutController.getTimerButton().addClickListener(new Button.ClickListener() {
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+               resetClock();
+            }
+        });
+        
+        
+        final Refresher refresher = new Refresher();
+        refresher.addListener(layoutController.getTimerButton());
+        addExtension(refresher);
+        
+        layoutController.runClock(customTimerTask = new CustomTimerTask(layoutController));
+        layoutController.setCustomTimerTask(customTimerTask);
+        
+        content.addComponent(layoutController.getTimerButton());
     }
 }

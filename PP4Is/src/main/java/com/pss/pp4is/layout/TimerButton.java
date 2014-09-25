@@ -10,6 +10,7 @@ import com.github.wolfie.refresher.Refresher;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.themes.BaseTheme;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  *
@@ -21,8 +22,9 @@ public class TimerButton extends Button implements Refresher.RefreshListener {
 
     public TimerButton(LayoutController layoutController) {
         this.layoutController = layoutController;
-        addStyleName(BaseTheme.BUTTON_LINK);
-        addStyleName("restart-clock-button");
+        addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        //addStyleName("restart-clock-button");
+        addStyleName("restart-clock-button-new");
         setDescription("Reset the clock by clicking on it.");
     }
 

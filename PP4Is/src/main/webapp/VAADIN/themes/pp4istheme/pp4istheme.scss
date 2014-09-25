@@ -1,14 +1,60 @@
 /* Import the reindeer theme. */
 /* This only allows us to use the mixins defined in it and does not add any styles by itself. */
-@import "../reindeer/reindeer.scss";
+@import "../valo/valo.scss";
 //@import "../valo/valo";
 @import "keyframes.scss";
 /* This contains all of your theme. */
 /* If somebody wants to extend the theme she will include this mixin. */
 @mixin pp4istheme {
   /* Include all the styles from the reindeer theme */
-  @include reindeer;
+  @include valo;
   /* Insert your theme rules here */
+ 
+  
+  
+  .label-font{
+      color: #ddeb25;
+      font-weight: bold;
+  }
+  
+  .combo-box-font{
+      color: #ddeb25;
+  }
+  .label-color{
+      color: #FFFFFF;
+  }
+  .v-slot-restart-clock-button-new {
+        color: #ddeb25;
+    }
+  
+  .v-filterselect .v-filterselect-button:before {
+    color: #FFFFFF;
+    font-family: FontAwesome;
+    line-height: 1;
+    margin-top: -0.47em;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transition: color 140ms ease 0s;
+    width: 30px;
+}
+  
+  .header-layout {
+      background-color: #00a3e8;
+  }
+  .v-slot-header-layout-line{
+      height: 4px;
+      background-color: #0082b9;
+  }
+  .logo-layout-content {
+      width: 1024px;
+      height: 47px;
+  }
+  .header-layout-content{
+      width: 1024px;
+      padding-top: 4px;
+      height: 32px;
+  }
   
     .v-table-header {
       background-color:#00a2e8;

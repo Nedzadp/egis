@@ -6,10 +6,16 @@ import com.pss.pp4is.system.LanguageEnum;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 import javax.servlet.annotation.WebServlet;
 
 @Theme("pp4istheme")
@@ -26,13 +32,33 @@ public class MyVaadinUI extends UI
 
     @Override
     protected void init(VaadinRequest request) {
+        initNewLayout();
+    }
+    
+    private void initNewLayout() {
+        VerticalLayout verticalLayout = new VerticalLayout();
+        
+        layoutController = new LayoutController();
+        layoutController.setI18n(new I18n(LanguageEnum.getENGLISH()));
+        customLayout = new CustomLayout(layoutController);
+        layoutController.setCustomLayout(customLayout);
+        verticalLayout.addComponent(customLayout);
+        
+        setContent(verticalLayout);
+    }
+    
+    private void initLayout() {
+        
         VerticalLayout layout  = new VerticalLayout();
+
         layout.setSizeFull();
+        
         layoutController = new LayoutController();
         layoutController.setI18n(new I18n(LanguageEnum.getENGLISH()));
         customLayout = new CustomLayout(layoutController);
         layoutController.setCustomLayout(customLayout);
         layout.addComponent(customLayout);
+        
         setContent(layout);
     }
 

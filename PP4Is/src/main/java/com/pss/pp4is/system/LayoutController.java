@@ -276,7 +276,7 @@ public class LayoutController implements Serializable{
     
     public void refreshLanguageLayout() {
         getCustomLayout().removeAllComponents();
-        getCustomLayout().init();
+        getCustomLayout().initNewStyle();
     }
     
     
@@ -332,5 +332,10 @@ public class LayoutController implements Serializable{
 
     public String getToDateLabel() {
         return toDateLabel;
+    }
+
+    public void refreshNewLayout() {
+        getUserLoginHeader().removeAllComponents();
+        getUserLoginHeader().refreshNewLayout();
     }
 }

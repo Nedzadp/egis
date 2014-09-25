@@ -52,8 +52,9 @@ public class CustomHeaderLayout extends  HorizontalLayout{
     private void addLeftHeaderContent() {
         headerContent = new HorizontalLayout();
         headerContent.addStyleName("header-layout-content");
-
+        
         HorizontalLayout leftHeaderContent = new HorizontalLayout();
+        leftHeaderContent.addStyleName("left-header-content");
         leftHeaderContent.addComponent(new Image(null, new ThemeResource("img/client_logo.jpg")));
         leftHeaderContent.addComponent(new Image(null, new ThemeResource("img/world-map.jpg")));
         
@@ -94,7 +95,7 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         leftHeaderContent.addComponent(comboBox);
         
         headerContent.addComponent(leftHeaderContent);
-        headerContent.setComponentAlignment(leftHeaderContent, Alignment.TOP_LEFT);
+        headerContent.setComponentAlignment(leftHeaderContent, Alignment.MIDDLE_LEFT);
         
     }
     

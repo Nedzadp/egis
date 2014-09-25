@@ -38,7 +38,9 @@
     transition: color 140ms ease 0s;
     width: 30px;
 }
-  
+.left-header-content{
+    padding-top: 3px;
+}
   .header-layout {
       background-color: #00a3e8;
   }
@@ -49,6 +51,10 @@
   .logo-layout-content {
       width: 1024px;
       height: 47px;
+  }
+  .main-layout-content {
+      width: 1024px;
+      height: 100%;
   }
   .header-layout-content{
       width: 1024px;

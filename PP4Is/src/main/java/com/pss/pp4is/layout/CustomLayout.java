@@ -38,9 +38,10 @@ public class CustomLayout extends  VerticalLayout{
         initNewStyle();
     }
     public final void initNewStyle() { 
-        
-        
         createNewHeader();
+        
+        addMainContent();
+        
     }
     
     private void createNewHeader() {
@@ -49,6 +50,8 @@ public class CustomLayout extends  VerticalLayout{
         addNewLine();
         
         addNewLogo();
+        
+        
     }
     
     private void addNewLine() {
@@ -78,8 +81,15 @@ public class CustomLayout extends  VerticalLayout{
         addComponent(logoLayout);
         setComponentAlignment(logoLayout, Alignment.TOP_CENTER);
     }
-    
-    
+     private void addMainContent() {
+        HorizontalLayout mainContent = new HorizontalLayout();
+        mainContent.addStyleName("main-layout-content");
+        mainContent.addComponent(mainContentComponent = new MainContentComponent(layoutController));
+        mainContent.setComponentAlignment(mainContentComponent, Alignment.TOP_CENTER);
+        layoutController.setMainContentComponent(mainContentComponent);
+        addComponent(mainContent);
+        setComponentAlignment(mainContent, Alignment.TOP_CENTER);
+    }
     
     public final void init() {
         initLayout();
@@ -148,10 +158,7 @@ public class CustomLayout extends  VerticalLayout{
         addComponent(logoLayout);
     }
     
-    private void addMainContent() {
-        addComponent(mainContentComponent = new MainContentComponent(layoutController));
-        layoutController.setMainContentComponent(mainContentComponent);
-    }
+   
     
     private void createMainMenuNavigation() {
         subMenuNavigationLayout = new SubMenuNavigationLayout(layoutController);

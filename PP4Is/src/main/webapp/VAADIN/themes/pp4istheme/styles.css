@@ -11685,6 +11685,10 @@ div.v-layout.v-horizontal.v-widget {
 	width: 30px;
 }
 
+.pp4istheme .left-header-content {
+	padding-top: 3px;
+}
+
 .pp4istheme .header-layout {
 	background-color: #00a3e8;
 }
@@ -11697,6 +11701,11 @@ div.v-layout.v-horizontal.v-widget {
 .pp4istheme .logo-layout-content {
 	width: 1024px;
 	height: 47px;
+}
+
+.pp4istheme .main-layout-content {
+	width: 1024px;
+	height: 100%;
 }
 
 .pp4istheme .header-layout-content {

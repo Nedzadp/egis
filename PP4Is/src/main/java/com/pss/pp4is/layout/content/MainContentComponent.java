@@ -16,17 +16,14 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class MainContentComponent extends  VerticalLayout{
     
-    private LayoutController layoutController;
+    private final LayoutController layoutController;
     public MainContentComponent(LayoutController layoutController) {
         this.layoutController = layoutController;
-        setMargin(false);
-        setSpacing(false);
-        setSizeFull();
         
         initLayout();
     }
     
-    public void initLayout() {
+    public final void initLayout() {
         if(layoutController.getI18n().getLanguageEnum().getLang().equals("eng")) {
             addComponent(new CustomLayout("home_eng"));
         } else if(layoutController.getI18n().getLanguageEnum().getLang().equals("hun")) {

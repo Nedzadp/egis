@@ -55,6 +55,7 @@ public class UserLoginHeader extends HorizontalLayout{
     
     private void initContent() {
         setWidth("750px");
+        setHeight("30px");
         if(content == null) {
             content = new HorizontalLayout();
         }
@@ -72,18 +73,21 @@ public class UserLoginHeader extends HorizontalLayout{
         loginLabel.addStyleName("label-color");
         
         content.addComponent(loginLabel);
-        content.setComponentAlignment(loginLabel, Alignment.TOP_CENTER);
+        content.setComponentAlignment(loginLabel, Alignment.MIDDLE_RIGHT);
         usernameField = new TextField();
         usernameField.addStyleName(ValoTheme.TEXTFIELD_TINY);
         usernameField.setInputPrompt(layoutController.getI18n().translate("username"));
         usernameField.setHeight("21px");
         
         content.addComponent(usernameField);
+        content.setComponentAlignment(usernameField, Alignment.MIDDLE_RIGHT);
+        
         passwordField  = new PasswordField();
         passwordField.addStyleName(ValoTheme.TEXTFIELD_TINY);
         passwordField.setInputPrompt(layoutController.getI18n().translate("password"));
         passwordField.setHeight("21px");
         content.addComponent(passwordField);
+        content.setComponentAlignment(passwordField, Alignment.MIDDLE_RIGHT);
         
          usernameField.addTextChangeListener(new TextChangeListener() {
             @Override
@@ -140,8 +144,8 @@ public class UserLoginHeader extends HorizontalLayout{
             }
         });
          
-         content.addComponent(loginButton);
-        
+        content.addComponent(loginButton);
+        content.setComponentAlignment(loginButton, Alignment.MIDDLE_RIGHT);
     }
     
     private void initLayout() {
@@ -311,14 +315,14 @@ public class UserLoginHeader extends HorizontalLayout{
        
         
         content.addComponent(loggedInLabel);
-        content.setComponentAlignment(loggedInLabel, Alignment.BOTTOM_RIGHT);
+        content.setComponentAlignment(loggedInLabel, Alignment.MIDDLE_RIGHT);
         
         Label usernameLabel = new Label(layoutController.getUser().getUsername());
         usernameLabel.addStyleName("label-font");
         
         
         content.addComponent(usernameLabel);
-        content.setComponentAlignment(usernameLabel, Alignment.BOTTOM_RIGHT);
+        content.setComponentAlignment(usernameLabel, Alignment.MIDDLE_RIGHT);
         Label spacer = new Label(" ");
         spacer.setWidth("20px");
         content.addComponent(spacer);
@@ -327,7 +331,7 @@ public class UserLoginHeader extends HorizontalLayout{
         autoLogoutLabel.addStyleName("label-color");
         
         content.addComponent(autoLogoutLabel);
-        content.setComponentAlignment(autoLogoutLabel, Alignment.BOTTOM_RIGHT);
+        content.setComponentAlignment(autoLogoutLabel, Alignment.MIDDLE_RIGHT);
         
         layoutController.setSeconds(59);
         layoutController.setMinutes(DataController.getTimerMinutes()-1);
@@ -350,5 +354,22 @@ public class UserLoginHeader extends HorizontalLayout{
         layoutController.setCustomTimerTask(customTimerTask);
         
         content.addComponent(layoutController.getTimerButton());
+        
+        Button logoutButton = new Button(new ThemeResource("img/logout.jpg"));
+        logoutButton.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
+        logoutButton.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);
+        logoutButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        logoutButton.setWidth("23px");
+        logoutButton.setHeight("21px");
+        logoutButton.addClickListener(new Button.ClickListener() {
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                UI.getCurrent().addWindow(new ExitWindow(layoutController));
+            }
+        });
+         
+         content.addComponent(logoutButton);
+         content.setComponentAlignment(logoutButton, Alignment.MIDDLE_RIGHT);
     }
 }

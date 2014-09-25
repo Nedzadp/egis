@@ -13,6 +13,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  *
@@ -33,9 +34,9 @@ public class ExitWindow extends Window{
         center();
         setModal(true);
         setClosable(true);
-        setHeight("200px");
-        setWidth("300px");
-        addStyleName("exit-window");
+        setHeight("250px");
+        setWidth("350px");
+        //addStyleName("exit-window");
         setResizable(false);
         VerticalLayout layout = new VerticalLayout();
         layout.setSpacing(true);
@@ -46,7 +47,7 @@ public class ExitWindow extends Window{
         answerButtons.setMargin(true);
         answerButtons.setSpacing(true);
         
-        answerButtons.addComponent(new Button(layoutController.getI18n().translate("Yes"), new Button.ClickListener() {
+        Button yesButton = new Button(layoutController.getI18n().translate("Yes"), new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 close();
@@ -60,14 +61,19 @@ public class ExitWindow extends Window{
                 layoutController.setCustomButtonLink(null);
                 layoutController.getCustomLayout().init();
             }
-        }));
+        });
+        yesButton.addStyleName(ValoTheme.BUTTON_DANGER);
+        
+        answerButtons.addComponent(yesButton);
 
-        answerButtons.addComponent(new Button(layoutController.getI18n().translate("No"), new Button.ClickListener() {
+        Button noButton = new Button(layoutController.getI18n().translate("No"), new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 close();
             }
-        }));
+        });
+        noButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+        answerButtons.addComponent(noButton);
         
         layout.addComponent(answerButtons);
         

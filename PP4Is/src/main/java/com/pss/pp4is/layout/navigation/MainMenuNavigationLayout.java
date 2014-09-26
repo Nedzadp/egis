@@ -6,7 +6,6 @@
 
 package com.pss.pp4is.layout.navigation;
 
-import com.pss.pp4is.layout.navigation.links.MainMenuHomeNavigationLink;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.HorizontalLayout;
 

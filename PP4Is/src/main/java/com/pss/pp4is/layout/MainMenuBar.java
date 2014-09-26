@@ -6,6 +6,11 @@
 
 package com.pss.pp4is.layout;
 
+import com.pss.pp4is.layout.navigation.submenu.links.help.AboutMenuBarCommand;
+import com.pss.pp4is.layout.navigation.submenu.links.help.ImageMenuBarCommand;
+import com.pss.pp4is.layout.navigation.submenu.links.help.InformationMenuBarCommand;
+import com.pss.pp4is.layout.navigation.submenu.links.help.ListMenuBarCommand;
+import com.pss.pp4is.layout.navigation.submenu.links.help.ReportMenuBarCommand;
 import com.pss.pp4is.layout.navigation.submenu.links.home.EnglishMenuBarCommand;
 import com.pss.pp4is.layout.navigation.submenu.links.home.ExitMenuBarCommand;
 import com.pss.pp4is.layout.navigation.submenu.links.home.LoginMenuBarCommand;
@@ -19,6 +24,8 @@ import com.pss.pp4is.layout.navigation.submenu.links.lists.DocumentTypeMenuBarCo
 import com.pss.pp4is.layout.navigation.submenu.links.lists.InspectionProfileMenuBarCommand;
 import com.pss.pp4is.layout.navigation.submenu.links.lists.ProductInspectionMenuBarCommand;
 import com.pss.pp4is.layout.navigation.submenu.links.lists.UserMenuBarCommand;
+import com.pss.pp4is.layout.navigation.submenu.links.reports.SystemUsageMenuBarCommand;
+import com.pss.pp4is.layout.navigation.submenu.links.reports.UserActivitiesMenuBarCommand;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.MenuBar;
 
@@ -67,16 +74,16 @@ public class MainMenuBar extends MenuBar {
         
         MenuItem menuItemReports = addItem(layoutController.getI18n().translate("REPORTS"), null);
        
-        menuItemReports.addItem(layoutController.getI18n().translate("System usage".toUpperCase()), new ProductInspectionMenuBarCommand(layoutController));
-        menuItemReports.addItem(layoutController.getI18n().translate("User activities".toUpperCase()), new ProductInspectionMenuBarCommand(layoutController));
+        menuItemReports.addItem(layoutController.getI18n().translate("System usage".toUpperCase()), new SystemUsageMenuBarCommand(layoutController));
+        menuItemReports.addItem(layoutController.getI18n().translate("User activities".toUpperCase()), new UserActivitiesMenuBarCommand(layoutController));
         
         MenuItem menuItemHelp = addItem(layoutController.getI18n().translate("HELP"), null);
        
-        menuItemHelp.addItem(layoutController.getI18n().translate("Information".toUpperCase()), new ProductInspectionMenuBarCommand(layoutController));
-        menuItemHelp.addItem(layoutController.getI18n().translate("Lists".toUpperCase()), new ProductInspectionMenuBarCommand(layoutController));
-        menuItemHelp.addItem(layoutController.getI18n().translate("Images".toUpperCase()), new ProductInspectionMenuBarCommand(layoutController));
-        menuItemHelp.addItem(layoutController.getI18n().translate("Reports".toUpperCase()), new ProductInspectionMenuBarCommand(layoutController));
-        menuItemHelp.addItem(layoutController.getI18n().translate("About".toUpperCase()), new ProductInspectionMenuBarCommand(layoutController));
+        menuItemHelp.addItem(layoutController.getI18n().translate("Information".toUpperCase()), new InformationMenuBarCommand(layoutController));
+        menuItemHelp.addItem(layoutController.getI18n().translate("Lists".toUpperCase()), new ListMenuBarCommand(layoutController));
+        menuItemHelp.addItem(layoutController.getI18n().translate("Images".toUpperCase()), new ImageMenuBarCommand(layoutController));
+        menuItemHelp.addItem(layoutController.getI18n().translate("Reports".toUpperCase()), new ReportMenuBarCommand(layoutController));
+        menuItemHelp.addItem(layoutController.getI18n().translate("About".toUpperCase()), new AboutMenuBarCommand(layoutController));
            
         
     }

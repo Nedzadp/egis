@@ -7,10 +7,11 @@
 package com.pss.pp4is.layout.content.views.reports;
 
 import com.pss.pp4is.data.DataController;
-import com.pss.pp4is.layout.content.CustomVerticalLayout;
+import com.pss.pp4is.layout.content.CustomPanelLayout;
 import com.pss.pp4is.layout.content.tables.UserActivityTable;
 import com.pss.pp4is.layout.content.tables.UserInspectionTable;
 import com.pss.pp4is.layout.content.tables.UserProductTable;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -24,17 +25,26 @@ import com.vaadin.ui.VerticalLayout;
  *
  * @author Nedzad
  */
-public class MainContentUserActivityLayout extends CustomVerticalLayout{
+public class MainContentUserActivityLayout extends CustomPanelLayout{
 
     private UserActivityTable userActivityTable;
     private UserProductTable userProductTable;
     private UserInspectionTable userInspectionTable;
     private HorizontalLayout filterLayout;
     private Button filterButton;
+    private VerticalLayout layout;
+
+    public MainContentUserActivityLayout(LayoutController layoutController) {
+        super(layoutController);
+    }
+    
+    
+    
     @Override
     public void initLayout() {
-        setMargin(true);
-        setSpacing(true);
+       layout = new VerticalLayout();
+        layout.setMargin(true);
+        layout.setSpacing(true);
         
         
         userActivityTable = new UserActivityTable(DataController.getUserActivities());
@@ -58,25 +68,27 @@ public class MainContentUserActivityLayout extends CustomVerticalLayout{
         
         Label spacer = new Label(" ");
         spacer.setHeight("10px");
-        addComponent(spacer);
+        layout.addComponent(spacer);
         addFilterLayout();
-        addComponent(userActivityTable);
-        addComponent(userProductTable);
-        addComponent(userInspectionTable);
+       layout.addComponent(userActivityTable);
+        layout.addComponent(userProductTable);
+        layout.addComponent(userInspectionTable);
+        
+        setContent(layout);
         
     }
     private UserActivityFilterPopup addFilter() {
        return new UserActivityFilterPopup(userActivityTable,userProductTable,userInspectionTable,null,null,getLayoutController(),this);
     }
     public void repaint() {
-        removeAllComponents();
+        layout.removeAllComponents();
         Label spacer = new Label(" ");
         spacer.setHeight("10px");
-        addComponent(spacer);
+        layout.addComponent(spacer);
         addFilterLayout();
-        addComponent(userActivityTable);
-        addComponent(userProductTable);
-        addComponent(userInspectionTable);
+        layout.addComponent(userActivityTable);
+        layout.addComponent(userProductTable);
+        layout.addComponent(userInspectionTable);
     }
     private void addFilterLayout(){
         filterLayout = new HorizontalLayout();
@@ -98,6 +110,6 @@ public class MainContentUserActivityLayout extends CustomVerticalLayout{
 
         filterLayout.addComponent(panel);
         
-        addComponent(filterLayout);
+        layout.addComponent(filterLayout);
     }
 }

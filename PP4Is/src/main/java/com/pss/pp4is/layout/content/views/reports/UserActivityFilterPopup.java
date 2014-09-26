@@ -28,7 +28,6 @@ import com.vaadin.ui.Window;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.joda.time.DateTime;
 
 /**
  *
@@ -150,7 +149,7 @@ public class UserActivityFilterPopup extends Window {
                     systemUsageTable.setColumnCollapsed("id", true);
                     systemUsageTable.setColumnHeaders(SystemUsageContainer.COL_HEADERS_ENGLISH);
                  
-                    customChartComponent.removeComponent(customChartComponent.getCustomChartComponent());
+                    customChartComponent.getLayout().removeComponent(customChartComponent.getCustomChartComponent());
                     
                     ChartUtils chartUtils = new ChartUtils();
         
@@ -160,7 +159,7 @@ public class UserActivityFilterPopup extends Window {
                     customChartComponent.setCustomChartComponent(chartComponent);
                     chartComponent.show();
                     customChartComponent.repaint();
-                    customChartComponent.addComponent(chartComponent);
+                    customChartComponent.getLayout().addComponent(chartComponent);
                 }
                 
                 close();

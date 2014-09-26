@@ -6,24 +6,32 @@
 
 package com.pss.pp4is.layout.content.views.help;
 
-import com.pss.pp4is.layout.content.CustomVerticalLayout;
+import com.pss.pp4is.layout.content.CustomPanelLayout;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.CustomLayout;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  *
  * @author Nedzad
  */
-public class MainContentListsLayout extends CustomVerticalLayout{
+public class MainContentListsLayout extends CustomPanelLayout{
+
+    public MainContentListsLayout(LayoutController layoutController) {
+        super(layoutController);
+    }
 
     @Override
     public void initLayout() {
-        setMargin(false);
-        setSpacing(false);
+        VerticalLayout layout = new VerticalLayout();
+        layout.setMargin(true);
+        layout.setSpacing(true);
         
         if(getLayoutController().getI18n().getLanguageEnum().getLang().equals("eng")) {
-            addComponent(new CustomLayout("lists_eng"));
+            layout.addComponent(new CustomLayout("lists_eng"));
         } else if(getLayoutController().getI18n().getLanguageEnum().getLang().equals("hun")) {
-            addComponent(new CustomLayout("lists_hun")); 
+            layout.addComponent(new CustomLayout("lists_hun")); 
         }
+        setContent(layout);
     }
 }

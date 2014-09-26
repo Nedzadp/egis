@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package com.pss.pp4is.layout.navigation.submenu.links.lists;
+package com.pss.pp4is.layout.navigation.submenu.links.help;
 
 import com.pss.pp4is.layout.AbstractCommand;
 import com.pss.pp4is.layout.content.CustomPanelLayout;
-import com.pss.pp4is.layout.content.views.listing.MainContentProductInspectionLayout;
+import com.pss.pp4is.layout.content.views.help.MainContentListsLayout;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.MenuBar;
 
@@ -16,15 +16,15 @@ import com.vaadin.ui.MenuBar;
  *
  * @author Nedzad
  */
-public class ProductInspectionMenuBarCommand extends AbstractCommand{
+public class ListMenuBarCommand extends AbstractCommand{
 
-    public ProductInspectionMenuBarCommand(LayoutController layoutController) {
+    public ListMenuBarCommand(LayoutController layoutController) {
         super(layoutController);
     }
 
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
-        CustomPanelLayout layout = new MainContentProductInspectionLayout(getLayoutController());
+        CustomPanelLayout layout = new MainContentListsLayout(getLayoutController());
         layout.initLayout();
         getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
         getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);

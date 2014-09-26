@@ -6,14 +6,10 @@
 
 package com.pss.pp4is.layout;
 
-import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.pss.pp4is.layout.content.MainContentComponent;
-import com.pss.pp4is.layout.content.MainContentLayoutEnum;
 import com.pss.pp4is.layout.header.CustomHeaderLayout;
 import com.pss.pp4is.layout.navigation.MainMenuNavigationLayout;
-import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
-import com.pss.pp4is.layout.navigation.submenu.links.home.WelcomeMenuBarCommand;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.event.MouseEvents;
 import com.vaadin.event.MouseEvents.ClickListener;
@@ -21,11 +17,8 @@ import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
-import com.vaadin.ui.MenuBar;
-import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.ValoTheme;
 
 /**
  *

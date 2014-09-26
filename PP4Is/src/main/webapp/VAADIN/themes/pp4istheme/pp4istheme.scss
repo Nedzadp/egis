@@ -5,26 +5,34 @@
 @import "keyframes.scss";
 /* This contains all of your theme. */
 /* If somebody wants to extend the theme she will include this mixin. */
+
+$v-font-family: "Trebuchet MS",sans-serif;
 @mixin pp4istheme {
   /* Include all the styles from the reindeer theme */
   @include valo;
   /* Insert your theme rules here */
- 
-  
-  
+  .v-table-cell-wrapper {
+        white-space: normal;
+    }
   .label-font{
       color: #ddeb25;
       font-weight: bold;
   }
-  
+  .v-button-link {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #ddeb25;
+    padding: 0;
+}
   .combo-box-font{
       color: #ddeb25;
   }
   .label-color{
       color: #FFFFFF;
   }
-  .v-slot-restart-clock-button-new {
+  .restart-clock-button-new {
         color: #ddeb25;
+        text-decoration: none;
     }
   
   .v-filterselect .v-filterselect-button:before {
@@ -39,7 +47,7 @@
     width: 30px;
 }
 .left-header-content{
-    padding-top: 3px;
+    padding-top: 2px;
 }
   .header-layout {
       background-color: #00a3e8;
@@ -56,14 +64,18 @@
       width: 1024px;
       height: 100%;
   }
+  .main-menu-bar {
+      width: 1024px;
+      height: 28px;
+  }
   .header-layout-content{
       width: 1024px;
-      padding-top: 4px;
+      padding-top: 2px;
       height: 32px;
   }
   
     .v-table-header {
-      background-color:#00a2e8;
+      background-color:#0082b9;
     }
     
     .v-table-caption-container{
@@ -112,12 +124,7 @@
         padding-top: 5px;
         padding-right: 10px;
     }
-    
-   .v-button-link .v-button-caption{
-        font-family: Arial;
-        font-size: 14px;
-	font-weight: bold;
-    }
+   
     .v-slot-selected{
         background-color:#00a2e8;
         color: white;
@@ -154,7 +161,7 @@
 
  .v-button-link .v-button-caption {
 	text-decoration: none;
-	color: inherit;
+	color: #ddeb25;
 	text-align: left;
 }
 
@@ -332,4 +339,76 @@
      .v-window-exit-window .v-window-closebox {
         background: url('img/close-modal.png');
      }
+     
+     
+     // maine menu bar
+  .v-menubar {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    -moz-user-select: none;
+    background-color: #0082b9;
+    background-image: none;
+    border-color: #0082b9 #0082b9 #bcbcbc;
+    border-image: none;
+    border-left: 1px solid #0082b9;
+    border-right: 1px solid #0082b9;
+    border-radius: 0px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 white inset, 0 -1px 0 #0082b9 inset, 0 2px 3px rgba(0, 0, 0, 0.05);
+    color: #FFFFFF;
+    cursor: default;
+    font-weight: 300;
+    height: 28px;
+    line-height: 25px;
+    outline: medium none;
+    padding: 0;
+    position: relative;
+    text-align: left;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+}
+    
+    .v-menubar > .v-menubar-menuitem {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        background: none repeat scroll 0 0 transparent;
+        border-color: inherit;
+        border-image: none;
+        border-radius: 0;
+        border-width: 0 1px 0 0;
+        box-shadow: none;
+        box-sizing: border-box;
+        border-style: none;
+        color: inherit;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 400;
+        height: 100%;
+        line-height: inherit;
+        padding: 0 15px;
+        position: relative;
+        text-align: center;
+        vertical-align: top;
+        z-index: 1;
+    }
+
+    .v-menubar:after {
+        border: inherit;
+        bottom: -1px;
+        left: -1px;
+        right: -1px;
+        top: 0px;
+    }
+
+    .v-menubar > .v-menubar-menuitem-selected {
+        color: #FFFFFF;
+        border-radius: 0;
+        background-color: #1866aa;
+    }
+
 }

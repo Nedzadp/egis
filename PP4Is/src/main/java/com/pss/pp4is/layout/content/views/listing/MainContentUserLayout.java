@@ -7,27 +7,36 @@
 package com.pss.pp4is.layout.content.views.listing;
 
 import com.pss.pp4is.data.DataController;
+import com.pss.pp4is.layout.content.CustomPanelLayout;
 import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.pss.pp4is.layout.content.tables.UserTable;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  *
  * @author Nedzad
  */
-public class MainContentUserLayout extends CustomVerticalLayout{
+public class MainContentUserLayout extends CustomPanelLayout{
+
+    public MainContentUserLayout(LayoutController layoutController) {
+        super(layoutController);
+    }
 
     
     @Override
     public void initLayout() {
-        setMargin(true);
-        setSpacing(true);
+        VerticalLayout layout = new VerticalLayout();
+        layout.setMargin(true);
+        layout.setSpacing(true);
         
-        addComponent(new Label(getLayoutController().getI18n().translate("User listing")));
+        layout.addComponent(new Label(getLayoutController().getI18n().translate("User listing")));
         
         UserTable userTable = new UserTable(DataController.getUsers());
         
-        addComponent(userTable);
+        layout.addComponent(userTable);
         
+        setContent(layout);
     }
 }

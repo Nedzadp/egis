@@ -4,30 +4,24 @@
  * and open the template in the editor.
  */
 
-package com.pss.pp4is.layout.content;
+package com.pss.pp4is.layout;
 
 import com.pss.pp4is.system.LayoutController;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.MenuBar.Command;
 
 /**
  *
  * @author Nedzad
  */
-public abstract class CustomVerticalLayout extends VerticalLayout{
-    private LayoutController layoutController;
-    
-    public CustomVerticalLayout() {
-    }
+public abstract class AbstractCommand implements Command{
 
-    public void setLayoutController(LayoutController layoutController) {
+    private LayoutController layoutController; 
+    
+    public AbstractCommand(LayoutController layoutController) {
         this.layoutController = layoutController;
     }
 
     public LayoutController getLayoutController() {
         return layoutController;
     }
-    
-    public abstract void initLayout();
-    
 }

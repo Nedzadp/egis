@@ -28,7 +28,6 @@ import com.pss.pp4is.layout.content.views.reports.MainContentUserActivityLayout;
  */
 public enum MainContentLayoutEnum {
     WELCOME_CONTENT_LAYOUT(1,1, MainContentHomeLayout.class),
-    TRANSLATION_CONTENT_LAYOUT(20,14, MainContentTranslationLayout.class),
     // help sub links
     INFORMATION_LAYOUT(15,2,MainContentInformationLayout.class),
     LISTS_LAYOUT(16,3,MainContentListsLayout.class),
@@ -36,12 +35,7 @@ public enum MainContentLayoutEnum {
     REPORTS_LAYOUT(18,5,MainContentReportsLayout.class),
     ABOUT_LAYOUT(19,6,MainContentAboutLayout.class),
     // listings
-    DOCUMENT_LANGUAGE(8,7, MainContentProductLanguageLayout.class),
-    DOCUMENT_TYPE(9,8,MainContentProductTypeLayout.class),
-    DOCUMENT_PRINTER(10,9, MainContentProductPrinterLayout.class),
-    USERS(12,10, MainContentUserLayout.class),
-    INSPECTION_PROFILES(11,11, MainContentInspectionProfileLayout.class),
-    PRODUCTS_INSPECTIONS(7,12, MainContentProductInspectionLayout.class),
+
     // reports
     USER_ACTIVITIES(14,13, MainContentUserActivityLayout.class),
     SYSTEM_USAGE(13,14, MainContentSystemUsageLayout.class)

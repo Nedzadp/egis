@@ -10,25 +10,35 @@ import com.pss.pp4is.data.models.Inspection;
 import com.pss.pp4is.data.models.InspectionDetail;
 import com.pss.pp4is.data.models.Product;
 import com.pss.pp4is.data.models.ProductMaster;
-import com.pss.pp4is.layout.content.CustomVerticalLayout;
+import com.pss.pp4is.layout.content.CustomPanelLayout;
 import com.pss.pp4is.layout.content.LeftMainContentComponent;
 import com.pss.pp4is.layout.content.RightMainContentComponent;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.data.Property;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  *
  * @author Nedzad
  */
-public class MainContentProductInspectionLayout extends CustomVerticalLayout{
+public class MainContentProductInspectionLayout extends CustomPanelLayout{
 
     private Inspection selectedInspection=null;
     private ProductMaster selectedProductMaster = null;
+
+    public MainContentProductInspectionLayout(LayoutController layoutController) {
+        super(layoutController);
+    }
+    
+    
     
     @Override
     public void initLayout() {
-        setMargin(true);
-        setSpacing(true);
+        
+        VerticalLayout layout = new VerticalLayout();
+        layout.setMargin(true);
+        layout.setSpacing(true);
         
         HorizontalLayout firstRowLayout = new HorizontalLayout();
         
@@ -134,11 +144,13 @@ public class MainContentProductInspectionLayout extends CustomVerticalLayout{
                 }
             }
         });
-        addComponent(firstRowLayout);
-        addComponent(secondRowLayout);
-        addComponent(thirdRowLayout);
-        addComponent(fourthRowLayout);
+        layout.addComponent(firstRowLayout);
+        layout.addComponent(secondRowLayout);
+        layout.addComponent(thirdRowLayout);
+        layout.addComponent(fourthRowLayout);
         
+        
+        setContent(layout);
     }
     
 }

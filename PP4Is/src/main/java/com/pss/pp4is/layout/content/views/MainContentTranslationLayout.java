@@ -7,31 +7,39 @@
 package com.pss.pp4is.layout.content.views;
 
 import com.pss.pp4is.data.DataController;
-import com.pss.pp4is.data.models.TranslationComponent;
-import com.pss.pp4is.layout.content.CustomVerticalLayout;
+import com.pss.pp4is.layout.content.CustomPanelLayout;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  *
  * @author Nedzad
  */
-public class MainContentTranslationLayout extends CustomVerticalLayout{
+public class MainContentTranslationLayout extends CustomPanelLayout{
+
+    public MainContentTranslationLayout(LayoutController layoutController) {
+        super(layoutController);
+    }
 
     
     @Override
     public void initLayout() {
-        setMargin(true);
-        setSpacing(true);
+        VerticalLayout layoutContent = new VerticalLayout();
         
-        addComponent(new Label(getLayoutController().getI18n().translate("Translation listing")));
-        
+        layoutContent.addComponent(new Label(getLayoutController().getI18n().translate("Translation listing")));
+        layoutContent.setSizeFull();
         Table translationTable = new Table();
+        translationTable.setSizeFull();
         translationTable.setContainerDataSource(DataController.getTranslations());
-        
         translationTable.setVisibleColumns("keyword","englishTranslation","hungarianTranslation");
         translationTable.setColumnHeaders(getLayoutController().getI18n().translate("Keyword"),getLayoutController().getI18n().translate("English"),getLayoutController().getI18n().translate("Hungarian"));
         
-        addComponent(translationTable);
+        translationTable.setColumnWidth("keyword", 480);
+        
+        layoutContent.addComponent(translationTable);
+        
+        setContent(layoutContent);
     }
 }

@@ -37,7 +37,7 @@ public class CustomHeaderLayout extends  HorizontalLayout{
     private void initNewLayout() {
         setSizeFull();
         addStyleName("header-layout");
-        setHeight("39px");
+        setHeight("36px");
         
         addLeftHeaderContent();
         
@@ -59,6 +59,7 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         leftHeaderContent.addComponent(new Image(null, new ThemeResource("img/world-map.jpg")));
         
         ComboBox comboBox = new ComboBox(null);
+        layoutController.setLanguageComboBox(comboBox);
         comboBox.setStyleName(ValoTheme.COMBOBOX_BORDERLESS);
         comboBox.setWidth("115px");
         comboBox.setHeight("32px");

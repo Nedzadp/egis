@@ -10,6 +10,7 @@ import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.data.models.User;
 import com.pss.pp4is.layout.CustomLayout;
 import com.pss.pp4is.layout.CustomTimerTask;
+import com.pss.pp4is.layout.MainMenuBar;
 import com.pss.pp4is.layout.TimerButton;
 import com.pss.pp4is.layout.UserLoginHeader;
 import com.pss.pp4is.layout.content.MainContentComponent;
@@ -23,6 +24,7 @@ import com.vaadin.server.Page;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Panel;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Timer;
@@ -58,6 +60,8 @@ public class LayoutController implements Serializable{
      private String userLabel = null;
     private String fromDateLabel = null;
     private String toDateLabel = null;
+    
+    private MainMenuBar mainMenuBar;
     
     public LayoutController() {
         user = null;
@@ -337,5 +341,25 @@ public class LayoutController implements Serializable{
     public void refreshNewLayout() {
         getUserLoginHeader().removeAllComponents();
         getUserLoginHeader().refreshNewLayout();
+        getMainMenuBar().removeItems();
+        getMainMenuBar().initAuthenticatedMenuBar();
     }
+
+    public void setMainMenuBar(MainMenuBar mainMenuBar) {
+        this.mainMenuBar = mainMenuBar;
+    }
+
+    public MainMenuBar getMainMenuBar() {
+        return mainMenuBar;
+    }
+
+    public void setMainContentPanel(Panel mainContentPanel) {
+        this.mainContentPanel = mainContentPanel;
+    }
+
+    public Panel getMainContentPanel() {
+        return mainContentPanel;
+    }
+    
+    private  Panel mainContentPanel;
 }

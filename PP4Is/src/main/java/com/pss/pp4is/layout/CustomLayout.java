@@ -6,10 +6,14 @@
 
 package com.pss.pp4is.layout;
 
+import com.pss.pp4is.layout.content.CustomVerticalLayout;
 import com.pss.pp4is.layout.content.MainContentComponent;
+import com.pss.pp4is.layout.content.MainContentLayoutEnum;
 import com.pss.pp4is.layout.header.CustomHeaderLayout;
 import com.pss.pp4is.layout.navigation.MainMenuNavigationLayout;
+import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationEnum;
 import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
+import com.pss.pp4is.layout.navigation.submenu.links.home.WelcomeMenuBarCommand;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.event.MouseEvents;
 import com.vaadin.event.MouseEvents.ClickListener;
@@ -17,7 +21,11 @@ import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
+import com.vaadin.ui.MenuBar;
+import com.vaadin.ui.MenuBar.MenuItem;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  *
@@ -31,6 +39,8 @@ public class CustomLayout extends  VerticalLayout{
     private SubMenuNavigationLayout subMenuNavigationLayout;
     private MainContentComponent mainContentComponent;
     private final LayoutController layoutController;
+    private MainMenuBar mainMenuBar;
+    private Panel mainContentPanel;
     
     public CustomLayout(LayoutController layoutController) {
         this.layoutController = layoutController;
@@ -40,8 +50,29 @@ public class CustomLayout extends  VerticalLayout{
     public final void initNewStyle() { 
         createNewHeader();
         
+        addMainMenu();
+        
         addMainContent();
         
+    }
+    
+    private void addMainMenu() {
+        HorizontalLayout mainMenuLayout = new HorizontalLayout();
+        mainMenuLayout.addStyleName("main-menu-bar");
+        
+        if(mainMenuBar==null) {
+            mainMenuBar = new MainMenuBar(layoutController);
+        }
+        mainMenuBar.removeItems();
+        mainMenuBar.initWelcomeMenu();
+        
+        layoutController.setMainMenuBar(mainMenuBar);
+      
+        mainMenuLayout.addComponent(mainMenuBar);
+        mainMenuLayout.setComponentAlignment(mainMenuBar, Alignment.TOP_CENTER);
+        
+        addComponent(mainMenuLayout);
+        setComponentAlignment(mainMenuLayout, Alignment.TOP_CENTER);
     }
     
     private void createNewHeader() {
@@ -84,9 +115,18 @@ public class CustomLayout extends  VerticalLayout{
      private void addMainContent() {
         HorizontalLayout mainContent = new HorizontalLayout();
         mainContent.addStyleName("main-layout-content");
-        mainContent.addComponent(mainContentComponent = new MainContentComponent(layoutController));
-        mainContent.setComponentAlignment(mainContentComponent, Alignment.TOP_CENTER);
+        if(mainContentComponent==null) {
+            mainContentComponent = new MainContentComponent(layoutController);
+        }
+        mainContentComponent.removeAllComponents();
+        mainContentComponent.initLayout();
+        
         layoutController.setMainContentComponent(mainContentComponent);
+        
+        mainContent.addComponent(mainContentComponent);
+        mainContent.setComponentAlignment(mainContentComponent, Alignment.TOP_CENTER);
+        
+        
         addComponent(mainContent);
         setComponentAlignment(mainContent, Alignment.TOP_CENTER);
     }
@@ -185,5 +225,9 @@ public class CustomLayout extends  VerticalLayout{
 
     public LayoutController getLayoutController() {
         return layoutController;
+    }
+
+    public MainMenuBar getMainMenuBar() {
+        return mainMenuBar;
     }
 }

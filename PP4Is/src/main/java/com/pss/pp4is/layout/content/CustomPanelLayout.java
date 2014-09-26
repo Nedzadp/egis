@@ -8,20 +8,21 @@ package com.pss.pp4is.layout.content;
 
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  *
  * @author Nedzad
  */
-public abstract class CustomVerticalLayout extends VerticalLayout{
-    private LayoutController layoutController;
+public abstract class CustomPanelLayout extends Panel{
+    private final LayoutController layoutController;
     
-    public CustomVerticalLayout() {
-    }
-
-    public void setLayoutController(LayoutController layoutController) {
+    public CustomPanelLayout(LayoutController layoutController) {
         this.layoutController = layoutController;
+        addStyleName(ValoTheme.PANEL_BORDERLESS);
+        addStyleName(ValoTheme.PANEL_SCROLL_INDICATOR);
+        setWidth("990px");
+        setHeight("100%");
     }
 
     public LayoutController getLayoutController() {
@@ -29,5 +30,4 @@ public abstract class CustomVerticalLayout extends VerticalLayout{
     }
     
     public abstract void initLayout();
-    
 }

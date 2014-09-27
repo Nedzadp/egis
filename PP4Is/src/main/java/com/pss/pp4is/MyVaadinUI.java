@@ -32,19 +32,17 @@ public class MyVaadinUI extends UI
     }
     
     private void initNewLayout() {
-        Panel panel = new Panel();
-        panel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        panel.addStyleName(ValoTheme.PANEL_SCROLL_INDICATOR);
-        panel.addStyleName("vertical-background");
-        panel.setSizeFull();
+        VerticalLayout layout = new VerticalLayout();
+        layout.setSizeFull();
+        layout.addStyleName("vertical-background");
+        
         layoutController = new LayoutController();
         layoutController.setI18n(new I18n(LanguageEnum.getENGLISH()));
         customLayout = new CustomLayout(layoutController);
         layoutController.setCustomLayout(customLayout);
+        layout.addComponent(customLayout);
         
-        panel.setContent(customLayout);
-        
-        setContent(panel);
+        setContent(layout);
     }
     
     private void initLayout() {

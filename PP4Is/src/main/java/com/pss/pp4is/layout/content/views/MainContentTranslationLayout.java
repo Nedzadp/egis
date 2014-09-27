@@ -33,11 +33,12 @@ public class MainContentTranslationLayout extends CustomPanelLayout{
         layoutContent.addComponent(new Label(getLayoutController().getI18n().translate("Translation listing")));
         
         Table translationTable = new Table();
+        translationTable.setSizeFull();
         translationTable.setContainerDataSource(DataController.getTranslations());
         translationTable.setVisibleColumns("keyword","englishTranslation","hungarianTranslation");
         translationTable.setColumnHeaders(getLayoutController().getI18n().translate("Keyword"),getLayoutController().getI18n().translate("English"),getLayoutController().getI18n().translate("Hungarian"));
         
-        translationTable.setColumnWidth("keyword", 450);
+        translationTable.setColumnWidth("keyword", 420);
         
         layoutContent.addComponent(translationTable);
         

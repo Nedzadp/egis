@@ -15,6 +15,10 @@ $v-font-family: "Trebuchet MS",sans-serif;
   /* Include all the styles from the reindeer theme */
   @include valo;
  
+  .v-scrollable > .v-widget {
+    vertical-align: middle;
+    overflow: auto;
+}
   .filter-layout{
       background-color: #f3f4f4;
       border: 1px solid #cccccc;
@@ -32,6 +36,7 @@ $v-font-family: "Trebuchet MS",sans-serif;
   
   .vertical-background{
       background-color: #fff;
+      height: auto;
   }
   .v-app, .v-app-loading {
 	font: 300 16px/1.55 "Trebuchet MS", sans-serif;

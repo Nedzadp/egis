@@ -7,6 +7,7 @@
 package com.pss.pp4is.layout.content.tables;
 
 import com.pss.pp4is.data.containers.InspectionProfileContainer;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.Table;
 import java.io.Serializable;
 
@@ -17,8 +18,10 @@ import java.io.Serializable;
 public class InspectionProfileTable extends Table implements Serializable{
 
     private final InspectionProfileContainer inspectionProfileContainer;
+    private final LayoutController layoutController;
     
-    public InspectionProfileTable(InspectionProfileContainer inspectionProfileContainer) {
+    public InspectionProfileTable(LayoutController layoutController,InspectionProfileContainer inspectionProfileContainer) {
+        this.layoutController = layoutController;
         this.inspectionProfileContainer = inspectionProfileContainer;
         initTable();
     }
@@ -34,7 +37,7 @@ public class InspectionProfileTable extends Table implements Serializable{
         createDataRow();
         setVisibleColumns(InspectionProfileContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("inspectionProfileId", true);
-        setColumnHeaders(InspectionProfileContainer.COL_HEADERS_ENGLISH);
+        setColumnHeaders(inspectionProfileContainer.getCOL_HEADERS_ENGLISH(layoutController));
         setColumnWidth("inspectionProfileId", 120);
     }
     

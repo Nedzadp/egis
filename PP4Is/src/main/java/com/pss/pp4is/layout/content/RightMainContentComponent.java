@@ -77,7 +77,7 @@ public class RightMainContentComponent extends  VerticalLayout{
     public void addInspectionTable(Product product) {
         InspectionContainer inspectionContainer = DataController.getProductInspections(product.getProductId());
         if(inspectionContainer != null) {
-            productInspectionTable = new ProductInspectionTable(inspectionContainer);
+            productInspectionTable = new ProductInspectionTable(layoutController,inspectionContainer);
             addComponent(productInspectionTable);
         }
     }
@@ -117,7 +117,7 @@ public class RightMainContentComponent extends  VerticalLayout{
     public void addInspectionTable(ProductMaster productMaster) {
         InspectionContainer inspectionContainer = DataController.getProductInspectionsByMaster(productMaster.getMasterId());
         if(inspectionContainer != null) {
-            productInspectionTable = new ProductInspectionTable(inspectionContainer);
+            productInspectionTable = new ProductInspectionTable(layoutController,inspectionContainer);
             addComponent(productInspectionTable);
         }
     }

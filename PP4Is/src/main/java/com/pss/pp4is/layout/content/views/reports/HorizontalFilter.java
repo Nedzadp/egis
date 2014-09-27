@@ -53,7 +53,7 @@ public class HorizontalFilter extends HorizontalLayout{
         VerticalLayout leftSide = new VerticalLayout();
         
         leftSide.setWidth("850px");
-        Label filterOptionLabel = new Label("Filter options");
+        Label filterOptionLabel = new Label(layoutController.getI18n().translate("Filter options"));
         filterOptionLabel.addStyleName("filter-bold-label");
         leftSide.addComponent(filterOptionLabel);
         
@@ -72,7 +72,7 @@ public class HorizontalFilter extends HorizontalLayout{
         userSelectLayout.setWidth("380px");
         userSelectLayout.setHeight("100px");
         
-        Label usersLabel = new Label("Users: ");
+        Label usersLabel = new Label(layoutController.getI18n().translate("Users: "));
         usersLabel.setWidth("100px");
         userSelectLayout.addComponent(usersLabel);
         userSelectLayout.setExpandRatio(usersLabel, 0.1f);
@@ -104,7 +104,7 @@ public class HorizontalFilter extends HorizontalLayout{
         fromDateField.addStyleName(ValoTheme.DATEFIELD_TINY);
         fromDateField.setWidth("280px");
         fromDateField.setDateFormat("yyyy-MM-dd HH:mm");
-        Label fromDateLabel = new Label("From date: ");
+        Label fromDateLabel = new Label(layoutController.getI18n().translate("From date: "));
         fromDateLabel.setWidth("100px");
         fromDateFieldLayout.addComponent(fromDateLabel);
         fromDateFieldLayout.addComponent(fromDateField);
@@ -121,7 +121,7 @@ public class HorizontalFilter extends HorizontalLayout{
         toDateField.setValue(new Timestamp(new Date().getTime()));
         toDateField.setResolution(Resolution.SECOND);
         toDateField.setWidth("280px");
-        Label toDateLabel = new Label("To date: ");
+        Label toDateLabel = new Label(layoutController.getI18n().translate("To date: "));
         toDateLabel.setWidth("100px");
         toDateFieldLayout.addComponent(toDateLabel);
         toDateFieldLayout.addComponent(toDateField);
@@ -152,7 +152,7 @@ public class HorizontalFilter extends HorizontalLayout{
         rightSide.setHeight("164px");
         rightSide.addStyleName("right-border");
         
-        Button applyFilter = new Button("Apply", new Button.ClickListener() {
+        Button applyFilter = new Button(layoutController.getI18n().translate("Apply"), new Button.ClickListener() {
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
@@ -162,7 +162,7 @@ public class HorizontalFilter extends HorizontalLayout{
         applyFilter.addStyleName(ValoTheme.BUTTON_FRIENDLY);
         applyFilter.addStyleName(ValoTheme.BUTTON_SMALL);
         
-        Button clearFilter = new Button("Clear", new Button.ClickListener() {
+        Button clearFilter = new Button(layoutController.getI18n().translate("Clear"), new Button.ClickListener() {
 
             @Override
             public void buttonClick(Button.ClickEvent event) {

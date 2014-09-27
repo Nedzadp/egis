@@ -31,7 +31,7 @@ public class MainContentInspectionProfileLayout extends CustomPanelLayout{
         
         layout.addComponent(new Label(getLayoutController().getI18n().translate("Inspection profile listing")));
         
-        InspectionProfileTable inspectionProfileTable = new InspectionProfileTable(DataController.getInspectionProfiles());
+        InspectionProfileTable inspectionProfileTable = new InspectionProfileTable(getLayoutController(),DataController.getInspectionProfiles());
         
         layout.addComponent(inspectionProfileTable);
         

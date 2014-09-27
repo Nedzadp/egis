@@ -11658,7 +11658,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .v-scrollable > .v-widget {
 	vertical-align: middle;
-	overflow: auto;
+	overflow: scroll;
 }
 
 .pp4istheme .filter-layout {

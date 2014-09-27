@@ -1,15 +1,51 @@
 /* Import the reindeer theme. */
 /* This only allows us to use the mixins defined in it and does not add any styles by itself. */
+
 @import "../valo/valo.scss";
 //@import "../valo/valo";
+
 @import "keyframes.scss";
 /* This contains all of your theme. */
 /* If somebody wants to extend the theme she will include this mixin. */
 
 $v-font-family: "Trebuchet MS",sans-serif;
+
+
 @mixin pp4istheme {
   /* Include all the styles from the reindeer theme */
   @include valo;
+ 
+  .filter-layout{
+      background-color: #f3f4f4;
+      border: 1px solid #cccccc;
+      padding: 5px;
+  }
+  .horizontal-filter-line{
+      background-color: #cccccc;
+  }
+  .filter-bold-label{
+      font-weight: bold;
+  }
+  .right-border{
+      border-left: 1px solid #cccccc;
+  }
+  
+  .vertical-background{
+      background-color: #fff;
+  }
+  .v-app, .v-app-loading {
+	font: 300 16px/1.55 "Trebuchet MS", sans-serif;
+	color: #474747;
+	background-color: #fff;
+	cursor: default;
+}
+
+ .v-app-loading {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+  
   /* Insert your theme rules here */
   .v-table-cell-wrapper {
         white-space: normal;

@@ -24,6 +24,7 @@ public class ListMenuBarCommand extends AbstractCommand{
 
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
+        getLayoutController().setMenuSelected(selectedItem);
         CustomPanelLayout layout = new MainContentListsLayout(getLayoutController());
         layout.initLayout();
         getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();

@@ -17,6 +17,7 @@ import com.pss.pp4is.layout.content.tables.InspectionDetailTable;
 import com.pss.pp4is.layout.content.tables.ProductInspectionTable;
 import com.pss.pp4is.layout.content.tables.ProductMasterTable;
 import com.pss.pp4is.layout.content.tables.ProductTable;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -31,8 +32,10 @@ public class RightMainContentComponent extends  VerticalLayout{
     private ProductMasterTable productMasterTable;
     private ProductInspectionTable productInspectionTable;
     private InspectionDetailTable inspectionDetailTable;
+    private LayoutController layoutController;
     
-    public RightMainContentComponent() {
+    public RightMainContentComponent(LayoutController layoutController) {
+        this.layoutController = layoutController;
         setWidth("620px");
         addStyleName("right-panel");
     }
@@ -86,7 +89,7 @@ public class RightMainContentComponent extends  VerticalLayout{
     public void addInspectionDetailTable(Inspection inspection, ProductMaster productMaster) {
         InspectionDetailContainer  inspectionDetailContainer = DataController.getInspectionDetails(inspection.getInspectionId(),productMaster.getMasterId());
         if(inspectionDetailContainer != null) {
-            inspectionDetailTable = new InspectionDetailTable(inspectionDetailContainer);
+            inspectionDetailTable = new InspectionDetailTable(layoutController,inspectionDetailContainer);
             addComponent(inspectionDetailTable);
         }
     }
@@ -98,7 +101,7 @@ public class RightMainContentComponent extends  VerticalLayout{
     public void addInspectionDetailTable(Product product) {
          InspectionDetailContainer  inspectionDetailContainer = DataController.getInspectionDetailsByProduct(product.getProductId());
         if(inspectionDetailContainer != null) {
-            inspectionDetailTable = new InspectionDetailTable(inspectionDetailContainer);
+            inspectionDetailTable = new InspectionDetailTable(layoutController,inspectionDetailContainer);
             addComponent(inspectionDetailTable);
         }
     }
@@ -106,7 +109,7 @@ public class RightMainContentComponent extends  VerticalLayout{
     public void addInspectionDetailTable(ProductMaster productMaster, Inspection inspection) {
         InspectionDetailContainer  inspectionDetailContainer = DataController.getInspectionDetailsByMaster(productMaster.getMasterId(),inspection.getInspectionId());
         if(inspectionDetailContainer != null) {
-            inspectionDetailTable = new InspectionDetailTable(inspectionDetailContainer);
+            inspectionDetailTable = new InspectionDetailTable(layoutController,inspectionDetailContainer);
             addComponent(inspectionDetailTable);
         }
     }

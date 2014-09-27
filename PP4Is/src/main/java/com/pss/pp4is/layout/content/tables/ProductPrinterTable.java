@@ -7,6 +7,7 @@
 package com.pss.pp4is.layout.content.tables;
 
 import com.pss.pp4is.data.containers.ProductPrinterContainer;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.Table;
 import java.io.Serializable;
 
@@ -17,8 +18,10 @@ import java.io.Serializable;
 public class ProductPrinterTable extends Table implements Serializable{
 
     private final ProductPrinterContainer productPrinterContainer;
+    private final LayoutController layoutController;
     
-    public ProductPrinterTable(ProductPrinterContainer productPrinterContainer) {
+    public ProductPrinterTable(LayoutController layoutController,ProductPrinterContainer productPrinterContainer) {
+        this.layoutController = layoutController;
         this.productPrinterContainer = productPrinterContainer;
         initTable();
     }
@@ -34,7 +37,7 @@ public class ProductPrinterTable extends Table implements Serializable{
         createDataRow();
         setVisibleColumns(ProductPrinterContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("productPrinterId", true);
-        setColumnHeaders(ProductPrinterContainer.COL_HEADERS_ENGLISH);
+        setColumnHeaders(productPrinterContainer.getCOL_HEADERS_ENGLISH(layoutController));
         setColumnWidth("productPrinterId", 110);
     }
     

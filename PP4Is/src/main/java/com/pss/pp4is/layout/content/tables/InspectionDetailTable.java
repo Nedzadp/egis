@@ -7,6 +7,7 @@
 package com.pss.pp4is.layout.content.tables;
 
 import com.pss.pp4is.data.containers.InspectionDetailContainer;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.Table;
 import java.io.Serializable;
 
@@ -17,8 +18,10 @@ import java.io.Serializable;
 public class InspectionDetailTable extends Table implements Serializable{
 
     private final InspectionDetailContainer inspectionDetailContainer;
+    private final LayoutController layoutController;
     
-    public InspectionDetailTable(InspectionDetailContainer inspectionDetailContainer) {
+    public InspectionDetailTable(LayoutController layoutController,InspectionDetailContainer inspectionDetailContainer) {
+        this.layoutController =layoutController;
         this.inspectionDetailContainer = inspectionDetailContainer;
         initTable();
     }
@@ -35,7 +38,7 @@ public class InspectionDetailTable extends Table implements Serializable{
         setVisibleColumns(InspectionDetailContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("inspection_details_id", true);
         setColumnCollapsed("master_id", true);
-        setColumnHeaders(InspectionDetailContainer.COL_HEADERS_ENGLISH);
+        setColumnHeaders(inspectionDetailContainer.getCOL_HEADERS_ENGLISH(layoutController));
         setColumnWidth("inspection_details_id", 120);
     }
     

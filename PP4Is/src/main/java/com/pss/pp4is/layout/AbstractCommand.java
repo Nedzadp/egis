@@ -15,7 +15,7 @@ import com.vaadin.ui.MenuBar.Command;
  */
 public abstract class AbstractCommand implements Command{
 
-    private LayoutController layoutController; 
+    private final LayoutController layoutController; 
     
     public AbstractCommand(LayoutController layoutController) {
         this.layoutController = layoutController;
@@ -24,4 +24,6 @@ public abstract class AbstractCommand implements Command{
     public LayoutController getLayoutController() {
         return layoutController;
     }
+    
+    
 }

@@ -8,7 +8,7 @@ package com.pss.pp4is.layout.navigation.submenu.links.home;
 
 import com.pss.pp4is.layout.AbstractCommand;
 import com.pss.pp4is.layout.content.CustomPanelLayout;
-import com.pss.pp4is.layout.content.views.listing.MainContentProductInspectionLayout;
+import com.pss.pp4is.layout.content.views.MainContentTranslationLayout;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.MenuBar;
 
@@ -24,7 +24,8 @@ public class TranslationMenuBarCommand extends AbstractCommand{
 
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
-        CustomPanelLayout layout = new MainContentProductInspectionLayout(getLayoutController());
+        getLayoutController().setMenuSelected(selectedItem);
+        CustomPanelLayout layout = new MainContentTranslationLayout(getLayoutController());
         layout.initLayout();
         getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
         getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);

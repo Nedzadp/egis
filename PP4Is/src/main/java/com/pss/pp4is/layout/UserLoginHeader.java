@@ -46,6 +46,8 @@ public class UserLoginHeader extends HorizontalLayout{
     private final LayoutController layoutController;
     private CustomTimerTask customTimerTask;
     private HorizontalLayout content;
+    private Label loggedInLabel;
+    private Label autoLogoutLabel;
     
     public UserLoginHeader(LayoutController layoutController) {
         this.layoutController = layoutController;
@@ -127,7 +129,7 @@ public class UserLoginHeader extends HorizontalLayout{
                 } else {
                      layoutController.getI18n().setLanguageEnum(LanguageEnum.getUserLanguage(user));
                      layoutController.setUser(user);
-                     
+                     layoutController.getComboBox().setValue(layoutController.getI18n().getLanguageEnum().getLang());
                      Notification notification = new Notification(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
                      notification.setDelayMsec(2000);
                      notification.show(Page.getCurrent());
@@ -217,6 +219,7 @@ public class UserLoginHeader extends HorizontalLayout{
                     
                 } else {
                      layoutController.getI18n().setLanguageEnum(LanguageEnum.getUserLanguage(user));
+                     layoutController.getComboBox().setValue(layoutController.getI18n().getLanguageEnum().getLang());
                      Notification notification = new Notification(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
                      notification.setDelayMsec(1);
                      notification.show(Page.getCurrent());
@@ -304,7 +307,8 @@ public class UserLoginHeader extends HorizontalLayout{
     public void refreshNewLayout() {
         initContent();
         
-        Label loggedInLabel = new Label(layoutController.getI18n().translate("LOGGED IN: "));
+        loggedInLabel = new Label();
+        loggedInLabel.setValue(layoutController.getI18n().translate("LOGGED IN: "));
         loggedInLabel.addStyleName("label-color");
        
         
@@ -321,7 +325,8 @@ public class UserLoginHeader extends HorizontalLayout{
         spacer.setWidth("20px");
         content.addComponent(spacer);
         
-        Label autoLogoutLabel = new Label(layoutController.getI18n().translate("AUTO LOG OUT TIME:"));
+        autoLogoutLabel = new Label();
+        autoLogoutLabel.setValue(layoutController.getI18n().translate("AUTO LOG OUT TIME:"));
         autoLogoutLabel.addStyleName("label-color");
         
         content.addComponent(autoLogoutLabel);
@@ -365,5 +370,22 @@ public class UserLoginHeader extends HorizontalLayout{
          
          content.addComponent(logoutButton);
          content.setComponentAlignment(logoutButton, Alignment.MIDDLE_RIGHT);
+    }
+
+    public Label getAutoLogoutLabel() {
+        return autoLogoutLabel;
+    }
+
+    public Label getLoggedInLabel() {
+        return loggedInLabel;
+    }
+
+    public void refreshLabelTranslate() {
+        if(autoLogoutLabel!=null){
+            autoLogoutLabel.setValue("");
+            loggedInLabel.setValue("");
+            autoLogoutLabel.setValue(layoutController.getI18n().translate("AUTO LOG OUT TIME:"));
+            loggedInLabel.setValue(layoutController.getI18n().translate("LOGGED IN: "));
+        }
     }
 }

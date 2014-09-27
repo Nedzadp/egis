@@ -42,7 +42,7 @@ public class MainContentUserActivityLayout extends CustomPanelLayout{
     
     @Override
     public void initLayout() {
-       layout = new VerticalLayout();
+        layout = new VerticalLayout();
         layout.setMargin(true);
         layout.setSpacing(true);
         
@@ -65,12 +65,8 @@ public class MainContentUserActivityLayout extends CustomPanelLayout{
                UI.getCurrent().addWindow(addFilter());
             }
         });
-        
-        Label spacer = new Label(" ");
-        spacer.setHeight("10px");
-        layout.addComponent(spacer);
         addFilterLayout();
-       layout.addComponent(userActivityTable);
+        layout.addComponent(userActivityTable);
         layout.addComponent(userProductTable);
         layout.addComponent(userInspectionTable);
         
@@ -81,11 +77,10 @@ public class MainContentUserActivityLayout extends CustomPanelLayout{
        return new UserActivityFilterPopup(userActivityTable,userProductTable,userInspectionTable,null,null,getLayoutController(),this);
     }
     public void repaint() {
-        layout.removeAllComponents();
-        Label spacer = new Label(" ");
-        spacer.setHeight("10px");
-        layout.addComponent(spacer);
-        addFilterLayout();
+        layout.removeComponent(userActivityTable);
+        layout.removeComponent(userProductTable);
+        layout.removeComponent(userInspectionTable);
+        //addFilterLayout();
         layout.addComponent(userActivityTable);
         layout.addComponent(userProductTable);
         layout.addComponent(userInspectionTable);
@@ -93,8 +88,9 @@ public class MainContentUserActivityLayout extends CustomPanelLayout{
     private void addFilterLayout(){
         filterLayout = new HorizontalLayout();
         
-        filterLayout.setSpacing(true);
-        
+        HorizontalFilter horizontalFilter = new HorizontalFilter(getLayoutController(),this,null);
+        filterLayout.addComponent(horizontalFilter);
+        /*
         filterLayout.addComponent(filterButton);
         filterLayout.setComponentAlignment(filterButton, Alignment.MIDDLE_CENTER);
         
@@ -108,8 +104,20 @@ public class MainContentUserActivityLayout extends CustomPanelLayout{
         }
         panel.setContent(filterData);
 
-        filterLayout.addComponent(panel);
-        
+        //filterLayout.addComponent(panel);
+        */
         layout.addComponent(filterLayout);
+    }
+
+    public UserActivityTable getUserActivityTable() {
+        return userActivityTable;
+    }
+
+    public UserProductTable getUserProductTable() {
+        return userProductTable;
+    }
+
+    public UserInspectionTable getUserInspectionTable() {
+        return userInspectionTable;
     }
 }

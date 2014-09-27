@@ -55,8 +55,11 @@ public class MainMenuBar extends MenuBar {
 
     public void initAuthenticatedMenuBar() {
         MenuItem menuItemSystem = addItem(layoutController.getI18n().translate("PP4I SYSTEM"), null);
+        MenuItem selectedItem = menuItemSystem.addItem(layoutController.getI18n().translate("WELCOME"), new WelcomeMenuBarCommand(layoutController));
+        if(layoutController.getMenuSelected()==null) {
+            layoutController.setMenuSelected(selectedItem);
+        }
         
-        menuItemSystem.addItem(layoutController.getI18n().translate("WELCOME"), new WelcomeMenuBarCommand(layoutController));
         menuItemSystem.addItem("ENGLISH", new EnglishMenuBarCommand(layoutController));
         menuItemSystem.addItem("MAGYAR", new MagyarMenuBarCommand(layoutController));
         menuItemSystem.addItem(layoutController.getI18n().translate("RESTART CLOCK"), new RestartClockMenuBarCommand(layoutController));

@@ -19,10 +19,9 @@ public abstract class CustomPanelLayout extends Panel{
     
     public CustomPanelLayout(LayoutController layoutController) {
         this.layoutController = layoutController;
+        setWidth("990px");
         addStyleName(ValoTheme.PANEL_BORDERLESS);
         addStyleName(ValoTheme.PANEL_SCROLL_INDICATOR);
-        setWidth("990px");
-        setHeight("100%");
     }
 
     public LayoutController getLayoutController() {

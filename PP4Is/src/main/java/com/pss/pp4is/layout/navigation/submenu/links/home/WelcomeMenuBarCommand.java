@@ -22,6 +22,7 @@ public class WelcomeMenuBarCommand extends AbstractCommand {
     }
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
+        getLayoutController().setMenuSelected(selectedItem);
         getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
         if(getLayoutController().getUser()!=null) {
             getLayoutController().getCustomLayout().getMainContentComponent().initWelcomeLayout();

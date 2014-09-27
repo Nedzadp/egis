@@ -14,6 +14,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.themes.BaseTheme;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  *
@@ -46,7 +47,8 @@ public class CustomTranslation extends HorizontalLayout{
         
         addComponent(updateButton = new Button("save"));
         setComponentAlignment(updateButton, Alignment.MIDDLE_RIGHT);
-        updateButton.addStyleName(BaseTheme.BUTTON_LINK);
+        updateButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+        updateButton.addStyleName(ValoTheme.BUTTON_TINY);
         updateButton.addClickListener(new Button.ClickListener() {
 
             @Override

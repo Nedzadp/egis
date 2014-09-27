@@ -8,6 +8,7 @@ package com.pss.pp4is.system;
 
 import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.data.models.User;
+import com.pss.pp4is.layout.AbstractCommand;
 import com.pss.pp4is.layout.CustomLayout;
 import com.pss.pp4is.layout.CustomTimerTask;
 import com.pss.pp4is.layout.MainMenuBar;
@@ -23,6 +24,7 @@ import com.pss.pp4is.layout.navigation.submenu.SubMenuNavigationLayout;
 import com.vaadin.server.Page;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import java.io.Serializable;
@@ -57,9 +59,10 @@ public class LayoutController implements Serializable{
     private CustomSubmenuLink currentSubmenuLinkSelected;
     private ComboBox comboBox;
     
-     private String userLabel = null;
+    private String userLabel = null;
     private String fromDateLabel = null;
     private String toDateLabel = null;
+    private MenuItem menuSelected;
     
     private MainMenuBar mainMenuBar;
     
@@ -67,6 +70,14 @@ public class LayoutController implements Serializable{
         user = null;
         clockTimer = new Timer();
         timerButton = new TimerButton(this);
+    }
+
+    public MenuItem getMenuSelected() {
+        return menuSelected;
+    }
+
+    public void setMenuSelected(MenuItem menuSelected) {
+        this.menuSelected = menuSelected;
     }
 
     public void setCurrentRootLinkSelected(CustomButtonLink currentRootLinkSelected) {
@@ -300,7 +311,7 @@ public class LayoutController implements Serializable{
         setCustomButtonLink(null);
         setCustomButtonLink(null);
         getCustomLayout().removeAllComponents();
-        getCustomLayout().init();
+        getCustomLayout().initNewStyle();
         Notification notification = new Notification(getI18n().translate("Timer"),getI18n().translate("You have been automatically logged out!"), Notification.Type.WARNING_MESSAGE);
         notification.setDelayMsec(1);
         notification.show(Page.getCurrent());
@@ -343,6 +354,8 @@ public class LayoutController implements Serializable{
         getUserLoginHeader().refreshNewLayout();
         getMainMenuBar().removeItems();
         getMainMenuBar().initAuthenticatedMenuBar();
+        getMainContentComponent().removeAllComponents();
+        getMainContentComponent().initWelcomeLayout();
     }
 
     public void setMainMenuBar(MainMenuBar mainMenuBar) {
@@ -362,4 +375,10 @@ public class LayoutController implements Serializable{
     }
     
     private  Panel mainContentPanel;
+
+    public void refreshLanguageNewLayoutAuthenticated() {
+        getMainMenuBar().removeItems();
+        getMainMenuBar().initAuthenticatedMenuBar();
+        getUserLoginHeader().refreshLabelTranslate();
+    }
 }

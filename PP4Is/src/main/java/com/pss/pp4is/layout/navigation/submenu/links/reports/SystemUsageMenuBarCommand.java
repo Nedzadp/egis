@@ -24,6 +24,7 @@ public class SystemUsageMenuBarCommand extends AbstractCommand{
 
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
+        getLayoutController().setMenuSelected(selectedItem);
         CustomPanelLayout layout = new MainContentSystemUsageLayout(getLayoutController());
         layout.initLayout();
         getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();

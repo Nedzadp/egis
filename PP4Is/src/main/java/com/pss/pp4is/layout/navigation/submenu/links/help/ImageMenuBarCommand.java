@@ -24,6 +24,7 @@ public class ImageMenuBarCommand extends AbstractCommand{
 
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
+        getLayoutController().setMenuSelected(selectedItem);
         CustomPanelLayout layout = new MainContentImagesLayout(getLayoutController());
         layout.initLayout();
         getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();

@@ -24,6 +24,7 @@ public class DocumentCompaniesMenuBarCommand extends AbstractCommand{
 
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
+        getLayoutController().setMenuSelected(selectedItem);
         CustomPanelLayout layout = new MainContentProductPrinterLayout(getLayoutController());
         layout.initLayout();
         getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();

@@ -17,7 +17,6 @@ import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -33,7 +32,6 @@ public class CustomLayout extends  VerticalLayout{
     private MainContentComponent mainContentComponent;
     private final LayoutController layoutController;
     private MainMenuBar mainMenuBar;
-    private Panel mainContentPanel;
     
     public CustomLayout(LayoutController layoutController) {
         this.layoutController = layoutController;

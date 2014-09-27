@@ -22,6 +22,7 @@ public class RestartClockMenuBarCommand extends AbstractCommand {
 
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
+        getLayoutController().setMenuSelected(selectedItem);
        getLayoutController().getUserLoginHeader().resetClock();
     }
 }

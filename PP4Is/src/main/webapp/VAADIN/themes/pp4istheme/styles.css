@@ -11656,6 +11656,41 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
+.pp4istheme .filter-layout {
+	background-color: #f3f4f4;
+	border: 1px solid #cccccc;
+	padding: 5px;
+}
+
+.pp4istheme .horizontal-filter-line {
+	background-color: #cccccc;
+}
+
+.pp4istheme .filter-bold-label {
+	font-weight: bold;
+}
+
+.pp4istheme .right-border {
+	border-left: 1px solid #cccccc;
+}
+
+.pp4istheme .vertical-background {
+	background-color: #fff;
+}
+
+.pp4istheme .v-app, .pp4istheme .v-app-loading {
+	font: 300 16px/1.55 "Trebuchet MS", sans-serif;
+	color: #474747;
+	background-color: #fff;
+	cursor: default;
+}
+
+.pp4istheme .v-app-loading {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+
 .pp4istheme .v-table-cell-wrapper {
 	white-space: normal;
 }

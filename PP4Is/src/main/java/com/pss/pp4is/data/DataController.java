@@ -750,7 +750,7 @@ public class DataController {
     }
     
     public static void updateUserLanguage(User user, String language) {
-        String sql = "UPDATE translation SET language = ? WHERE userId = ?";
+        String sql = "UPDATE user SET language = ? WHERE userId = ? ";
         DatabaseConnection databaseConnection = new DatabaseConnection();
         try {
             databaseConnection.connect();

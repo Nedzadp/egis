@@ -24,12 +24,14 @@ public class MagyarMenuBarCommand extends AbstractCommand {
 
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
+        
         getLayoutController().getI18n().setLanguageEnum(LanguageEnum.HUNGARIAN);
         if(getLayoutController().getUser()==null) {
             getLayoutController().refreshLanguageLayout();
         } else {
-            getLayoutController().refreshLanguageLayoutAuthenticated();
-            DataController.updateUserLanguage(getLayoutController().getUser(), LanguageEnum.HUNGARIAN.getLang());
+            getLayoutController().refreshLanguageNewLayoutAuthenticated();
+            getLayoutController().getMenuSelected().getCommand().menuSelected(getLayoutController().getMenuSelected());
+            DataController.updateUserLanguage(getLayoutController().getUser(), getLayoutController().getI18n().getLanguageEnum().getLang());
         }
         getLayoutController().getComboBox().setValue(getLayoutController().getI18n().getLanguageEnum().getLang());
     }

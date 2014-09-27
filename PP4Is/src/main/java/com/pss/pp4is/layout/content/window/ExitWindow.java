@@ -55,11 +55,10 @@ public class ExitWindow extends Window{
                 layoutController.getCustomLayout().removeAllComponents();
                 layoutController.setUser(null);
                 layoutController.getCustomTimerTask().cancel();
-                layoutController.setCurrentRootLinkSelected(null);
-                layoutController.setCurrentSubmenuLinkSelected(null);
-                layoutController.setCustomButtonLink(null);
-                layoutController.setCustomButtonLink(null);
-                layoutController.getCustomLayout().init();
+                //layoutController.setCurrentRootLinkSelected(null);
+                //layoutController.setCurrentSubmenuLinkSelected(null);
+                //layoutController.setCustomButtonLink(null);
+                layoutController.getCustomLayout().initNewStyle();
             }
         });
         yesButton.addStyleName(ValoTheme.BUTTON_DANGER);

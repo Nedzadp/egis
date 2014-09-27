@@ -24,6 +24,7 @@ public class ExitMenuBarCommand extends AbstractCommand{
 
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
+        
         UI.getCurrent().addWindow(new ExitWindow(getLayoutController()));
     }
 }

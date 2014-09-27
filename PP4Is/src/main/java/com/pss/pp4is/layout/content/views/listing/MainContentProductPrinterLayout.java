@@ -32,7 +32,7 @@ public class MainContentProductPrinterLayout extends CustomPanelLayout{
         
         layout.addComponent(new Label(getLayoutController().getI18n().translate("Product printer listing")));
         
-        ProductPrinterTable productPrinterTable = new ProductPrinterTable(DataController.getProductPrinter());
+        ProductPrinterTable productPrinterTable = new ProductPrinterTable(getLayoutController(),DataController.getProductPrinter());
         
         layout.addComponent(productPrinterTable);
         

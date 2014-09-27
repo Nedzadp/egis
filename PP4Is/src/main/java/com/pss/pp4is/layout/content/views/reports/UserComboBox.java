@@ -11,6 +11,7 @@ import com.pss.pp4is.data.containers.UserContainer;
 import com.pss.pp4is.data.models.User;
 import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  *
@@ -23,7 +24,7 @@ public class UserComboBox extends ComboBox{
     }
     
     private void initLayout() {
-        setCaption("User");
+        addStyleName(ValoTheme.COMBOBOX_SMALL);
         setNullSelectionAllowed(true);
         setFilteringMode(FilteringMode.CONTAINS);
         setTextInputAllowed(false);

@@ -65,11 +65,6 @@ public class MainContentSystemUsageLayout extends CustomPanelLayout{
             }
         });
         
-        
-        Label spacer = new Label(" ");
-        spacer.setHeight("10px");
-        layout.addComponent(spacer);
-        
         addFilterLayout();
         
         layout.addComponent(systemUsageTable);
@@ -109,7 +104,9 @@ public class MainContentSystemUsageLayout extends CustomPanelLayout{
     
     private void addFilterLayout(){
         filterLayout = new HorizontalLayout();
-        
+        HorizontalFilter horizontalFilter = new HorizontalFilter(getLayoutController(),null,this);
+        filterLayout.addComponent(horizontalFilter);
+        /*
         filterLayout.setSpacing(true);
         
         filterLayout.addComponent(filterButton);
@@ -126,8 +123,12 @@ public class MainContentSystemUsageLayout extends CustomPanelLayout{
         panel.setContent(filterData);
 
         filterLayout.addComponent(panel);
-        
+        */
         layout.addComponent(filterLayout);
+    }
+
+    public SystemUsageTable getSystemUsageTable() {
+        return systemUsageTable;
     }
     
 }

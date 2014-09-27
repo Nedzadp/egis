@@ -25,12 +25,13 @@ public class EnglishMenuBarCommand extends AbstractCommand{
     
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
-      getLayoutController().getI18n().setLanguageEnum(LanguageEnum.ENGLISH);
+        getLayoutController().getI18n().setLanguageEnum(LanguageEnum.ENGLISH);
         if(getLayoutController().getUser()==null) {
             getLayoutController().refreshLanguageLayout();
         } else {
-            getLayoutController().refreshLanguageLayoutAuthenticated();
-            DataController.updateUserLanguage(getLayoutController().getUser(), LanguageEnum.ENGLISH.getLang());
+            getLayoutController().refreshLanguageNewLayoutAuthenticated();
+            getLayoutController().getMenuSelected().getCommand().menuSelected(getLayoutController().getMenuSelected());
+            DataController.updateUserLanguage(getLayoutController().getUser(), getLayoutController().getI18n().getLanguageEnum().getLang());
         }
         getLayoutController().getComboBox().setValue(getLayoutController().getI18n().getLanguageEnum().getLang());
     }

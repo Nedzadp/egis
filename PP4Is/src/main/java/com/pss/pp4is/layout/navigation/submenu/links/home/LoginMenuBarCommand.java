@@ -25,6 +25,7 @@ public class LoginMenuBarCommand extends AbstractCommand{
 
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
+        getLayoutController().setMenuSelected(selectedItem);
         Notification note = new Notification(null,"Log in here, please!",Notification.Type.HUMANIZED_MESSAGE);
         note.setDelayMsec(4000);
         note.setPosition(Position.TOP_CENTER);

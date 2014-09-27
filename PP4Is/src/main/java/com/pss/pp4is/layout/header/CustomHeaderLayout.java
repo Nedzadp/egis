@@ -84,8 +84,8 @@ public class CustomHeaderLayout extends  HorizontalLayout{
                 if(layoutController.getUser()==null) {
                     layoutController.refreshLanguageLayout();
                 } else {
-                    layoutController.refreshLanguageLayoutAuthenticated();
-                    layoutController.getCurrentSubmenuLinkSelected().click();
+                    layoutController.refreshLanguageNewLayoutAuthenticated();
+                    layoutController.getMenuSelected().getCommand().menuSelected(layoutController.getMenuSelected());
                     DataController.updateUserLanguage(layoutController.getUser(), layoutController.getI18n().getLanguageEnum().getLang());
                 }
             }
@@ -102,9 +102,10 @@ public class CustomHeaderLayout extends  HorizontalLayout{
     
     private void addRightHeaderContent() {
         userLoginHeader = new UserLoginHeader(layoutController);
+        layoutController.setUserLogin(userLoginHeader);
         headerContent.addComponent(userLoginHeader);
         headerContent.setComponentAlignment(userLoginHeader, Alignment.TOP_RIGHT);
-        layoutController.setUserLogin(userLoginHeader);
+       
     }
     
     private void initLayout() {

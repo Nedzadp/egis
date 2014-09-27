@@ -46,7 +46,7 @@ public class MainContentProductInspectionLayout extends CustomPanelLayout{
         leftMainContentComponent.initLayout();
         
         
-        final RightMainContentComponent rightMainContentComponent = new RightMainContentComponent();      
+        final RightMainContentComponent rightMainContentComponent = new RightMainContentComponent(getLayoutController());      
         rightMainContentComponent.initLayout(getLayoutController().getI18n().translate("Product"));
         firstRowLayout.addComponent(rightMainContentComponent);
         firstRowLayout.addComponent(leftMainContentComponent);
@@ -57,21 +57,21 @@ public class MainContentProductInspectionLayout extends CustomPanelLayout{
         
         
         
-        final RightMainContentComponent rightMainContentComponentSecondRow = new RightMainContentComponent();      
+        final RightMainContentComponent rightMainContentComponentSecondRow = new RightMainContentComponent(getLayoutController());      
         rightMainContentComponentSecondRow.initHeader(getLayoutController().getI18n().translate("Master"));
         secondRowLayout.addComponent(rightMainContentComponentSecondRow);
         secondRowLayout.addComponent(leftMainContentComponentSecondRow);
         
         
         HorizontalLayout thirdRowLayout = new HorizontalLayout();
-        final RightMainContentComponent rightMainContentComponentThirddRow = new RightMainContentComponent();        
+        final RightMainContentComponent rightMainContentComponentThirddRow = new RightMainContentComponent(getLayoutController());        
         rightMainContentComponentThirddRow.initHeader(getLayoutController().getI18n().translate("Inspection"));
         thirdRowLayout.addComponent(rightMainContentComponentThirddRow);
         
         HorizontalLayout fourthRowLayout = new HorizontalLayout();
         
         
-        final RightMainContentComponent rightMainContentComponentFourthRow = new RightMainContentComponent();        
+        final RightMainContentComponent rightMainContentComponentFourthRow = new RightMainContentComponent(getLayoutController());        
         rightMainContentComponentFourthRow.initHeader(getLayoutController().getI18n().translate("Inspection details"));
         final LeftMainContentComponent leftMainContentComponentFourthRow = new LeftMainContentComponent();
         leftMainContentComponentFourthRow.setWidth("260px");

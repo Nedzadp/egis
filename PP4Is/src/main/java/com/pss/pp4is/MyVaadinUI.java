@@ -8,8 +8,10 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 import javax.servlet.annotation.WebServlet;
 
 @Theme("pp4istheme")
@@ -30,15 +32,19 @@ public class MyVaadinUI extends UI
     }
     
     private void initNewLayout() {
-        VerticalLayout verticalLayout = new VerticalLayout();
-        
+        Panel panel = new Panel();
+        panel.addStyleName(ValoTheme.PANEL_BORDERLESS);
+        panel.addStyleName(ValoTheme.PANEL_SCROLL_INDICATOR);
+        panel.addStyleName("vertical-background");
+        panel.setSizeFull();
         layoutController = new LayoutController();
         layoutController.setI18n(new I18n(LanguageEnum.getENGLISH()));
         customLayout = new CustomLayout(layoutController);
         layoutController.setCustomLayout(customLayout);
-        verticalLayout.addComponent(customLayout);
         
-        setContent(verticalLayout);
+        panel.setContent(customLayout);
+        
+        setContent(panel);
     }
     
     private void initLayout() {

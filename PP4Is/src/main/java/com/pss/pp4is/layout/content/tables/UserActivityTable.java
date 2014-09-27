@@ -30,7 +30,7 @@ public class UserActivityTable extends Table implements Serializable{
         setImmediate(true);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(7);
+        setPageLength(5);
         createDataRow();
         setVisibleColumns(UserActivityContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("id", true);

@@ -45,7 +45,6 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         
         addComponent(headerContent);
         setComponentAlignment(headerContent, Alignment.TOP_CENTER);
-       
         
     }
   

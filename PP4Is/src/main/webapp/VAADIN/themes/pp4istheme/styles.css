@@ -11698,6 +11698,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .label-font {
 	color: #ddeb25;
+	padding-top: 6px;
 	font-weight: bold;
 }
 
@@ -11715,6 +11716,16 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .label-color {
 	color: #FFFFFF;
+	padding-top: 6px;
+}
+
+.pp4istheme .login-label-color {
+	color: #FFFFFF;
+	padding-top: 6px;
+}
+
+.pp4istheme .logout-button-padding {
+	margin-top: 8px;
 }
 
 .pp4istheme .restart-clock-button-new {
@@ -11724,6 +11735,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .username-border {
 	border: 1px solid #0082b9;
+	margin-top: 7px;
 }
 
 .pp4istheme .v-filterselect .v-filterselect-button:before {
@@ -11978,9 +11990,8 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .pp4istheme .v-slot-login-label-action {
-	padding-top: 2px;
+	padding-top: 6px;
 	color: red;
-	font-weight: bold;
 }
 
 .pp4istheme .login-fields {

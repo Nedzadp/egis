@@ -54,6 +54,7 @@ $v-font-family: "Trebuchet MS",sans-serif;
     }
   .label-font{
       color: #ddeb25;
+      padding-top: 6px;
       font-weight: bold;
   }
   .v-button-link {
@@ -68,6 +69,14 @@ $v-font-family: "Trebuchet MS",sans-serif;
   }
   .label-color{
       color: #FFFFFF;
+      padding-top: 6px;
+  }
+  .login-label-color{
+      color: #FFFFFF;
+      padding-top: 6px;
+  }
+  .logout-button-padding{
+      margin-top: 8px;
   }
   .restart-clock-button-new {
         color: #ddeb25;
@@ -75,6 +84,7 @@ $v-font-family: "Trebuchet MS",sans-serif;
     }
     .username-border{
         border: 1px solid #0082b9;
+        margin-top: 7px;
     }
   .v-filterselect .v-filterselect-button:before {
     color: #FFFFFF;
@@ -308,9 +318,8 @@ $v-font-family: "Trebuchet MS",sans-serif;
        padding-top: 2px;
     }
     .v-slot-login-label-action {
-       padding-top: 2px;
+       padding-top: 6px;
        color:red;
-       font-weight: bold;
     }
     
     .login-fields {

@@ -33,11 +33,8 @@ public class I18n implements Serializable{
     }
     
     public String translate(String keyword){
-        for(Map.Entry<String, String> mapEntry : translationMap.entrySet()) {
-            System.out.println("KEY: "+mapEntry.getKey()+" VALUE "+mapEntry.getValue());
-        }
         if(!translationMap.containsKey(keyword)) {
-            DataController.insertKeywordForTranslation(keyword);
+            //DataController.insertKeywordForTranslation(keyword);
             translationMap.put(keyword, keyword);
         } 
         return translationMap.get(keyword);

@@ -271,13 +271,16 @@ public class LayoutController implements Serializable{
     
     public void refreshLayout() {
         getUserLoginHeader().removeAllComponents();
-        getMainMenuNavigationLayout().removeAllComponents();
-        getSubMenuNavigationLayout().removeAllComponents();
+        getUserLoginHeader().refreshLayout();
+       // getMainMenuNavigationLayout().removeAllComponents();
+        //getSubMenuNavigationLayout().removeAllComponents();
+        getMainMenuBar().removeItems();
+        getMainMenuBar().initAuthenticatedMenuBar();
         getMainContentComponent().removeAllComponents();
         getMainContentComponent().initWelcomeLayout();
-        getUserLoginHeader().refreshLayout();
-        getMainMenuNavigationLayout().initLayoutForAuthenticatedUser();
-        getSubMenuNavigationLayout().initLayoutForAuthenticatedUser();
+        
+        //getMainMenuNavigationLayout().initLayoutForAuthenticatedUser();
+        //getSubMenuNavigationLayout().initLayoutForAuthenticatedUser();
     }
     
      public void refreshLanguageLayoutAuthenticated() {
@@ -351,7 +354,7 @@ public class LayoutController implements Serializable{
 
     public void refreshNewLayout() {
         getUserLoginHeader().removeAllComponents();
-        getUserLoginHeader().refreshNewLayout();
+        getUserLoginHeader().refreshLayout();
         getMainMenuBar().removeItems();
         getMainMenuBar().initAuthenticatedMenuBar();
         getMainContentComponent().removeAllComponents();

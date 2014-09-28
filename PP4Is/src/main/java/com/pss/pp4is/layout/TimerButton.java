@@ -34,6 +34,6 @@ public class TimerButton extends Button implements Refresher.RefreshListener {
             seconds +="0";
         }
         seconds += layoutController.getSeconds().toString();
-        setCaption(layoutController.getMinutes().toString()+" : "+seconds);
+        setCaption(layoutController.getMinutes().toString()+":"+seconds);
     }
 }

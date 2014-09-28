@@ -36,6 +36,6 @@ public class MainContentProductLanguageLayout extends CustomPanelLayout{
         
         layout.addComponent(productLanguageTable);
         
-        setContent(layout);
+        addComponent(layout);
     }
 }

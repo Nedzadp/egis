@@ -70,7 +70,7 @@ public class MainContentUserActivityLayout extends CustomPanelLayout{
         layout.addComponent(userProductTable);
         layout.addComponent(userInspectionTable);
         
-        setContent(layout);
+        addComponent(layout);
         
     }
     private UserActivityFilterPopup addFilter() {

@@ -31,6 +31,7 @@ public class MyVaadinUI extends UI
     
     private void initNewLayout() {
         VerticalLayout layout = new VerticalLayout();
+        layout.setSizeFull();
         layout.addStyleName("vertical-background");
         
         layoutController = new LayoutController();

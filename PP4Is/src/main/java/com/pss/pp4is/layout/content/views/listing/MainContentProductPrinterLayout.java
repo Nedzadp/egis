@@ -36,6 +36,6 @@ public class MainContentProductPrinterLayout extends CustomPanelLayout{
         
         layout.addComponent(productPrinterTable);
         
-        setContent(layout);
+        addComponent(layout);
     }
 }

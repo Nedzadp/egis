@@ -33,7 +33,7 @@ public class MainContentReportsLayout extends CustomPanelLayout{
         } else if(getLayoutController().getI18n().getLanguageEnum().getLang().equals("hun")) {
             layout.addComponent(new CustomLayout("reports_hun")); 
         }
-        setContent(layout);
+        addComponent(layout);
                
     }
 }

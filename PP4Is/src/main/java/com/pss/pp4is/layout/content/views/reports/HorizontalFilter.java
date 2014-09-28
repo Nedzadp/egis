@@ -47,29 +47,29 @@ public class HorizontalFilter extends HorizontalLayout{
     
     private void initLayout() {
         addStyleName("filter-layout");
-        setWidth("960px");
+        setWidth("915px");
         setHeight("170px");
     
         VerticalLayout leftSide = new VerticalLayout();
         
-        leftSide.setWidth("850px");
+        leftSide.setWidth("807px");
         Label filterOptionLabel = new Label(layoutController.getI18n().translate("Filter options"));
         filterOptionLabel.addStyleName("filter-bold-label");
         leftSide.addComponent(filterOptionLabel);
         
         Label horizontalSpacer = new Label("");
         horizontalSpacer.addStyleName("horizontal-filter-line");
-        horizontalSpacer.setWidth("800px");
+        horizontalSpacer.setWidth("780px");
         horizontalSpacer.setHeight("1px");
         leftSide.addComponent(horizontalSpacer);
         
         HorizontalLayout fieldsLayout = new HorizontalLayout();
         fieldsLayout.setHeight("100px");
-        fieldsLayout.setWidth("800px");
+        fieldsLayout.setWidth("780px");
         
         // user select left layout
         HorizontalLayout userSelectLayout = new HorizontalLayout();
-        userSelectLayout.setWidth("380px");
+        userSelectLayout.setWidth("360px");
         userSelectLayout.setHeight("100px");
         
         Label usersLabel = new Label(layoutController.getI18n().translate("Users: "));
@@ -94,15 +94,15 @@ public class HorizontalFilter extends HorizontalLayout{
         // right dates layout
         VerticalLayout rightFieldsLayout = new  VerticalLayout();
         
-        rightFieldsLayout.setWidth("380px");
+        rightFieldsLayout.setWidth("360px");
         rightFieldsLayout.setHeight("100px");
         
         HorizontalLayout fromDateFieldLayout = new HorizontalLayout();
-        fromDateFieldLayout.setWidth("380px");
+        fromDateFieldLayout.setWidth("360px");
         fromDateFieldLayout.setHeight("100px");
         fromDateField = new DateField();
         fromDateField.addStyleName(ValoTheme.DATEFIELD_TINY);
-        fromDateField.setWidth("280px");
+        fromDateField.setWidth("260px");
         fromDateField.setDateFormat("yyyy-MM-dd HH:mm");
         Label fromDateLabel = new Label(layoutController.getI18n().translate("From date: "));
         fromDateLabel.setWidth("100px");
@@ -113,14 +113,14 @@ public class HorizontalFilter extends HorizontalLayout{
         // end right dates layout
         
         HorizontalLayout toDateFieldLayout = new HorizontalLayout();
-        toDateFieldLayout.setWidth("380px");
+        toDateFieldLayout.setWidth("360px");
         toDateFieldLayout.setHeight("100px");
         toDateField = new DateField();
         toDateField.addStyleName(ValoTheme.DATEFIELD_TINY);
         toDateField.setDateFormat("yyyy-MM-dd HH:mm");
         toDateField.setValue(new Timestamp(new Date().getTime()));
         toDateField.setResolution(Resolution.SECOND);
-        toDateField.setWidth("280px");
+        toDateField.setWidth("260px");
         Label toDateLabel = new Label(layoutController.getI18n().translate("To date: "));
         toDateLabel.setWidth("100px");
         toDateFieldLayout.addComponent(toDateLabel);
@@ -159,7 +159,6 @@ public class HorizontalFilter extends HorizontalLayout{
                 applyFilter(username,fromDateField.getValue(),toDateField.getValue());
             }
         });
-        applyFilter.addStyleName(ValoTheme.BUTTON_FRIENDLY);
         applyFilter.addStyleName(ValoTheme.BUTTON_SMALL);
         
         Button clearFilter = new Button(layoutController.getI18n().translate("Clear"), new Button.ClickListener() {

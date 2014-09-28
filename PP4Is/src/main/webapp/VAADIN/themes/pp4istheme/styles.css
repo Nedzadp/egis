@@ -11710,6 +11710,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .combo-box-font {
 	color: #ddeb25;
+	font-weight: bold;
 }
 
 .pp4istheme .label-color {
@@ -11719,6 +11720,10 @@ div.v-layout.v-horizontal.v-widget {
 .pp4istheme .restart-clock-button-new {
 	color: #ddeb25;
 	text-decoration: none;
+}
+
+.pp4istheme .username-border {
+	border: 1px solid #0082b9;
 }
 
 .pp4istheme .v-filterselect .v-filterselect-button:before {
@@ -12068,6 +12073,11 @@ div.v-layout.v-horizontal.v-widget {
 	text-align: left;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
 	white-space: nowrap;
+}
+
+.pp4istheme .v-menubar:focus:after {
+	border-color: 0;
+	box-shadow: 0 0 0 0 rgba(25, 125, 225, 0.5);
 }
 
 .pp4istheme .v-menubar > .v-menubar-menuitem {

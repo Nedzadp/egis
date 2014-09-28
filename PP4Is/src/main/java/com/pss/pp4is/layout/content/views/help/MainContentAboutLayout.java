@@ -32,6 +32,6 @@ public class MainContentAboutLayout extends CustomPanelLayout{
         } else if(getLayoutController().getI18n().getLanguageEnum().getLang().equals("hun")) {
             layout.addComponent(new CustomLayout("about_hun")); 
         } 
-        setContent(layout);
+        addComponent(layout);
     }
 }

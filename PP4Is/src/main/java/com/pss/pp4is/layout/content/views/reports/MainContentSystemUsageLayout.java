@@ -71,7 +71,7 @@ public class MainContentSystemUsageLayout extends CustomPanelLayout{
         
         layout.addComponent(customChartComponent);
         
-        setContent(layout);
+        addComponent(layout);
         
     }
 

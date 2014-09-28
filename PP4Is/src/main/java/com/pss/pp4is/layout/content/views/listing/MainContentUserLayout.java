@@ -36,6 +36,6 @@ public class MainContentUserLayout extends CustomPanelLayout{
         
         layout.addComponent(userTable);
         
-        setContent(layout);
+        addComponent(layout);
     }
 }

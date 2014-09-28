@@ -8,9 +8,9 @@ package com.pss.pp4is.layout.content.views;
 
 import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.layout.content.CustomPanelLayout;
+import com.pss.pp4is.layout.content.tables.TranslationTable;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
 /**
@@ -31,17 +31,8 @@ public class MainContentTranslationLayout extends CustomPanelLayout{
         layoutContent.setSpacing(true);
         
         layoutContent.addComponent(new Label(getLayoutController().getI18n().translate("Translation listing")));
+        layoutContent.addComponent(new TranslationTable(getLayoutController(), DataController.getTranslations()));
         
-        Table translationTable = new Table();
-        translationTable.setSizeFull();
-        translationTable.setContainerDataSource(DataController.getTranslations());
-        translationTable.setVisibleColumns("keyword","englishTranslation","hungarianTranslation");
-        translationTable.setColumnHeaders(getLayoutController().getI18n().translate("Keyword"),getLayoutController().getI18n().translate("English"),getLayoutController().getI18n().translate("Hungarian"));
-        
-        translationTable.setColumnWidth("keyword", 420);
-        
-        layoutContent.addComponent(translationTable);
-        
-        setContent(layoutContent);
+        addComponent(layoutContent);
     }
 }

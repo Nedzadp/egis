@@ -32,6 +32,6 @@ public class MainContentImagesLayout extends CustomPanelLayout{
         } else if(getLayoutController().getI18n().getLanguageEnum().getLang().equals("hun")) {
              layout.addComponent(new CustomLayout("images_hun")); 
         } 
-        setContent(layout);
+        addComponent(layout);
     }
 }

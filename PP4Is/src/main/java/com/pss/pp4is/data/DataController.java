@@ -15,6 +15,7 @@ import com.pss.pp4is.data.containers.ProductMasterContainer;
 import com.pss.pp4is.data.containers.ProductPrinterContainer;
 import com.pss.pp4is.data.containers.ProductTypeContainer;
 import com.pss.pp4is.data.containers.SystemUsageContainer;
+import com.pss.pp4is.data.containers.TranslationContainer;
 import com.pss.pp4is.data.containers.UserActivityContainer;
 import com.pss.pp4is.data.containers.UserContainer;
 import com.pss.pp4is.data.containers.UserInspectionContainer;
@@ -766,8 +767,8 @@ public class DataController {
         }
     }
     
-     public static Container getTranslations() {
-        Container container = new BeanItemContainer(TranslationComponent.class);
+     public static TranslationContainer getTranslations() {
+        TranslationContainer container = new TranslationContainer();
         DatabaseConnection databaseConnection = new DatabaseConnection();
         String selectSql = "SELECT id,keyword, english, magyar FROM translation;";
         

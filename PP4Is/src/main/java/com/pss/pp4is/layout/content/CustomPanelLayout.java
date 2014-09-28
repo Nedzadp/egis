@@ -7,21 +7,18 @@
 package com.pss.pp4is.layout.content;
 
 import com.pss.pp4is.system.LayoutController;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.ui.VerticalLayout;
 
 /**
  *
  * @author Nedzad
  */
-public abstract class CustomPanelLayout extends Panel{
+public abstract class CustomPanelLayout extends VerticalLayout{
     private final LayoutController layoutController;
     
     public CustomPanelLayout(LayoutController layoutController) {
         this.layoutController = layoutController;
         setWidth("990px");
-        addStyleName(ValoTheme.PANEL_BORDERLESS);
-        addStyleName(ValoTheme.PANEL_SCROLL_INDICATOR);
     }
 
     public LayoutController getLayoutController() {

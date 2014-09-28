@@ -150,7 +150,7 @@ public class MainContentProductInspectionLayout extends CustomPanelLayout{
         layout.addComponent(fourthRowLayout);
         
         
-        setContent(layout);
+        addComponent(layout);
     }
     
 }

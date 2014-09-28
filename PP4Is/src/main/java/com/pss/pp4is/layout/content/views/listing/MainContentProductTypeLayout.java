@@ -35,7 +35,7 @@ public class MainContentProductTypeLayout extends CustomPanelLayout{
         ProductTypeTable productTypeTable = new ProductTypeTable(DataController.getProductType());
         
         layout.addComponent(productTypeTable);
-        setContent(layout);
+        addComponent(layout);
         
     }
 }

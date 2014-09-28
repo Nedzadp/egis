@@ -20,7 +20,6 @@ public class MainContentComponent extends  VerticalLayout{
     public MainContentComponent(LayoutController layoutController) {
         this.layoutController = layoutController;
         initLayout();
-        setWidth("990px");
     }
     
     public final void initLayout() {

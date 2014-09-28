@@ -35,6 +35,6 @@ public class MainContentInspectionProfileLayout extends CustomPanelLayout{
         
         layout.addComponent(inspectionProfileTable);
         
-        setContent(layout);
+        addComponent(layout);
     }
 }

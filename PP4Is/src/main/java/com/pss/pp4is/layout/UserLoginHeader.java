@@ -80,7 +80,7 @@ public class UserLoginHeader extends HorizontalLayout{
         usernameField.addStyleName(ValoTheme.TEXTFIELD_TINY);
         usernameField.setInputPrompt(layoutController.getI18n().translate("username"));
         usernameField.setHeight("21px");
-        
+        usernameField.addStyleName("username-border");
         content.addComponent(usernameField);
         content.setComponentAlignment(usernameField, Alignment.TOP_RIGHT);
         
@@ -88,6 +88,7 @@ public class UserLoginHeader extends HorizontalLayout{
         passwordField.addStyleName(ValoTheme.TEXTFIELD_TINY);
         passwordField.setInputPrompt(layoutController.getI18n().translate("password"));
         passwordField.setHeight("21px");
+        passwordField.addStyleName("username-border");
         content.addComponent(passwordField);
         content.setComponentAlignment(passwordField, Alignment.TOP_RIGHT);
         

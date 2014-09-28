@@ -68,6 +68,11 @@ $v-font-family: "Trebuchet MS",sans-serif;
       color: #ddeb25;
       font-weight: bold;
   }
+  .custom-combobox{
+      color: #ddeb25;
+      font-weight: bolder;
+      padding-left: 5px;
+  }
   .label-color{
       color: #FFFFFF;
       padding-top: 6px;
@@ -100,6 +105,9 @@ $v-font-family: "Trebuchet MS",sans-serif;
 }
 .left-header-content{
     padding-top: 2px;
+}
+.world-map {
+    padding-left: 5px;
 }
   .header-layout {
       background-color: #00a3e8;

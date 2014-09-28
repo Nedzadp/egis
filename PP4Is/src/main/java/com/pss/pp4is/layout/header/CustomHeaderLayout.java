@@ -71,10 +71,10 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         comboBox.addStyleName("custom-combobox");
         
         comboBox.addItem("eng");
-        comboBox.setItemCaption("eng", "English");
+        comboBox.setItemCaption("eng", layoutController.getI18n().translate("English"));
         
         comboBox.addItem("hun");
-        comboBox.setItemCaption("hun", "Magyar");
+        comboBox.setItemCaption("hun", layoutController.getI18n().translate("Magyar"));
         comboBox.setValue(layoutController.getI18n().getLanguageEnum().getLang());
         comboBox.addValueChangeListener(new Property.ValueChangeListener() {
 

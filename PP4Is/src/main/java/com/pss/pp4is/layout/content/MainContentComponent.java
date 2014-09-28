@@ -28,8 +28,6 @@ public class MainContentComponent extends  VerticalLayout{
         } else if(layoutController.getI18n().getLanguageEnum().getLang().equals("hun")) {
             addComponent(new CustomLayout("home_hun"));
         }
-        HorizontalFilter filter = new HorizontalFilter(this.layoutController,null,null);
-        addComponent(filter);
     }
     
     public void initWelcomeLayout() {

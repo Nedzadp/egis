@@ -47,10 +47,10 @@ public class MainMenuBar extends MenuBar {
     void initWelcomeMenu() {
         MenuItem menuItem = addItem(layoutController.getI18n().translate("PP4I SYSTEM"), null);
         
-        menuItem.addItem("WELCOME", new WelcomeMenuBarCommand(layoutController));
-        menuItem.addItem("ENGLISH", new EnglishMenuBarCommand(layoutController));
-        menuItem.addItem("MAGYAR", new MagyarMenuBarCommand(layoutController));
-        menuItem.addItem("LOGIN", new LoginMenuBarCommand(layoutController));
+        menuItem.addItem(layoutController.getI18n().translate("WELCOME"), new WelcomeMenuBarCommand(layoutController));
+        menuItem.addItem(layoutController.getI18n().translate("ENGLISH"), new EnglishMenuBarCommand(layoutController));
+        menuItem.addItem(layoutController.getI18n().translate("MAGYAR"), new MagyarMenuBarCommand(layoutController));
+        menuItem.addItem(layoutController.getI18n().translate("LOGIN"), new LoginMenuBarCommand(layoutController));
     }
 
     public void initAuthenticatedMenuBar() {
@@ -60,8 +60,8 @@ public class MainMenuBar extends MenuBar {
             layoutController.setMenuSelected(selectedItem);
         }
         
-        menuItemSystem.addItem("ENGLISH", new EnglishMenuBarCommand(layoutController));
-        menuItemSystem.addItem("MAGYAR", new MagyarMenuBarCommand(layoutController));
+        menuItemSystem.addItem(layoutController.getI18n().translate("ENGLISH"), new EnglishMenuBarCommand(layoutController));
+        menuItemSystem.addItem(layoutController.getI18n().translate("MAGYAR"), new MagyarMenuBarCommand(layoutController));
         menuItemSystem.addItem(layoutController.getI18n().translate("RESTART CLOCK"), new RestartClockMenuBarCommand(layoutController));
         menuItemSystem.addItem(layoutController.getI18n().translate("EXIT"), new ExitMenuBarCommand(layoutController));
         menuItemSystem.addItem(layoutController.getI18n().translate("TRANSLATION"), new TranslationMenuBarCommand(layoutController));

@@ -6,6 +6,7 @@
 
 package com.pss.pp4is.layout.content;
 
+import com.pss.pp4is.layout.content.views.reports.HorizontalFilter;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.CustomLayout;
 import com.vaadin.ui.VerticalLayout;
@@ -19,7 +20,6 @@ public class MainContentComponent extends  VerticalLayout{
     private final LayoutController layoutController;
     public MainContentComponent(LayoutController layoutController) {
         this.layoutController = layoutController;
-        initLayout();
     }
     
     public final void initLayout() {
@@ -28,6 +28,8 @@ public class MainContentComponent extends  VerticalLayout{
         } else if(layoutController.getI18n().getLanguageEnum().getLang().equals("hun")) {
             addComponent(new CustomLayout("home_hun"));
         }
+        HorizontalFilter filter = new HorizontalFilter(this.layoutController,null,null);
+        addComponent(filter);
     }
     
     public void initWelcomeLayout() {

@@ -61,7 +61,7 @@ public class ExitWindow extends Window{
                 layoutController.getCustomLayout().initNewStyle();
             }
         });
-        yesButton.addStyleName(ValoTheme.BUTTON_DANGER);
+        yesButton.addStyleName(ValoTheme.BUTTON_SMALL);
         
         answerButtons.addComponent(yesButton);
 
@@ -71,7 +71,7 @@ public class ExitWindow extends Window{
                 close();
             }
         });
-        noButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+        noButton.addStyleName(ValoTheme.BUTTON_SMALL);
         answerButtons.addComponent(noButton);
         
         layout.addComponent(answerButtons);

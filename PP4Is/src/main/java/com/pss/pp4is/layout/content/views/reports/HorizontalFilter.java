@@ -21,7 +21,6 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -38,7 +37,7 @@ public class HorizontalFilter extends HorizontalLayout{
     private final MainContentUserActivityLayout activityLayout;
     private final MainContentSystemUsageLayout systemUsageLayout;
     
-    HorizontalFilter(LayoutController layoutController, MainContentUserActivityLayout activityLayout, MainContentSystemUsageLayout systemUsageLayout) {
+    public HorizontalFilter(LayoutController layoutController, MainContentUserActivityLayout activityLayout, MainContentSystemUsageLayout systemUsageLayout) {
         this.layoutController = layoutController;
         this.activityLayout = activityLayout;
         this.systemUsageLayout = systemUsageLayout;
@@ -48,7 +47,7 @@ public class HorizontalFilter extends HorizontalLayout{
     private void initLayout() {
         addStyleName("filter-layout");
         setWidth("915px");
-        setHeight("170px");
+        setHeight("140px");
     
         VerticalLayout leftSide = new VerticalLayout();
         
@@ -95,11 +94,11 @@ public class HorizontalFilter extends HorizontalLayout{
         VerticalLayout rightFieldsLayout = new  VerticalLayout();
         
         rightFieldsLayout.setWidth("360px");
-        rightFieldsLayout.setHeight("100px");
+        rightFieldsLayout.setHeight("80px");
         
         HorizontalLayout fromDateFieldLayout = new HorizontalLayout();
         fromDateFieldLayout.setWidth("360px");
-        fromDateFieldLayout.setHeight("100px");
+        fromDateFieldLayout.setHeight("30px");
         fromDateField = new DateField();
         fromDateField.addStyleName(ValoTheme.DATEFIELD_TINY);
         fromDateField.setWidth("260px");
@@ -114,7 +113,7 @@ public class HorizontalFilter extends HorizontalLayout{
         
         HorizontalLayout toDateFieldLayout = new HorizontalLayout();
         toDateFieldLayout.setWidth("360px");
-        toDateFieldLayout.setHeight("100px");
+        toDateFieldLayout.setHeight("30px");
         toDateField = new DateField();
         toDateField.addStyleName(ValoTheme.DATEFIELD_TINY);
         toDateField.setDateFormat("yyyy-MM-dd HH:mm");
@@ -132,7 +131,7 @@ public class HorizontalFilter extends HorizontalLayout{
         fieldsSpacer.setWidth("10px");
         Label horizontalFieldSpacer = new Label("");
         horizontalFieldSpacer.setWidth("1px");
-        horizontalFieldSpacer.setHeight("100px");
+        horizontalFieldSpacer.setHeight("85px");
         horizontalFieldSpacer.addStyleName("horizontal-filter-line");
         fieldsSpacer.addComponent(horizontalFieldSpacer);
         
@@ -149,7 +148,7 @@ public class HorizontalFilter extends HorizontalLayout{
         
         VerticalLayout rightSide = new VerticalLayout();
         rightSide.setWidth("100px");
-        rightSide.setHeight("164px");
+        rightSide.setHeight("132px");
         rightSide.addStyleName("right-border");
         
         Button applyFilter = new Button(layoutController.getI18n().translate("Apply"), new Button.ClickListener() {
@@ -173,7 +172,7 @@ public class HorizontalFilter extends HorizontalLayout{
             }
         });
         clearFilter.addStyleName(ValoTheme.BUTTON_SMALL);
-        
+        clearFilter.setWidth("65px");
         rightSide.setSpacing(true);
         rightSide.setMargin(true);
         rightSide.addComponent(applyFilter);

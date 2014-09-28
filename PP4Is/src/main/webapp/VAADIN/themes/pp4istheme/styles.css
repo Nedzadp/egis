@@ -11677,6 +11677,7 @@ div.v-layout.v-horizontal.v-widget {
 .pp4istheme .vertical-background {
 	background-color: #fff;
 	min-height: 1500px;
+	overflow: auto !important;
 }
 
 .pp4istheme .v-app, .pp4istheme .v-app-loading {

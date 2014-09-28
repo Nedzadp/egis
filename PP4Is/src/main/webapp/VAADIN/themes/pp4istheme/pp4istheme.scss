@@ -33,6 +33,7 @@ $v-font-family: "Trebuchet MS",sans-serif;
   .vertical-background{
       background-color: #fff;
       min-height: 1500px;
+      overflow: auto !important;
       
   }
   .v-app, .v-app-loading {

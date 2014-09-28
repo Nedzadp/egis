@@ -34,7 +34,7 @@ public class TranslationTable extends Table implements Serializable{
         setImmediate(false);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(25);
+        setPageLength(15);
         createDataRow();
         setVisibleColumns(TranslationContainer.NATURAL_COL_ORDER);
         setColumnHeaders(translationContainer.getCOL_HEADERS_ENGLISH(layoutController));

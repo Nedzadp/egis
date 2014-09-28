@@ -42,7 +42,7 @@ public class MainContentSystemUsageLayout extends CustomPanelLayout{
         layout.setMargin(true);
         layout.setSpacing(true);
         
-        
+        layout.addComponent(new Label(getLayoutController().getI18n().translate("System usage")));
         
         SystemUsageContainer systemUsageContainer = DataController.getFilteredSystemUsage(null, null, null);
         

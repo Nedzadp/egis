@@ -45,7 +45,7 @@ public class MainContentUserActivityLayout extends CustomPanelLayout{
         layout = new VerticalLayout();
         layout.setMargin(true);
         layout.setSpacing(true);
-        
+        layout.addComponent(new Label(getLayoutController().getI18n().translate("User activity")));
         
         userActivityTable = new UserActivityTable(DataController.getUserActivities());
         userActivityTable.setCaption(getLayoutController().getI18n().translate("User activities"));

@@ -34,7 +34,7 @@ public class I18n implements Serializable{
     
     public String translate(String keyword){
         if(!translationMap.containsKey(keyword)) {
-            //DataController.insertKeywordForTranslation(keyword);
+            DataController.insertKeywordForTranslation(keyword);
             translationMap.put(keyword, keyword);
         } 
         return translationMap.get(keyword);

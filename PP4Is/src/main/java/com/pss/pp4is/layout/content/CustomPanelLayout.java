@@ -18,7 +18,7 @@ public abstract class CustomPanelLayout extends VerticalLayout{
     
     public CustomPanelLayout(LayoutController layoutController) {
         this.layoutController = layoutController;
-        setWidth("990px");
+        setWidth("1090px");
     }
 
     public LayoutController getLayoutController() {

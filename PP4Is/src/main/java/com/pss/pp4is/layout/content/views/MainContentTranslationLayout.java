@@ -10,6 +10,7 @@ import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.layout.content.CustomPanelLayout;
 import com.pss.pp4is.layout.content.tables.TranslationTable;
 import com.pss.pp4is.system.LayoutController;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 

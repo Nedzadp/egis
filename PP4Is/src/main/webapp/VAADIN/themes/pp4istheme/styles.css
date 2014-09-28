@@ -11718,7 +11718,6 @@ div.v-layout.v-horizontal.v-widget {
 .pp4istheme .custom-combobox {
 	color: #ddeb25;
 	font-weight: bolder;
-	padding-left: 5px;
 }
 
 .pp4istheme .label-color {
@@ -11738,6 +11737,7 @@ div.v-layout.v-horizontal.v-widget {
 .pp4istheme .restart-clock-button-new {
 	color: #ddeb25;
 	text-decoration: none;
+	font-weight: bold;
 }
 
 .pp4istheme .username-border {
@@ -11775,22 +11775,22 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .pp4istheme .logo-layout-content {
-	width: 1024px;
+	width: 1090px;
 	height: 47px;
 }
 
 .pp4istheme .main-layout-content {
-	width: 1024px;
+	width: 1090px;
 	height: 100%;
 }
 
 .pp4istheme .main-menu-bar {
-	width: 1024px;
+	width: 1090px;
 	height: 28px;
 }
 
 .pp4istheme .header-layout-content {
-	width: 1024px;
+	width: 1090px;
 	padding-top: 2px;
 	height: 32px;
 }
@@ -12014,6 +12014,8 @@ div.v-layout.v-horizontal.v-widget {
 	background: white;
 	border: 3px solid #dfdfdf;
 	color: #00a2e8;
+	top: -8px;
+	left: -10px;
 }
 
 .pp4istheme .v-caption-username-label {
@@ -12045,7 +12047,8 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .pp4istheme .login-label-blinker {
-	padding-top: 2px;
+	padding-top: 6px;
+	color: #FFFFFF;
 	-webkit-animation-name: blinker;
 	-webkit-animation-duration: 1s;
 	-webkit-animation-timing-function: linear;

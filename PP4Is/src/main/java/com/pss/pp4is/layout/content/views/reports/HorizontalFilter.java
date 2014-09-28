@@ -46,7 +46,7 @@ public class HorizontalFilter extends HorizontalLayout{
     
     private void initLayout() {
         addStyleName("filter-layout");
-        setWidth("915px");
+        setWidth("1015px");
         setHeight("140px");
     
         VerticalLayout leftSide = new VerticalLayout();
@@ -58,7 +58,7 @@ public class HorizontalFilter extends HorizontalLayout{
         
         Label horizontalSpacer = new Label("");
         horizontalSpacer.addStyleName("horizontal-filter-line");
-        horizontalSpacer.setWidth("780px");
+        horizontalSpacer.setWidth("865px");
         horizontalSpacer.setHeight("1px");
         leftSide.addComponent(horizontalSpacer);
         

@@ -12,6 +12,7 @@ import com.vaadin.server.Page;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  *
@@ -26,14 +27,14 @@ public class LoginMenuBarCommand extends AbstractCommand{
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
         getLayoutController().setMenuSelected(selectedItem);
-        Notification note = new Notification(null,"Log in here, please!",Notification.Type.HUMANIZED_MESSAGE);
-        note.setDelayMsec(4000);
+        Notification note = new Notification(null,"Log in here, please!",Notification.Type.TRAY_NOTIFICATION);
+        note.setDelayMsec(2000);
         note.setPosition(Position.TOP_CENTER);
-        note.setStyleName("mynotification");
+        note.setStyleName(ValoTheme.NOTIFICATION_SMALL);
         note.show(Page.getCurrent());
 
         
-        getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label");
+        getLayoutController().getUserLoginHeader().getLoginLabel().removeStyleName("login-label-color");
         getLayoutController().getUserLoginHeader().getLoginLabel().addStyleName("login-label-blinker");
         
         getLayoutController().getUserLoginHeader().getUsernameField().addStyleName("login-fields-blinker");

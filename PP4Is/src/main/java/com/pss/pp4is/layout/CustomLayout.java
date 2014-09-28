@@ -60,7 +60,6 @@ public class CustomLayout extends  VerticalLayout{
         layoutController.setMainMenuBar(mainMenuBar);
       
         mainMenuLayout.addComponent(mainMenuBar);
-        mainMenuLayout.setComponentAlignment(mainMenuBar, Alignment.TOP_CENTER);
         
         addComponent(mainMenuLayout);
         setComponentAlignment(mainMenuLayout, Alignment.TOP_CENTER);
@@ -115,7 +114,6 @@ public class CustomLayout extends  VerticalLayout{
         layoutController.setMainContentComponent(mainContentComponent);
         
         mainContent.addComponent(mainContentComponent);
-        mainContent.setComponentAlignment(mainContentComponent, Alignment.TOP_CENTER);
         
         
         addComponent(mainContent);

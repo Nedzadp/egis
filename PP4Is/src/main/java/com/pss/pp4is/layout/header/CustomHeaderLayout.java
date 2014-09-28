@@ -62,8 +62,8 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         worldMapLogo.addStyleName("world-map");
         ComboBox comboBox = new ComboBox(null);
         layoutController.setLanguageComboBox(comboBox);
-        comboBox.setStyleName(ValoTheme.COMBOBOX_BORDERLESS);
-        comboBox.setWidth("115px");
+        comboBox.addStyleName(ValoTheme.COMBOBOX_BORDERLESS);
+        comboBox.addStyleName(ValoTheme.COMBOBOX_ALIGN_CENTER);
         comboBox.setHeight("32px");
         comboBox.setNullSelectionAllowed(false);
         comboBox.setTextInputAllowed(false);

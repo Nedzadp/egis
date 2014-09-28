@@ -71,7 +71,6 @@ $v-font-family: "Trebuchet MS",sans-serif;
   .custom-combobox{
       color: #ddeb25;
       font-weight: bolder;
-      padding-left: 5px;
   }
   .label-color{
       color: #FFFFFF;
@@ -118,19 +117,19 @@ $v-font-family: "Trebuchet MS",sans-serif;
       background-color: #0082b9;
   }
   .logo-layout-content {
-      width: 1024px;
+      width: 1090px;
       height: 47px;
   }
   .main-layout-content {
-      width: 1024px;
+      width: 1090px;
       height: 100%;
   }
   .main-menu-bar {
-      width: 1024px;
+      width: 1090px;
       height: 28px;
   }
   .header-layout-content{
-      width: 1024px;
+      width: 1090px;
       padding-top: 2px;
       height: 32px;
   }
@@ -341,6 +340,8 @@ $v-font-family: "Trebuchet MS",sans-serif;
         background: white;
         border: 3px solid #dfdfdf;
         color: #00a2e8;
+        top: -8px;
+        left:-10px;
     }
     
     .v-caption-username-label {
@@ -375,8 +376,8 @@ $v-font-family: "Trebuchet MS",sans-serif;
     
     .login-label-blinker {
         
-        padding-top: 2px;
-        
+        padding-top: 6px;
+        color: #FFFFFF;
         -webkit-animation-name: blinker;
         -webkit-animation-duration: 1s;
         -webkit-animation-timing-function: linear;

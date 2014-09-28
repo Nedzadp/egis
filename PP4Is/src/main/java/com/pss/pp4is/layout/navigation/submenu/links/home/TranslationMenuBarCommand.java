@@ -10,6 +10,7 @@ import com.pss.pp4is.layout.AbstractCommand;
 import com.pss.pp4is.layout.content.CustomPanelLayout;
 import com.pss.pp4is.layout.content.views.MainContentTranslationLayout;
 import com.pss.pp4is.system.LayoutController;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.MenuBar;
 
 /**

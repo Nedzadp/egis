@@ -30,7 +30,7 @@ public class UserProductTable extends Table implements Serializable{
         setImmediate(true);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(5);
+        setPageLength(7);
         createDataRow();
         setVisibleColumns(UserProductContainer.NATURAL_COL_ORDER);
         setColumnHeaders(UserProductContainer.COL_HEADERS_ENGLISH);

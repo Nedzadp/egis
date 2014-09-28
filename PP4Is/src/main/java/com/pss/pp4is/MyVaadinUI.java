@@ -8,10 +8,8 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.ValoTheme;
 import javax.servlet.annotation.WebServlet;
 
 @Theme("pp4istheme")
@@ -33,7 +31,6 @@ public class MyVaadinUI extends UI
     
     private void initNewLayout() {
         VerticalLayout layout = new VerticalLayout();
-        layout.setSizeFull();
         layout.addStyleName("vertical-background");
         
         layoutController = new LayoutController();

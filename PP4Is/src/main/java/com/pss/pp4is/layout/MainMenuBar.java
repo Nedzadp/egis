@@ -39,7 +39,7 @@ public class MainMenuBar extends MenuBar {
     
     public MainMenuBar(LayoutController layoutController) {
         this.layoutController = layoutController;
-        setWidth("1090px");
+        setWidth("1042px");
         setHeight("28px");
         setAutoOpen(true);
     }

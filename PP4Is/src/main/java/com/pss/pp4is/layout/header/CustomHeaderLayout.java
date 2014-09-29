@@ -57,14 +57,20 @@ public class CustomHeaderLayout extends  HorizontalLayout{
         leftHeaderContent.addStyleName("left-header-content");
         Image clientLogo = new Image(null, new ThemeResource("img/client_logo.jpg"));
         leftHeaderContent.addComponent(clientLogo);
-        Image worldMapLogo = new Image(null, new ThemeResource("img/world-map.jpg"));
+        clientLogo.addStyleName("client-logo");
+        Image worldMapLogo = new Image(null, new ThemeResource("img/map.jpg"));
         leftHeaderContent.addComponent(worldMapLogo);
         worldMapLogo.addStyleName("world-map");
+        Image separator = new Image(null, new ThemeResource("img/separator.jpg"));
+        leftHeaderContent.addComponent(separator);
+        separator.addStyleName("world-map");
+        
         ComboBox comboBox = new ComboBox(null);
         layoutController.setLanguageComboBox(comboBox);
         comboBox.addStyleName(ValoTheme.COMBOBOX_BORDERLESS);
         comboBox.addStyleName(ValoTheme.COMBOBOX_ALIGN_CENTER);
-        comboBox.setHeight("32px");
+        comboBox.setWidth("120px");
+        comboBox.setHeight("36px");
         comboBox.setNullSelectionAllowed(false);
         comboBox.setTextInputAllowed(false);
         comboBox.setImmediate(true);

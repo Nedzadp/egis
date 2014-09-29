@@ -14,7 +14,7 @@ import com.pss.pp4is.data.models.User;
  */
 public enum LanguageEnum {
     ENGLISH("eng","English"),
-    HUNGARIAN("hun","Hungarian");
+    HUNGARIAN("hun","Magyar");
 
     private final String lang;
     private final String fullLangName;

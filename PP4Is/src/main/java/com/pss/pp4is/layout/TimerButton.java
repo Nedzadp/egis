@@ -23,6 +23,7 @@ public class TimerButton extends Button implements Refresher.RefreshListener {
         this.layoutController = layoutController;
         addStyleName(ValoTheme.BUTTON_LINK);
         //addStyleName("restart-clock-button");
+        setHeight("25px");
         addStyleName("restart-clock-button-new");
         setDescription("Reset the clock by clicking on it.");
     }

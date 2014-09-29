@@ -11738,6 +11738,7 @@ div.v-layout.v-horizontal.v-widget {
 	color: #ddeb25;
 	text-decoration: none;
 	font-weight: bold;
+	margin-top: 5px;
 }
 
 .pp4istheme .username-border {
@@ -11758,11 +11759,16 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .pp4istheme .left-header-content {
-	padding-top: 2px;
+	padding-top: 0px;
+}
+
+.pp4istheme .client-logo {
+	padding-top: 3px;
 }
 
 .pp4istheme .world-map {
-	padding-left: 5px;
+	padding-left: 6px;
+	padding-top: 3px;
 }
 
 .pp4istheme .header-layout {
@@ -11775,22 +11781,22 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .pp4istheme .logo-layout-content {
-	width: 1090px;
+	width: 1042px;
 	height: 47px;
 }
 
 .pp4istheme .main-layout-content {
-	width: 1090px;
+	width: 1042px;
 	height: 100%;
 }
 
 .pp4istheme .main-menu-bar {
-	width: 1090px;
+	width: 1042px;
 	height: 28px;
 }
 
 .pp4istheme .header-layout-content {
-	width: 1090px;
+	width: 1042px;
 	padding-top: 2px;
 	height: 32px;
 }
@@ -11801,6 +11807,12 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .v-table-caption-container {
 	color: white;
+}
+
+.pp4istheme .v-table-cell-content {
+	border-left: 1px solid #d4d4d4;
+	height: 30px;
+	overflow: hidden;
 }
 
 .pp4istheme .v-slot-vertical-custom-layout {

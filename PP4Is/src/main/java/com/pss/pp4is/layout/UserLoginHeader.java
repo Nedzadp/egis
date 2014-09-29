@@ -84,6 +84,12 @@ public class UserLoginHeader extends HorizontalLayout{
         passwordField.setInputPrompt(layoutController.getI18n().translate("password"));
         passwordField.setHeight("21px");
         passwordField.addStyleName("username-border");
+        passwordField.addShortcutListener(new ShortcutListener("Enter pressed", ShortcutAction.KeyCode.ENTER, null) {
+           @Override
+           public void handleAction(Object sender, Object target) {
+               login();
+           }
+        });
         content.addComponent(passwordField);
         
          usernameField.addTextChangeListener(new TextChangeListener() {
@@ -108,7 +114,15 @@ public class UserLoginHeader extends HorizontalLayout{
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
-                user = CurrentUser.isAuthenticated(usernameField.getValue(), passwordField.getValue());
+                login();
+            }
+        });
+         
+        content.addComponent(loginButton);
+    }
+    
+    private void login() {
+        user = CurrentUser.isAuthenticated(usernameField.getValue(), passwordField.getValue());
                 if(user == null) {
                     Notification notification = new Notification(layoutController.getI18n().translate("Login"), layoutController.getI18n().translate("User name or password is not correct. Please try it again."), Notification.Type.WARNING_MESSAGE);
                     notification.setDelayMsec(2000);
@@ -126,6 +140,8 @@ public class UserLoginHeader extends HorizontalLayout{
                      layoutController.getI18n().setLanguageEnum(LanguageEnum.getUserLanguage(user));
                      layoutController.setUser(user);
                      layoutController.getComboBox().setValue(layoutController.getI18n().getLanguageEnum().getLang());
+                     layoutController.getComboBox().setItemCaption(layoutController.getI18n().getLanguageEnum().getLang(), layoutController.getI18n().translate(layoutController.getI18n().getLanguageEnum().getFullLangName()));
+                     
                      Notification notification = new Notification(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("System will automaticly log you out after a long inactivity. You can reset the clock by clicking on it."), Notification.Type.HUMANIZED_MESSAGE);
                      notification.setDelayMsec(2000);
                      notification.show(Page.getCurrent());
@@ -139,10 +155,6 @@ public class UserLoginHeader extends HorizontalLayout{
                      notification2.show(Page.getCurrent());
                      //Notification.show(layoutController.getI18n().translate("Welcome!"), layoutController.getI18n().translate("User activity logged in"), Notification.Type.TRAY_NOTIFICATION);
                 }
-            }
-        });
-         
-        content.addComponent(loginButton);
     }
     
     private void initLayout() {
@@ -408,6 +420,8 @@ public class UserLoginHeader extends HorizontalLayout{
             loggedInLabel.setValue("");
             autoLogoutLabel.setValue(layoutController.getI18n().translate("AUTO LOG OUT TIME:"));
             loggedInLabel.setValue(layoutController.getI18n().translate("LOGGED IN: "));
+            layoutController.getComboBox().setItemCaption("eng", layoutController.getI18n().translate("English"));
+            layoutController.getComboBox().setItemCaption("hun", layoutController.getI18n().translate("Magyar"));
         }
     }
 }

@@ -87,6 +87,7 @@ $v-font-family: "Trebuchet MS",sans-serif;
         color: #ddeb25;
         text-decoration: none;
         font-weight: bold;
+        margin-top:5px;
     }
     .username-border{
         border: 1px solid #0082b9;
@@ -104,10 +105,14 @@ $v-font-family: "Trebuchet MS",sans-serif;
     width: 30px;
 }
 .left-header-content{
-    padding-top: 2px;
+    padding-top: 0px;
+}
+.client-logo{
+    padding-top: 3px;
 }
 .world-map {
-    padding-left: 5px;
+    padding-left: 6px;
+    padding-top: 3px;
 }
   .header-layout {
       background-color: #00a3e8;
@@ -117,19 +122,19 @@ $v-font-family: "Trebuchet MS",sans-serif;
       background-color: #0082b9;
   }
   .logo-layout-content {
-      width: 1090px;
+      width: 1042px;
       height: 47px;
   }
   .main-layout-content {
-      width: 1090px;
+      width: 1042px;
       height: 100%;
   }
   .main-menu-bar {
-      width: 1090px;
+      width: 1042px;
       height: 28px;
   }
   .header-layout-content{
-      width: 1090px;
+      width: 1042px;
       padding-top: 2px;
       height: 32px;
   }
@@ -140,6 +145,12 @@ $v-font-family: "Trebuchet MS",sans-serif;
     
     .v-table-caption-container{
         color: white;
+    }
+    
+    .v-table-cell-content {
+        border-left: 1px solid #d4d4d4;
+        height: 30px;
+        overflow: hidden;
     }
     
   /* Insert your theme rules here */

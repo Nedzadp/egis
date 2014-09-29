@@ -46,19 +46,19 @@ public class HorizontalFilter extends HorizontalLayout{
     
     private void initLayout() {
         addStyleName("filter-layout");
-        setWidth("1015px");
+        setWidth("966px");
         setHeight("140px");
     
         VerticalLayout leftSide = new VerticalLayout();
         
-        leftSide.setWidth("807px");
+        leftSide.setWidth("757px");
         Label filterOptionLabel = new Label(layoutController.getI18n().translate("Filter options"));
         filterOptionLabel.addStyleName("filter-bold-label");
         leftSide.addComponent(filterOptionLabel);
         
         Label horizontalSpacer = new Label("");
         horizontalSpacer.addStyleName("horizontal-filter-line");
-        horizontalSpacer.setWidth("865px");
+        horizontalSpacer.setWidth("815px");
         horizontalSpacer.setHeight("1px");
         leftSide.addComponent(horizontalSpacer);
         

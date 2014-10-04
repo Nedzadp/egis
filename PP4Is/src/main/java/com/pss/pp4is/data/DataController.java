@@ -20,10 +20,12 @@ import com.pss.pp4is.data.containers.UserActivityContainer;
 import com.pss.pp4is.data.containers.UserContainer;
 import com.pss.pp4is.data.containers.UserInspectionContainer;
 import com.pss.pp4is.data.containers.UserProductContainer;
+import com.pss.pp4is.data.models.CounterHelper;
 import com.pss.pp4is.data.models.CustomTranslation;
 import com.pss.pp4is.data.models.Inspection;
 import com.pss.pp4is.data.models.InspectionDetail;
 import com.pss.pp4is.data.models.InspectionProfile;
+import com.pss.pp4is.data.models.NewProductListing;
 import com.pss.pp4is.data.models.Product;
 import com.pss.pp4is.data.models.ProductLanguage;
 import com.pss.pp4is.data.models.ProductMaster;
@@ -46,6 +48,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -1120,4 +1123,125 @@ public class DataController {
             databaseConnection.disconnect();
         }
     }
+    
+    public static List<NewProductListing> getProductsListing() {
+        Map<Integer, NewProductListing> productListings = new TreeMap<Integer, NewProductListing>();
+        
+        String queryOne = "SELECT p.product_id, p.name, (SELECT COUNT(ii.inspection_id) FROM inspection ii WHERE ii.product_id = p.product_id) AS  'Inspections', (SELECT COUNT(m.master_id) FROM master m WHERE m.product_id = p.product_id) AS  'MasterImages' " +
+                          "FROM product p " +
+                          "GROUP BY p.product_id, p.name ";
+        
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        
+        Map<Integer, NewProductListing> helper = new TreeMap<Integer, NewProductListing>();
+        
+        try {
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(queryOne);
+            while(resultSet.next()) {
+                Integer productId = resultSet.getInt("p.product_id");
+                String productName = resultSet.getString("p.name");
+                Integer inspections = resultSet.getInt("Inspections");
+                Integer masterImages = resultSet.getInt("MasterImages");
+                
+                NewProductListing productListing = new NewProductListing();
+                productListing.setProductId(productId);
+                productListing.setProductName(productName);
+                productListing.setInspections(inspections);
+                productListing.setMasterImages(masterImages);
+                
+                if(!inspections.equals(0) || !masterImages.equals(0)) {
+                    helper.put(productId, productListing);       
+                }
+                productListings.put(productId, productListing);
+                
+            }
+            
+            if(!helper.isEmpty()) {
+                
+                String inCondition = "";
+                for(Integer key : helper.keySet()) {
+                    inCondition += key.toString()+",";
+                }
+                inCondition = inCondition.substring(0, inCondition.length()-1);
+                System.out.println(inCondition);
+                String queryTwo = "SELECT p.product_id, m.master_id, " +
+                                  "(SELECT COUNT(id.inspection_details_id) " +
+                                  "FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id) AS 'InspectedImages', " +          
+                                  "(SELECT COUNT(id.inspection_details_id) " +
+                                  "FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id) AS 'Analyses', " +          
+                                  "(SELECT COUNT(id.inspection_details_id) FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id AND (elfogadva=1 OR engedellyel_elfogadva=1 OR elutasitva =1)) AS 'Certificates' "+
+                                  "FROM product p " +
+                                  "JOIN master m ON p.product_id = m.product_id " +
+                                  "WHERE p.product_id IN ("+inCondition+") "+
+                                  "GROUP BY p.product_id, m.master_id";
+                
+                resultSet = databaseConnection.executeQuery(queryTwo);
+                
+                Map<Integer, Map<Integer, CounterHelper>> dataMap = new HashMap<Integer, Map<Integer, CounterHelper>>();
+                
+                while(resultSet.next()) {
+                    Integer productId = resultSet.getInt("p.product_id");
+                    Integer masterId = resultSet.getInt("m.master_id");
+                    Integer inspectedImages = resultSet.getInt("InspectedImages");
+                    Integer analyses = resultSet.getInt("Analyses");
+                    Integer certificates = resultSet.getInt("Certificates");
+                    
+                    if(!dataMap.containsKey(productId)) {
+                        dataMap.put(productId, new HashMap<Integer,CounterHelper>());
+                    }
+                    dataMap.get(productId).put(masterId, new CounterHelper(inspectedImages, analyses, certificates));
+                }
+                
+                for(Map.Entry<Integer,Map<Integer,CounterHelper>> mapEntry : dataMap.entrySet()) {
+                    
+                    Integer inspectedImages = 0;
+                    String inspectedColor = "blue";
+                    Integer analyses = 0;
+                    String analysesColor = "green";
+                    Integer certificates = 0;
+                    String certificatesColor = "green";
+                    
+                    for(Map.Entry<Integer,CounterHelper> mapEntry2 : mapEntry.getValue().entrySet()) {
+                        if(mapEntry2.getValue().getInspectedImages().equals(0)) {
+                            inspectedColor = "pink";
+                        }
+                        inspectedImages += mapEntry2.getValue().getInspectedImages();
+                        
+                        if(mapEntry2.getValue().getAnalyses().equals(0)) {
+                            analysesColor = "pink";
+                        }
+                        analyses += mapEntry2.getValue().getAnalyses();
+                        
+                        if(mapEntry2.getValue().getCertificates().equals(0)) {
+                            certificatesColor = "pink";
+                        }
+                        certificates += mapEntry2.getValue().getCertificates();
+                    }
+                    productListings.get(mapEntry.getKey()).setInspectedImages(inspectedImages);
+                    productListings.get(mapEntry.getKey()).setInspectedImagesColor(inspectedColor);
+                    
+                    productListings.get(mapEntry.getKey()).setAnalyses(analyses);
+                    productListings.get(mapEntry.getKey()).setAnalysesColor(analysesColor);
+                    
+                    productListings.get(mapEntry.getKey()).setCertificates(certificates);
+                    productListings.get(mapEntry.getKey()).setCertificatesColor(certificatesColor);
+                }
+            }
+            
+            
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            databaseConnection.disconnect();
+        }
+        List<NewProductListing> listings = new ArrayList<NewProductListing>();
+        
+        for(NewProductListing productListing : productListings.values()) {
+            listings.add(productListing);
+        }
+        return listings;
+    }
+
 }

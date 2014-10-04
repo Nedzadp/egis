@@ -7,10 +7,6 @@
 package com.pss.pp4is.layout.content;
 
 import com.pss.pp4is.data.models.ListingMiddleContent;
-import com.pss.pp4is.data.models.MiddleContentBlue;
-import com.pss.pp4is.data.models.RightSideListing;
-import com.pss.pp4is.data.models.SecondMiddleContent;
-import com.pss.pp4is.data.models.SecondSideListing;
 import com.pss.pp4is.layout.content.views.listing.MainContentNewProductInspectionLayout;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.event.LayoutEvents;
@@ -18,7 +14,6 @@ import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.JavaScript;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 

@@ -36,6 +36,10 @@ public class ProductNameComponent extends HorizontalLayout {
         addComponent(layout);
         
         ImageComponent imageComponent = new ImageComponent("arrow3.png", "1");
-        addComponent(imageComponent);
+        //addComponent(imageComponent);
+        
+        HorizontalLayout imageLabel = new HorizontalLayout();
+        imageLabel.addStyleName("product-name-image-label");
+        addComponent(imageLabel);
     }
 }

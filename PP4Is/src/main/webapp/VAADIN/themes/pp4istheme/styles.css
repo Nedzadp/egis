@@ -11682,6 +11682,18 @@ div.v-layout.v-horizontal.v-widget {
 	padding-left: 5px;
 }
 
+.pp4istheme .product-list:hover .product-name-image-label {
+	background: url('img/arrow-hover.png');
+}
+
+.pp4istheme .product-name-image-label {
+	position: relative;
+	z-index: 4;
+	width: 14px;
+	height: 23px;
+	background: url('img/arrow3.png');
+}
+
 .pp4istheme .image-1 {
 	position: relative;
 	z-index: 4;
@@ -11848,7 +11860,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .analyses-listing-empty {
 	height: 23px;
-	width: 36px;
+	width: 35px;
 }
 
 .pp4istheme .analyses-empty-data {

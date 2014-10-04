@@ -313,6 +313,18 @@ border-top: 1px solid #cccccc;
   }
   
   // end of product listing
+  // right side content
+.right-side{
+    border: 1px solid black;
+}
+.product-column-title {
+    font-size: 14px;
+}
+.lines-with-titles{
+    z-index: 99;
+}
+  // end right side content
+  
   
   .mainContainer{
     position: relative;

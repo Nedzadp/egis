@@ -9,8 +9,14 @@ package com.pss.pp4is.layout.content.views.listing;
 import com.pss.pp4is.data.DataController;
 import com.pss.pp4is.data.models.NewProductListing;
 import com.pss.pp4is.layout.content.CustomPanelLayout;
+import com.pss.pp4is.layout.content.views.listing.products.RightSideContentComponent;
+import com.pss.pp4is.layout.content.views.reports.HorizontalFilter;
 import com.pss.pp4is.system.LayoutController;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,9 +77,15 @@ public class MainContentNewProductInspectionLayout extends CustomPanelLayout{
         listings.add(listing1);
         listings.add(listing2);
         listings.add(listing3);
+        RightSideContentComponent rightSideContentComponent = new RightSideContentComponent();
+        ProductInspectionLeftSideLayout leftSideLayout = new ProductInspectionLeftSideLayout(rightSideContentComponent, listings);
         
-        ProductInspectionLeftSideLayout leftSideLayout = new ProductInspectionLeftSideLayout(listings);
+        
+        
+        
+        
         horizontalLayout.addComponent(leftSideLayout);
+        horizontalLayout.addComponent(rightSideContentComponent);
         
         addComponent(horizontalLayout);
     }

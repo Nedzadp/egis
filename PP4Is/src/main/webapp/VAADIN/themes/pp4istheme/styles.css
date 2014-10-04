@@ -11964,6 +11964,18 @@ div.v-layout.v-horizontal.v-widget {
 	top: -1px;
 }
 
+.pp4istheme .right-side {
+	border: 1px solid black;
+}
+
+.pp4istheme .product-column-title {
+	font-size: 14px;
+}
+
+.pp4istheme .lines-with-titles {
+	z-index: 99;
+}
+
 .pp4istheme .mainContainer {
 	position: relative;
 	width: 800px;

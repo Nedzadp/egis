@@ -40,6 +40,7 @@ import com.pss.pp4is.data.models.UserProduct;
 import com.pss.pp4is.layout.content.views.reports.ChartUtils;
 import com.pss.pp4is.system.DatabaseConnection;
 import com.pss.pp4is.system.LanguageEnum;
+import com.pss.pp4is.system.LayoutController;
 import com.pss.pp4is.system.Translation;
 import com.vaadin.data.Container;
 import com.vaadin.data.util.BeanItemContainer;
@@ -63,6 +64,38 @@ import org.joda.time.Duration;
  * @author Nedzad
  */
 public class DataController {
+    
+    public static Product getProduct(Integer productId) {
+        try {
+            
+            String sql = "SELECT p.product_id, p.name, p.path, pt.product_type_id, pt.name, pl.product_language_id, pl.name, pp.product_printer_id, pp.name, p.prod_note " +
+                    "FROM product p " +
+                    "JOIN product_type pt ON p.product_type_id = pt.product_type_id " +
+                    "JOIN product_language pl ON p.product_language_id = pl.product_language_id " +
+                    "JOIN product_printer pp ON p.product_printer_id = pp.product_printer_id "+ 
+                    "WHERE p.product_id = "+productId+" ";
+            
+            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection.connect();
+            ResultSet resultSet = databaseConnection.executeQuery(sql);
+            
+            while(resultSet.next()) {     
+                Product product = new Product(resultSet.getInt("p.product_id"),
+                        resultSet.getString("p.name"),
+                        resultSet.getString("p.path"),
+                        resultSet.getString("pt.name"),
+                        resultSet.getString("pl.name"),
+                        resultSet.getString("pp.name"),
+                        resultSet.getString("p.prod_note"));
+                return product;
+            }
+            databaseConnection.disconnect();
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(DataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     public static ProductContainer getProducts() {
         try {
@@ -96,12 +129,12 @@ public class DataController {
         return null;
     }
 
-    public static ProductMasterContainer getProductMaster(Product product) {
+    public static ProductMasterContainer getProductMaster(LayoutController layoutController,Integer productId) {
         try {
             ProductMasterContainer products = new ProductMasterContainer();
-            String sql = "SELECT m.master_id, m.name, m.is_braille, m.is_falt, m.is_active, m.path " +
+            String sql = "SELECT m.master_id, m.name, m.is_braille, m.is_falt, m.is_active, m.path, m.path_pdf " +
                          "FROM master m " +
-                         "WHERE m.product_id = "+product.getProductId()+" ";
+                         "WHERE m.product_id = "+productId+" ";
             
             DatabaseConnection databaseConnection = new DatabaseConnection();
             databaseConnection.connect();
@@ -115,6 +148,15 @@ public class DataController {
                 boolean is_braille = resultSet.getBoolean("m.is_braille");
                 boolean is_falt =  resultSet.getBoolean("m.is_falt");
                 boolean is_active =  resultSet.getBoolean("m.is_active");
+                String pathPdf = resultSet.getString("m.path_pdf");
+                String type;
+                if(is_braille) {
+                    type = layoutController.getI18n().translate("Be");
+                } else if(is_falt) {
+                    type = layoutController.getI18n().translate("Fa");
+                } else {
+                    type = layoutController.getI18n().translate("Le");
+                }
                 
                 if(!is_braille && !is_falt) {
                     leaflet = true;
@@ -127,7 +169,9 @@ public class DataController {
                                                                 is_braille?"X":"", 
                                                                 is_falt?"X":"", 
                                                                 is_active?"X":"", 
-                                                                resultSet.getString("m.path"));
+                                                                resultSet.getString("m.path"),
+                                                                type,
+                                                                pathPdf==null?" ":"X");
                 products.addBean(productMaster);
             }
             databaseConnection.disconnect();
@@ -621,7 +665,7 @@ public class DataController {
         return inspectionDetailContainer;
     }
 
-    public static InspectionDetailContainer getInspectionDetailsByMaster(int masterId, int inspectionId) {
+    public static InspectionDetailContainer getInspectionDetailsByMaster(LayoutController layoutController,int masterId, int inspectionId) {
         InspectionDetailContainer inspectionDetailContainer = new InspectionDetailContainer();
         
         String selectSql = "SELECT id.inspection_details_id, id.master_id, m.name, id.vizsgalt_name, id.vizsgalt_feltoltve_path, id.eredmeny_path, id.jelolt_path, "
@@ -645,7 +689,7 @@ public class DataController {
                 inspectionDetail.setMaster_id(resultSet.getInt("id.master_id"));
                 inspectionDetail.setMasterName(resultSet.getString("m.name"));
                 inspectionDetail.setVizsgalt_name(resultSet.getString("id.vizsgalt_name"));
-                inspectionDetail.setVizsgalt_feldolgozott_path(resultSet.getString("id.vizsgalt_feltoltve_path"));
+                inspectionDetail.setVizsgalt_feltoltve_path(resultSet.getString("id.vizsgalt_feltoltve_path"));
                 inspectionDetail.setEredmeny_path(resultSet.getString("id.eredmeny_path"));
                 inspectionDetail.setJelolt_path(resultSet.getString("id.jelolt_path"));
                 inspectionDetail.setMaszk_path(resultSet.getString("id.maszk_path"));
@@ -660,6 +704,15 @@ public class DataController {
                 inspectionDetail.setOnTheBunchList(resultSet.getBoolean("id.onTheBunchList")?"X":"");
                 inspectionDetail.setUrgent(resultSet.getBoolean("id.urgent")?"X":"");
                 inspectionDetail.setVizsgalt_feltoltve_path_pdf(resultSet.getString("id.vizsgalt_feltoltve_path_pdf"));
+                
+                inspectionDetail.setType(layoutController.getI18n().translate("Scan"));
+                inspectionDetail.setResult(inspectionDetail.getEredmeny_path().isEmpty()?" ":"X");
+                if(inspectionDetail.getElfogadva().equals("X") || inspectionDetail.getElutasitva().equals("X") || inspectionDetail.getEngedellyel_elfogadva().equals("X")) {
+                    inspectionDetail.setCert("X");
+                } else {
+                    inspectionDetail.setCert(" ");
+                }
+                
                 inspectionDetailContainer.addBean(inspectionDetail);
             }
         }

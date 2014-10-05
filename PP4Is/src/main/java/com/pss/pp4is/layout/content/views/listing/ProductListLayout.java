@@ -22,6 +22,7 @@ import com.vaadin.ui.HorizontalLayout;
 public class  ProductListLayout extends HorizontalLayout {
 
     private final NewProductListing productListing;
+    private ProductNameComponent productNameComponent;
     
     public ProductListLayout(NewProductListing productListing) {
         this.productListing = productListing;
@@ -32,7 +33,7 @@ public class  ProductListLayout extends HorizontalLayout {
     private void initLayout() {
         addStyleName("product-list");
         
-        addComponent(new ProductNameComponent(productListing.getProductName()));
+        addComponent(productNameComponent = new ProductNameComponent(productListing.getProductName()));
         
         addComponent(new InspectionComponent(productListing.getInspections()));
         
@@ -44,5 +45,12 @@ public class  ProductListLayout extends HorizontalLayout {
         
         addComponent(new CertificatesComponent(productListing.getCertificates(), productListing.getCertificatesColor()));
     }
-    
+
+    public NewProductListing getProductListing() {
+        return productListing;
+    }
+
+    public ProductNameComponent getProductNameComponent() {
+        return productNameComponent;
+    }
 }

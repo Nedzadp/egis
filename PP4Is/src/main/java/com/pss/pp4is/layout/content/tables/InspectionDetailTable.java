@@ -38,12 +38,56 @@ public class InspectionDetailTable extends Table implements Serializable{
         setVisibleColumns(InspectionDetailContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("inspection_details_id", true);
         setColumnCollapsed("master_id", true);
+        setColumnCollapsed("masterName", true);
+        setColumnCollapsed("vizsgalt_feltoltve_path", true);
+        setColumnCollapsed("eredmeny_path", true);
+        setColumnCollapsed("jelolt_path", true);
+        setColumnCollapsed("maszk_path", true);
+        setColumnCollapsed("mester_path", true);
+        setColumnCollapsed("mester_feldolgozott_path", true);
+        setColumnCollapsed("vizsgalt_path", true);
+        setColumnCollapsed("vizsgalt_feldolgozott_path", true);
+        setColumnCollapsed("jelolt_szamozott_path", true);
+        setColumnCollapsed("elfogadva", true);
+        setColumnCollapsed("engedellyel_elfogadva", true);
+        setColumnCollapsed("elutasitva", true);
+        setColumnCollapsed("inspection_profile_notes", true);
+        setColumnCollapsed("onTheBunchList", true);
+        setColumnCollapsed("urgent", true);
+        setColumnCollapsed("vizsgalt_feltoltve_path_pdf", true);
+        
         setColumnHeaders(inspectionDetailContainer.getCOL_HEADERS_ENGLISH(layoutController));
-        setColumnWidth("inspection_details_id", 120);
+        
     }
     
     private void createDataRow() {
         setContainerDataSource(inspectionDetailContainer);
+    }
+
+    public void refreshTable(InspectionDetailContainer inspectionDetailContainer) {
+        removeAllItems();
+        setContainerDataSource(inspectionDetailContainer);
+        setVisibleColumns(InspectionDetailContainer.NATURAL_COL_ORDER);
+        setColumnCollapsed("inspection_details_id", true);
+        setColumnCollapsed("master_id", true);
+        setColumnCollapsed("masterName", true);
+        setColumnCollapsed("vizsgalt_feltoltve_path", true);
+        setColumnCollapsed("eredmeny_path", true);
+        setColumnCollapsed("jelolt_path", true);
+        setColumnCollapsed("maszk_path", true);
+        setColumnCollapsed("mester_path", true);
+        setColumnCollapsed("mester_feldolgozott_path", true);
+        setColumnCollapsed("vizsgalt_path", true);
+        setColumnCollapsed("vizsgalt_feldolgozott_path", true);
+        setColumnCollapsed("jelolt_szamozott_path", true);
+        setColumnCollapsed("elfogadva", true);
+        setColumnCollapsed("engedellyel_elfogadva", true);
+        setColumnCollapsed("elutasitva", true);
+        setColumnCollapsed("inspection_profile_notes", true);
+        setColumnCollapsed("onTheBunchList", true);
+        setColumnCollapsed("urgent", true);
+        setColumnCollapsed("vizsgalt_feltoltve_path_pdf", true);
+        setColumnHeaders(inspectionDetailContainer.getCOL_HEADERS_ENGLISH(layoutController));
     }
 }
 

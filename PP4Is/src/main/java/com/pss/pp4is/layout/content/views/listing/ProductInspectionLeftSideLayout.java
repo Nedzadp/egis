@@ -7,7 +7,9 @@
 package com.pss.pp4is.layout.content.views.listing;
 
 import com.pss.pp4is.data.models.NewProductListing;
-import com.pss.pp4is.layout.content.views.listing.products.RightSideContentComponent;
+import com.pss.pp4is.layout.content.views.listing.products.RightSideAbsoluteContentComponent;
+import com.pss.pp4is.layout.content.views.listing.products.RightSideContentLayout;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.AbsoluteLayout;
@@ -24,18 +26,21 @@ import java.util.List;
  */
 public class ProductInspectionLeftSideLayout extends AbsoluteLayout{
 
-    private final RightSideContentComponent rightSideContentComponent;
+    private final LayoutController layoutController;
+    private final RightSideAbsoluteContentComponent rightSideContentComponent;
     private final List<NewProductListing> productListings;
     private List<ProductListLayout> components;
+    private ProductListLayout selected;
     
-    public ProductInspectionLeftSideLayout(RightSideContentComponent rightSideContentComponent, List<NewProductListing> productListings) {
+    public ProductInspectionLeftSideLayout(LayoutController layoutController,RightSideAbsoluteContentComponent rightSideContentComponent, List<NewProductListing> productListings) {
+        this.layoutController = layoutController;
         this.rightSideContentComponent = rightSideContentComponent;
         this.productListings = productListings;
         initLayout();
     }
     
     private void initLayout() {
-        setWidth("550");
+        setWidth("520");
         setHeight("800");
         
         components = new ArrayList<ProductListLayout>();
@@ -43,50 +48,70 @@ public class ProductInspectionLeftSideLayout extends AbsoluteLayout{
         for (NewProductListing productListing : productListings) {
             components.add(new ProductListLayout(productListing));
         }
-        AbsoluteLayout linesWithTitles = new AbsoluteLayout();
-        linesWithTitles.setWidth("500");
-        linesWithTitles.setHeight("140");
+        HorizontalLayout linesWithTitles = new HorizontalLayout();
+       
         linesWithTitles.addStyleName("lines-with-titles");
         VerticalLayout titles = new VerticalLayout();
-        Label title1 = new Label("Certificates");
+        titles.addStyleName("product-column-titles");
+        
+        Label title1 = new Label(layoutController.getI18n().translate("Certificates"));
         title1.addStyleName("product-column-title");
         titles.addComponent(title1);
-        Label title2 = new Label("Image analyses");
+        Label title2 = new Label(layoutController.getI18n().translate("Image analyses"));
         title2.addStyleName("product-column-title");
         titles.addComponent(title2);
-        Label title3 = new Label("Inspected images");
+        Label title3 = new Label(layoutController.getI18n().translate("Inspected images"));
         title3.addStyleName("product-column-title");
         titles.addComponent(title3);
         
-        Label title4 = new Label("Master images");
+        Label title4 = new Label(layoutController.getI18n().translate("Master images"));
         title4.addStyleName("product-column-title");
         titles.addComponent(title4);
-        Label title5 = new Label("Inspections");
+        Label title5 = new Label(layoutController.getI18n().translate("Inspections"));
         title5.addStyleName("product-column-title");
         titles.addComponent(title5);
         
         linesWithTitles.addComponent(titles);
         
-        Image lines = new Image(null, new ThemeResource("img/lines-2.png"));
-        linesWithTitles.addComponent(lines,"left:110px; top:12px");
+        Image lines = new Image(null, new ThemeResource("img/lines-3.png"));
+        lines.addStyleName("line-image");
+        linesWithTitles.addComponent(lines);
         
-        addComponent(linesWithTitles,"left:145px;");
+        addComponent(linesWithTitles,"left:103px;top:90px");
         
         
         
         for(int i= 0; i<components.size();i++) {
             final ProductListLayout productListing = components.get(i);
             if(i == 0) {
-                addComponent(productListing,"top: 135px;");
+                addComponent(productListing,"top: 220px;");
             } else {
-                Integer margin = i*28+135;
+                Integer margin = i*28+220;
                 addComponent(productListing,"top:"+margin.toString()+"px");
             }
             productListing.addLayoutClickListener(new LayoutEvents.LayoutClickListener() {
 
                 @Override
                 public void layoutClick(LayoutEvents.LayoutClickEvent event) {
-                   Float topMargin = getCurrentLayout().getPosition(productListing).getTopValue();
+                    //css correction
+                    if(selected != null) {
+                        selected.removeStyleName("product-list-selected");
+                        selected.addStyleName("product-list");
+                        selected.getProductNameComponent().getImageLabel().removeStyleName("product-name-image-label-selected");
+                        selected.getProductNameComponent().getImageLabel().addStyleName("product-name-image-label");
+                    }
+                    productListing.removeStyleName("product-list");
+                    productListing.addStyleName("product-list-selected");
+                    productListing.getProductNameComponent().getImageLabel().removeStyleName("product-name-image-label");
+                    productListing.getProductNameComponent().getImageLabel().addStyleName("product-name-image-label-selected");
+                    //
+                    selected = productListing;
+                   Float topMargin = getCurrentLayout().getPosition(productListing).getTopValue()-220;
+
+                  RightSideContentLayout contentLayout = new RightSideContentLayout(layoutController , productListing.getProductListing());
+                   
+                   rightSideContentComponent.removeAllComponents();
+                   rightSideContentComponent.addComponent(contentLayout,"top: "+topMargin.toString()+"px;");
                 }
             });
         }

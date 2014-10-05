@@ -32,7 +32,34 @@ public class InspectionDetail {
     private String onTheBunchList;
     private String urgent;
     private String vizsgalt_feltoltve_path_pdf;
+    private String type;
+    private String result;
+    private String cert;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getCert() {
+        return cert;
+    }
+
+    public void setCert(String cert) {
+        this.cert = cert;
+    }
+    
     public int getInspection_details_id() {
         return inspection_details_id;
     }

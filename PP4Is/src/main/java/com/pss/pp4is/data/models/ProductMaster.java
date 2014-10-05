@@ -16,13 +16,15 @@ public class ProductMaster implements Serializable{
     
     private final int masterId;
     private final String name;
+    private final String type;
+    private final String pdf;
     private final String leaflet;
     private final String braille;
     private final String falt;
     private final String active;
     private final String path;
 
-    public ProductMaster(int masterId, String name, String leaflet, String braille, String falt, String active, String path) {
+    public ProductMaster(int masterId, String name, String leaflet, String braille, String falt, String active, String path, String type, String pdf) {
         this.masterId = masterId;
         this.name = name;
         this.leaflet = leaflet;
@@ -30,8 +32,15 @@ public class ProductMaster implements Serializable{
         this.falt = falt;
         this.active = active;
         this.path = path;
+        this.type = type;
+        this.pdf = pdf;
     }
 
+    public String getPdf() {
+        return pdf;
+    }
+
+    
     public int getMasterId() {
         return masterId;
     }
@@ -59,5 +68,8 @@ public class ProductMaster implements Serializable{
     public String getPath() {
         return path;
     }
-    
+
+    public String getType() {
+        return type;
+    }
 }

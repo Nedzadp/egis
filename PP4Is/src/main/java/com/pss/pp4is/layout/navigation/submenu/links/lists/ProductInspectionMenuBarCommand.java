@@ -8,6 +8,7 @@ package com.pss.pp4is.layout.navigation.submenu.links.lists;
 
 import com.pss.pp4is.layout.AbstractCommand;
 import com.pss.pp4is.layout.content.CustomPanelLayout;
+import com.pss.pp4is.layout.content.views.listing.MainContentNewProductInspectionLayout;
 import com.pss.pp4is.layout.content.views.listing.MainContentProductInspectionLayout;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.MenuBar;
@@ -25,7 +26,7 @@ public class ProductInspectionMenuBarCommand extends AbstractCommand{
     @Override
     public void menuSelected(MenuBar.MenuItem selectedItem) {
         getLayoutController().setMenuSelected(selectedItem);
-        CustomPanelLayout layout = new MainContentProductInspectionLayout(getLayoutController());
+        CustomPanelLayout layout = new MainContentNewProductInspectionLayout(getLayoutController());
         layout.initLayout();
         getLayoutController().getCustomLayout().getMainContentComponent().removeAllComponents();
         getLayoutController().getCustomLayout().getMainContentComponent().addComponent(layout);

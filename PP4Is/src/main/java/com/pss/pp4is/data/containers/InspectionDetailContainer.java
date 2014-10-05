@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class InspectionDetailContainer extends BeanItemContainer<InspectionDetail> implements Serializable{
 
     public static final Object[] NATURAL_COL_ORDER = new String[] {
-        "inspection_details_id", "master_id", "masterName", "vizsgalt_name", "vizsgalt_feltoltve_path", "eredmeny_path", "jelolt_path", "maszk_path", "mester_path", "mester_feldolgozott_path",
+        "inspection_details_id", "master_id", "masterName", "vizsgalt_name", "type","result", "cert","vizsgalt_feltoltve_path", "eredmeny_path", "jelolt_path", "maszk_path", "mester_path", "mester_feldolgozott_path",
         "vizsgalt_path", "vizsgalt_feldolgozott_path", "jelolt_szamozott_path", "elfogadva", "engedellyel_elfogadva", "elutasitva","inspection_profile_notes", "onTheBunchList", "urgent", "vizsgalt_feltoltve_path_pdf"
     };
 
@@ -32,7 +32,10 @@ public class InspectionDetailContainer extends BeanItemContainer<InspectionDetai
          COL_HEADERS_ENGLISH = new String[] { layoutController.getI18n().translate("inspection_details_id"), 
              layoutController.getI18n().translate("master_id"), 
              layoutController.getI18n().translate("masterName"), 
-             layoutController.getI18n().translate("vizsgalt_name"), 
+             layoutController.getI18n().translate("Inspection images"), 
+             layoutController.getI18n().translate("Type"), 
+             layoutController.getI18n().translate("Result"),
+             layoutController.getI18n().translate("Cert"),
              layoutController.getI18n().translate("vizsgalt_feltoltve_path"), 
              layoutController.getI18n().translate("eredmeny_path"), 
              layoutController.getI18n().translate("jelolt_path"), 

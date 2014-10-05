@@ -11,7 +11,7 @@ package com.pss.pp4is.data.models;
  * @author Nedzad
  */
 public class Inspection {
-    private  int inspectionId;
+    private  Integer inspectionId;
     private  String inspectionDate;
     private  String path;
     private  String inspector;
@@ -21,11 +21,11 @@ public class Inspection {
     private  String taskaNum;
     private  String closed;
 
-    public int getInspectionId() {
+    public Integer getInspectionId() {
         return inspectionId;
     }
 
-    public void setInspectionId(int inspectionId) {
+    public void setInspectionId(Integer inspectionId) {
         this.inspectionId = inspectionId;
     }
 

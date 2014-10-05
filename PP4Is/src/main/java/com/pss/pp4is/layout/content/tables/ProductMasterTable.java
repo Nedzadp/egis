@@ -7,6 +7,7 @@
 package com.pss.pp4is.layout.content.tables;
 
 import com.pss.pp4is.data.containers.ProductMasterContainer;
+import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.Table;
 import java.io.Serializable;
 
@@ -16,26 +17,30 @@ import java.io.Serializable;
  */
 public class ProductMasterTable extends Table implements Serializable{
 
+    private final LayoutController layoutController;
     private final ProductMasterContainer products;
     
-    public ProductMasterTable(ProductMasterContainer products) {
+    public ProductMasterTable(LayoutController layoutController, ProductMasterContainer products) {
+        this.layoutController = layoutController;
         this.products = products;
         initTable();
     }
     
     private void initTable() {
-        addStyleName("right-table");
-        setColumnCollapsingAllowed(true);
+       setColumnCollapsingAllowed(true);
         setColumnReorderingAllowed(true);
         setSelectable(true);
         setImmediate(true);
         setNullSelectionAllowed(false);
-        setPageLength(10);
+        setSizeFull();
+        setPageLength(5);
         createDataRow();
         setVisibleColumns(ProductMasterContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("masterId", true);
-        setColumnHeaders(ProductMasterContainer.COL_HEADERS_ENGLISH);
-        setColumnWidth("masterId", 120);
+        setColumnCollapsed("leaflet", true);
+        setColumnCollapsed("braille", true);
+        setColumnCollapsed("falt", true);
+        setColumnHeaders(products.getCOL_HEADERS_ENGLISH(layoutController));
     }
     
     private void createDataRow() {

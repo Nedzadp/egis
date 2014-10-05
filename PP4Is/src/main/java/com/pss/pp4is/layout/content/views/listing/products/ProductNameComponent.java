@@ -20,6 +20,7 @@ import com.vaadin.ui.Label;
 public class ProductNameComponent extends HorizontalLayout {
 
     private final String productName;
+    private HorizontalLayout imageLabel;
     
     public ProductNameComponent(String productName) {
         this.productName = productName;
@@ -38,8 +39,12 @@ public class ProductNameComponent extends HorizontalLayout {
         ImageComponent imageComponent = new ImageComponent("arrow3.png", "1");
         //addComponent(imageComponent);
         
-        HorizontalLayout imageLabel = new HorizontalLayout();
+         imageLabel = new HorizontalLayout();
         imageLabel.addStyleName("product-name-image-label");
         addComponent(imageLabel);
+    }
+
+    public HorizontalLayout getImageLabel() {
+        return imageLabel;
     }
 }

@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @author Nedzad
  */
 public class Product implements Serializable{
-    private final int productId;
+    private final Integer productId;
     private final String name;
     private final String path;
     private final String productTypeName;
@@ -21,7 +21,7 @@ public class Product implements Serializable{
     private final String productPrinterName;
     private final String productNote;
 
-    public Product(int productId, String name, String path, String productTypeName, String productLanguageName, String productPrinterName, String productNote) {
+    public Product(Integer productId, String name, String path, String productTypeName, String productLanguageName, String productPrinterName, String productNote) {
         this.productId = productId;
         this.name = name;
         this.path = path;
@@ -31,7 +31,7 @@ public class Product implements Serializable{
         this.productNote = productNote;
     }
 
-    public int getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 

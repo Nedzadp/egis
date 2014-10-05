@@ -11656,7 +11656,13 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
+.pp4istheme .main-container {
+	margin-top: 20px;
+	margin-left: 10px;
+}
+
 .pp4istheme .product-list {
+	width: 520px;
 	height: 24px;
 	background-color: white;
 	border-left: 1px solid #cccccc;
@@ -11664,6 +11670,21 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .product-list:hover {
 	background: #9fe2ff;
+}
+
+.pp4istheme .product-list-selected {
+	width: 520px;
+	height: 24px;
+	border-left: 1px solid #cccccc;
+	background: #9fe2ff;
+}
+
+.pp4istheme .product-name-image-label-selected {
+	background: url('img/arrow-hover.png') no-repeat;
+	position: relative;
+	z-index: 4;
+	width: 14px;
+	height: 23px;
 }
 
 .pp4istheme .product-name-layout {
@@ -11972,8 +11993,63 @@ div.v-layout.v-horizontal.v-widget {
 	font-size: 14px;
 }
 
-.pp4istheme .lines-with-titles {
-	z-index: 99;
+.pp4istheme .product-column-titles {
+	width: 150px;
+	margin-top: 2px;
+}
+
+.pp4istheme .line-image {
+	margin-top: 12px;
+}
+
+.pp4istheme .product-detail-layout {
+	min-width: 250px;
+	height: 220px;
+	border-left: 1px solid #cccccc;
+	border-top: 1px solid #cccccc;
+}
+
+.pp4istheme .inspection-detail-layout {
+	min-width: 250px;
+	height: 220px;
+	border-right: 1px solid #cccccc;
+	border-top: 1px solid #cccccc;
+}
+
+.pp4istheme .product-detail-header-layout {
+	min-width: 250px;
+	height: 25px;
+	border-bottom: 1px solid #cccccc;
+	background: #f4f4f4;
+	padding-left: 10px;
+}
+
+.pp4istheme .inspection-detail-header-layout {
+	min-width: 250px;
+	height: 25px;
+	border-bottom: 1px solid #cccccc;
+	background: #f4f4f4;
+	padding-left: 10px;
+}
+
+.pp4istheme .header-label {
+	font-weight: bold;
+	color: #646464;
+	font-size: 13px;
+}
+
+.pp4istheme .data-layout {
+	padding-left: 10px;
+}
+
+.pp4istheme .data-label {
+	font-size: 12px;
+}
+
+.pp4istheme .type-label {
+	font-weight: bold;
+	color: #646464;
+	font-size: 12px;
 }
 
 .pp4istheme .mainContainer {
@@ -12100,10 +12176,6 @@ div.v-layout.v-horizontal.v-widget {
 	background: #fff;
 }
 
-.pp4istheme .v-table-cell-wrapper {
-	white-space: normal;
-}
-
 .pp4istheme .label-font {
 	color: #ddeb25;
 	padding-top: 6px;
@@ -12208,17 +12280,91 @@ div.v-layout.v-horizontal.v-widget {
 	height: 32px;
 }
 
+.pp4istheme .inspection-table .v-selected[class*="-row"] {
+	color: #646464;
+	background-color: white;
+	background-origin: content-box;
+	border: 1px solid #9fe2ff;
+	background-image: none;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.pp4istheme .inspection-table .v-table-caption-container, .pp4istheme .inspection-table .v-table-header-drag {
+	border-left: none;
+}
+
+.pp4istheme .inspection-table .v-table-body {
+	border-left: 1px solid #d4d4d4;
+	border-top: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	border-bottom: none;
+}
+
+.pp4istheme .master-table .v-selected[class*="-row"] {
+	color: #646464;
+	background-color: white;
+	background-origin: content-box;
+	border: 1px solid #9fe2ff;
+	background-image: none;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.pp4istheme .master-table .v-table-caption-container, .pp4istheme .master-table .v-table-header-drag {
+	border-left: none;
+}
+
+.pp4istheme .master-table .v-table-body {
+	border-left: 1px solid #d4d4d4;
+	border-top: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	border-bottom: none;
+}
+
+.pp4istheme .master-table .v-table-header {
+	background-color: #f4f4f4;
+	height: 22px;
+}
+
+.pp4istheme .inspection-detail-table .v-selected[class*="-row"] {
+	color: #646464;
+	background-color: white;
+	background-origin: content-box;
+	border: 1px solid #9fe2ff;
+	background-image: none;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.pp4istheme .inspection-detail-table .v-table-caption-container, .pp4istheme .inspection-detail-table .v-table-header-drag {
+	border-left: none;
+}
+
+.pp4istheme .inspection-detail-table .v-table-header {
+	background-color: #f4f4f4;
+	height: 22px;
+}
+
 .pp4istheme .v-table-header {
-	background-color: #0082b9;
+	background-color: #9fe2ff;
+	height: 22px;
+}
+
+.pp4istheme .v-table-caption-container, .pp4istheme .v-table-header-drag {
+	padding: 5px 12px;
 }
 
 .pp4istheme .v-table-caption-container {
-	color: white;
+	font-weight: bold;
+	color: #646464;
+}
+
+.pp4istheme .v-table-cell-wrapper {
+	white-space: normal;
+	font-size: 12px;
 }
 
 .pp4istheme .v-table-cell-content {
 	border-left: 1px solid #d4d4d4;
-	height: 30px;
+	height: 22px;
 	overflow: hidden;
 }
 

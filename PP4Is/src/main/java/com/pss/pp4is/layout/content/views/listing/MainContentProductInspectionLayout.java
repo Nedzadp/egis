@@ -31,8 +31,6 @@ public class MainContentProductInspectionLayout extends CustomPanelLayout{
         super(layoutController);
     }
     
-    
-    
     @Override
     public void initLayout() {
         
@@ -124,8 +122,8 @@ public class MainContentProductInspectionLayout extends CustomPanelLayout{
                            selectedInspection = inspection; 
                            if(selectedProductMaster != null) {
                                rightMainContentComponentFourthRow.removeAllComponents();
-                                    rightMainContentComponentFourthRow.initHeader(getLayoutController().getI18n().translate("Inspection details"));
-                                    rightMainContentComponentFourthRow.addInspectionDetailTable(inspection,selectedProductMaster);
+                            rightMainContentComponentFourthRow.initHeader(getLayoutController().getI18n().translate("Inspection details"));
+                            rightMainContentComponentFourthRow.addInspectionDetailTable(inspection,selectedProductMaster);
                            }
                         }
                     });

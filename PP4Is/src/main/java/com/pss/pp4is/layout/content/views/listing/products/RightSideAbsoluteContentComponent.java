@@ -12,15 +12,14 @@ import com.vaadin.ui.AbsoluteLayout;
  *
  * @author Nedzad
  */
-public class RightSideContentComponent extends AbsoluteLayout{
+public class RightSideAbsoluteContentComponent extends AbsoluteLayout{
 
-    public RightSideContentComponent() {
+    public RightSideAbsoluteContentComponent() {
         initLayout();
     }
  
     private void initLayout() {
-        setWidth("500");
+        setWidth("505");
         setHeight("800");
-        addStyleName("right-side");
     }
 }

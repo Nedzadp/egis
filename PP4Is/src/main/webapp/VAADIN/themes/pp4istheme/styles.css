@@ -11656,6 +11656,11 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
+.pp4istheme .v-scrollable > .v-widget {
+	overflow: auto;
+	vertical-align: middle;
+}
+
 .pp4istheme .main-container {
 	margin-top: 20px;
 	margin-left: 10px;
@@ -12159,7 +12164,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .vertical-background {
 	background-color: #fff;
-	min-height: 1500px;
+	height: 100%;
 	overflow: auto !important;
 }
 
@@ -12250,6 +12255,10 @@ div.v-layout.v-horizontal.v-widget {
 	padding-top: 3px;
 }
 
+.pp4istheme .footer-background {
+	background-color: #00a3e8;
+}
+
 .pp4istheme .header-layout {
 	background-color: #00a3e8;
 }
@@ -12266,7 +12275,6 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .main-layout-content {
 	width: 1042px;
-	height: 100%;
 }
 
 .pp4istheme .main-menu-bar {
@@ -12366,41 +12374,6 @@ div.v-layout.v-horizontal.v-widget {
 	border-left: 1px solid #d4d4d4;
 	height: 22px;
 	overflow: hidden;
-}
-
-.pp4istheme .v-slot-vertical-custom-layout {
-	width: 1024px;
-	min-height: 1500px;
-	-webkit-border-radius: 20px 20px 20px 20px;
-	-moz-border-radius: 20px 20px 20px 20px;
-	border-radius: 20px 20px 20px 20px;
-	border: 3px solid #dfdfdf;
-	background-color: white;
-	margin: 0 auto;
-}
-
-.pp4istheme .v-slot-hrline {
-	background-color: #00a2e8;
-}
-
-.pp4istheme .v-slot-hrline2 {
-	background-color: #dfdfdf;
-}
-
-.pp4istheme .v-slot-main-menu-button {
-	background-color: #fff;
-	border-right: 2px solid #dfdfdf;
-	border-top: 2px solid #dfdfdf;
-	border-bottom: 2px solid #dfdfdf;
-	display: inline-block;
-	color: #777777;
-	height: 30px;
-	line-height: 30px;
-	text-decoration: none;
-	text-align: center;
-	min-width: 100px;
-	padding-left: 10px;
-	padding-right: 10px;
 }
 
 .pp4istheme .v-slot-restart-clock-button {

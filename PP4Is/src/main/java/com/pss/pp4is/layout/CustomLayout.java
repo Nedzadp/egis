@@ -36,6 +36,7 @@ public class CustomLayout extends  VerticalLayout{
     public CustomLayout(LayoutController layoutController) {
         this.layoutController = layoutController;
         //init();
+        setSizeFull();
         initNewStyle();
     }
     public final void initNewStyle() { 
@@ -105,6 +106,7 @@ public class CustomLayout extends  VerticalLayout{
      private void addMainContent() {
         HorizontalLayout mainContent = new HorizontalLayout();
         mainContent.addStyleName("main-layout-content");
+        
         if(mainContentComponent==null) {
             mainContentComponent = new MainContentComponent(layoutController);
         }
@@ -114,7 +116,6 @@ public class CustomLayout extends  VerticalLayout{
         layoutController.setMainContentComponent(mainContentComponent);
         
         mainContent.addComponent(mainContentComponent);
-        
         
         addComponent(mainContent);
         setComponentAlignment(mainContent, Alignment.TOP_CENTER);

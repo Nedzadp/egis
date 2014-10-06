@@ -14,6 +14,12 @@ $v-font-family: "Trebuchet MS",sans-serif;
 @mixin pp4istheme {
   /* Include all the styles from the reindeer theme */
   @include valo;
+  
+  .v-scrollable > .v-widget {
+    overflow: auto;
+    vertical-align: middle;
+}
+  
   // product listing
   .main-container{
       margin-top:20px;
@@ -497,7 +503,7 @@ border-top: 1px solid #cccccc;
   
   .vertical-background{
       background-color: #fff;
-      min-height: 1500px;
+      height: 100%;
       overflow: auto !important;
       
   }
@@ -578,6 +584,9 @@ border-top: 1px solid #cccccc;
     padding-left: 6px;
     padding-top: 3px;
 }
+.footer-background{
+    background-color: #00a3e8;
+}
   .header-layout {
       background-color: #00a3e8;
   }
@@ -591,7 +600,6 @@ border-top: 1px solid #cccccc;
   }
   .main-layout-content {
       width: 1042px;
-      height: 100%;
   }
   .main-menu-bar {
       width: 1042px;
@@ -689,40 +697,7 @@ border-top: 1px solid #cccccc;
     overflow: hidden;
 }
     
-  /* Insert your theme rules here */
-  .v-slot-vertical-custom-layout {
-    width:1024px;
-    min-height: 1500px;
-    -webkit-border-radius: 20px 20px 20px 20px;
-    -moz-border-radius: 20px 20px 20px 20px;
-    border-radius: 20px 20px 20px 20px;
-    border:3px solid #dfdfdf;
-    background-color:white;
-    margin: 0 auto;
-}
-    .v-slot-hrline{
-        background-color:#00a2e8;
-    }
-    .v-slot-hrline2{
-        background-color:#dfdfdf;
-    }
-
-    .v-slot-main-menu-button {
-          
-            background-color: #fff;
-            border-right: 2px solid #dfdfdf;
-            border-top: 2px solid #dfdfdf;
-            border-bottom: 2px solid #dfdfdf;
-            display: inline-block;
-            color: #777777;
-            height: 30px;
-            line-height: 30px;
-            text-decoration: none;
-            text-align: center;
-            min-width: 100px;
-            padding-left: 10px;
-            padding-right: 10px;
-    }
+  
     
     .v-slot-restart-clock-button {
         color: #00a2e8;

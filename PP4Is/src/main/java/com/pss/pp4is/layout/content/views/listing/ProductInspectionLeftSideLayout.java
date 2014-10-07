@@ -91,19 +91,19 @@ public class ProductInspectionLeftSideLayout extends AbsoluteLayout{
         lines.addStyleName("line-image");
         linesWithTitles.addComponent(lines);
         
-        addComponent(linesWithTitles,"left:103px;top:120px");
+        addComponent(linesWithTitles,"left:103px;top:50px");
         
         Label productLabel = new Label(layoutController.getI18n().translate("Products"));
         productLabel.addStyleName("product-name-label-header");
         
-        addComponent(productLabel,"top:195px;");
+        addComponent(productLabel,"top:125px;");
         
         for(int i= 0; i<components.size();i++) {
             final ProductListLayout productListing = components.get(i);
             if(i == 0) {
-                addComponent(productListing,"top: 220px;");
+                addComponent(productListing,"top: 150px;");
             } else {
-                Integer margin = i*30+220;
+                Integer margin = i*30+150;
                 addComponent(productListing,"top:"+margin.toString()+"px");
             }
             productListing.addLayoutClickListener(new LayoutEvents.LayoutClickListener() {

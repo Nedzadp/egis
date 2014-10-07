@@ -72,6 +72,7 @@ public class InspectionDetailTable extends Table implements Serializable{
             removeAllItems();
         }
         setContainerDataSource(inspectionDetailContainer);
+        setPageLength(size());
         setVisibleColumns(InspectionDetailContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("inspection_details_id", true);
         setColumnCollapsed("master_id", true);

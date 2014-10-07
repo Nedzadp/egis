@@ -14,11 +14,13 @@ public class CounterHelper {
      private final Integer inspectedImages;
         private final Integer analyses;
         private final Integer certificates;
-
-        public CounterHelper(Integer inspectedImages, Integer analyses, Integer certificates) {
+        private final Integer missingCertificates;
+        
+        public CounterHelper(Integer inspectedImages, Integer analyses, Integer certificates,Integer missingCertificates) {
             this.inspectedImages = inspectedImages;
             this.analyses = analyses;
             this.certificates = certificates;
+            this.missingCertificates = missingCertificates;
         }
 
         public Integer getAnalyses() {
@@ -32,4 +34,9 @@ public class CounterHelper {
         public Integer getInspectedImages() {
             return inspectedImages;
         }
+
+    public Integer getMissingCertificates() {
+        return missingCertificates;
+    }
+        
 }

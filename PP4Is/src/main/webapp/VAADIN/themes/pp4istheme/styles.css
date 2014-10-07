@@ -11662,7 +11662,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .pp4istheme .main-container {
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .pp4istheme .product-list {
@@ -11755,7 +11755,7 @@ div.v-layout.v-horizontal.v-widget {
 .pp4istheme .image-5 {
 	position: relative;
 	z-index: 5;
-	left: 14px;
+	left: 12px;
 }
 
 .pp4istheme .image-6 {
@@ -11917,7 +11917,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .pp4istheme .analyses-listing {
 	height: 23px;
-	width: 26px;
+	width: 33px;
 }
 
 .pp4istheme .analyses-listing-container-pink {
@@ -11997,7 +11997,7 @@ div.v-layout.v-horizontal.v-widget {
 .pp4istheme .listing-label {
 	color: #ffffff;
 	font-size: 13px;
-	left: 25px;
+	left: 24px;
 	position: relative;
 	top: 1px;
 }

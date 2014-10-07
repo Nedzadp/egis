@@ -1227,7 +1227,8 @@ public class DataController {
                                   "FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id) AS 'InspectedImages', " +          
                                   "(SELECT COUNT(id.inspection_details_id) " +
                                   "FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id AND id.eredmeny_path IS NOT NULL AND LENGTH(id.eredmeny_path) > 0) AS 'Analyses', " +          
-                                  "(SELECT COUNT(id.inspection_details_id) FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id AND (id.elfogadva=1 OR id.engedellyel_elfogadva=1 OR id.elutasitva =1) AND LENGTH(id.eredmeny_path) > 0) AS 'Certificates' "+
+                                  "(SELECT COUNT(id.inspection_details_id) FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id AND (id.elfogadva=1 OR id.engedellyel_elfogadva=1 OR id.elutasitva =1) AND LENGTH(id.eredmeny_path) > 0) AS 'Certificates', "+
+                                  "(SELECT COUNT(id.inspection_details_id) FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id AND (id.elfogadva=0 AND id.engedellyel_elfogadva=0 AND id.elutasitva =0) AND LENGTH(id.eredmeny_path) > 0) AS 'MissingCertificates' "+
                                   "FROM product p " +
                                   "JOIN master m ON p.product_id = m.product_id " +
                                   "WHERE p.product_id IN ("+inCondition+") "+
@@ -1243,11 +1244,11 @@ public class DataController {
                     Integer inspectedImages = resultSet.getInt("InspectedImages");
                     Integer analyses = resultSet.getInt("Analyses");
                     Integer certificates = resultSet.getInt("Certificates");
-                    
+                    Integer missingCertificates = resultSet.getInt("MissingCertificates");
                     if(!dataMap.containsKey(productId)) {
                         dataMap.put(productId, new LinkedHashMap<Integer,CounterHelper>());
                     }
-                    dataMap.get(productId).put(masterId, new CounterHelper(inspectedImages, analyses, certificates));
+                    dataMap.get(productId).put(masterId, new CounterHelper(inspectedImages, analyses, certificates,missingCertificates));
                 }
                 
                 for(Map.Entry<Integer,Map<Integer,CounterHelper>> mapEntry : dataMap.entrySet()) {
@@ -1273,6 +1274,10 @@ public class DataController {
                         if(mapEntry2.getValue().getCertificates().equals(0)) {
                             certificatesColor = "pink";
                         }
+                        if(!mapEntry2.getValue().getMissingCertificates().equals(0)) {
+                            certificatesColor = "pink";
+                        }
+                       
                         certificates += mapEntry2.getValue().getCertificates();
                     }
                     productListings.get(mapEntry.getKey()).setInspectedImages(inspectedImages);

@@ -18,17 +18,7 @@ import com.vaadin.ui.Label;
 public class InspectedImagesComponent extends HorizontalLayout{
 
     
-    private final Integer inspectedImages;
-    private final String color;
-    
-    public InspectedImagesComponent(Integer inspectedImages,String color) {
-        this.inspectedImages = inspectedImages;
-        this.color = color;
-        initLayout();
-    }
-
-    
-    private void initLayout() {
+    public void initLayout(Integer inspectedImages,String color) {
         if(inspectedImages.equals(0)) {
             addStyleName("inspected-listing-container-empty");
             HorizontalLayout layout = new HorizontalLayout();

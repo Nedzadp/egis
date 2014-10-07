@@ -33,8 +33,8 @@ public class InspectionDetailTable extends Table implements Serializable{
         setImmediate(true);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(7);
         createDataRow();
+        setPageLength(size());
         setVisibleColumns(InspectionDetailContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("inspection_details_id", true);
         setColumnCollapsed("master_id", true);
@@ -57,7 +57,10 @@ public class InspectionDetailTable extends Table implements Serializable{
         setColumnCollapsed("vizsgalt_feltoltve_path_pdf", true);
         
         setColumnHeaders(inspectionDetailContainer.getCOL_HEADERS_ENGLISH(layoutController));
-        
+        setColumnWidth("vizsgalt_name", 270);
+        setColumnWidth("type", 70);
+        setColumnWidth("result", 80);
+        setColumnWidth("cert", 96);
     }
     
     private void createDataRow() {
@@ -65,7 +68,9 @@ public class InspectionDetailTable extends Table implements Serializable{
     }
 
     public void refreshTable(InspectionDetailContainer inspectionDetailContainer) {
-        removeAllItems();
+        if(this.size()!= 0) {
+            removeAllItems();
+        }
         setContainerDataSource(inspectionDetailContainer);
         setVisibleColumns(InspectionDetailContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("inspection_details_id", true);

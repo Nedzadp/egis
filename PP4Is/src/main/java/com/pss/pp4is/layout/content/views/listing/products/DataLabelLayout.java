@@ -25,8 +25,12 @@ public class DataLabelLayout extends HorizontalLayout {
     }
     
     private void initLayout() {
+        addStyleName("data-label-layout");
+        
         type.addStyleName("type-label");
+        type.setHeight("4px");
         data.addStyleName("data-label");
+        data.setHeight("4px");
         addComponent(type);
         Label spacer = new Label(" ");
         spacer.setWidth("5px");

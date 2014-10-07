@@ -21,6 +21,7 @@ import com.pss.pp4is.layout.content.window.ExitWindow;
 import com.pss.pp4is.layout.content.window.ImageWindow;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.data.Property;
+import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -92,6 +93,18 @@ public class RightSideContentLayout extends VerticalLayout {
                     }
                 }
             });
+            productMasterTable.addItemClickListener(new ItemClickEvent.ItemClickListener() {
+
+                @Override
+                public void itemClick(ItemClickEvent event) {
+                    
+                    if(event.isDoubleClick()) {
+                        String path = event.getItem().getItemProperty("path").getValue().toString();
+                        System.out.println(path);
+                        UI.getCurrent().addWindow(new ImageWindow(layoutController,path));
+                    }
+                }
+            });
         }
     }
     
@@ -105,13 +118,18 @@ public class RightSideContentLayout extends VerticalLayout {
                 inspectionDetailTable.addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
                 inspectionDetailTable.addStyleName(ValoTheme.TABLE_NO_STRIPES);
                 addComponent(inspectionDetailTable);
-                inspectionDetailTable.addValueChangeListener(new Property.ValueChangeListener() {
+                inspectionDetailTable.addItemClickListener(new ItemClickEvent.ItemClickListener() {
+
                     @Override
-                    public void valueChange(Property.ValueChangeEvent event) {
-                        InspectionDetail inspectionDetail = (InspectionDetail)inspectionDetailTable.getValue();
-                        UI.getCurrent().addWindow(new ImageWindow(layoutController, inspectionDetail.getVizsgalt_feltoltve_path()));
+                    public void itemClick(ItemClickEvent event) {
+                       if(event.isDoubleClick()) { 
+                        String path = event.getItem().getItemProperty("vizsgalt_feltoltve_path").getValue().toString();
+                        System.out.println(path);
+                        UI.getCurrent().addWindow(new ImageWindow(layoutController, path));
+                       }
                     }
                 });
+                    
             } else {
                 inspectionDetailTable.refreshTable(inspectionDetailContainer);
             }
@@ -119,6 +137,11 @@ public class RightSideContentLayout extends VerticalLayout {
     }
     
     private void addInspectionDetailTable(Inspection inspection) {
+        productMasterTable.removeStyleName("master-table");
+        productMasterTable.setStyleName("master-table2");
+        productMasterTable.addStyleName(ValoTheme.TABLE_NO_HORIZONTAL_LINES);
+        productMasterTable.addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+        productMasterTable.addStyleName(ValoTheme.TABLE_NO_STRIPES);
         InspectionDetailContainer  inspectionDetailContainer = DataController.getInspectionDetailsByMaster(layoutController,selectedProductMaster.getMasterId(),inspection.getInspectionId());
         if(inspectionDetailContainer != null) {
             if(inspectionDetailTable==null) {
@@ -128,11 +151,15 @@ public class RightSideContentLayout extends VerticalLayout {
                 inspectionDetailTable.addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
                 inspectionDetailTable.addStyleName(ValoTheme.TABLE_NO_STRIPES);
                 addComponent(inspectionDetailTable);
-                inspectionDetailTable.addValueChangeListener(new Property.ValueChangeListener() {
+                inspectionDetailTable.addItemClickListener(new ItemClickEvent.ItemClickListener() {
+
                     @Override
-                    public void valueChange(Property.ValueChangeEvent event) {
-                        InspectionDetail inspectionDetail = (InspectionDetail)inspectionDetailTable.getValue();
-                        UI.getCurrent().addWindow(new ImageWindow(layoutController, inspectionDetail.getVizsgalt_feltoltve_path()));
+                    public void itemClick(ItemClickEvent event) {
+                      if(event.isDoubleClick()) { 
+                        String path = event.getItem().getItemProperty("vizsgalt_feltoltve_path").getValue().toString();
+                        System.out.println(path);
+                        UI.getCurrent().addWindow(new ImageWindow(layoutController, path));
+                       }
                     }
                 });
             } else {

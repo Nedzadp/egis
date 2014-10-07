@@ -18,17 +18,7 @@ import com.vaadin.ui.Label;
 public class AnalyesComponent extends HorizontalLayout{
 
     
-    private final Integer analyses;
-    private final String color;
-    
-    public AnalyesComponent(Integer analyses,String color) {
-        this.analyses = analyses;
-        this.color = color;
-        initLayout();
-    }
-
-    
-    private void initLayout() {
+    public void initLayout(Integer analyses,String color) {
        if(analyses.equals(0)) {
             addStyleName("analyses-listing-container-empty");
             HorizontalLayout layout = new HorizontalLayout();

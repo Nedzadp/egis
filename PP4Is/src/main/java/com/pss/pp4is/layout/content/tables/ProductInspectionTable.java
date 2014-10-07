@@ -33,8 +33,8 @@ public class ProductInspectionTable extends Table implements Serializable{
         setImmediate(true);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(5);
         createDataRow();
+        setPageLength(size());
         setColumnCollapsed("inspectionId", true);
         setColumnCollapsed("path", true);
         setColumnCollapsed("inspector", true);
@@ -43,6 +43,7 @@ public class ProductInspectionTable extends Table implements Serializable{
         setColumnCollapsed("taskaNum", true);
         setVisibleColumns(InspectionContainer.NATURAL_COL_ORDER);
         setColumnHeaders(inspectionContainer.getCOL_HEADERS_ENGLISH(layoutController));
+        setColumnWidth("meoNum", 260);
     }
     
     private void createDataRow() {

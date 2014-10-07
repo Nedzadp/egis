@@ -19,7 +19,7 @@ public class RightSideAbsoluteContentComponent extends AbsoluteLayout{
     }
  
     private void initLayout() {
-        setWidth("505");
+        setWidth("530");
         setHeight("800");
     }
 }

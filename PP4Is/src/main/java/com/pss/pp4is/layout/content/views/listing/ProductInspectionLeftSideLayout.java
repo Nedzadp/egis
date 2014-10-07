@@ -51,67 +51,97 @@ public class ProductInspectionLeftSideLayout extends AbsoluteLayout{
         HorizontalLayout linesWithTitles = new HorizontalLayout();
        
         linesWithTitles.addStyleName("lines-with-titles");
-        VerticalLayout titles = new VerticalLayout();
+        AbsoluteLayout titles = new AbsoluteLayout();
+        titles.setWidth("150");
         titles.addStyleName("product-column-titles");
         
         Label title1 = new Label(layoutController.getI18n().translate("Certificates"));
         title1.addStyleName("product-column-title");
+        title1.setWidth("150px");
+        
         titles.addComponent(title1);
+        
         Label title2 = new Label(layoutController.getI18n().translate("Image analyses"));
         title2.addStyleName("product-column-title");
-        titles.addComponent(title2);
+        title2.setWidth("150px");
+        
+        titles.addComponent(title2,"top:15px");
+        
         Label title3 = new Label(layoutController.getI18n().translate("Inspected images"));
         title3.addStyleName("product-column-title");
-        titles.addComponent(title3);
+        title3.setWidth("150px");
+        
+        titles.addComponent(title3,"top:30px");
         
         Label title4 = new Label(layoutController.getI18n().translate("Master images"));
         title4.addStyleName("product-column-title");
-        titles.addComponent(title4);
+        title4.setWidth("150px");
+        
+        titles.addComponent(title4,"top:45px");
+        
         Label title5 = new Label(layoutController.getI18n().translate("Inspections"));
         title5.addStyleName("product-column-title");
-        titles.addComponent(title5);
+        title5.setWidth("150px");
+        
+        titles.addComponent(title5,"top:60px");
         
         linesWithTitles.addComponent(titles);
         
-        Image lines = new Image(null, new ThemeResource("img/lines-3.png"));
+        Image lines = new Image(null, new ThemeResource("img/column-lines6.png"));
         lines.addStyleName("line-image");
         linesWithTitles.addComponent(lines);
         
-        addComponent(linesWithTitles,"left:103px;top:90px");
+        addComponent(linesWithTitles,"left:103px;top:120px");
         
+        Label productLabel = new Label(layoutController.getI18n().translate("Products"));
+        productLabel.addStyleName("product-name-label-header");
         
+        addComponent(productLabel,"top:195px;");
         
         for(int i= 0; i<components.size();i++) {
             final ProductListLayout productListing = components.get(i);
             if(i == 0) {
                 addComponent(productListing,"top: 220px;");
             } else {
-                Integer margin = i*28+220;
+                Integer margin = i*30+220;
                 addComponent(productListing,"top:"+margin.toString()+"px");
             }
             productListing.addLayoutClickListener(new LayoutEvents.LayoutClickListener() {
 
                 @Override
                 public void layoutClick(LayoutEvents.LayoutClickEvent event) {
+                    productListing.recalculateData();
                     //css correction
+                    if(selected != null && selected == productListing) {
+                        rightSideContentComponent.removeAllComponents();
+                        selected.removeStyleName("product-list-selected");
+                        selected.addStyleName("product-list");
+                        selected.getProductNameComponent().getImageLabel().removeStyleName("product-name-image-label-selected");
+                        selected.getProductNameComponent().getImageLabel().addStyleName("product-name-image-label");
+                        selected = null;
+                        return;
+                    }
+                    
                     if(selected != null) {
                         selected.removeStyleName("product-list-selected");
                         selected.addStyleName("product-list");
                         selected.getProductNameComponent().getImageLabel().removeStyleName("product-name-image-label-selected");
                         selected.getProductNameComponent().getImageLabel().addStyleName("product-name-image-label");
                     }
+                    
+                    
                     productListing.removeStyleName("product-list");
                     productListing.addStyleName("product-list-selected");
                     productListing.getProductNameComponent().getImageLabel().removeStyleName("product-name-image-label");
                     productListing.getProductNameComponent().getImageLabel().addStyleName("product-name-image-label-selected");
                     //
+                    
+                    Float topMargin = getCurrentLayout().getPosition(productListing).getTopValue()-150;
+                    RightSideContentLayout contentLayout = new RightSideContentLayout(layoutController , productListing.getProductListing());
+                    rightSideContentComponent.removeAllComponents();
+                    rightSideContentComponent.addComponent(contentLayout,"top: "+topMargin.toString()+"px;");
+                    
                     selected = productListing;
-                   Float topMargin = getCurrentLayout().getPosition(productListing).getTopValue()-220;
-
-                  RightSideContentLayout contentLayout = new RightSideContentLayout(layoutController , productListing.getProductListing());
-                   
-                   rightSideContentComponent.removeAllComponents();
-                   rightSideContentComponent.addComponent(contentLayout,"top: "+topMargin.toString()+"px;");
                 }
             });
         }

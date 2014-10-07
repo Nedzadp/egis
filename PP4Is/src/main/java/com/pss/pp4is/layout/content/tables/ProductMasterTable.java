@@ -33,7 +33,7 @@ public class ProductMasterTable extends Table implements Serializable{
         setImmediate(true);
         setNullSelectionAllowed(false);
         setSizeFull();
-        setPageLength(5);
+        setPageLength(0);
         createDataRow();
         setVisibleColumns(ProductMasterContainer.NATURAL_COL_ORDER);
         setColumnCollapsed("masterId", true);
@@ -41,6 +41,11 @@ public class ProductMasterTable extends Table implements Serializable{
         setColumnCollapsed("braille", true);
         setColumnCollapsed("falt", true);
         setColumnHeaders(products.getCOL_HEADERS_ENGLISH(layoutController));
+        setColumnWidth("name", 270);
+        setColumnWidth("type", 71);
+        setColumnWidth("pdf", 75);
+        setColumnWidth("active", 100);
+        
     }
     
     private void createDataRow() {

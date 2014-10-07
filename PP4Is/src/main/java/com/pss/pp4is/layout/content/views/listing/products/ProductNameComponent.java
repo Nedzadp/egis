@@ -6,11 +6,7 @@
 
 package com.pss.pp4is.layout.content.views.listing.products;
 
-import com.vaadin.server.ThemeResource;
-import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 
 /**
@@ -36,10 +32,7 @@ public class ProductNameComponent extends HorizontalLayout {
         layout.addComponent(label);
         addComponent(layout);
         
-        ImageComponent imageComponent = new ImageComponent("arrow3.png", "1");
-        //addComponent(imageComponent);
-        
-         imageLabel = new HorizontalLayout();
+        imageLabel = new HorizontalLayout();
         imageLabel.addStyleName("product-name-image-label");
         addComponent(imageLabel);
     }

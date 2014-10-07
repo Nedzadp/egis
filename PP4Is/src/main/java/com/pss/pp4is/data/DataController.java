@@ -1177,16 +1177,20 @@ public class DataController {
         }
     }
     
-    public static List<NewProductListing> getProductsListing() {
-        Map<Integer, NewProductListing> productListings = new TreeMap<Integer, NewProductListing>();
+    public static List<NewProductListing> getProductsListing(Integer product) {
+        Map<Integer, NewProductListing> productListings = new LinkedHashMap<Integer, NewProductListing>();
         
         String queryOne = "SELECT p.product_id, p.name, (SELECT COUNT(ii.inspection_id) FROM inspection ii WHERE ii.product_id = p.product_id) AS  'Inspections', (SELECT COUNT(m.master_id) FROM master m WHERE m.product_id = p.product_id) AS  'MasterImages' " +
-                          "FROM product p " +
-                          "GROUP BY p.product_id, p.name ";
+                          "FROM product p " ;
+                if(product != null) {
+                    queryOne += "WHERE p.product_id = "+product+ " ";
+                }
+                queryOne += "GROUP BY p.product_id, p.name "+
+                            "ORDER BY p.name ";
         
         DatabaseConnection databaseConnection = new DatabaseConnection();
         
-        Map<Integer, NewProductListing> helper = new TreeMap<Integer, NewProductListing>();
+        Map<Integer, NewProductListing> helper = new LinkedHashMap<Integer, NewProductListing>();
         
         try {
             databaseConnection.connect();
@@ -1222,8 +1226,8 @@ public class DataController {
                                   "(SELECT COUNT(id.inspection_details_id) " +
                                   "FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id) AS 'InspectedImages', " +          
                                   "(SELECT COUNT(id.inspection_details_id) " +
-                                  "FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id) AS 'Analyses', " +          
-                                  "(SELECT COUNT(id.inspection_details_id) FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id AND (elfogadva=1 OR engedellyel_elfogadva=1 OR elutasitva =1)) AS 'Certificates' "+
+                                  "FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id AND id.eredmeny_path IS NOT NULL AND LENGTH(id.eredmeny_path) > 0) AS 'Analyses', " +          
+                                  "(SELECT COUNT(id.inspection_details_id) FROM inspection_details id LEFT JOIN inspection i ON id.inspection_id = i.inspection_id WHERE i.product_id = p.product_id  AND id.master_id = m.master_id AND (id.elfogadva=1 OR id.engedellyel_elfogadva=1 OR id.elutasitva =1) AND LENGTH(id.eredmeny_path) > 0) AS 'Certificates' "+
                                   "FROM product p " +
                                   "JOIN master m ON p.product_id = m.product_id " +
                                   "WHERE p.product_id IN ("+inCondition+") "+
@@ -1231,7 +1235,7 @@ public class DataController {
                 
                 resultSet = databaseConnection.executeQuery(queryTwo);
                 
-                Map<Integer, Map<Integer, CounterHelper>> dataMap = new HashMap<Integer, Map<Integer, CounterHelper>>();
+                Map<Integer, Map<Integer, CounterHelper>> dataMap = new LinkedHashMap<Integer, Map<Integer, CounterHelper>>();
                 
                 while(resultSet.next()) {
                     Integer productId = resultSet.getInt("p.product_id");
@@ -1241,7 +1245,7 @@ public class DataController {
                     Integer certificates = resultSet.getInt("Certificates");
                     
                     if(!dataMap.containsKey(productId)) {
-                        dataMap.put(productId, new HashMap<Integer,CounterHelper>());
+                        dataMap.put(productId, new LinkedHashMap<Integer,CounterHelper>());
                     }
                     dataMap.get(productId).put(masterId, new CounterHelper(inspectedImages, analyses, certificates));
                 }

@@ -37,7 +37,7 @@ public class MainContentNewProductInspectionLayout extends CustomPanelLayout{
         HorizontalLayout horizontalLayout = new HorizontalLayout();
        
         RightSideAbsoluteContentComponent rightSideContentComponent = new RightSideAbsoluteContentComponent();
-        ProductInspectionLeftSideLayout leftSideLayout = new ProductInspectionLeftSideLayout(getLayoutController(),rightSideContentComponent, DataController.getProductsListing());
+        ProductInspectionLeftSideLayout leftSideLayout = new ProductInspectionLeftSideLayout(getLayoutController(),rightSideContentComponent, DataController.getProductsListing(null));
         
         
         horizontalLayout.addComponent(leftSideLayout);

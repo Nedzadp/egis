@@ -38,22 +38,24 @@ public class MyVaadinUI extends UI
     private void initNewLayout() {
         
         VerticalLayout mainLayout = new VerticalLayout();
-        mainLayout.setSizeFull();
+        mainLayout.setHeight("1550px");
+        
         VerticalLayout layout = new VerticalLayout();
         layout.addStyleName("vertical-background");
-        
         layoutController = new LayoutController();
         layoutController.setI18n(new I18n(LanguageEnum.getENGLISH()));
         customLayout = new CustomLayout(layoutController);
         layoutController.setCustomLayout(customLayout);
         layout.addComponent(customLayout);
-        mainLayout.addComponent(layout);
-        mainLayout.setExpandRatio(layout, 0.95f);
         
         createFooter();
+        VerticalLayout verticalLayout = new VerticalLayout();
+        verticalLayout.setHeight("50px");
+        verticalLayout.addComponent(footer);
         
-        mainLayout.addComponent(footer);
-        mainLayout.setExpandRatio(footer, 0.05f);
+        mainLayout.addComponent(layout);
+        mainLayout.setExpandRatio(layout, 1f);
+        mainLayout.addComponent(verticalLayout);
         
         setContent(mainLayout);
     }

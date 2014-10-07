@@ -16,15 +16,9 @@ import com.vaadin.ui.Label;
  * @author Nedzad
  */
 public class MasterImageComponent extends HorizontalLayout{
-
-    private final Integer masterImages;
     
-    public MasterImageComponent(Integer masterImages) {
-        this.masterImages = masterImages;
-        initLayout();
-    }
-    
-    private void initLayout() {
+    public void initLayout(Integer masterImages) {
+        
          if(!masterImages.equals(0)) {
           
             addStyleName("master-listing-container");

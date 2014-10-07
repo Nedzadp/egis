@@ -18,15 +18,8 @@ import com.vaadin.ui.Label;
  * @author Nedzad
  */
 public class InspectionComponent extends HorizontalLayout{
-
-    private final Integer inspections;
     
-    public InspectionComponent(Integer inspections) {
-        this.inspections = inspections;
-        initLayout();
-    }
-    
-    private void initLayout() {
+    public void initLayout(Integer inspections) {
         if(!inspections.equals(0)) {
             addStyleName("inspections-listing-container");
             HorizontalLayout layout = new HorizontalLayout();

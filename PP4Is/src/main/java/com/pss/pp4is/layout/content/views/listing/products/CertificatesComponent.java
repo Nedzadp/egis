@@ -18,17 +18,7 @@ import com.vaadin.ui.Label;
 public class CertificatesComponent extends HorizontalLayout{
 
     
-    private final Integer certificates;
-    private final String color;
-    
-    public CertificatesComponent(Integer certificates,String color) {
-        this.certificates = certificates;
-        this.color = color;
-        initLayout();
-    }
-
-    
-    private void initLayout() {
+    public void initLayout(Integer certificates,String color) {
         if(certificates.equals(0)) {
             addStyleName("certificates-listing-container-empty");
             HorizontalLayout layout = new HorizontalLayout();

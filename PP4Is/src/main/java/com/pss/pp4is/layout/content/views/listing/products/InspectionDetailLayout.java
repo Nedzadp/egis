@@ -9,6 +9,7 @@ package com.pss.pp4is.layout.content.views.listing.products;
 import com.pss.pp4is.data.models.Inspection;
 import com.pss.pp4is.data.models.NewProductListing;
 import com.pss.pp4is.system.LayoutController;
+import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -45,17 +46,18 @@ public class InspectionDetailLayout extends VerticalLayout{
        headerText.addStyleName("header-label");
        headerLayout.addComponent(headerText);
        
-       VerticalLayout dataLayout = new VerticalLayout();
+        AbsoluteLayout dataLayout = new AbsoluteLayout();
+        dataLayout.setWidth("220");
+        dataLayout.setHeight("150");
        dataLayout.addStyleName("data-layout");
-       
        dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("Inspector: ")), inspectorLabel = new Label("-")));
-       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("Start date: ")),starDateLabel = new Label("-")));
-       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("End date: ")), endDateLabel = new Label("-")));
-       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("Article number: ")),articleNumberLabel = new Label("-")));
-       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("Diary number: ")), diaryNumberLabel = new Label("-")));
-       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("Bag number: ")), bagNumberLabel = new Label("-")));
-       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("State: ")), stateLabel = new Label("-")));
-       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("ID: ")), idLabel = new Label("-")));
+       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("Start date: ")),starDateLabel = new Label("-")),"top:15px");
+       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("End date: ")), endDateLabel = new Label("-")),"top:30px");
+       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("Article number: ")),articleNumberLabel = new Label("-")),"top:45px");
+       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("Diary number: ")), diaryNumberLabel = new Label("-")),"top:60px");
+       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("Bag number: ")), bagNumberLabel = new Label("-")),"top:75px");
+       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("State: ")), stateLabel = new Label("-")),"top:90px");
+       dataLayout.addComponent(new DataLabelLayout(new Label(layoutController.getI18n().translate("ID: ")), idLabel = new Label("-")),"top:105px");
        
        
        addComponent(headerLayout);

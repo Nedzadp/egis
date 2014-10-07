@@ -6,7 +6,6 @@
 
 package com.pss.pp4is.layout.content.views.listing.products;
 
-import com.pss.pp4is.data.models.Inspection;
 import com.pss.pp4is.data.models.NewProductListing;
 import com.pss.pp4is.system.LayoutController;
 import com.vaadin.ui.HorizontalLayout;
